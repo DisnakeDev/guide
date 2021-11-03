@@ -1,0 +1,7 @@
+site_name: Disnake Guide
+site_url: 
+
+nav:
+  - Guide: index.md
+
+theme: material

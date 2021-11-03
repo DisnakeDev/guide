@@ -1,3 +1,0 @@
-# Creating Your Application
-
-If this is your first time making a bot, you'd first need to register an application on [Discord's Application Portal](https://discord.com/developers/applications). Secondly, you will need to invite your bot to the desired server/guild, where you can test commands and features. You can follow the steps mentioned [here](https://disnake.readthedocs.io/en/stable/discord.html).
