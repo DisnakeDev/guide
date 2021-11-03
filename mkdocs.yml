@@ -1,7 +1,28 @@
 site_name: Disnake Guide
-site_url: 
-
+site_description: A guide for disnake.
+site_url: https://disnakedev.github.io/Disnake-Guide
+theme:
+    name: material
+    features:
+        - navigation.instant
+        - navigation.expand
+    language: en
+repo_name: thesadru/genshin.py
+repo_url: https://github.com/DisnakeDev/Disnake-Guide
+plugins:
+    - search
+markdown_extensions:
+    - tables
+    - pymdownx.highlight
+    - pymdownx.inlinehilite
+    - pymdownx.superfences
+    - pymdownx.snippets
+    - pymdownx.emoji:
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
 nav:
-  - Guide: index.md
-
-theme: material
+    - index.md
+    - Basics:
+        - basics/index.md
+        - basics/making-your-application.md
+        - basics/coding-your-bot.md
