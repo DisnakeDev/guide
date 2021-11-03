@@ -13,10 +13,13 @@ plugins:
     - search
 markdown_extensions:
     - tables
+    - admonition
     - pymdownx.highlight
     - pymdownx.inlinehilite
     - pymdownx.superfences
     - pymdownx.snippets
+    - pymdownx.details
+    - pymdownx.superfences
     - pymdownx.emoji:
         emoji_index: !!python/name:materialx.emoji.twemoji
         emoji_generator: !!python/name:materialx.emoji.to_svg
@@ -26,3 +29,6 @@ nav:
         - basics/index.md
         - basics/making-your-application.md
         - basics/coding-your-bot.md
+    - Commands:
+        - commands/index.md
+        - commands/basic.md
