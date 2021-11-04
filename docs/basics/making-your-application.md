@@ -3,6 +3,7 @@
 The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs](https://disnake.readthedocs.io/en/stable/discord.html). Therefore, you can follow the steps from either resource.
 
 !!! Note
+
     If you have already made your bot application, you can skip this document and move on to [`basics`](./index.md).
 
 ## Creating a Bot Account
@@ -54,6 +55,7 @@ Creating a Bot account is a pretty straightforward process.
     - This is **not** the Client Secret at the General Information page.
 
     - !!! Warning
+
         It should be worth noting that this token is essentially your bot’s password. You should **never** share this with someone else. In doing so, someone can log in to your bot and do malicious things, such as leaving servers, ban all members inside a server, or pinging everyone maliciously.
     
         The possibilities are endless, so do not share this token.
@@ -111,6 +113,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 7. Now the resulting URL can be used to add your bot to a server. Copy and paste the URL into your browser, choose a server to invite the bot to, and click `Authorize`.
 
     - !!! Note
+
         The person adding the bot needs "Manage Server" permissions to do so.
 
 If you want to generate this URL dynamically at run-time inside your bot and using the [`disnake.Permissions`](https://disnake.readthedocs.io/en/stable/api.html#disnake.Permissions) interface, you can use [`disnake.utils.oauth_url()`](https://disnake.readthedocs.io/en/stable/api.html#disnake.utils.oauth_url).
