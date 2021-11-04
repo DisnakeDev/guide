@@ -20,8 +20,8 @@ theme:
             icon: material/weather-night
             name: Dark Mode
 
-repo_name: DisnakeDev/DisnakeGuide
-repo_url: https://github.com/DisnakeDev/Disnake-Guide
+repo_name: DisnakeDev/Disnake
+repo_url: https://github.com/DisnakeDev/disnake
 
 plugins:
     - search
