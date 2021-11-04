@@ -1,16 +1,31 @@
 site_name: Disnake Guide
 site_description: A guide for disnake.
 site_url: https://disnakedev.github.io/Disnake-Guide
+
 theme:
     name: material
     features:
         - navigation.instant
         - navigation.expand
     language: en
+    palette:
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          toggle: 
+            icon: material/weather-sunny
+            name: Light Mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          toggle:
+            icon: material/weather-night
+            name: Dark Mode
+
 repo_name: DisnakeDev/DisnakeGuide
 repo_url: https://github.com/DisnakeDev/Disnake-Guide
+
 plugins:
     - search
+
 markdown_extensions:
     - tables
     - admonition
@@ -23,6 +38,7 @@ markdown_extensions:
     - pymdownx.emoji:
         emoji_index: !!python/name:materialx.emoji.twemoji
         emoji_generator: !!python/name:materialx.emoji.to_svg
+
 nav:
     - index.md
     - Basics:
@@ -32,3 +48,6 @@ nav:
     - Commands:
         - commands/index.md
         - commands/basic.md
+
+extra_css:
+    - stylesheets/extra.css
