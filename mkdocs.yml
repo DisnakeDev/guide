@@ -7,7 +7,7 @@ theme:
         - navigation.instant
         - navigation.expand
     language: en
-repo_name: thesadru/genshin.py
+repo_name: DisnakeDev/DisnakeGuide
 repo_url: https://github.com/DisnakeDev/Disnake-Guide
 plugins:
     - search
