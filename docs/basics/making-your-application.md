@@ -54,7 +54,7 @@ Creating a Bot account is a pretty straightforward process.
 
     - This is **not** the Client Secret at the General Information page.
 
-    - !!! Warning
+    !!! Warning
 
         It should be worth noting that this token is essentially your bot’s password. You should **never** share this with someone else. In doing so, someone can log in to your bot and do malicious things, such as leaving servers, ban all members inside a server, or pinging everyone maliciously.
     
@@ -112,7 +112,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
 7. Now the resulting URL can be used to add your bot to a server. Copy and paste the URL into your browser, choose a server to invite the bot to, and click `Authorize`.
 
-    - !!! Note
+    !!! Note
 
         The person adding the bot needs "Manage Server" permissions to do so.
 
