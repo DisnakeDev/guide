@@ -1,6 +1,6 @@
 site_name: Disnake Guide
 site_description: A guide for disnake.
-site_url: https://disnakedev.github.io/Disnake-Guide
+site_url: https://disnakedev.github.io/guide
 
 theme:
     name: material
@@ -20,8 +20,8 @@ theme:
             icon: material/weather-night
             name: Dark Mode
 
-repo_name: DisnakeDev/Disnake
-repo_url: https://github.com/DisnakeDev/disnake
+repo_name: DisnakeDev/guide
+repo_url: https://github.com/DisnakeDev/guide
 
 plugins:
     - search
