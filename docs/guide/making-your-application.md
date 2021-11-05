@@ -4,7 +4,7 @@ The steps mentioned further in this markdown are essentially a copy of the steps
 
 !!! Note
 
-    If you have already made your bot application, you can skip this document and move on to [`basics`](./index.md).
+    If you have already made your bot application, you can skip this document and move on to [`coding-your-bot`](./coding-your-bot.md).
 
 ## Creating a Bot Account
 

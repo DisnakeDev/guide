@@ -4,6 +4,10 @@ site_url: https://disnakedev.github.io/guide
 
 theme:
     name: material
+    icon:
+        repo: fontawesome/brands/github
+    logo: favicon.png
+    favicon: favicon.png
     features:
         - navigation.instant
         - navigation.expand
@@ -41,11 +45,10 @@ markdown_extensions:
 
 nav:
     - index.md
-    - Basics:
-        - basics/index.md
-        - basics/making-your-application.md
-        - basics/coding-your-bot.md
-    - Commands:
+    - Guide:
+        - guide/making-your-application.md
+        - guide/coding-your-bot.md
+    - Command Samples:
         - commands/index.md
         - commands/basic.md
 
