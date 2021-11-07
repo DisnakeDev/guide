@@ -54,17 +54,19 @@ Creating a Bot account is a pretty straightforward process.
 
     - This is **not** the Client Secret at the General Information page.
 
-    !!! Warning
-
-        It should be worth noting that this token is essentially your bot’s password. You should **never** share this with someone else. In doing so, someone can log in to your bot and do malicious things, such as leaving servers, ban all members inside a server, or pinging everyone maliciously.
-    
-        The possibilities are endless, so do not share this token.
-    
-        If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
-
 And that’s it. You now have a bot account and you can login with that token.
 
-## Inviting Your Bot
+### Regarding Bot Tokens
+
+!!! Warning
+
+    It should be worth noting that this token is essentially your bot’s password. You should **never** share this with someone else. In doing so, someone can log in to your bot and do malicious things, such as leaving servers, ban all members inside a server, or pinging everyone maliciously.
+
+    The possibilities are endless, so do not share this token.
+
+    If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
+
+### Inviting Your Bot
 
 So, you've made the bot account, but it is not actually in any server. If you want to invite your bot you must create an invite URL for it.
 
