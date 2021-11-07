@@ -39,7 +39,7 @@ async def autocomplete_item(
     inter: disnake.ApplicationCommandInteraction, 
     option: str, 
     *, 
-    target: disnake.Membe = None, 
+    target: disnake.Member = None, 
     **kwargs: Any
 ):
     if target is None:
