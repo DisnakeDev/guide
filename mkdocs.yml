@@ -1,20 +1,20 @@
 site_name: Disnake Guide
 site_description: A guide for disnake.
-site_url: https://disnakedev.github.io/guide
+site_url: https://guide.disnake.dev/
 
 theme:
     name: material
     icon:
         repo: fontawesome/brands/github
-    logo: favicon.png
-    favicon: favicon.png
+    logo: disnake.png
+    favicon: disnake.png
     features:
         - navigation.instant
         - navigation.expand
     language: en
     palette:
         - media: "(prefers-color-scheme: light)"
-          scheme: default
+          scheme: light
           toggle: 
             icon: material/weather-sunny
             name: Light Mode
