@@ -4,8 +4,6 @@ site_url: https://guide.disnake.dev/
 
 theme:
     name: material
-    icon:
-        repo: fontawesome/brands/github
     logo: disnake.png
     favicon: disnake.png
     features:
@@ -19,13 +17,13 @@ theme:
             icon: material/weather-sunny
             name: Light Mode
         - media: "(prefers-color-scheme: dark)"
-          scheme: slate
+          scheme: dark
           toggle:
             icon: material/weather-night
             name: Dark Mode
 
-repo_name: DisnakeDev/guide
-repo_url: https://github.com/DisnakeDev/guide
+repo_name: DisnakeDev/disnake
+repo_url: https://github.com/DisnakeDev/disnake
 
 plugins:
     - search
