@@ -50,7 +50,8 @@ nav:
     - Command Samples:
         - commands/index.md
         - commands/basic.md
-    - good-practices.md
+    - Good Practices:
+        - good-practices/index.md
 
 extra_css:
     - stylesheets/extra.css
