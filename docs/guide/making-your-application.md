@@ -1,6 +1,6 @@
 # Creating Your Application
 
-The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs](https://disnake.readthedocs.io/en/stable/discord.html). Therefore, you can follow the steps from either resource.
+The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs][disnake-docs-discord]. Therefore, you can follow the steps from either resource.
 
 !!! Note
 
@@ -12,9 +12,9 @@ In order to work with the library and the Discord API in general, we must first 
 
 Creating a Bot account is a pretty straightforward process.
 
-1. Make sure you’re logged on to the [Discord website](https://www.discord.com/).
+1. Make sure you’re logged on to the [Discord website][discord-page].
 
-2. Navigate to the [application page](https://discord.com/developers/applications).
+2. Navigate to the [application page][discord-app-page].
 
 3. Click on the `New Application` button.
 
@@ -70,9 +70,9 @@ And that’s it. You now have a bot account and you can login with that token.
 
 So, you've made the bot account, but it is not actually in any server. If you want to invite your bot you must create an invite URL for it.
 
-1. Make sure you’re logged on to the [Discord website](https://www.discord.com/).
+1. Make sure you’re logged on to the [Discord website][discord-page].
 
-2. Navigate to the [application page](https://discord.com/developers/applications).
+2. Navigate to the [application page][discord-app-page].
 
 3. Click on your bot’s page.
 
@@ -104,7 +104,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     - Please be aware of the consequences of requiring your bot to have the `Administrator` permission.
 
-    - Bot owners must have 2FA enabled for certain actions and permissions when added in servers that have Server-Wide 2FA enabled. Check the [2FA support page](https://support.discord.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication) for more information.
+    - Bot owners must have 2FA enabled for certain actions and permissions when added in servers that have Server-Wide 2FA enabled. Check the [2FA support page][discord-2fa-page] for more information.
 
     <br>
     <p align = "center">
@@ -118,4 +118,14 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
         The person adding the bot needs "Manage Server" permissions to do so.
 
-If you want to generate this URL dynamically at run-time inside your bot and using the [`disnake.Permissions`](https://disnake.readthedocs.io/en/stable/api.html#disnake.Permissions) interface, you can use [`disnake.utils.oauth_url()`](https://disnake.readthedocs.io/en/stable/api.html#disnake.utils.oauth_url).
+If you want to generate this URL dynamically at run-time inside your bot and using the [`disnake.Permissions`][disnake-docs-permissions] interface, you can use [`disnake.utils.oauth_url()`][disnake-docs-oauth].
+
+
+
+[disnake-docs-discord]: https://disnake.readthedocs.io/en/stable/discord.html
+[disnake-docs-permissions]: https://disnake.readthedocs.io/en/stable/api.html#disnake.Permissions
+[disnake-docs-oauth]: https://disnake.readthedocs.io/en/stable/api.html#disnake.utils.oauth_url
+
+[discord-page]: https://www.discord.com
+[discord-app-page]: https://discord.com/developers/applications
+[discord-2fa-page]: https://support.discord.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication
