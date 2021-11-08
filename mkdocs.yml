@@ -31,7 +31,6 @@ plugins:
 markdown_extensions:
     - tables
     - admonition
-    - attr_list
     - pymdownx.highlight
     - pymdownx.inlinehilite
     - pymdownx.superfences
@@ -50,8 +49,7 @@ nav:
     - Command Samples:
         - commands/index.md
         - commands/basic.md
-    - Good Practices:
-        - good-practices/index.md
+    - good-practices/index.md
 
 extra_css:
     - stylesheets/extra.css

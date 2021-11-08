@@ -2,14 +2,14 @@
 
 Here's a list of some good practices in disnake.
 
-## Running code when a cog is loaded
+## Running code with a loaded cog
 
 Most people are used to running everything in `__init__` but that doesn't allow running async code. In this case you can overwrite the special `cog_load` method. 
 
 ```py
 class MyCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
-        self.bot = bpt
+        self.bot = bot
 
     async def cog_load(self):
         self.data = await bot.fetch_database_data()
@@ -23,7 +23,7 @@ class MyCog(commands.Cog):
         await interaction.response.send_message(self.data[user.id])
 ```
 
-## Attaching a file to an embed
+## Attaching Embed Files
 
 Using explicit `attachment://` used to be the only way to attach a local file to an embed. Disnake abstracts this with `file=` kwargs.
 
@@ -31,10 +31,11 @@ Using explicit `attachment://` used to be the only way to attach a local file to
 # discord.py:
 embed = discord.Embed(title="An embed with an image")
 embed.set_image(url="attachment://image.png")
-file = disnake.File("assets/image.png")
+file = discord.File("assets/image.png")
 
 await channel.send(embed=embed, file=file)
 ```
+
 ```py
 # disnake:
 embed = discord.Embed(title="An embed with an image")
@@ -65,6 +66,7 @@ async def command(
 ):
     ...
 ```
+
 ```py
 # disnake
 async def convert_data(inter: disnake.ApplicationCommandInteraction, arg: str):
@@ -101,7 +103,7 @@ async def command(
     ...
 ```
 
-## The target of context commands
+## Context command targets
 
 Instead of using `inter.target` you should be using a parameter of your command.
 
@@ -114,7 +116,7 @@ async def command(
     await inter.response.send_message(f"Used on {user.mention}")
 ```
 
-## Adding descriptions to slash commands
+## Slash command descriptions
 
 You may use docstrings for command and option descriptions. Everything before `Parameters` is the command description. Everything after `Parameters` are the option descriptions.
 
