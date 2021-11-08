@@ -20,7 +20,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/xQyQVdT.png">
+        ![](../img/guide-img/making-your-app-001.png){ width="40%" }
     </p>
     <br>
 
@@ -28,7 +28,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/rOK02AR.png">
+        ![](../img/guide-img/making-your-app-002.png){ width="75%" }
     </p>
     <br>
 
@@ -37,7 +37,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/eXkLZ1B.png">
+        ![](../img/guide-img/making-your-app-003.png){ width="75%" }
     </p>
     <br>
 
@@ -46,7 +46,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/brdjJXc.png">
+        ![](../img/guide-img/making-your-app-004.png){ width="75%" }
     </p>
     <br>
 
@@ -80,7 +80,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/IlpXP7E.png">
+        ![](../img/guide-img/making-your-app-005.png){ width="75%" }
     </p>
     <br>
 
@@ -88,7 +88,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/RS6U12t.png">
+        ![](../img/guide-img/making-your-app-006.png){ width="75%" }
     </p>
     <br>
 
@@ -96,7 +96,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/3fJWR1f.png">
+        ![](../img/guide-img/making-your-app-007.png){ width="75%" }
     </p>
     <br>
 
@@ -108,7 +108,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        <img width = "75%" src = "https://i.imgur.com/1bXFLrI.png">
+        ![](../img/guide-img/making-your-app-008.png){ width="75%" }
     </p>
     <br>    
 
