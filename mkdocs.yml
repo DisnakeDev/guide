@@ -49,6 +49,7 @@ nav:
     - Command Samples:
         - commands/index.md
         - commands/basic.md
+    - good-practices.md
 
 extra_css:
     - stylesheets/extra.css
