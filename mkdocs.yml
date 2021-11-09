@@ -66,4 +66,6 @@ nav:
     - good-practices/index.md
 
 extra_css:
-    - stylesheets/extra.css
+    - stylesheets/lightmode.css
+    - stylesheets/darkmode.css
+    - stylesheets/others.css
