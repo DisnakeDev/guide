@@ -68,4 +68,3 @@ nav:
 extra_css:
     - stylesheets/lightmode.css
     - stylesheets/darkmode.css
-    - stylesheets/others.css
