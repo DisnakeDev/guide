@@ -1,6 +1,6 @@
 # Creating Your Application
 
-The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs]({{ docs }}/discord.html). Therefore, you can follow the steps from either resource.
+The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs]({{ disnakedocs }}/discord.html). Therefore, you can follow the steps from either resource.
 
 !!! Note
 
@@ -118,7 +118,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
         The person adding the bot needs "Manage Server" permissions to do so.
 
-If you want to generate this URL dynamically at run-time inside your bot and using the [`disnake.Permissions`]({{ docs }}/api.html#disnake.Permissions) interface, you can use [`disnake.utils.oauth_url()`]({{ docs }}/api.html#disnake.utils.oauth_url).
+If you want to generate this URL dynamically at run-time inside your bot and using the [`disnake.Permissions`]({{ disnakedocs }}/api.html#disnake.Permissions) interface, you can use [`disnake.utils.oauth_url()`]({{ disnakedocs }}/api.html#disnake.utils.oauth_url).
 
 
 [discord-page]: https://www.discord.com
