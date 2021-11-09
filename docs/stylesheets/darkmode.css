@@ -2,6 +2,9 @@
 
     --md-hue: 220;
 
+    --md-header-fg-color:                                                   #fff;
+    --md-header-bg-color:                               var(--md-primary-fg-color);
+
     --md-default-fg-color:                                   rgba(0, 0, 0, 0.87);
     --md-default-fg-color--light:                 hsla(var(--md-hue),75%,90%,0.62);
     --md-default-fg-color--lighter:               hsla(var(--md-hue),75%,90%,0.32);
@@ -25,7 +28,7 @@
     --md-code-hl-constant-color:            #e08865;
     --md-code-hl-keyword-color:             #66a8e2;
     --md-code-hl-string-color:              #3bc07d;
-    --md-code-hl-name-color:                  var(--md-code-fg-color);
+    --md-code-hl-name-color:        var(--md-code-fg-color);
     --md-code-hl-operator-color:    var(--md-code-fg-color);
     --md-code-hl-punctuation-color: var(--md-code-fg-color);
     --md-code-hl-comment-color:     var(--md-code-fg-color);
