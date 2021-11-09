@@ -29,6 +29,8 @@ edit_uri: ""
 plugins:
     - search
     - macros
+    - git-revision-date-localized:
+        type: datetime
 
 extra: {
     disnakedocs: https://disnake.readthedocs.io/en/latest,
