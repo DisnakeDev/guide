@@ -27,6 +27,11 @@ repo_url: https://github.com/DisnakeDev/disnake
 
 plugins:
     - search
+    - macros
+
+extra: {
+    docs: https://disnake.readthedocs.io/en/latest
+}
 
 markdown_extensions:
     - tables
