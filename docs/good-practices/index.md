@@ -38,7 +38,7 @@ await channel.send(embed=embed, file=file)
 
 ```py
 # disnake:
-embed = discord.Embed(title="An embed with an image")
+embed = disnake.Embed(title="An embed with an image")
 file = disnake.File("assets/image.png")
 embed.set_image(file=file)
 
@@ -61,6 +61,7 @@ class DataConverter(commands.Converter):
 
 @commands.command()
 async def command(
+    self,
     ctx: commands.Context,
     data: DataConverter
 ):
@@ -76,6 +77,7 @@ async def convert_data(inter: disnake.ApplicationCommandInteraction, arg: str):
 
 @commands.slash_command()
 async def command(
+    self,
     inter: disnake.ApplicationCommandInteraction,
     data: Dict[str, Any] = commands.Param(converter=convert_data)
 ):
@@ -97,6 +99,7 @@ class Data:
 
 @commands.slash_command()
 async def command(
+    self,
     inter: disnake.ApplicationCommandInteraction,
     data: Data = commands.Param(converter=Data.from_option)
 ):
@@ -110,6 +113,7 @@ Instead of using `inter.target` you should be using a parameter of your command.
 ```py
 @commands.user_command()
 async def command(
+    self,
     inter: disnake.ApplicationCommandInteraction,
     user: disnake.User
 ):
@@ -123,6 +127,7 @@ You may use docstrings for command and option descriptions. Everything before `P
 ```py
 @commands.slash_command()
 async def command(
+    self,
     inter: disnake.ApplicationCommandInteraction,
     category: str,
     item: str,
