@@ -24,6 +24,7 @@ theme:
 
 repo_name: DisnakeDev/disnake
 repo_url: https://github.com/DisnakeDev/disnake
+edit_uri: ""
 
 plugins:
     - search
