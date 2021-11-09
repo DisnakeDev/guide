@@ -7,8 +7,11 @@ theme:
     logo: disnake.png
     favicon: disnake.png
     features:
-        - navigation.instant
         - navigation.expand
+        - navigation.instant
+        - navigation.top
+        - navigation.tracking
+        - toc.integrate
     language: en
     palette:
         - media: "(prefers-color-scheme: light)"
