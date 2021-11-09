@@ -12,6 +12,7 @@ The annotations and docstrings matter
 @commands.guild_permissions(808030843078836254, roles={891619545356308481: True})
 @commands.slash_command(default_permissions=False)
 async def transfer(
+    self,
     inter: disnake.ApplicationCommandInteraction,
     target: disnake.Member,
     item: str,
@@ -36,6 +37,7 @@ async def transfer(
 
 @transfer.autocomplete("item")
 async def autocomplete_item(
+    self,
     inter: disnake.ApplicationCommandInteraction, 
     option: str, 
     *, 
