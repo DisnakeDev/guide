@@ -30,7 +30,10 @@ plugins:
     - macros
 
 extra: {
-    docs: https://disnake.readthedocs.io/en/latest
+    disnakedocs: https://disnake.readthedocs.io/en/latest,
+    dpydocs: https://discordpy.readthedocs.io/en/latest,
+    discord: https://www.discord.com,
+    discordsupport: https://support.discord.com/hc/en-us
 }
 
 markdown_extensions:
