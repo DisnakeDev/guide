@@ -47,8 +47,8 @@
 
     --md-accent-fg-color:                #66a8e2;
     --md-accent-fg-color--transparent:   #66a8e2;
-    --md-accent-bg-color:                #66a8e2;
-    --md-accent-bg-color--light:         #66a8e2;
+    --md-accent-bg-color:                #ffffff;
+    --md-accent-bg-color--light:         #ffffff;
 
     --md-admonition-bg-color:       hsla(var(--md-hue),0%,100%,0.025);
     --md-admonition-fg-color:                                  #fff;
