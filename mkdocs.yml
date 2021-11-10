@@ -61,8 +61,8 @@ markdown_extensions:
 nav:
     - index.md
     - Guide:
-        - guide/making-your-application.md
-        - guide/coding-your-bot.md
+        - guide/001-making-your-application.md
+        - guide/002-coding-your-bot.md
     - Command Samples:
         - commands/index.md
         - commands/basic.md
