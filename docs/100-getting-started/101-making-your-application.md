@@ -1,12 +1,12 @@
-# Creating Your Application
+# Creating your application
 
 The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs]({{ disnakedocs }}/discord.html). Therefore, you can follow the steps from either resource.
 
 !!! Note
 
-    If you have already made your bot application, you can skip this document and move on to [`coding-your-bot`](./002-coding-your-bot.md).
+    If you have already made your bot application, you can skip this document and move on to [`coding-your-bot`](./102-coding-your-bot.md).
 
-## Creating a Bot Account
+## Creating a bot account
 
 In order to work with the library and the Discord API in general, we must first create a Discord Bot account.
 
@@ -56,7 +56,7 @@ Creating a Bot account is a pretty straightforward process.
 
 And that’s it. You now have a bot account and you can login with that token.
 
-### Regarding Bot Tokens
+### Regarding bot tokens
 
 !!! Warning
 
@@ -66,7 +66,7 @@ And that’s it. You now have a bot account and you can login with that token.
 
     If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
 
-### Inviting Your Bot
+### Inviting your bot
 
 So, you've made the bot account, but it is not actually in any server. If you want to invite your bot you must create an invite URL for it.
 

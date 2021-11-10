@@ -7,7 +7,7 @@ theme:
     logo: disnake.png
     favicon: disnake.png
     features:
-        - navigation.expand
+        - navigation.sections
         - navigation.instant
         - navigation.top
         - navigation.tracking
@@ -33,7 +33,7 @@ plugins:
     - search
     - macros
     - git-revision-date-localized:
-        type: datetime
+        type: date
 
 extra: {
     disnakedocs: https://disnake.readthedocs.io/en/latest,
@@ -60,9 +60,9 @@ markdown_extensions:
 
 nav:
     - index.md
-    - Guide:
-        - guide/001-making-your-application.md
-        - guide/002-coding-your-bot.md
+    - Getting Started:
+        - 100-getting-started/101-making-your-application.md
+        - 100-getting-started/102-coding-your-bot.md
     - Command Samples:
         - commands/index.md
         - commands/basic.md
