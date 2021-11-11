@@ -8,6 +8,8 @@ theme:
     logo: disnake.png
     favicon: disnake.png
 
+    custom_dir: docs/overrides
+
     features:
         - navigation.sections
         - navigation.instant
