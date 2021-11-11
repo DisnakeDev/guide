@@ -6,16 +6,6 @@ In this guide we will try to explain the differences between discord.py and disn
 
 As you probably know, discord.py has been discontinued, and because of that, disnake developers and contributors committed to keep the Discord API wrapper for Python alive.
 
-In this table we will show you some differences between discord.py and disnake:
-
-| Features       | Disnake            | Discord.py           |
-| -------------- | ------------------ | -------------------  |
-| Slash commands | :white_check_mark: | :x:                  |
-| Components     | :white_check_mark: | :white_check_mark: * |
-| Context menus  | :white_check_mark: | :x:                  |
-
-<sup>\* Only in version 2.0.</sup>
-
 discord.py 2.0 had major changes, and that's why if you are not using that version, we recommend you to read [this page]({{ breakingchanges }}) which collected all the major changes that version had.
 
 # Rewrite
