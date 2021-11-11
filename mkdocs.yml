@@ -3,16 +3,21 @@ site_description: A guide for disnake.
 site_url: https://guide.disnake.dev/
 
 theme:
+
     name: material
     logo: disnake.png
     favicon: disnake.png
+
     features:
         - navigation.sections
         - navigation.instant
         - navigation.top
         - navigation.tracking
         - toc.integrate
+        - content.tabs.link
+
     language: en
+
     palette:
         - media: "(prefers-color-scheme: light)"
           scheme: light
@@ -30,8 +35,10 @@ repo_url: https://github.com/DisnakeDev/disnake
 edit_uri: ""
 
 plugins:
+
     - search
     - macros
+
     - git-revision-date-localized:
         type: date
 
@@ -43,32 +50,43 @@ extra: {
 }
 
 markdown_extensions:
+
     - tables
     - admonition
     - attr_list
+
     - pymdownx.highlight
     - pymdownx.inlinehilite
     - pymdownx.superfences
+    - pymdownx.tabbed:
+        alternate_style: true 
     - pymdownx.snippets
     - pymdownx.details
-    - pymdownx.superfences
+
     - markdown_link_attr_modifier:
         new_tab: external_only
+
     - pymdownx.emoji:
         emoji_index: !!python/name:materialx.emoji.twemoji
         emoji_generator: !!python/name:materialx.emoji.to_svg
 
 nav:
+
     - index.md
     - links-credits.md
+
     - Prerequisites:
         - 000-prerequisites/001-installing-python.md
+        - 000-prerequisites/002-creating-your-application.md
+        - 000-prerequisites/003-inviting-your-bot.md
+
     - Getting Started:
-        - 100-getting-started/101-making-your-application.md
-        - 100-getting-started/102-coding-your-bot.md
+        - 100-getting-started/101-initial-files.md
+
     - Command Samples:
         - commands/index.md
         - commands/basic.md
+        
     - good-practices/index.md
 
 extra_css:
