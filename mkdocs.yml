@@ -43,6 +43,7 @@ plugins:
         type: date
 
 extra: {
+    guiderepo: https://github.com/DisnakeDev/guide,
     disnakedocs: https://disnake.readthedocs.io/en/latest,
     dpydocs: https://discordpy.readthedocs.io/en/latest,
     discord: https://www.discord.com,

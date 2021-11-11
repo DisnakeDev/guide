@@ -60,7 +60,7 @@ You can alternatively also use the [python-dotenv package][python-dotenv] to eit
     ``` python
     from dotenv import dotenv_values
 
-    config = dotenv_values(".env")  # Makes a dict out of the values.
+    config = dotenv_values('.env')  # Makes a dict out of the values.
     
     # Thus, we get
     # config = {YOUR_BOT_TOKEN: OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg}
@@ -95,6 +95,41 @@ config.json
     [`__pycache__/`][pycache] has been included in `.gitignore` as it is simply cache that helps loading and running your script faster (this is an oversimplification). As it is of no particular importance, and is recompiled every time a change is made in the script, it is better to not commit the directory.
 
     Also, you can specify quite intricate patterns in `.gitignore` files, as per the requirements of your project. Check out the [Git documentation on `.gitignore`][gitignore] for more information!
+
+## Creating the main file
+
+Open your code editor and create a new file. We suggest that you save the file as `main.py` or `bot.py`, but you may name it whatever you wish.
+
+Here's the base code to get you started:
+
+``` python linenums="1"
+# Import the necessary libraries.
+import disnake
+from disnake.ext import commands
+
+# Creating a commands.Bot() instance, and assigning it to "bot"
+bot = commands.Bot(
+    command_prefix = ">"
+)
+
+# When the bot is ready, run this code.
+@bot.event
+async def on_ready():
+    print("The bot is ready!")
+
+# Login to Discord with the bot's token.
+bot.run(YOUR_BOT_TOKEN) 
+```
+
+This is how you create a client instance for your Discord bot and login to Discord. Open your terminal and run `python3 main.py` to start the process. If you see "The bot is ready!" after a few seconds, you're good to go!
+
+!!! Tip
+
+    After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands you've run in the terminal. Pressing up and then enter after closing the process is a quick way to start it up again.
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/intial-files).
 
 
 
