@@ -23,6 +23,21 @@ class MyCog(commands.Cog):
         await interaction.response.send_message(self.data[user.id])
 ```
 
+## Reloading your bot
+
+A one of the less known disnake features is the `reload` kwarg for your bot. It reloads extensions every time they are edited allowing you to test your code in real-time.
+This is especially useful if startup times for your bot are very slow since only one extension will be reloaded at a time.
+
+```py
+from disnake.ext import commands
+
+bot = commands.Bot(..., reload=True)
+```
+
+!!! Warning
+
+    This should be used purely for debugging. Please do not use this in production.
+
 ## Attaching Embed Files
 
 Using explicit `attachment://` used to be the only way to attach a local file to an embed. Disnake abstracts this with `file=` kwargs.
@@ -47,7 +62,7 @@ await channel.send(embed=embed, file=file)
 
 ## Converting arguments in commands
 
-discord.py used to have `Converter` classes to convert arguments if they are provided. The idea of converters are very good however the implementation is incredebly shitty and in disnake they are deprecated. This is because when you annotate an argument you're hinting its type. However an argument will never actually be an instance of the converter class. Its usage also makes it absolutely impossible to use typecheckers.
+discord.py used to have `Converter` classes to convert arguments if they are provided. These were however very hard to use with type-checkers because the type of the parameter is never actually the converter itself.
 
 Disnake aims to eliminate this issue by only allowing conversion of builtin types like `disnake.Member`, `disnake.Emoji`, etc. If you ever want to have your own converter you have to use the `converter` argument in `Param`
 
@@ -95,7 +110,7 @@ class Data:
     @classmethod
     async def from_option(cls, inter: disnake.ApplicationCommandInteraction, arg: str)
         parts = arg.split(",")
-        return cls(a=parts[0], b=int(parts[1]), c=parts[2].lower())
+        return cls(parts[0], int(parts[1]), parts[2].lower())
 
 @commands.slash_command()
 async def command(
