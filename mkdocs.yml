@@ -60,6 +60,9 @@ markdown_extensions:
 
 nav:
     - index.md
+    - links-credits.md
+    - Prerequisites:
+        - 000-prerequisites/001-installing-python.md
     - Getting Started:
         - 100-getting-started/101-making-your-application.md
         - 100-getting-started/102-coding-your-bot.md
