@@ -2,7 +2,7 @@
 
 Here's a list of some good practices in disnake.
 
-## Running code with a loaded cog
+## Running code when a cog is loaded
 
 Most people are used to running everything in `__init__` but that doesn't allow running async code. In this case you can overwrite the special `cog_load` method. 
 
@@ -57,7 +57,7 @@ embed = disnake.Embed(title="An embed with an image")
 file = disnake.File("assets/image.png")
 embed.set_image(file=file)
 
-await channel.send(embed=embed, file=file)
+await channel.send(embed=embed)
 ```
 
 ## Converting arguments in commands
