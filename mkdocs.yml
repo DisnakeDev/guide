@@ -46,6 +46,7 @@ extra: {
     disnakedocs: https://disnake.readthedocs.io/en/latest,
     dpydocs: https://discordpy.readthedocs.io/en/latest,
     discord: https://www.discord.com,
+    devportal: https://discord.com/developers/applications,
     discordsupport: https://support.discord.com/hc/en-us
 }
 
