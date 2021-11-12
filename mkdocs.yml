@@ -47,10 +47,12 @@ plugins:
 extra: {
     guiderepo: https://github.com/DisnakeDev/guide,
     disnakedocs: https://disnake.readthedocs.io/en/latest,
+    disnakeserver: https://discord.gg/gJDbCw8aQy,
     dpydocs: https://discordpy.readthedocs.io/en/latest,
     discord: https://www.discord.com,
     devportal: https://discord.com/developers/applications,
-    discordsupport: https://support.discord.com/hc/en-us
+    discordsupport: https://support.discord.com/hc/en-us,
+    breakingchanges: https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58
 }
 
 markdown_extensions:
@@ -73,6 +75,7 @@ markdown_extensions:
     - pymdownx.emoji:
         emoji_index: !!python/name:materialx.emoji.twemoji
         emoji_generator: !!python/name:materialx.emoji.to_svg
+
     - toc:
         permalink: True
 
@@ -94,6 +97,8 @@ nav:
         - commands/basic.md
         
     - good-practices/index.md
+
+    - discordpy-to-disnake.md
 
 extra_css:
     - stylesheets/lightmode.css
