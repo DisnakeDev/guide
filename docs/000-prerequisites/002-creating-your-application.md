@@ -12,42 +12,42 @@ In order to work with the library and the Discord API in general, we must first 
 
 Creating a Bot account is a pretty straightforward process.
 
-1. Make sure you’re logged on to the [Discord website][discord-page].
+1. Make sure you’re logged on to the [Discord website]({{ discord }}).
 
-2. Navigate to the [application page][discord-app-page].
+2. Navigate to the [application page]({{ devportal }}).
 
 3. Click on the `New Application` button.
 
     <br>
-    <p align = "center">
-        ![](../assets/img-creating-your-application/001.png){ width="40%" }
-    </p>
+        <p align = "center">
+            ![](../assets/img-creating-your-application/001.png){ width="40%" }
+        </p>
     <br>
 
 4. Give the application a name and click `Create`.
 
     <br>
-    <p align = "center">
-        ![](../assets/img-creating-your-application/002.png){ width="75%" }
-    </p>
+        <p align = "center">
+            ![](../assets/img-creating-your-application/002.png){ width="60%" }
+        </p>
     <br>
 
 5. Create a Bot User by navigating to the `Bot` tab and clicking `Add Bot`.
     - Click `Yes, do it!` to continue.
 
     <br>
-    <p align = "center">
-        ![](../assets/img-creating-your-application/003.png){ width="75%" }
-    </p>
+        <p align = "center">
+            ![](../assets/img-creating-your-application/003.png){ width="75%" }
+        </p>
     <br>
 
 6. Make sure that `Public Bot` is ticked if you want others to invite your bot.
     - You should also make sure that `Require OAuth2 Code Grant` is unchecked unless you are developing a service that needs it. If you’re unsure, then **leave it unchecked**.
 
     <br>
-    <p align = "center">
-        ![](../assets/img-creating-your-application/004.png){ width="75%" }
-    </p>
+        <p align = "center">
+            ![](../assets/img-creating-your-application/004.png){ width="75%" }
+        </p>
     <br>
 
 7. Copy the token using the `Copy` button.
@@ -87,7 +87,30 @@ All that and much, much more. Sounds pretty terrible, right? So make sure to kee
 
 ## Discord's system messages
 
+System messages are official messages that Discord sends to alert you of an account issue.  These messages can range from a variety of payment issues, support ticket updates, and ToS violation warnings. You can also expect a system message if your bot token has been posted on the internet publicly, and was found by Discord.
+
+**Such a message will look as follows:**
+
+<br>
+    <p align = "center">
+        ![](../assets/img-creating-your-application/005.png){ width="75%" }
+    </p>
+<br>
+
+!!! Warning
+
+    Since we do not know the extent to which Discord searches for bot tokens, or the time taken to inform the user about where the bot was found, we recommend not fully depending on this feature. But incase your bot token *is* found on the internet publicly (say, on  [a GitHub repository](https://www.github.com/)), you can expect Discord to send a system message to the account the bot is linked to.
+
+Note that Discord will never ask for your password or account token, and a system message will never request for the same. System messages from Discord will have a verified `SYSTEM` tag, and the bar at the bottom of the DM will mention - "This thread is reserved for official Discord notifications". 
+
+<br>
+    <p align = "center">
+        ![](../assets/img-creating-your-application/006.png){ width="50%" }
+    </p>
+<br>
+
+You can read more about the authenticity of these messages [in this article][discord-sys-msg-page].
 
 
-[discord-page]: https://www.discord.com
-[discord-app-page]: https://discord.com/developers/applications
+
+[discord-sys-msg-page]: https://support.discord.com/hc/en-us/articles/360036118732-Discord-System-Messages
