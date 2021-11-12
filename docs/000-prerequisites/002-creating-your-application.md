@@ -20,7 +20,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-001.png){ width="40%" }
+        ![](../assets/img-creating-your-application/001.png){ width="40%" }
     </p>
     <br>
 
@@ -28,7 +28,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-002.png){ width="75%" }
+        ![](../assets/img-creating-your-application/002.png){ width="75%" }
     </p>
     <br>
 
@@ -37,7 +37,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-003.png){ width="75%" }
+        ![](../assets/img-creating-your-application/003.png){ width="75%" }
     </p>
     <br>
 
@@ -46,7 +46,7 @@ Creating a Bot account is a pretty straightforward process.
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-004.png){ width="75%" }
+        ![](../assets/img-creating-your-application/004.png){ width="75%" }
     </p>
     <br>
 
@@ -84,6 +84,8 @@ All that and much, much more. Sounds pretty terrible, right? So make sure to kee
 !!! Danger
 
     If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
+
+## Discord's system messages
 
 
 

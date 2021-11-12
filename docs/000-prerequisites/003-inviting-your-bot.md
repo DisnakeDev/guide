@@ -12,7 +12,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-005.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/001.png){ width="75%" }
     </p>
     <br>
 
@@ -20,7 +20,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-006.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/002.png){ width="75%" }
     </p>
     <br>
 
@@ -28,7 +28,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-007.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/003.png){ width="75%" }
     </p>
     <br>
 
@@ -40,7 +40,7 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     <br>
     <p align = "center">
-        ![](../img/guide-img/making-your-app-008.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/004.png){ width="75%" }
     </p>
     <br>    
 
