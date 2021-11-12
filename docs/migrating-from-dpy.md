@@ -1,14 +1,14 @@
-# Discord.py to Disnake
+# Migrating from discord.py
 
 In this guide we will try to explain the differences between discord.py and disnake, and ways to rewrite your code to disnake.
 
-# Differences
+## Differences
 
 As you probably know, discord.py has been discontinued, and because of that, disnake developers and contributors committed to keep the Discord API wrapper for Python alive.
 
 discord.py 2.0 had major changes, and that's why if you are not using that version, we recommend you to read [this page]({{ breakingchanges }}) which collected all the major changes that version had.
 
-# Rewrite
+## Rewrite
 
 If you want to rewrite your code from discord.py to disnake, this will require some not so difficult changes.
 
