@@ -1,1 +1,1 @@
-# Links & Credits
+# Links and credits
