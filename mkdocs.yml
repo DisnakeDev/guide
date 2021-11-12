@@ -5,8 +5,8 @@ site_url: https://guide.disnake.dev/
 theme:
 
     name: material
-    logo: assets/disnake.png
-    favicon: assets/disnake.png
+    logo: assets/disnake-logo.png
+    favicon: assets/disnake-logo.png
 
     custom_dir: docs/overrides
 
