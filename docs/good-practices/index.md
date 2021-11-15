@@ -46,6 +46,7 @@ Using explicit `attachment://` used to be the only way to attach a local file to
 # discord.py:
 embed = discord.Embed(title="An embed with an image")
 embed.set_image(url="attachment://image.png")
+
 file = discord.File("assets/image.png")
 
 await channel.send(embed=embed, file=file)
@@ -54,8 +55,7 @@ await channel.send(embed=embed, file=file)
 ```py
 # disnake:
 embed = disnake.Embed(title="An embed with an image")
-file = disnake.File("assets/image.png")
-embed.set_image(file=file)
+embed.set_image(file=disnake.File("assets/image.png"))
 
 await channel.send(embed=embed)
 ```
@@ -156,4 +156,22 @@ async def command(
     item: The item to display
     details: Whether to get the details of this time
     """
+```
+
+## Guild-only commands
+
+While disnake does provide a `@commands.guild_only()` decorator, it still makes you handle `guild` being optional in case you're using linters. To solve this you should be using `GuildCommandInteraction`.
+
+```py
+# before
+@commands.slash_command()
+@commands.guild_only()
+async def command(inter: disnake.ApplicationCommandInteraction):
+    assert inter.guild is not None
+    await inter.send(inter.guild.name)
+
+# after
+@commands.slash_command()
+async def command(inter: disnake.GuildCommandInteraction):
+    await inter.send(inter.guild.name)
 ```
