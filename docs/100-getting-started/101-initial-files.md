@@ -108,9 +108,7 @@ import disnake
 from disnake.ext import commands
 
 # Creating a commands.Bot() instance, and assigning it to "bot"
-bot = commands.Bot(
-    command_prefix = ">"
-)
+bot = commands.Bot()
 
 # When the bot is ready, run this code.
 @bot.event
