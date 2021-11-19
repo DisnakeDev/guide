@@ -49,8 +49,10 @@ extra: {
     disnakedocs: https://disnake.readthedocs.io/en/latest,
     disnakeserver: https://discord.gg/gJDbCw8aQy,
     dpydocs: https://discordpy.readthedocs.io/en/latest,
+    dpyserver: https://discord.gg/dpy,
     discord: https://www.discord.com,
     devportal: https://discord.com/developers/applications,
+    devdocs: https://discord.com/developers/docs,
     discordsupport: https://support.discord.com/hc/en-us,
     breakingchanges: https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58
 }
@@ -101,7 +103,9 @@ nav:
         - 200-interactions/204-select-menus.md
         - 200-interactions/205-context-menus.md
         
-    - good-practices/index.md
+    - Popular Topics:
+        - 300-popular-topics/301-good-practices.md
+        - 300-popular-topics/302-prefix-commands.md
 
 extra_css:
     - stylesheets/lightmode.css
