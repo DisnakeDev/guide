@@ -102,7 +102,7 @@ Open your code editor and create a new file. We suggest that you save the file a
 
 Here's the base code to get you started:
 
-``` python linenums="1"
+``` python linenums="1" title="main.py"
 # Import the necessary libraries.
 import disnake
 from disnake.ext import commands
