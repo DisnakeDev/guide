@@ -23,9 +23,7 @@ async def server(inter):
 
 @bot.slash_command()
 async def user(inter):
-    await inter.response.send_message(
-        f"Your tag: {inter.author}\nYour ID: {inter.author.id}"
-    )
+    await inter.response.send_message(f"Your tag: {inter.author}\nYour ID: {inter.author.id}")
 
 
 bot.run(YOUR_BOT_TOKEN)

@@ -12,3 +12,4 @@ repos:
     rev: 21.9b0
     hooks:
     - id: black
+      args: [--line-length=100]
