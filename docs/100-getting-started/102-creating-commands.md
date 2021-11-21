@@ -41,7 +41,7 @@ bot.run(YOUR_BOT_TOKEN)
 
 The first step is to use the `@bot.slash_command` coroutine, along with an `async` function in order to define the code for your slash command. Below is a script demonstrating the same (focus on the use of `inter`, which is short for `interaction`).
 
-``` python linenums="1" title="main.py" hl_lines="10-12"
+``` python linenums="1" title="main.py" hl_lines="12-14"
 import disnake
 from disnake.ext import commands
 
@@ -73,7 +73,7 @@ Note that servers are referred to as "guilds" in the Discord API and disnake lib
 
 When you're trying to test your changes to code in real time, it can be immensely useful to have the command's function update with your code changes right away. Thus, you can use the `guild_ids` argument for the command to be instantaneously registered in a list of specified servers. (We recommend including your separate development server in this list.)
 
-``` python linenums="1" title="main.py" hl_lines="10-12"
+``` python linenums="1" title="main.py" hl_lines="12-14"
 import disnake
 from disnake.ext import commands
 
@@ -137,7 +137,7 @@ bot.run(YOUR_BOT_TOKEN)
 
 `inter.guild` refers to the guild the interaction was sent in (a [Guild instance]({{ disnakedocs }}/api.html?highlight=guild#disnake.Guild)), which exposes properties such as `.name` or `.member_count`.
 
-``` python linenums="1" title="main.py" hl_lines="10-12"
+``` python linenums="1" title="main.py" hl_lines="12-16"
 import disnake
 from disnake.ext import commands
 
@@ -176,7 +176,7 @@ You could also display the date the server was created, or the server's verifica
 A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a [User instance]({{ disnakedocs }}/api.html?highlight=user#disnake.User) in DM contexts, or a [Member instance]({{ disnakedocs }}/api.html?highlight=user#disnake.Member) in server contexts), which exposes properties such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
 
-``` python linenums="1" title="main.py" hl_lines="10-12"
+``` python linenums="1" title="main.py" hl_lines="12-16"
 import disnake
 from disnake.ext import commands
 
