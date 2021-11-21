@@ -6,3 +6,4 @@ markdown-link-attr-modifier==0.2.0
 mkdocs-git-revision-date-localized-plugin==0.10.1
 PyYAML==5.4.1
 tqdm==4.61.1
+pre-commit==2.15.0
