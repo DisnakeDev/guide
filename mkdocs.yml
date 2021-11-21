@@ -95,6 +95,8 @@ nav:
     - Getting Started:
         - 100-getting-started/101-initial-files.md
         - 100-getting-started/102-creating-commands.md
+        - 100-getting-started/103-command-handling.md
+        - 100-getting-started/104-event-handling.md
 
     - Interactions:
         - 200-interactions/201-interactions.md
