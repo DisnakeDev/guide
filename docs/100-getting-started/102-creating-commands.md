@@ -64,11 +64,11 @@ The `inter` passed into the function is analogous to context, or `ctx` used in p
 
 ### Registering commands in specific guilds
 
-On running the above code, the slash command will be registered globally, and will be accessible on all servers the bot is in. The caviat being that global registration of slash commands can take upto 1 hour (Refer [Discord's docs]({{ devdocs }}/interactions/application-commands#create-global-application-command)). 
+Note that servers are referred to as "guilds" in the Discord API and disnake library. On running the above code, the slash command will be registered globally, and will be accessible on all servers the bot is in. The caviat being that global registration of slash commands can take upto 1 hour (Refer [Discord's docs]({{ devdocs }}/interactions/application-commands#create-global-application-command)). 
 
-When you're trying to test your changes to code in real time, it can be immensely useful to have the command's function update with your code changes right away. Thus, you can use the `guild_ids` argument for the command to be instantaneously registered in a list of specified servers.
+When you're trying to test your changes to code in real time, it can be immensely useful to have the command's function update with your code changes right away. Thus, you can use the `guild_ids` argument for the command to be instantaneously registered in a list of specified servers. (We recommend including your separate development server in this list.)
 
-``` python linenums="1" title="main.py" hl_lines="10-14"
+``` python linenums="1" title="main.py" hl_lines="10-12"
 import disnake
 from disnake.ext import commands
 
@@ -86,6 +86,41 @@ async def ping(inter):
 
 bot.run(YOUR_BOT_TOKEN) 
 ```
+
+???+ Tip "Using `test_guilds` in `commands.Bot()`"
+
+    When you have multiple commands registered under the same test guilds, it is convenient 
+
+Now that you're all set with registering the slash command, you can proceed to respond to the initiated command.
+
+## Replying to commands
+
+You can reply to a slash command initiated by the user, using `inter.response.send_message()`. It is analogous to using `ctx.send()`, in that you can respond to the interaction with embeds, files, buttons/select menus or just plain text.
+
+``` python linenums="1" title="main.py" hl_lines="14"
+import disnake
+from disnake.ext import commands
+
+bot = commands.Bot()
+
+@bot.event
+async def on_ready():
+    print("The bot is ready!")
+
+@bot.slash_command(
+    guild_ids = [1234, 5678]
+) 
+async def ping(inter):
+    await inter.response.send_message("Pong!")
+
+bot.run(YOUR_BOT_TOKEN) 
+```
+
+<br>
+    <p align = "left">
+        ![](../assets/img-creating-commands/001.png){ width="60%" }
+    </p>
+<br>
 
 
 
