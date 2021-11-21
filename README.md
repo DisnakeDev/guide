@@ -11,6 +11,10 @@ Whether you're getting into Discord bots from scratch, or rewriting your bot fro
 - A plethora of examples with popular topics along with in-depth explanation, and much more!
 
 
+## Development
+For more info on development/contributions, see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
+
+
 
 [dpydocs]: https://discordpy.readthedocs.io/en/latest
 [sqlite-docs]: https://docs.python.org/3/library/sqlite3.html
