@@ -18,7 +18,7 @@ async def transfer(
     item: str,
     amount: int = commands.Param(10, gt=0, le=100),
     source: disnake.Member = commands.Param(lambda inter: inter.author),
-    reason: str = '',
+    reason: str = "",
 ):
     """Transfer an item from an inventory of a member to an inventory of another member
 
@@ -30,7 +30,9 @@ async def transfer(
     source: The member from which to take to item
     reason: The reason for this transfer
     """
-    await inter.response.send_message(f"Transfered {amount}x {item} from {source.mention} to {target.mention}")
+    await inter.response.send_message(
+        f"Transfered {amount}x {item} from {source.mention} to {target.mention}"
+    )
     if reason:
         await inter.followup.send(reason)
 
@@ -38,14 +40,14 @@ async def transfer(
 @transfer.autocomplete("item")
 async def autocomplete_item(
     self,
-    inter: disnake.ApplicationCommandInteraction, 
-    option: str, 
-    *, 
-    target: disnake.Member = None, 
-    **kwargs: Any
+    inter: disnake.ApplicationCommandInteraction,
+    option: str,
+    *,
+    target: disnake.Member = None,
+    **kwargs: Any,
 ):
     if target is None:
         return {}
-    
+
     return {item["name"]: item["id"] for item in get_db_items(target.id)}
 ```

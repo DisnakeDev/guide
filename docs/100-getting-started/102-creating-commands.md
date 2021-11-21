@@ -176,7 +176,7 @@ You could also display the date the server was created, or the server's verifica
 A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a [User instance]({{ disnakedocs }}/api.html?highlight=user#disnake.User) in DM contexts, or a [Member instance]({{ disnakedocs }}/api.html?highlight=user#disnake.Member) in server contexts), which exposes properties such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
 
-``` python linenums="1" title="main.py" hl_lines="12-16"
+``` python linenums="1" title="main.py" hl_lines="12-14"
 import disnake
 from disnake.ext import commands
 
@@ -190,9 +190,7 @@ async def on_ready():
 
 @bot.slash_command()
 async def user(inter):
-    await inter.response.send_message(
-        f"Your tag: {inter.author}\nYour ID: {inter.author.id}"
-    )
+    await inter.response.send_message(f"Your tag: {inter.author}\nYour ID: {inter.author.id}")
 
 
 bot.run(YOUR_BOT_TOKEN)

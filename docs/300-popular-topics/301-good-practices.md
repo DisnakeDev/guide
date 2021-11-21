@@ -15,11 +15,7 @@ class MyCog(commands.Cog):
         self.data = await bot.fetch_database_data()
 
     @commands.slash_command()
-    async def command(
-        self, 
-        interaction: disnake.ApplicationCommandInteraction,
-        user: disnake.User
-    ):
+    async def command(self, interaction: disnake.ApplicationCommandInteraction, user: disnake.User):
         await interaction.response.send_message(self.data[user.id])
 ```
 
@@ -75,11 +71,7 @@ class DataConverter(commands.Converter):
 
 
 @commands.command()
-async def command(
-    self,
-    ctx: commands.Context,
-    data: DataConverter
-):
+async def command(self, ctx: commands.Context, data: DataConverter):
     ...
 ```
 
@@ -94,7 +86,7 @@ async def convert_data(inter: disnake.ApplicationCommandInteraction, arg: str):
 async def command(
     self,
     inter: disnake.ApplicationCommandInteraction,
-    data: Dict[str, Any] = commands.Param(converter=convert_data)
+    data: Dict[str, Any] = commands.Param(converter=convert_data),
 ):
     ...
 ```
@@ -108,15 +100,16 @@ class Data:
         self.c = c
 
     @classmethod
-    async def from_option(cls, inter: disnake.ApplicationCommandInteraction, arg: str)
+    async def from_option(cls, inter: disnake.ApplicationCommandInteraction, arg: str):
         parts = arg.split(",")
         return cls(parts[0], int(parts[1]), parts[2].lower())
+
 
 @commands.slash_command()
 async def command(
     self,
     inter: disnake.ApplicationCommandInteraction,
-    data: Data = commands.Param(converter=Data.from_option)
+    data: Data = commands.Param(converter=Data.from_option),
 ):
     ...
 ```
@@ -127,11 +120,7 @@ Instead of using `inter.target` you should be using a parameter of your command.
 
 ```py
 @commands.user_command()
-async def command(
-    self,
-    inter: disnake.ApplicationCommandInteraction,
-    user: disnake.User
-):
+async def command(self, inter: disnake.ApplicationCommandInteraction, user: disnake.User):
     await inter.response.send_message(f"Used on {user.mention}")
 ```
 
@@ -169,6 +158,7 @@ While disnake does provide a `@commands.guild_only()` decorator, it still makes 
 async def command(inter: disnake.ApplicationCommandInteraction):
     assert inter.guild is not None
     await inter.send(inter.guild.name)
+
 
 # after
 @commands.slash_command()
