@@ -20,7 +20,7 @@ Therefore, to minimize the permissions your bot has to use, we will be convering
 
 ## Registering commands
 
-This section covers the bare minimum to get you started with registering slash commands. Once again, you can refer the [this page](../200-interactions/202-slash-commands) for an in-depth coverage of topics, including guild commands, global commands, options, option types, autocomplete and choices.
+This section covers the bare minimum to get you started with registering slash commands. Once again, you can refer to [this page](../200-interactions/202-slash-commands) for an in-depth coverage of topics, including guild commands, global commands, options, option types, autocomplete and choices.
 
 Now, we shall continue with the base code used in the previous section.
 
@@ -64,7 +64,7 @@ The `inter` passed into the function is analogous to context, or `ctx` used in p
 
 ### Registering commands in specific guilds
 
-Note that servers are referred to as "guilds" in the Discord API and disnake library. On running the above code, the slash command will be registered globally, and will be accessible on all servers the bot is in. The caviat being that global registration of slash commands can take upto 1 hour (Refer [Discord's documentation]({{ devdocs }}/interactions/application-commands#create-global-application-command)). 
+Note that servers are referred to as "guilds" in the Discord API and disnake library. On running the above code, the slash command will be registered globally, and will be accessible on all servers the bot is in. The caveat being that global registration of slash commands can take up to 1 hour (refer to [Discord's documentation]({{ devdocs }}/interactions/application-commands#create-global-application-command)).
 
 When you're trying to test your changes to code in real time, it can be immensely useful to have the command's function update with your code changes right away. Thus, you can use the `guild_ids` argument for the command to be instantaneously registered in a list of specified servers. (We recommend including your separate development server in this list.)
 
@@ -89,17 +89,17 @@ bot.run(YOUR_BOT_TOKEN)
 
 ???+ Tip "Using `test_guilds` in `commands.Bot()`"
 
-    When you have multiple commands registered under the same test guilds, it is convenient to only have your `guild_ids` defined once. Therefore, you can use the `test_guilds` argument in the `commands.Bot()` instance - 
+    When you have multiple commands registered under the same test guilds, it is convenient to only have your `guild_ids` defined once. Therefore, you can use the `test_guilds` argument in the `commands.Bot()` instance instead of passing `guild_ids` to every single command -
 
     ``` python
     bot = commands.Bot(test_guilds=[1234, 5678])
     ```
 
-Now that you're all set with registering the slash command, you can proceed to respond to the initiated command.
+Now that you're all set with registering the slash command, you can proceed with responding to the initiated command.
 
-## Replying to commands
+## Responding to commands
 
-You can reply to a slash command initiated by the user, using `inter.response.send_message()`. It is analogous to using `ctx.send()`, in that you can respond to the interaction with embeds, files, buttons/select menus or just plain text.
+You can respond to a slash command initiated by the user, using `inter.response.send_message()`. It is analogous to using `ctx.send()`, in that you can respond to the interaction with embeds, files, buttons/select menus or just plain text.
 
 ``` python linenums="1" title="main.py" hl_lines="14"
 import disnake
@@ -161,7 +161,8 @@ You could also display the date the server was created, or the server's verifica
 
 ### User info command
 
-A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a [User instance]({{ disnakedocs }}/api.html?highlight=user#disnake.User)), which exposes properties such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
+A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a [User instance]({{ disnakedocs }}/api.html?highlight=user#disnake.User) in DM contexts, or a [Member instance]({{ disnakedocs }}/api.html?highlight=user#disnake.Member) in server contexts), which exposes properties such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
+
 
 ``` python linenums="1" title="main.py" hl_lines="10-12"
 import disnake
@@ -188,7 +189,7 @@ bot.run(YOUR_BOT_TOKEN)
 
 !!! Tip
 
-    Refer to the [User]({{ disnakedocs }}/api.html?highlight=user#disnake.User) documentation for a list of all the available properties and methods.
+    Refer to the [User]({{ disnakedocs }}/api.html?highlight=user#disnake.User) and [Member]({{ disnakedocs }}/api.html?highlight=user#disnake.Member) documentation for a list of all the available properties and methods.
 
 And there you have it!
 
