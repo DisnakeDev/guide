@@ -30,11 +30,13 @@ from disnake.ext import commands
 
 bot = commands.Bot()
 
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
 
-bot.run(YOUR_BOT_TOKEN) 
+
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 The first step is to use the `@bot.slash_command` coroutine, along with an `async` function in order to define the code for your slash command. Below is a script demonstrating the same (focus on the use of `inter`, which is short for `interaction`).
@@ -45,15 +47,18 @@ from disnake.ext import commands
 
 bot = commands.Bot()
 
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
+
 
 @bot.slash_command()
 async def ping(inter):
     ...
 
-bot.run(YOUR_BOT_TOKEN) 
+
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 The `inter` passed into the function is analogous to context, or `ctx` used in prefix commands - it passes through all information relative to the interaction - data regarding the user who initiated the command, as an example. It is also necessary for replying to the use of the command.
@@ -74,17 +79,18 @@ from disnake.ext import commands
 
 bot = commands.Bot()
 
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
 
-@bot.slash_command(
-    guild_ids = [1234, 5678] # Your server IDs go here.
-) 
+
+@bot.slash_command(guild_ids=[1234, 5678])  # Your server IDs go here.
 async def ping(inter):
     ...
 
-bot.run(YOUR_BOT_TOKEN) 
+
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 ???+ Tip "Using `test_guilds` in `commands.Bot()`"
@@ -107,17 +113,18 @@ from disnake.ext import commands
 
 bot = commands.Bot()
 
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
 
-@bot.slash_command(
-    guild_ids = [1234, 5678]
-) 
+
+@bot.slash_command(guild_ids=[1234, 5678])
 async def ping(inter):
     await inter.response.send_message("Pong!")
 
-bot.run(YOUR_BOT_TOKEN) 
+
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 <br>
@@ -136,15 +143,20 @@ from disnake.ext import commands
 
 bot = commands.Bot()
 
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
 
-@bot.slash_command() 
-async def server(inter):
-    await inter.response.send_message(f"Server name: {inter.guild.name}\nTotal members: {inter.guild.member_count}")
 
-bot.run(YOUR_BOT_TOKEN) 
+@bot.slash_command()
+async def server(inter):
+    await inter.response.send_message(
+        f"Server name: {inter.guild.name}\nTotal members: {inter.guild.member_count}"
+    )
+
+
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 <br>
@@ -170,15 +182,20 @@ from disnake.ext import commands
 
 bot = commands.Bot()
 
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
 
-@bot.slash_command() 
-async def user(inter):
-    await inter.response.send_message(f"Your tag: {inter.author}\nYour ID: {inter.author.id}")
 
-bot.run(YOUR_BOT_TOKEN) 
+@bot.slash_command()
+async def user(inter):
+    await inter.response.send_message(
+        f"Your tag: {inter.author}\nYour ID: {inter.author.id}"
+    )
+
+
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 <br>

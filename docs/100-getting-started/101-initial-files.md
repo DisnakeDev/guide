@@ -33,7 +33,7 @@ Storing data in a `.env` file is a common way of keeping your sensitive values s
 
     # Getting .env value.
     # You can name this variable in the script however you like.
-    YOUR_BOT_TOKEN = os.getenv('YOUR_BOT_TOKEN')
+    YOUR_BOT_TOKEN = os.getenv("YOUR_BOT_TOKEN")
     ```
 
 !!! Danger
@@ -47,12 +47,13 @@ You can alternatively also use the [python-dotenv package][python-dotenv] to eit
     ``` python
     import os
     from dotenv import load_dotenv
-    load_dotenv() # Take environment variables from .env.
 
-    # Using the variables in your application, which uses environment variables 
-    # (e.g. from 'os.environ()' or 'os.getenv()') 
+    load_dotenv()  # Take environment variables from .env.
+
+    # Using the variables in your application, which uses environment variables
+    # (e.g. from 'os.environ()' or 'os.getenv()')
     # as if they came from the actual environment.
-    YOUR_BOT_TOKEN = os.getenv('YOUR_BOT_TOKEN')
+    YOUR_BOT_TOKEN = os.getenv("YOUR_BOT_TOKEN")
     ```
 
 === "dotenv_values()"
@@ -60,12 +61,12 @@ You can alternatively also use the [python-dotenv package][python-dotenv] to eit
     ``` python
     from dotenv import dotenv_values
 
-    config = dotenv_values('.env')  # Makes a dict out of the values.
-    
+    config = dotenv_values(".env")  # Makes a dict out of the values.
+
     # Thus, we get
     # config = {YOUR_BOT_TOKEN: OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg}
     # which can be used as:
-    YOUR_BOT_TOKEN = config['YOUR_BOT_TOKEN']
+    YOUR_BOT_TOKEN = config["YOUR_BOT_TOKEN"]
     ```
 
 Keep in mind that the values imported from the `.env` file are **in string format**. Therefore if you would like to, say, use them for calculations, you'll have to convert them via `int()`
@@ -115,8 +116,9 @@ bot = commands.Bot()
 async def on_ready():
     print("The bot is ready!")
 
+
 # Login to Discord with the bot's token.
-bot.run(YOUR_BOT_TOKEN) 
+bot.run(YOUR_BOT_TOKEN)
 ```
 
 This is how you create a client instance for your Discord bot and login to Discord. Open your terminal and run `python3 main.py` to start the process. If you see "The bot is ready!" after a few seconds, you're good to go!
