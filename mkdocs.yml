@@ -54,7 +54,8 @@ extra: {
     devportal: https://discord.com/developers/applications,
     devdocs: https://discord.com/developers/docs,
     discordsupport: https://support.discord.com/hc/en-us,
-    breakingchanges: https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58
+    breakingchanges: https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58,
+    futureofdpy: https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1
 }
 
 markdown_extensions:
