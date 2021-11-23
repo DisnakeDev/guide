@@ -53,10 +53,10 @@ There are three ways to switch between libraries:
 
 1. Import `disnake` into your code (and delete the lines where you import `discord`.).
 
-```py
-import disnake
-from disnake.ext import commands
-```
+    ```py
+    import disnake
+    from disnake.ext import commands
+    ```
 
 2. With your favorite editor, replace every `discord` reference in your code with `disnake`.
 
