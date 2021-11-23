@@ -1,22 +1,27 @@
 # Migrating from discord.py
 
-In this guide we will try to explain the differences between discord.py and disnake, and ways to rewrite your code to disnake.
+After the discontinuation of `discord.py` (refer [this gist]({{ futureofdpy }})), many forks of the API wrapper branched onward to modify the library, in order to keep it updated with the latest features and Discord API changes - `disnake` is one such fork. 
 
-## Differences
+Thus, if you've chosen `disnake` as your fork of choice in order to implement interactions/components and other features, this page will help you understand the changes in syntax, and aim for making your migrating process as smooth as possible.
 
-As you probably know, discord.py has been discontinued, and because of that, disnake developers and contributors committed to keep the Discord API wrapper for Python alive.
+## Differences between libraries
 
-discord.py 2.0 had major changes, and that's why if you are not using that version, we recommend you to read [this page]({{ breakingchanges }}) which collected all the major changes that version had.
+`disnake` is based on `discord.py 2.0`, which had major syntax changes from its previous version. Therefore, if you're shifting to `disnake` from a version of `discord.py` lower than 2.0, you will have to make some important syntax changes in your code. You can refer [this page]({{ breakingchanges }}) for the full list of breaking changes in `discord.py 2.0`, though we will list some primary API reference changes here:
 
-## Rewrite
+- Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
+- Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to `avatar.url`. `User.avatar` returns `None` in case the default avatar is used.
+- `on_presence_update` replaces `on_member_update` for updates to `Member.status` and `Member.activities`.
+- Webhooks are changed significantly: `WebhookAdapter` is removed, and synchronous requests using `requests` is now inside `SyncWebhook`.
+- `edit` method no longer updates cache and instead returns modified instance.
+- `Client.logout` is removed; use `Client.close` instead.
+- `Message.type` for replies are now `MessageType.reply`.
+- `Reaction.custom_emoji` property is changed to `Reaction.is_custom_emoji` method.
+- `missing_perms` attributes and arguments are renamed to `missing_permissions`.
+- Many arguments are now specified as positional-only or keyword-only; e.g. `oauth_url` now takes keyword-only arguments, and methods starting with `get_` or `fetch_` take positional-only arguments.
 
-If you want to rewrite your code from discord.py to disnake, this will require some not so difficult changes.
+## Changing requirements 
 
-Here are three ways to rewrite your code.
-
-### Requirements 
-
-Before we start, you must uninstall `discord` library, you can do it with the following command:
+In order to avoid conflicts between the libraries, you must uninstall `discord.py`. You can do so by using the following command in your terminal:
 
 === "Windows"
 
@@ -36,74 +41,58 @@ Before we start, you must uninstall `discord` library, you can do it with the fo
     python3 -m pip uninstall discord
     ```
 
-<sup>We do this to prevent conflicts with the `disnake` library.</sup>
+To install `disnake`, you can follow the instructions on [this page](000-prerequisites/001-installing-python.md#installing-disnake).
 
-Also don't forget to install disnake, you can follow [this guide](000-prerequisites/001-installing-python.md#installing-disnake) to install it.
+## Rewriting your bot
 
-Once you have those two requirements ready, let's continue with the three ways to rewrite your code from discord.py to disnake:
+As discussed above, rewriting your code from an older `discord.py` version to `disnake` will require some major syntax changes. But if you're migrating from `discord.py 2.0`, all that's left now is changing the library references throughout the code, since the base code for both the libraries is practically the same. 
 
-1. Replace every `discord` to `disnake`:
+There are three ways to switch between libraries:
 
-    * First of all, import disnake into your code:
+#### Replace `discord` with `disnake`
 
-        ```py
-        import disnake
-        from disnake.ext import commands
-        ```
+1. Import `disnake` into your code (and delete the lines where you import `discord`.).
 
-        Don't forget to delete the lines where you import `discord`.
+```py
+import disnake
+from disnake.ext import commands
+```
 
-    * Then with your favorite editor, replace every `discord` you have in your code with `disnake`.
+2. With your favorite editor, replace every `discord` reference in your code with `disnake`.
 
-        !!! info "Note"
-            Please, if you have problems with your code after doing this way, try to read [this page]({{ breakingchanges }}) which has a list of major changes or ask us on our [Discord server]({{ disnakeserver }}).
+#### Import `disnake as discord`
 
-2. Import disnake as discord:
+Import `disnake as discord` into your code (and delete the lines where you import `discord`). This reduces the effort of changing all references throughout your code.
 
-    * Import disnake as discord into your code:
+```py
+import disnake as discord
+from disnake.ext import commands
+```
 
-        ```py
-        import disnake as discord
-        from disnake.ext import commands
-        ```
+#### Using the `discord` shim
 
-        Don't forget to delete the lines where you import `discord`.
+Using the `discord` shim allows you to use `disnake`, without the need to import it directly or importing it as discord - thus eliminating the need to change your code at all. To install the shim, you can use the following command in your terminal:
 
-        !!! info "Note"
-            Please, if you have problems with your code after doing this way, try to read [this page]({{ breakingchanges }}) which has a list of major changes or ask us on our [Discord server]({{ disnakeserver }}).
+=== "Windows"
 
-3. Use discord shim:
+    ```
+    py -3 -m pip install disnake[discord]
+    ```
 
-    * First of all, you must install the discord shim, you can do it with the following command:
+=== "macOS"
 
-        === "Windows"
+    ```
+    python3 -m pip install disnake[discord]
+    ```
 
-            ```
-            py -3 -m pip install disnake[discord]
-            ```
+=== "Linux"
 
-        === "macOS"
+    ```
+    python3 -m pip install disnake[discord]
+    ```
 
-            ```
-            python3 -m pip install disnake[discord]
-            ```
+!!! Warning
 
-        === "Linux"
+    We don't recommend using the shim, as it is updated less frequently and may break the behaviour of interactions/components in some cases. If possible, proceed with one of the other two procedures mentioned.
 
-            ```
-            python3 -m pip install disnake[discord]
-            ```
-
-    * Then, import the discord shim:
-
-        ```py
-        import discord
-        from discord.ext import commands
-        ```
-
-        The discord shim allows us to use `disnake` without the need to import it directly, nor import it as `discord`.
-
-        !!! warning
-            We don't recommend using the shim, please prefer to use one of the two ways already mentioned.
-
-And that's it! Since disnake is a fork of discord.py, it has a lot of similarities, but we recommend you to always run your code to fix possible bugs.
+And that's it! Since `disnake` is a fork of `discord.py`, it inherits a lot of similarities - though we recommend you to always run your code to fix any possible issues.
