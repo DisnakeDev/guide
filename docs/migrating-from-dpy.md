@@ -51,7 +51,7 @@ There are three ways to switch between libraries:
 
 #### Replace `discord` with `disnake`
 
-1. Import `disnake` into your code (and delete the lines where you import `discord`.).
+1. Import `disnake` into your code (and delete the lines where you import `discord`).
 
     ```py
     import disnake
