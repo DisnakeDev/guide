@@ -1,6 +1,6 @@
 # Migrating from discord.py
 
-After the discontinuation of `discord.py` (refer [this gist]({{ futureofdpy }})), many forks of the API wrapper branched onward to modify the library, in order to keep it updated with the latest features and Discord API changes - `disnake` is one such fork. 
+After the discontinuation of `discord.py` (refer [this gist]({{ futureofdpy }})), many forks of the API wrapper branched onward to maintain the library, in order to keep it updated with the latest features and Discord API changes - `disnake` is one such fork. 
 
 Thus, if you've chosen `disnake` as your fork of choice in order to implement interactions/components and other features, this page will help you understand the changes in syntax, and aim for making your migrating process as smooth as possible.
 
@@ -12,7 +12,7 @@ Thus, if you've chosen `disnake` as your fork of choice in order to implement in
 - Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to `avatar.url`. `User.avatar` returns `None` in case the default avatar is used.
 - `on_presence_update` replaces `on_member_update` for updates to `Member.status` and `Member.activities`.
 - Webhooks are changed significantly: `WebhookAdapter` is removed, and synchronous requests using `requests` is now inside `SyncWebhook`.
-- `edit` method no longer updates cache and instead returns modified instance.
+- `edit` methods no longer updates cache and instead returns modified instance.
 - `Client.logout` is removed; use `Client.close` instead.
 - `Message.type` for replies are now `MessageType.reply`.
 - `Reaction.custom_emoji` property is changed to `Reaction.is_custom_emoji` method.
@@ -51,12 +51,12 @@ There are three ways to switch between libraries:
 
 #### Replace `discord` with `disnake`
 
-1. Import `disnake` into your code (and delete the lines where you import `discord`.).
+1. Import `disnake` into your code (and delete the lines where you import `discord`).
 
-```py
-import disnake
-from disnake.ext import commands
-```
+    ```py
+    import disnake
+    from disnake.ext import commands
+    ```
 
 2. With your favorite editor, replace every `discord` reference in your code with `disnake`.
 
