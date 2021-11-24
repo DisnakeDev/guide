@@ -20,7 +20,7 @@ Storing data in a `.env` file is a common way of keeping your sensitive values s
 
 === "secret.env"
 
-    ``` python
+    ```
     # Each line in a .env file should hold a KEY=value pair.
     YOUR_BOT_TOKEN=OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
     ```
