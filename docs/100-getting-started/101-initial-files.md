@@ -16,13 +16,13 @@ Environment variables are special values for your environment (e.g., terminal se
 
     When referring to a `.env` file, keep in mind that you can name this file whatever you prefer. For example, the file can be named `token.env` or `secret.env`.
 
-Storing data in a `.env` file is a common way of keeping your sensitive values safe. Create a `.env` file in your project directory and paste in your token. You can access your token inside other files by using `os.getenv`.
+Storing data in a `.env` file is a common way of keeping your sensitive values safe. Create a `.env` file in your project directory and paste in your token. You can access your token inside other files by using `os.environ`.
 
 === "secret.env"
 
     ``` python
-    # Each line in a .env file should hold a KEY = value pair.
-    YOUR_BOT_TOKEN = OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
+    # Each line in a .env file should hold a KEY=value pair.
+    YOUR_BOT_TOKEN=OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
     ```
 
 === "main.py"
@@ -33,7 +33,7 @@ Storing data in a `.env` file is a common way of keeping your sensitive values s
 
     # Getting .env value.
     # You can name this variable in the script however you like.
-    YOUR_BOT_TOKEN = os.getenv("YOUR_BOT_TOKEN")
+    YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
     ```
 
 !!! Danger
@@ -53,7 +53,7 @@ You can alternatively also use the [python-dotenv package][python-dotenv] to eit
     # Using the variables in your application, which uses environment variables
     # (e.g. from 'os.environ()' or 'os.getenv()')
     # as if they came from the actual environment.
-    YOUR_BOT_TOKEN = os.getenv("YOUR_BOT_TOKEN")
+    YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
     ```
 
 === "dotenv_values()"
@@ -95,7 +95,7 @@ config.json
 
     [`__pycache__/`][pycache] has been included in `.gitignore` as it is simply cache that helps loading and running your script faster (this is an oversimplification). As it is of no particular importance, and is recompiled every time a change is made in the script, it is better to not commit the directory.
 
-    Also, you can specify quite intricate patterns in `.gitignore` files, as per the requirements of your project. Check out the [Git documentation on `.gitignore`][gitignore] for more information!
+    Also, you can specify certain extensions/directories in `.gitignore` files, as per the requirements of your project - [here is an example][gitignore-example]. Check out the [Git documentation on `.gitignore`][gitignore-article] for more information!
 
 ## Creating the main file
 
@@ -142,4 +142,5 @@ If you want to compare your code to the code we've constructed so far, you can r
 [gitlab]: https://about.gitlab.com/
 [bitbucket]: https://bitbucket.org/product
 [pycache]: https://stackoverflow.com/questions/16869024/what-is-pycache
-[gitignore]: https://git-scm.com/docs/gitignore
+[gitignore-example]: https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore
+[gitignore-article]: https://git-scm.com/docs/gitignore
