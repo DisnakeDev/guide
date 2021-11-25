@@ -4,7 +4,7 @@
 
     This page is a follow-up, and the base code used is from the previous page ([Initial files](./101-initial-files.md)). The code can be found on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-intial-files).
 
-Discord also allows developers to register [slash commands]({{ devdocs }}/interactions/application-commands), which provides users a first-class way of interacting directly with your application. These slash commands shall be covered by the guide [here](../200-interactions/202-slash-commands.md), in the **Interactions** section.
+Discord also allows developers to register [slash commands]({{ devdocs }}/interactions/application-commands), which provides users a first-class way of interacting directly with your application. These slash commands shall be covered by the guide [here](../200-interactions/202-application-commands.md), in the **Interactions** section.
 
 ## A note on prefix commands
 
@@ -16,11 +16,11 @@ Bot commands that are initiated when a keyword is used along with a specified pr
 
     You can read more about the message intent [here][message-intent-article].
 
-Therefore, to minimize the permissions your bot has to use, we will be convering prefix commands under the **Popular Topics** section, and advancing with the basics of slash commands in this article; more advanced topics will be covered in the [**Interactions**](../200-interactions/202-slash-commands) section.
+Therefore, to minimize the permissions your bot has to use, we will be convering prefix commands under the **Popular Topics** section, and advancing with the basics of slash commands in this article; more advanced topics will be covered in the [**Interactions**](../200-interactions/202-application-commands.md) section.
 
 ## Registering commands
 
-This section covers the bare minimum to get you started with registering slash commands. Once again, you can refer to [this page](../200-interactions/202-slash-commands) for an in-depth coverage of topics, including guild commands, global commands, options, option types, autocomplete and choices.
+This section covers the bare minimum to get you started with registering slash commands. Once again, you can refer to [this page](../200-interactions/202-application-commands.md) for an in-depth coverage of topics, including guild commands, global commands, options, option types, autocomplete and choices.
 
 Now, we shall continue with the base code used in the previous section.
 

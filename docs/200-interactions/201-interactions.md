@@ -1,19 +1,62 @@
 # What are interactions?
 
-An **[Interaction]({{ disnakedocs }}/api.html#interaction)** is the message that your bot receives when a user uses application command or a message component.
+An **Interaction** is the message that your bot receives when a user uses application command or a message component.
 
-## Interaction types
+## Interactions and Bot Users
 
-For Application commands (i.e. slash commands, user and message context menus) it's **[ApplicationCommandInteraction]({{ disnakedocs }}/api.html#applicationcommandinteraction)**.
-For Message components (i.e. button and select menu) it's **[MessageInteraction]({{ disnakedocs }}/api.html#messageinteraction)**.
-
-# Interactions and Bot users
-
-We're all used to the way that Discord bots have worked for a long time. You make an application in [Dev Portal]({{ devportal }}), add bot user to it, and copy the token.
-Interaction bring something entirely new: the ability to interact with an application *without needing a bot user in the guild*. Responding doesn't require a bot token.
+We're all used to the way that Discord bots have worked for a long time.
+You make an application in [Dev Portal]({{ devportal }}), add bot user to it, and copy the token. Interaction bring something entirely new: the ability to interact with an application *without needing a bot user in the guild*. Responding doesn't require a bot token.
 
 `disnake` fully focused on using the gateway events, so you still need a bot user.
-Check out `[hikari-py](https://github.com/hikari-py/hikari)` with their REST-API part for this purposes.
+Check out [`hikari-py`](https://github.com/hikari-py/hikari) with their REST-API part for this purposes.
 
 Welcome to the new world.
 
+## Responding to interaction
+
+You have only 3 seconds to respond to the interaction.
+If do not have time to do it, Discord will shown "This interaction failed" error.
+
+In fact, there are 3 types of interactions:
+
+- [`ApplicationCommandInteraction`]({{ disnakedocs }}/api.html#applicationcommandinteraction) (for [application commands](./202-application-commands))
+- [`MessageInteraction`]({{ disnakedocs }}/api.html#messageinteraction) (for [message components](./203-message-components))
+- [`Interaction`]({{ disnakedocs }}/api.html#interaction) (a base class, usually not used)
+
+But responding is the same for both interactions types.
+
+### `interaction.response`
+
+[`response`]({{ disnakedocs }}/api.html#disnake.Interaction.response) attribute returns [`InteractionResponse`]({{ disnakedocs }}/api.html#disnake.InteractionResponse) instance that have 4 useable methods.
+A response can **only be done once**. If you want to send secondary messages, consider using [`followup`]({{ disnakedocs }}//api.html#disnake.Interaction.followup) webhook instead.
+
+1. [`send_message`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.send_message) - Sends response message
+2. [`edit_message`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.edit_message) - Edits original message, you're unable to use this in application command because there are no message while you responding
+3. [`defer`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.defer) - Defers the interaction
+4. [`is_done`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.is_done) - Indicates whether an interaction response has been done before
+
+!!! Note
+    [`defer`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.defer) works differently depending on the type of interaction.
+    It creates *"Bot is thinking..."* message for application commands and
+    don't throw *"This interaction failed"* if you're not going to respond for message components.
+
+!!! Note
+    If you're going to run long stuff (more than 3 seconds) while responding you must first defer the interaction.
+    Then when your response is ready you can edit the message using [`edit_original_message`]({{ disnakedocs }}/api.html#disnake.Interaction.edit_original_message) method
+
+``` python title="example.py"
+@bot.slash_command()
+async def ping(inter: ApplicationCommandInteraction):
+    await inter.response.send_message("Pong!")
+
+
+@bot.slash_command()
+async def defer(inter: ApplicationCommandInteraction):
+    await inter.response.defer()
+    await asyncio.sleep(10)
+    await inter.edit_original_message("The wait is over, my comrades!")
+```
+
+### `interaction.followup`
+
+Often used when you need to send secondary messages after responding.

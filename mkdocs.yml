@@ -100,10 +100,8 @@ nav:
 
     - Interactions:
         - 200-interactions/201-interactions.md
-        - 200-interactions/202-slash-commands.md
-        - 200-interactions/203-buttons.md
-        - 200-interactions/204-select-menus.md
-        - 200-interactions/205-context-menus.md
+        - 200-interactions/202-application-commands.md
+        - 200-interactions/203-message-components.md
         
     - Popular Topics:
         - 300-popular-topics/301-good-practices.md
