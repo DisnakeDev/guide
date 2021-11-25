@@ -11,10 +11,10 @@ theme:
     custom_dir: docs/overrides
 
     features:
-        - navigation.sections
         - navigation.instant
-        - navigation.top
         - navigation.tracking
+        - navigation.sections
+        - navigation.top
         - toc.integrate
         - content.tabs.link
 
@@ -107,7 +107,7 @@ nav:
         - 200-interactions/205-context-menus.md
         
     - Popular Topics:
-        - 300-popular-topics/301-good-practices.md
+        - 300-popular-topics/301-faq.md
         - 300-popular-topics/302-prefix-commands.md
 
 extra_css:
