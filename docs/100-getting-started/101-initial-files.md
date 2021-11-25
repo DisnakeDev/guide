@@ -129,7 +129,7 @@ This is how you create a client instance for your Discord bot and login to Disco
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/initial-files).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-initial-files).
 
 
 

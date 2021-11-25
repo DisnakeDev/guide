@@ -2,7 +2,7 @@
 
 !!! Note
 
-    This page is a follow-up, and the base code used is from the previous page ([Initial files](./101-initial-files.md)). The code can be found on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/intial-files).
+    This page is a follow-up, and the base code used is from the previous page ([Initial files](./101-initial-files.md)). The code can be found on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-intial-files).
 
 Discord also allows developers to register [slash commands]({{ devdocs }}/interactions/application-commands), which provides users a first-class way of interacting directly with your application. These slash commands shall be covered by the guide [here](../200-interactions/202-slash-commands.md), in the **Interactions** section.
 
@@ -210,7 +210,7 @@ And there you have it!
 
 ## Resulting Code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/creating-commands).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-creating-commands).
 
 
 

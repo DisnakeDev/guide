@@ -20,4 +20,5 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
       - name: Deploy docs
+        if: github.ref == 'refs/heads/main'
         run: mkdocs gh-deploy --force
