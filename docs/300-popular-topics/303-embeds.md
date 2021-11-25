@@ -28,7 +28,9 @@ embed = disnake.Embed(
 )
 
 embed.set_author(
-    name="Embed Author", url="https://disnake.dev/", icon_url="https://i.imgur.com/udpCmI3.png"
+    name="Embed Author",
+    url="https://disnake.dev/",
+    icon_url="https://i.imgur.com/udpCmI3.png",
 )
 embed.set_footer(text="Embed Footer", icon_url="https://i.imgur.com/udpCmI3.png")
 
