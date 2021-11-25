@@ -11,7 +11,6 @@ theme:
     custom_dir: docs/overrides
 
     features:
-        - navigation.sections
         - navigation.instant
         - navigation.top
         - navigation.tracking
