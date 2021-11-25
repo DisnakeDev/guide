@@ -13,7 +13,6 @@ theme:
     features:
         - navigation.instant
         - navigation.tracking
-        - navigation.sections
         - navigation.top
         - toc.integrate
         - content.tabs.link
