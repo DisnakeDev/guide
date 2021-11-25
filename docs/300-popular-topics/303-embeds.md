@@ -21,24 +21,26 @@ from disnake.ext import commands
 
 # Inside a command, event listener, etc.
 embed = disnake.Embed(
-    title = "Embed Title",
-    description = "Embed Description",
-    color = 0xf0c43f,
-    timestamp = datetime.datetime.now()
+    title="Embed Title",
+    description="Embed Description",
+    color=0xF0C43F,
+    timestamp=datetime.datetime.now(),
 )
-    
-embed.set_author(name = "Embed Author", url = "https://disnake.dev/", icon_url = "https://i.imgur.com/udpCmI3.png")
-embed.set_footer(text = "Embed Footer", icon_url = "https://i.imgur.com/udpCmI3.png")
 
-embed.set_thumbnail(url = "https://i.imgur.com/udpCmI3.png")
-embed.set_image(url = "https://i.imgur.com/KsTvw5Z.png")
+embed.set_author(
+    name="Embed Author", url="https://disnake.dev/", icon_url="https://i.imgur.com/udpCmI3.png"
+)
+embed.set_footer(text="Embed Footer", icon_url="https://i.imgur.com/udpCmI3.png")
 
-embed.add_field(name = "Regular Title", value = "Regular Value", inline = False)
-embed.add_field(name = "Inline Title", value = "Inline Value", inline = True)
-embed.add_field(name = "Inline Title", value = "Inline Value", inline = True)
-embed.add_field(name = "Inline Title", value = "Inline Value", inline = True)
+embed.set_thumbnail(url="https://i.imgur.com/udpCmI3.png")
+embed.set_image(url="https://i.imgur.com/KsTvw5Z.png")
 
-await channel.send(embed = embed)
+embed.add_field(name="Regular Title", value="Regular Value", inline=False)
+embed.add_field(name="Inline Title", value="Inline Value", inline=True)
+embed.add_field(name="Inline Title", value="Inline Value", inline=True)
+embed.add_field(name="Inline Title", value="Inline Value", inline=True)
+
+await channel.send(embed=embed)
 ```
 
 !!! Tip
