@@ -56,3 +56,7 @@
     --md-footer-bg-color--dark:     var(--md-default-fg-color--light);
   
 }
+
+label.md-nav__link, label.md-nav__title {
+    font-weight: bold;
+}
