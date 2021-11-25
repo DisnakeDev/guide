@@ -108,7 +108,12 @@ nav:
         
     - Popular Topics:
         - 300-popular-topics/301-faq.md
-        - 300-popular-topics/302-prefix-commands.md
+        - 300-popular-topics/302-threads.md
+        - 300-popular-topics/303-embeds.md
+        - 300-popular-topics/304-reactions.md
+        - 300-popular-topics/305-webhooks.md
+        - 300-popular-topics/306-permissions.md
+        - 300-popular-topics/307-intents.md
 
 extra_css:
     - stylesheets/lightmode.css
