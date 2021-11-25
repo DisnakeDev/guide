@@ -19,6 +19,12 @@ jobs:
           pip install -r requirements.txt
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
-      - name: Deploy docs
+
+      # only build on non-default branches
+      - name: Build docs
+        if: github.ref != 'refs/heads/main'
+        run: mkdocs build --strict
+      # only deploy from main branch
+      - name: Build + Deploy docs
         if: github.ref == 'refs/heads/main'
         run: mkdocs gh-deploy --force
