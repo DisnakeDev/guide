@@ -127,11 +127,7 @@ async def ping(inter):
 bot.run(YOUR_BOT_TOKEN)
 ```
 
-<br>
-    <p align = "left">
-        ![](../assets/img-creating-commands/001.png){ width="60%" }
-    </p>
-<br>
+![](../assets/img-creating-commands/001.png){ width="60%" }
 
 ### Server info command
 
@@ -159,11 +155,7 @@ async def server(inter):
 bot.run(YOUR_BOT_TOKEN)
 ```
 
-<br>
-    <p align = "left">
-        ![](../assets/img-creating-commands/002.png){ width="60%" }
-    </p>
-<br>
+![](../assets/img-creating-commands/002.png){ width="60%" }
 
 !!! Tip Inline End
 
@@ -196,11 +188,7 @@ async def user(inter):
 bot.run(YOUR_BOT_TOKEN)
 ```
 
-<br>
-    <p align = "left">
-        ![](../assets/img-creating-commands/003.png){ width="60%" }
-    </p>
-<br>
+![](../assets/img-creating-commands/003.png){ width="60%" }
 
 !!! Tip
 
