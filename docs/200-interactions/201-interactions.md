@@ -38,7 +38,7 @@ A response can **only be done once**. If you want to send secondary messages, co
 !!! Note
     [`defer`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.defer) works differently depending on the type of interaction.
     It creates *"Bot is thinking..."* message for application commands and
-    don't throw *"This interaction failed"* if you're not going to respond for message components.
+    doesn't throw *"This interaction failed"* if you're not going to respond to message components.
 
 !!! Note
     If you're going to run long stuff (more than 3 seconds) while responding you must first defer the interaction.
