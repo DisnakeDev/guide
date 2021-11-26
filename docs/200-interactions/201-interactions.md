@@ -1,6 +1,6 @@
 # What are interactions?
 
-An **Interaction** is the message that your bot receives when a user uses application command or a message component.
+An **Interaction** is the message that your bot receives when a user initiates an application command or a message component.
 
 ## Interactions and Bot Users
 
