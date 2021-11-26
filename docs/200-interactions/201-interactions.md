@@ -12,7 +12,7 @@ Check out [`hikari-py`](https://github.com/hikari-py/hikari) with their REST-API
 
 Welcome to the new world.
 
-## Responding to interaction
+## Responding to interactions
 
 You have only 3 seconds to respond to the interaction.
 If do not have time to do it, Discord will shown "This interaction failed" error.
