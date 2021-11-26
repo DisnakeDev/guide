@@ -41,7 +41,7 @@ A response can **only be done once**. If you want to send secondary messages, co
     doesn't throw *"This interaction failed"* if you're not going to respond to message components.
 
 !!! Note
-    If you're going to run long stuff (more than 3 seconds) while responding you must first defer the interaction.
+    If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction.
     Then when your response is ready you can edit the message using [`edit_original_message`]({{ disnakedocs }}/api.html#disnake.Interaction.edit_original_message) method
 
 ``` python title="example.py"
