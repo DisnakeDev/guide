@@ -106,13 +106,15 @@ nav:
         - 200-interactions/205-context-menus.md
         
     - Popular Topics:
-        - 300-popular-topics/301-faq.md
-        - 300-popular-topics/302-threads.md
-        - 300-popular-topics/303-embeds.md
-        - 300-popular-topics/304-reactions.md
-        - 300-popular-topics/305-webhooks.md
-        - 300-popular-topics/306-permissions.md
-        - 300-popular-topics/307-intents.md
+        - 300-popular-topics/301-threads.md
+        - 300-popular-topics/302-embeds.md
+        - 300-popular-topics/303-reactions.md
+        - 300-popular-topics/304-webhooks.md
+        - 300-popular-topics/305-permissions.md
+        - 300-popular-topics/306-intents.md
+    
+    - Frequently Asked Questions:
+        - 400-faq/401-good-practices.md
 
 extra_css:
     - stylesheets/lightmode.css
