@@ -58,9 +58,9 @@ You can use the [`Embed`]({{ disnakedocs }}/api.html?highlight=embed#embed) inst
 
 ```python linenums="1" title="embed.py"
 embed = disnake.Embed(
-    title="An Embed!",  # Embed Title
-    description="A description!",  # Embed Description
-    colour=0xF0C43F,  # Embed Colour(Hex: 0x123456, integer, disnake.Colour.yellow())
+    title="An Embed!",
+    description="A description!",
+    colour=0xF0C43F,
 )
 ```
 
