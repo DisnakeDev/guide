@@ -23,7 +23,7 @@ from disnake.ext import commands
 embed = disnake.Embed(
     title="Embed Title",
     description="Embed Description",
-    color=0xF0C43F,
+    color=disnake.Colour.yellow(),
     timestamp=datetime.datetime.now(),
 )
 
