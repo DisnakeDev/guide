@@ -27,7 +27,7 @@ But responding is the same for both interactions types.
 
 ### `interaction.response`
 
-[`response`]({{ disnakedocs }}/api.html#disnake.Interaction.response) attribute returns [`InteractionResponse`]({{ disnakedocs }}/api.html#disnake.InteractionResponse) instance that have 4 useable methods.
+[`response`]({{ disnakedocs }}/api.html#disnake.Interaction.response) attribute returns a [`InteractionResponse`]({{ disnakedocs }}/api.html#disnake.InteractionResponse) instance that has 4 usable methods.
 A response can **only be done once**. If you want to send secondary messages, consider using [`followup`]({{ disnakedocs }}//api.html#disnake.Interaction.followup) webhook instead.
 
 1. [`send_message`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.send_message) - Sends response message
