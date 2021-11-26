@@ -45,7 +45,7 @@ plugins:
 
 extra: {
     guiderepo: https://github.com/DisnakeDev/guide,
-    disnakedocs: https://disnake.readthedocs.io/en/latest,
+    disnakedocs: https://docs.disnake.dev/en/latest,
     disnakeserver: https://discord.gg/gJDbCw8aQy,
     dpydocs: https://discordpy.readthedocs.io/en/latest,
     dpyserver: https://discord.gg/dpy,
