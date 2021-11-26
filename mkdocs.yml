@@ -12,8 +12,8 @@ theme:
 
     features:
         - navigation.instant
-        - navigation.top
         - navigation.tracking
+        - navigation.top
         - toc.integrate
         - content.tabs.link
 
@@ -104,8 +104,15 @@ nav:
         - 200-interactions/203-message-components.md
         
     - Popular Topics:
-        - 300-popular-topics/301-good-practices.md
-        - 300-popular-topics/302-prefix-commands.md
+        - 300-popular-topics/301-threads.md
+        - 300-popular-topics/302-embeds.md
+        - 300-popular-topics/303-reactions.md
+        - 300-popular-topics/304-webhooks.md
+        - 300-popular-topics/305-permissions.md
+        - 300-popular-topics/306-intents.md
+    
+    - Frequently Asked Questions:
+        - 400-faq/401-good-practices.md
 
 extra_css:
     - stylesheets/lightmode.css
