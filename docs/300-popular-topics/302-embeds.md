@@ -158,6 +158,10 @@ embed.set_image(file=disnake.File("path/to/file.png"))
 
 ![](../assets/img-embeds/008.png){ width="72%" }
 
+## Sending an embed
+
+Once the embed is created, you need to send it to a channel too. This means you need to call `send(embed=embed)` on a messageable object, for example a `TextChannel` object (i.e. `message.channel.send`) or a `Context` object (`ctx.send`). Otherwise, the embed will not be sent.
+
 
 
 [datetime-pypi]: https://pypi.org/project/DateTime/
