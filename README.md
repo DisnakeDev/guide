@@ -12,7 +12,7 @@ Whether you're getting into Discord bots from scratch, or rewriting your bot fro
 
 
 ## Development
-For more info on development/contributions, see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
+For more info on development/contributions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 
 
