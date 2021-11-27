@@ -193,6 +193,10 @@ await channel.send(embed=disnake.Embed.from_dict(embed_dict))
 
 This will give the exact same result as the embed shown [here](./#embed-preview). Note that the timestamp passed through a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`). You can learn more about the `dict` format of embeds in the [official Discord documentation]({{ devdocs }}/resources/channel#embed-object).
 
+## Resulting code
+
+The code for the full embeds showcased in this section (using `set` methods and the `from_dict` method) can be found on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-embeds).
+
 
 
 [datetime-pypi]: https://pypi.org/project/DateTime/
