@@ -100,8 +100,9 @@ nav:
 
     - Interactions:
         - 200-interactions/201-interactions.md
-        - 200-interactions/202-application-commands.md
-        - 200-interactions/203-message-components.md
+        - 200-interactions/202-responding.md
+        - 200-interactions/203-application-commands.md
+        - 200-interactions/204-message-components.md
         
     - Popular Topics:
         - 300-popular-topics/301-threads.md
