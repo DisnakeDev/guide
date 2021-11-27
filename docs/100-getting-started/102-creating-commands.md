@@ -12,7 +12,7 @@ Bot commands that are initiated when a keyword is used along with a specified pr
 
 !!! Warning "Message Intent - Privileged"
 
-    It is to be noted that handling prefix commands requires the **message intent**, which allows the bot to get content and data of messages sent by users. This intent has recently been privileged, i.e., it needs to be manually enabled for the bot application, and its requirement will be reviewed if you eventually apply for your bot's verification.
+    It is to be noted that handling prefix commands require the **message intent**, which allows the bot to get content and data of messages sent by users. This intent has recently been privileged, i.e., it needs to be manually enabled for the bot application, and its requirement will eventually be reviewed if your bot is in over 100 servers.
 
     You can read more about the message intent [here][message-intent-article].
 
