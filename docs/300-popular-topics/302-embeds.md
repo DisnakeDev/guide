@@ -162,6 +162,37 @@ embed.set_image(file=disnake.File("path/to/file.png"))
 
 Once the embed is created, you need to send it to a channel too. This means you need to call `send(embed=embed)` on a messageable object, for example a `TextChannel` object (i.e. `message.channel.send`) or a `Context` object (`ctx.send`). Otherwise, the embed will not be sent.
 
+## Dictionaries to embeds
+
+A `dict` datatype (and essentially a `json` file) can be converted into an embed, using the [`Embed.from_dict()`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.from_dict) method. We can recreate the embed made at the start of this page, using the same.
+
+```python linenums="1" title="embed.py"
+embed_dict = {
+    "title": "Embed Title",
+    "description": "Embed Description",
+    "color": 0xFEE75C,
+    "timestamp": datetime.datetime.now().isoformat(),
+    "author": {
+        "name": "Embed Author",
+        "url": "https://disnake.dev/",
+        "icon_url": "https://disnake.dev/assets/disnake-logo.png",
+    },
+    "thumbnail": {"url": "https://disnake.dev/assets/disnake-logo.png"},
+    "fields": [
+        {"name": "Regular Title", "value": "Regular Value", "inline": "false"},
+        {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
+        {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
+        {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
+    ],
+    "image": {"url": "https://disnake.dev/assets/disnake-thin-banner.png"},
+    "footer": {"text": "Embed Footer", "icon_url": "https://disnake.dev/assets/disnake-logo.png"},
+}
+
+await channel.send(embed=disnake.Embed.from_dict(embed_dict))
+```
+
+This will give the exact same result as the embed shown [here](./#embed-preview). Note that the timestamp passed through a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`). You can learn more about the `dict` format of embeds in the [official Discord documentation]({{ devdocs }}/resources/channel#embed-object).
+
 
 
 [datetime-pypi]: https://pypi.org/project/DateTime/
