@@ -2,7 +2,7 @@
 
 You might have seen some special messages on Discord (often sent by bots/webhooks), that have a colored border, embedded images, text fields and other properties. These elements are referred to as **Embeds**, and this section will cover how you can create and send one with your bot. This is done with the [`disnake.Embed()`]({{ disnakedocs }}/api.html?highlight=embed#embed)
 
-This section will extensively cover the attributes and methods used with embeds. Thus, we recomment
+This section will extensively cover the attributes and methods used with embeds. Thus, we recommend skipping to your desired topic via the table of contents.
 
 ## Embed preview
 
@@ -192,6 +192,31 @@ await channel.send(embed=disnake.Embed.from_dict(embed_dict))
 ```
 
 This will give the exact same result as the embed shown [here](./#embed-preview). Note that the timestamp passed through a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`). You can learn more about the `dict` format of embeds in the [official Discord documentation]({{ devdocs }}/resources/channel#embed-object).
+
+## Embed notes
+
+- To display fields side-by-side, you need at least two consecutive fields set to inline.
+- The timestamp will automatically adjust the timezone depending on the user's device.
+- Mentions of any kind in embeds will only render correctly within embed descriptions and field values.
+- Mentions in embeds will not trigger a notification.
+- Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext'`)), but only in description and field values.
+
+<sup>Source: [Discord.js Guide](https://discordjs.guide/popular-topics/embeds.html#notes)</sup>
+
+## Embed limits
+
+There are a few limits to be aware of while planning your embeds due to the API's limitations. Here is a quick reference you can come back to:
+
+- Embed titles are limited to 256 characters.
+- Embed descriptions are limited to 4096 characters.
+- There can be up to 25 fields.
+- A field's name is limited to 256 characters and its value to 1024 characters.
+- The footer text is limited to 2048 characters.
+- The author name is limited to 256 characters.
+- The sum of all characters from all embed structures in a message must not exceed 6000 characters.
+- Ten embeds can be sent per message.
+
+<sup>Source: [Discord API Documentation]({{ devdocs }}/resources/channel#embed-limits)</sup>
 
 ## Resulting code
 
