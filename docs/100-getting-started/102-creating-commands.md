@@ -16,7 +16,7 @@ Bot commands that are initiated when a keyword is used along with a specified pr
 
     You can read more about the message intent [here][message-intent-article].
 
-Therefore, to minimize the permissions your bot has to use, we will be convering prefix commands under the **Popular Topics** section, and advancing with the basics of slash commands in this article; more advanced topics will be covered in the [**Interactions**](../200-interactions/202-application-commands.md) section.
+Therefore, to minimize the permissions your bot has to use, we will be covering prefix commands under the **Popular Topics** section, and advancing with the basics of slash commands in this article; more advanced topics of the same will be covered in the [**Interactions**](../200-interactions/202-application-commands.md) section.
 
 ## Registering commands
 
