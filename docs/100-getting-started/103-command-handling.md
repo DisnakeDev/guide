@@ -20,3 +20,5 @@ Cogs represent a fairly drastic change in the way you write commands and bots, s
 - Cogs are then registered with the [`Bot.add_cog()`]({{ disnakedocs }}/ext/commands/api.html#disnake.ext.commands.Bot.add_cog) call, and are subsequently removed with the [`Bot.remove_cog()`]({{ disnakedocs }}/ext/commands/api.html#disnake.ext.commands.Bot.remove_cog) call.
 
 <sup>Source: [Disnake Documentation]({{ disnakedocs }}/ext/commands/cogs.html)</sup>
+
+This page will explain in further detail as to how this syntax is used to create and handle cogs.
