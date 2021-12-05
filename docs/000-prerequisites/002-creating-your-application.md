@@ -18,21 +18,22 @@ Creating a Bot account is a pretty straightforward process.
 
 3. Click on the `New Application` button.
 
-    <br>
-        <p align = "center">
-            ![](../assets/img-creating-your-application/001.png){ width="40%" }
-        </p>
-    <br>
+<br>
+    <p align = "center">
+        ![](../assets/img-creating-your-application/001.png){ width="40%" }
+    </p>
+<br>
 
 4. Give the application a name and click `Create`.
 
-    <br>
-        <p align = "center">
-            ![](../assets/img-creating-your-application/002.png){ width="60%" }
-        </p>
-    <br>
+<br>
+    <p align = "center">
+        ![](../assets/img-creating-your-application/002.png){ width="60%" }
+    </p>
+<br>
 
 5. Create a Bot User by navigating to the `Bot` tab and clicking `Add Bot`.
+
     - Click `Yes, do it!` to continue.
 
     <br>
@@ -42,6 +43,7 @@ Creating a Bot account is a pretty straightforward process.
     <br>
 
 6. Make sure that `Public Bot` is ticked if you want others to invite your bot.
+
     - You should also make sure that `Require OAuth2 Code Grant` is unchecked unless you are developing a service that needs it. If you’re unsure, then **leave it unchecked**.
 
     <br>
@@ -72,12 +74,12 @@ Tokens look like this: `OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsr
 
 Let's imagine that you have a bot on over 1,000 servers, and it took you many, many months of coding and patience to get it on that amount. Your token gets leaked somewhere, and now someone else has it. That person can:
 
-- Spam every server your bot is on;
-- DM spam as many users as possible;
-- Delete as many channels as possible;
-- Kick or ban as many server members as possible;
-- Make your bot leave all of the servers it has joined;
-- Access and damage the underlying infrastructure (your server).
+-   Spam every server your bot is on;
+-   DM spam as many users as possible;
+-   Delete as many channels as possible;
+-   Kick or ban as many server members as possible;
+-   Make your bot leave all of the servers it has joined;
+-   Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible! In the [initial files](../100-getting-started/101-initial-files.md) page of the guide, we cover how to safely store your token in a configuration file.
 
@@ -87,7 +89,7 @@ All that and much, much more. Sounds pretty terrible, right? So make sure to kee
 
 ## Discord's system messages
 
-System messages are official messages that Discord sends to alert you of an account issue.  These messages can range from a variety of payment issues, support ticket updates, and ToS violation warnings. You can also expect a system message if your bot token has been posted on the internet publicly, and was found by Discord.
+System messages are official messages that Discord sends to alert you of an account issue. These messages can range from a variety of payment issues, support ticket updates, and ToS violation warnings. You can also expect a system message if your bot token has been posted on the internet publicly, and was found by Discord.
 
 **Such a message will look as follows:**
 
@@ -101,7 +103,7 @@ System messages are official messages that Discord sends to alert you of an acco
 
     Since we do not know the extent to which Discord searches for bot tokens, or the time taken to inform the user about where the bot was found, we recommend not fully depending on this feature. But incase your bot token *is* found on the internet publicly (say, on  [a GitHub repository](https://www.github.com/)), you can expect Discord to send a system message to the account the bot is linked to.
 
-Note that Discord will never ask for your password or account token, and a system message will never request for the same. System messages from Discord will have a verified `SYSTEM` tag, and the bar at the bottom of the DM will mention - "This thread is reserved for official Discord notifications". 
+Note that Discord will never ask for your password or account token, and a system message will never request for the same. System messages from Discord will have a verified `SYSTEM` tag, and the bar at the bottom of the DM will mention - "This thread is reserved for official Discord notifications".
 
 <br>
     <p align = "center">
@@ -110,7 +112,5 @@ Note that Discord will never ask for your password or account token, and a syste
 <br>
 
 You can read more about the authenticity of these messages [in this article][discord-sys-msg-page].
-
-
 
 [discord-sys-msg-page]: https://support.discord.com/hc/en-us/articles/360036118732-Discord-System-Messages

@@ -8,7 +8,7 @@ Discord also allows developers to register [slash commands]({{ devdocs }}/intera
 
 ## A note on prefix commands
 
-Bot commands that are initiated when a keyword is used along with a specified prefix (such as `!` or `$`) are known as **prefix commands** (are also often referred to as **text commands**). 
+Bot commands that are initiated when a keyword is used along with a specified prefix (such as `!` or `$`) are known as **prefix commands** (are also often referred to as **text commands**).
 
 !!! Warning "Message Intent - Privileged"
 
@@ -24,7 +24,7 @@ This section covers the bare minimum to get you started with registering slash c
 
 Now, we shall continue with the base code used in the previous section.
 
-``` python linenums="1" title="main.py"
+```python linenums="1" title="main.py"
 import disnake
 from disnake.ext import commands
 
@@ -41,7 +41,7 @@ bot.run(YOUR_BOT_TOKEN)
 
 The first step is to use the `@bot.slash_command` coroutine, along with an `async` function in order to define the code for your slash command. Below is a script demonstrating the same (focus on the use of `inter`, which is short for `interaction`).
 
-``` python linenums="1" title="main.py" hl_lines="12-14"
+```python linenums="1" title="main.py" hl_lines="12-14"
 import disnake
 from disnake.ext import commands
 
@@ -73,7 +73,7 @@ Note that servers are referred to as "guilds" in the Discord API and disnake lib
 
 When you're trying to test your changes to code in real time, it can be immensely useful to have the command's function update with your code changes right away. Thus, you can use the `guild_ids` argument for the command to be instantaneously registered in a list of specified servers. (We recommend including your separate development server in this list.)
 
-``` python linenums="1" title="main.py" hl_lines="12-14"
+```python linenums="1" title="main.py" hl_lines="12-14"
 import disnake
 from disnake.ext import commands
 
@@ -107,7 +107,7 @@ Now that you're all set with registering the slash command, you can proceed with
 
 You can respond to a slash command initiated by the user, using `inter.response.send_message()`. It is analogous to using `ctx.send()`, in that you can respond to the interaction with embeds, files, buttons/select menus or just plain text.
 
-``` python linenums="1" title="main.py" hl_lines="14"
+```python linenums="1" title="main.py" hl_lines="14"
 import disnake
 from disnake.ext import commands
 
@@ -133,7 +133,7 @@ bot.run(YOUR_BOT_TOKEN)
 
 `inter.guild` refers to the guild the interaction was sent in (a [Guild instance]({{ disnakedocs }}/api.html?highlight=guild#disnake.Guild)), which exposes properties such as `.name` or `.member_count`.
 
-``` python linenums="1" title="main.py" hl_lines="12-16"
+```python linenums="1" title="main.py" hl_lines="12-16"
 import disnake
 from disnake.ext import commands
 
@@ -167,8 +167,7 @@ You could also display the date the server was created, or the server's verifica
 
 A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a [User instance]({{ disnakedocs }}/api.html?highlight=user#disnake.User) in DM contexts, or a [Member instance]({{ disnakedocs }}/api.html?highlight=user#disnake.Member) in server contexts), which exposes properties such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
-
-``` python linenums="1" title="main.py" hl_lines="12-14"
+```python linenums="1" title="main.py" hl_lines="12-14"
 import disnake
 from disnake.ext import commands
 
@@ -199,7 +198,5 @@ And there you have it!
 ## Resulting Code
 
 If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-creating-commands).
-
-
 
 [message-intent-article]: https://support-dev.discord.com/hc/en-us/articles/4404772028055

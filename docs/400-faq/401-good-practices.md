@@ -2,7 +2,7 @@
 
 ## Running code when a cog is loaded
 
-Most people are used to running everything in `__init__` but that doesn't allow running async code. In this case you can overwrite the special `cog_load` method. 
+Most people are used to running everything in `__init__` but that doesn't allow running async code. In this case you can overwrite the special `cog_load` method.
 
 ```python linenums="1" hl_lines="5-6"
 class MyCog(commands.Cog):

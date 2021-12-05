@@ -5,7 +5,7 @@ An **Interaction** is the message that your bot receives when a user initiates a
 ## Interactions and Bot Users
 
 We're all used to the way that Discord bots have worked for a long time.
-You make an application in [Developer Portal]({{ devportal }}), make a new bot user, and copy the token. Interactions bring something entirely new - the ability to interact with an application *without needing a bot user in the guild*. Responding to the interaction doesn't require a bot token.
+You make an application in [Developer Portal]({{ devportal }}), make a new bot user, and copy the token. Interactions bring something entirely new - the ability to interact with an application _without needing a bot user in the guild_. Responding to the interaction doesn't require a bot token.
 
 `disnake` is primarily focused on using the gateway events, so you still need a bot user.
 Check out [`hikari-py`](https://github.com/hikari-py/hikari) with their REST-API part for this purpose.
@@ -19,9 +19,9 @@ If do not have time to do it, Discord will shown "This interaction failed" error
 
 In fact, there are 3 types of interactions:
 
-- [`ApplicationCommandInteraction`]({{ disnakedocs }}/api.html#applicationcommandinteraction) (for [application commands](./202-application-commands))
-- [`MessageInteraction`]({{ disnakedocs }}/api.html#messageinteraction) (for [message components](./203-message-components))
-- [`Interaction`]({{ disnakedocs }}/api.html#interaction) (a base class, usually not used)
+-   [`ApplicationCommandInteraction`]({{ disnakedocs }}/api.html#applicationcommandinteraction) (for [application commands](./202-application-commands))
+-   [`MessageInteraction`]({{ disnakedocs }}/api.html#messageinteraction) (for [message components](./203-message-components))
+-   [`Interaction`]({{ disnakedocs }}/api.html#interaction) (a base class, usually not used)
 
 But responding is the same for both interactions types.
 
@@ -44,7 +44,7 @@ A response can **only be done once**. If you want to send secondary messages, co
     If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction.
     Then when your response is ready you can edit the message using [`edit_original_message`]({{ disnakedocs }}/api.html#disnake.Interaction.edit_original_message) method
 
-``` python title="example.py"
+```python title="example.py"
 @bot.slash_command()
 async def ping(inter: ApplicationCommandInteraction):
     await inter.response.send_message("Pong!")

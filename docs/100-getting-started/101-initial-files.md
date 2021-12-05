@@ -103,7 +103,7 @@ Open your code editor and create a new file. We suggest that you save the file a
 
 Here's the base code to get you started:
 
-``` python linenums="1" title="main.py"
+```python linenums="1" title="main.py"
 # Import the necessary libraries.
 import disnake
 from disnake.ext import commands
@@ -131,13 +131,10 @@ This is how you create a client instance for your Discord bot and login to Disco
 
 If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-initial-files).
 
-
-
 [python-dotenv]: https://pypi.org/project/python-dotenv/
 [glitch-article]: https://glitch.happyfox.com/kb/article/18
 [heroku-article]: https://devcenter.heroku.com/articles/config-vars
 [replit-article]: https://docs.replit.com/repls/secrets-environment-variables
-
 [github]: https://github.com/
 [gitlab]: https://about.gitlab.com/
 [bitbucket]: https://bitbucket.org/product
