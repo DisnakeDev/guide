@@ -1,0 +1,6 @@
+# these are enabled right now, as an issue form may not exist for all uses
+blank_issues_enabled: true
+contact_links:
+  - name: Discord Server
+    about: Use our official Discord server to ask for help and questions as well.
+    url: https://discord.gg/gJDbCw8aQy

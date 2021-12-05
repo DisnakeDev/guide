@@ -1,0 +1,44 @@
+name: New Page/Section
+description: Suggestion for a new page that doesn't already exist
+labels: ['t: new-page/section']
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thank you for suggesting a new page or section!
+  - type: input
+    attributes:
+      label: Expands on
+      description: >
+        Does this page/section expand on something else?
+        If so, please provide a link to the page/section.
+      placeholder: guide.disnake.dev/intents
+  - type: input
+    attributes:
+      label: "Title"
+      description: "Short, one-line summary of the addition"
+      placeholder: "How to use Gateway Intents"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Description"
+      description: "A few sentences of what this would teach. If you have screenshots, examples, or links, add them here."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: If there is anything else to say, please do so here.
+  - type: dropdown
+    attributes:
+      label: Would you like to implement this yourself?
+      multiple: false
+      options:
+        - Yes, I'd like to write this
+        - No, someone else can write it!
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: Thanks for filling out this form!
