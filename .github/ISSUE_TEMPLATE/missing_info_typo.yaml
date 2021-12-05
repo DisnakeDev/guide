@@ -1,0 +1,34 @@
+name: Mistake/Typo/Missing information report
+description: report typos or missing information
+labels: ["t: typo/mistake"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to report a typo or missing information.
+  - type: textarea
+    attributes:
+      label: Affected pages
+      description: "What pages on guide.disnake.dev are affected?"
+      placeholder: guide.disnake.dev/example
+      render: "md"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Current text
+      description: >
+        Current text at fault.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Recommended text
+      description: >
+        Replace the current text.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: If there is anything else to say, please do so here.
