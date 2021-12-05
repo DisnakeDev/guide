@@ -1,11 +1,12 @@
-name: New Page/Section
-description: Suggestion for a new page that doesn't already exist
-labels: ['t: new-page/section']
+name: Page/Section Addition
+description: Suggestion for a new page/section that doesn't already exist.
+labels: ["t: page/section addition"]
 body:
   - type: markdown
     attributes:
       value: >
-        Thank you for suggesting a new page or section!
+        Thanks for taking the time to open an issue! We advise you to make the report descriptive of the issue, with links and images wherever required. 
+        Also make sure to go through the [`Contributing Guidelines`](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md)!
   - type: input
     attributes:
       label: Expands on
@@ -39,6 +40,3 @@ body:
         - No, someone else can write it!
     validations:
       required: true
-  - type: markdown
-    attributes:
-      value: Thanks for filling out this form!
