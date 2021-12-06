@@ -1,6 +1,7 @@
 # Inviting your bot
 
-So, you've made the bot account, but it is not actually in any server. If you want to invite your bot you must create an invite URL for it.
+So, you've made the bot account, but it is not actually in any server. If you want to invite your bot you must create an
+invite URL for it.
 
 1.  Make sure you’re logged on to the [Discord website][discord-page].
 
@@ -24,7 +25,8 @@ So, you've made the bot account, but it is not actually in any server. If you wa
     </p>
     <br>
 
-    -   If you would like to integrate slash commands and other interactions into your bot, make sure to check the `applications.commands` scope as well.
+    -   If you would like to integrate slash commands and other interactions into your bot, make sure to check the
+        `applications.commands` scope as well.
 
     <br>
     <p align = "center">
@@ -36,7 +38,8 @@ So, you've made the bot account, but it is not actually in any server. If you wa
 
     -   Please be aware of the consequences of requiring your bot to have the `Administrator` permission.
 
-    -   Bot owners must have 2FA enabled for certain actions and permissions when added in servers that have Server-Wide 2FA enabled. Check the [2FA support page][discord-2fa-page] for more information.
+    -   Bot owners must have 2FA enabled for certain actions and permissions when added in servers that have Server-Wide
+        2FA enabled. Check the [2FA support page][discord-2fa-page] for more information.
 
     <br>
     <p align = "center">
@@ -44,13 +47,16 @@ So, you've made the bot account, but it is not actually in any server. If you wa
     </p>
     <br>
 
-7.  Now the resulting URL can be used to add your bot to a server. Copy and paste the URL into your browser, choose a server to invite the bot to, and click `Authorize`.
+7.  Now the resulting URL can be used to add your bot to a server. Copy and paste the URL into your browser, choose a
+    server to invite the bot to, and click `Authorize`.
 
     !!! Note
 
         The person adding the bot needs "Manage Server" permissions to do so.
 
-If you want to generate this URL dynamically at run-time inside your bot and using the [`disnake.Permissions`]({{ disnakedocs }}/api.html#disnake.Permissions) interface, you can use [`disnake.utils.oauth_url()`]({{ disnakedocs }}/api.html#disnake.utils.oauth_url).
+If you want to generate this URL dynamically at run-time inside your bot and using the
+[`disnake.Permissions`]({{ disnakedocs }}/api.html#disnake.Permissions) interface, you can use
+[`disnake.utils.oauth_url()`]({{ disnakedocs }}/api.html#disnake.utils.oauth_url).
 
 [discord-page]: https://www.discord.com
 [discord-app-page]: https://discord.com/developers/applications

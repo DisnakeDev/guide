@@ -1,8 +1,10 @@
 # Introduction
 
-Hello there! The purpose of this guide is to make your journey with `disnake` easier. `disnake` is a fork of [`discord.py`]({{ dpydocs }})
+Hello there! The purpose of this guide is to make your journey with `disnake` easier. `disnake` is a fork of
+[`discord.py`]({{ dpydocs }})
 
-Whether you're getting into Discord bots from scratch, or rewriting your bot from another library, this guide will fulfil and teach concepts such as:
+Whether you're getting into Discord bots from scratch, or rewriting your bot from another library, this guide will
+fulfil and teach concepts such as:
 
 -   How to get started on working with bots;
 -   How to create and organize commands;

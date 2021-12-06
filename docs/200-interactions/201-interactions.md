@@ -1,39 +1,48 @@
 # What are interactions?
 
-An **Interaction** is the message that your bot receives when a user initiates an application command or a message component.
+An **Interaction** is the message that your bot receives when a user initiates an application command or a message
+component.
 
 ## Interactions and Bot Users
 
-We're all used to the way that Discord bots have worked for a long time.
-You make an application in [Developer Portal]({{ devportal }}), make a new bot user, and copy the token. Interactions bring something entirely new - the ability to interact with an application _without needing a bot user in the guild_. Responding to the interaction doesn't require a bot token.
+We're all used to the way that Discord bots have worked for a long time. You make an application in [Developer
+Portal]({{ devportal }}), make a new bot user, and copy the token. Interactions bring something entirely new - the
+ability to interact with an application _without needing a bot user in the guild_. Responding to the interaction doesn't
+require a bot token.
 
-`disnake` is primarily focused on using the gateway events, so you still need a bot user.
-Check out [`hikari-py`](https://github.com/hikari-py/hikari) with their REST-API part for this purpose.
+`disnake` is primarily focused on using the gateway events, so you still need a bot user. Check out
+[`hikari-py`](https://github.com/hikari-py/hikari) with their REST-API part for this purpose.
 
 Welcome to the new world.
 
 ## Responding to interactions
 
-You have only 3 seconds to respond to the interaction.
-If do not have time to do it, Discord will shown "This interaction failed" error.
+You have only 3 seconds to respond to the interaction. If do not have time to do it, Discord will shown "This
+interaction failed" error.
 
 In fact, there are 3 types of interactions:
 
--   [`ApplicationCommandInteraction`]({{ disnakedocs }}/api.html#applicationcommandinteraction) (for [application commands](./202-application-commands))
--   [`MessageInteraction`]({{ disnakedocs }}/api.html#messageinteraction) (for [message components](./203-message-components))
+-   [`ApplicationCommandInteraction`]({{ disnakedocs }}/api.html#applicationcommandinteraction) (for
+    [application commands](./202-application-commands))
+-   [`MessageInteraction`]({{ disnakedocs }}/api.html#messageinteraction) (for
+    [message components](./203-message-components))
 -   [`Interaction`]({{ disnakedocs }}/api.html#interaction) (a base class, usually not used)
 
 But responding is the same for both interactions types.
 
 ### `interaction.response`
 
-[`response`]({{ disnakedocs }}/api.html#disnake.Interaction.response) attribute returns a [`InteractionResponse`]({{ disnakedocs }}/api.html#disnake.InteractionResponse) instance that has 4 usable methods.
-A response can **only be done once**. If you want to send secondary messages, consider using [`followup`]({{ disnakedocs }}//api.html#disnake.Interaction.followup) webhook instead.
+[`response`]({{ disnakedocs }}/api.html#disnake.Interaction.response) attribute returns a
+[`InteractionResponse`]({{ disnakedocs }}/api.html#disnake.InteractionResponse) instance that has 4 usable methods. A
+response can **only be done once**. If you want to send secondary messages, consider using
+[`followup`]({{ disnakedocs }}//api.html#disnake.Interaction.followup) webhook instead.
 
 1. [`send_message`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.send_message) - Sends response message
-2. [`edit_message`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.edit_message) - Edits original message, you're unable to use this in application command because there are no message while you responding
+2. [`edit_message`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.edit_message) - Edits original message,
+   you're unable to use this in application command because there are no message while you responding
 3. [`defer`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.defer) - Defers the interaction
-4. [`is_done`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.is_done) - Indicates whether an interaction response has been done before
+4. [`is_done`]({{ disnakedocs }}/api.html#disnake.InteractionResponse.is_done) - Indicates whether an interaction
+   response has been done before
 
 <!-- prettier-ignore -->
 !!! Note

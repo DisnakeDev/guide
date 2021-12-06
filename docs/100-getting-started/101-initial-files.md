@@ -1,22 +1,26 @@
 # Initial files
 
-Once you [add your bot to a server](../000-prerequisites/003-inviting-your-bot.md), the next step is to start coding and get it online! Let's start by creating a `.env` file for your client token and a main file for your bot application.
+Once you [add your bot to a server](../000-prerequisites/003-inviting-your-bot.md), the next step is to start coding and
+get it online! Let's start by creating a `.env` file for your client token and a main file for your bot application.
 
 ## Creating configuration files
 
-As explained in the "What is a token, anyway?" section, your token is essentially your bot's password, and you should protect it as best as possible. This can be done through a `.env` file, or by using environment variables.
+As explained in the "What is a token, anyway?" section, your token is essentially your bot's password, and you should
+protect it as best as possible. This can be done through a `.env` file, or by using environment variables.
 
 Open your application in the [Discord Developer Portal]({{ devportal }}) and go to the `Bot` page to copy your token.
 
 ### Using environment variables
 
-Environment variables are special values for your environment (e.g., terminal session, docker container, or environment variable file). You can pass these values into your code's scope so that you can use them.
+Environment variables are special values for your environment (e.g., terminal session, docker container, or environment
+variable file). You can pass these values into your code's scope so that you can use them.
 
 !!! Note Inline End
 
     When referring to a `.env` file, keep in mind that you can name this file whatever you prefer. For example, the file can be named `token.env` or `secret.env`.
 
-Storing data in a `.env` file is a common way of keeping your sensitive values safe. Create a `.env` file in your project directory and paste in your token. You can access your token inside other files by using `os.environ`.
+Storing data in a `.env` file is a common way of keeping your sensitive values safe. Create a `.env` file in your
+project directory and paste in your token. You can access your token inside other files by using `os.environ`.
 
 === "secret.env"
 
@@ -40,7 +44,8 @@ Storing data in a `.env` file is a common way of keeping your sensitive values s
 
     If you're using Git, you should not commit this file and should ignore it via `.gitignore`.
 
-You can alternatively also use the [python-dotenv package][python-dotenv] to either load the env variables into the environment, or make a `config` dict out of the env values.
+You can alternatively also use the [python-dotenv package][python-dotenv] to either load the env variables into the
+environment, or make a `config` dict out of the env values.
 
 === "load_dotenv()"
 
@@ -69,7 +74,8 @@ You can alternatively also use the [python-dotenv package][python-dotenv] to eit
     YOUR_BOT_TOKEN = config["YOUR_BOT_TOKEN"]
     ```
 
-Keep in mind that the values imported from the `.env` file are **in string format**. Therefore if you would like to, say, use them for calculations, you'll have to convert them via `int()`
+Keep in mind that the values imported from the `.env` file are **in string format**. Therefore if you would like to,
+say, use them for calculations, you'll have to convert them via `int()`
 
 ??? Info "Online editors (Glitch, Heroku, Replit, etc.)"
 
@@ -81,9 +87,12 @@ Keep in mind that the values imported from the `.env` file are **in string forma
 
 ### Git and `.gitignore`
 
-Git is a fantastic tool to keep track of your code changes and allows you to upload progress to services like [GitHub][github], [GitLab][gitlab], or [Bitbucket][bitbucket]. While this is super useful to share code with other developers, it also bears the risk of uploading your configuration files with sensitive values!
+Git is a fantastic tool to keep track of your code changes and allows you to upload progress to services like
+[GitHub][github], [GitLab][gitlab], or [Bitbucket][bitbucket]. While this is super useful to share code with other
+developers, it also bears the risk of uploading your configuration files with sensitive values!
 
-You can specify files that Git should ignore in its versioning systems with a `.gitignore` file. Create a `.gitignore` file in your project directory and add the names of the files and folders you want to ignore:
+You can specify files that Git should ignore in its versioning systems with a `.gitignore` file. Create a `.gitignore`
+file in your project directory and add the names of the files and folders you want to ignore:
 
 ```
 __pycache__/
@@ -99,7 +108,8 @@ config.json
 
 ## Creating the main file
 
-Open your code editor and create a new file. We suggest that you save the file as `main.py` or `bot.py`, but you may name it whatever you wish.
+Open your code editor and create a new file. We suggest that you save the file as `main.py` or `bot.py`, but you may
+name it whatever you wish.
 
 Here's the base code to get you started:
 
@@ -121,7 +131,8 @@ async def on_ready():
 bot.run(YOUR_BOT_TOKEN)
 ```
 
-This is how you create a client instance for your Discord bot and login to Discord. Open your terminal and run `python3 main.py` to start the process. If you see "The bot is ready!" after a few seconds, you're good to go!
+This is how you create a client instance for your Discord bot and login to Discord. Open your terminal and run
+`python3 main.py` to start the process. If you see "The bot is ready!" after a few seconds, you're good to go!
 
 !!! Tip
 
@@ -129,7 +140,8 @@ This is how you create a client instance for your Discord bot and login to Disco
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-initial-files).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository
+[here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-initial-files).
 
 [python-dotenv]: https://pypi.org/project/python-dotenv/
 [glitch-article]: https://glitch.happyfox.com/kb/article/18
