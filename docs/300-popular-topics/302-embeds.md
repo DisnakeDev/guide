@@ -2,7 +2,7 @@
 
 You might have seen some special messages on Discord (often sent by bots/webhooks), that have a colored border, embedded images, text fields and other properties. These elements are referred to as **Embeds**, and this section will cover how you can create and send one with your bot. This is done with the [`disnake.Embed()`]({{ disnakedocs }}/api.html?highlight=embed#embed)
 
-This section will extensively cover the attributes and methods used with embeds. Thus, we recomment
+This section will extensively cover the attributes and methods used with embeds. Thus, we recommend skipping to your desired topic via the table of contents.
 
 ## Embed preview
 
@@ -157,6 +157,70 @@ embed.set_image(file=disnake.File("path/to/file.png"))
 ```
 
 ![](../assets/img-embeds/008.png){ width="72%" }
+
+## Sending an embed
+
+Once the embed is created, you need to send it to a channel too. This means you need to call `send(embed=embed)` on a messageable object, for example a `TextChannel` object (i.e. `message.channel.send`) or a `Context` object (`ctx.send`). Otherwise, the embed will not be sent.
+
+## Dictionaries to embeds
+
+A `dict` datatype (and essentially a `json` file) can be converted into an embed, using the [`Embed.from_dict()`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.from_dict) method. We can recreate the embed made at the start of this page, using the same.
+
+```python linenums="1" title="embed.py"
+embed_dict = {
+    "title": "Embed Title",
+    "description": "Embed Description",
+    "color": 0xFEE75C,
+    "timestamp": datetime.datetime.now().isoformat(),
+    "author": {
+        "name": "Embed Author",
+        "url": "https://disnake.dev/",
+        "icon_url": "https://disnake.dev/assets/disnake-logo.png",
+    },
+    "thumbnail": {"url": "https://disnake.dev/assets/disnake-logo.png"},
+    "fields": [
+        {"name": "Regular Title", "value": "Regular Value", "inline": "false"},
+        {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
+        {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
+        {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
+    ],
+    "image": {"url": "https://disnake.dev/assets/disnake-thin-banner.png"},
+    "footer": {"text": "Embed Footer", "icon_url": "https://disnake.dev/assets/disnake-logo.png"},
+}
+
+await channel.send(embed=disnake.Embed.from_dict(embed_dict))
+```
+
+This will give the exact same result as the embed shown [here](./#embed-preview). Note that the timestamp passed through a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`). You can learn more about the `dict` format of embeds in the [official Discord documentation]({{ devdocs }}/resources/channel#embed-object).
+
+## Embed notes
+
+- To display fields side-by-side, you need at least two consecutive fields set to inline.
+- The timestamp will automatically adjust the timezone depending on the user's device.
+- Mentions of any kind in embeds will only render correctly within embed descriptions and field values.
+- Mentions in embeds will not trigger a notification.
+- Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext'`)), but only in description and field values.
+
+<sup>Source: [Discord.js Guide](https://discordjs.guide/popular-topics/embeds.html#notes)</sup>
+
+## Embed limits
+
+There are a few limits to be aware of while planning your embeds due to the API's limitations. Here is a quick reference you can come back to:
+
+- Embed titles are limited to 256 characters.
+- Embed descriptions are limited to 4096 characters.
+- There can be up to 25 fields.
+- A field's name is limited to 256 characters and its value to 1024 characters.
+- The footer text is limited to 2048 characters.
+- The author name is limited to 256 characters.
+- The sum of all characters from all embed structures in a message must not exceed 6000 characters.
+- Ten embeds can be sent per message.
+
+<sup>Source: [Discord API Documentation]({{ devdocs }}/resources/channel#embed-limits)</sup>
+
+## Resulting code
+
+The code for the full embeds showcased in this section (using `set` methods and the `from_dict` method) can be found on the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-embeds).
 
 
 

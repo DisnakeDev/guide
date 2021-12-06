@@ -1,4 +1,6 @@
-# Disnake Guide
+<img src="docs/assets/disnake-thin-banner.png" align="center" width="100%">
+
+# Disnake Guide (WIP)
 
 The purpose of this guide is to make your journey with `disnake` easier. `disnake` is a fork of [`discord.py`][dpydocs]
 
@@ -12,7 +14,7 @@ Whether you're getting into Discord bots from scratch, or rewriting your bot fro
 
 
 ## Development
-For more info on development/contributions, see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
+For more info on development/contributions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 
 

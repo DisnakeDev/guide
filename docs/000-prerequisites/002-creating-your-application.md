@@ -1,6 +1,6 @@
 # Creating your application
 
-The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the docs]({{ disnakedocs }}/discord.html). Therefore, you can follow the steps from either resource.
+The steps mentioned further in this markdown are essentially a copy of the steps [mentioned in the documentation]({{ disnakedocs }}/discord.html). Therefore, you can follow the steps from either resource.
 
 !!! Note
 
