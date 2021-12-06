@@ -19,24 +19,27 @@ Creating a Bot account is a pretty straightforward process.
 
 3. Click on the `New Application` button.
 
-<br>
-    <p align = "center">
-        ![](../assets/img-creating-your-application/001.png){ width="40%" }
-    </p>
-<br>
+    <!-- prettier-ignore -->
+    <br>
+        <p align = "center">
+            ![](../assets/img-creating-your-application/001.png){ width="40%" }
+        </p>
+    <br>
 
 4. Give the application a name and click `Create`.
 
-<br>
-    <p align = "center">
-        ![](../assets/img-creating-your-application/002.png){ width="60%" }
-    </p>
-<br>
+    <!-- prettier-ignore -->
+    <br>
+        <p align = "center">
+            ![](../assets/img-creating-your-application/002.png){ width="60%" }
+        </p>
+    <br>
 
 5. Create a Bot User by navigating to the `Bot` tab and clicking `Add Bot`.
 
     - Click `Yes, do it!` to continue.
 
+    <!-- prettier-ignore -->
     <br>
         <p align = "center">
             ![](../assets/img-creating-your-application/003.png){ width="75%" }
@@ -48,6 +51,7 @@ Creating a Bot account is a pretty straightforward process.
     - You should also make sure that `Require OAuth2 Code Grant` is unchecked unless you are developing a service that
       needs it. If you’re unsure, then **leave it unchecked**.
 
+    <!-- prettier-ignore -->
     <br>
         <p align = "center">
             ![](../assets/img-creating-your-application/004.png){ width="75%" }
