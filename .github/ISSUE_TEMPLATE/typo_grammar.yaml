@@ -1,4 +1,4 @@
-name: Typo/Grammar Report
+name: Typo/grammar report
 description: Issues regarding incorrect spelling/grammar, missing information, etc.
 labels: ["t: spelling/grammar"]
 body:

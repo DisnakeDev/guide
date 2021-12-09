@@ -1,6 +1,6 @@
-name: Page/Section Addition
+name: Page/section addition
 description: Suggestion for a new page/section that doesn't already exist.
-labels: ["t: page/section addition"]
+labels: ["t: request"]
 body:
   - type: markdown
     attributes:
