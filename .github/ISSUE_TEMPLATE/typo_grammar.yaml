@@ -6,7 +6,7 @@ body:
     attributes:
       value: >
         Thanks for taking the time to open an issue! We advise you to make the report descriptive of the issue, with links and images wherever required. 
-        Also make sure to go through the [`Contributing Guidelines`](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md)!
+        Also make sure to go through the [Contributing Guidelines](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md).
   - type: textarea
     attributes:
       label: Affected pages
