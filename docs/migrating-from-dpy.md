@@ -1,27 +1,38 @@
 # Migrating from discord.py
 
-After the discontinuation of `discord.py` (refer [this gist]({{ futureofdpy }})), many forks of the API wrapper branched onward to maintain the library, in order to keep it updated with the latest features and Discord API changes - `disnake` is one such fork. 
+After the discontinuation of `discord.py` (refer [this gist]({{ futureofdpy }})), many forks of the API wrapper branched
+onward to maintain the library, in order to keep it updated with the latest features and Discord API changes - `disnake`
+is one such fork.
 
-Thus, if you've chosen `disnake` as your fork of choice in order to implement interactions/components and other features, this page will help you understand the changes in syntax, and aim for making your migrating process as smooth as possible.
+Thus, if you've chosen `disnake` as your fork of choice in order to implement interactions/components and other
+features, this page will help you understand the changes in syntax, and aim for making your migrating process as smooth
+as possible.
 
 ## Differences between libraries
 
-`disnake` is based on `discord.py 2.0`, which had major syntax changes from its previous version. Therefore, if you're shifting to `disnake` from a version of `discord.py` lower than 2.0, you will have to make some important syntax changes in your code. You can refer [this page]({{ breakingchanges }}) for the full list of breaking changes in `discord.py 2.0`, though we will list some primary API reference changes here:
+`disnake` is based on `discord.py 2.0`, which had major syntax changes from its previous version. Therefore, if you're
+shifting to `disnake` from a version of `discord.py` lower than 2.0, you will have to make some important syntax changes
+in your code. You can refer [this page]({{ breakingchanges }}) for the full list of breaking changes in
+`discord.py 2.0`, though we will list some primary API reference changes here:
 
-- Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
-- Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to `avatar.url`. `User.avatar` returns `None` in case the default avatar is used.
-- `on_presence_update` replaces `on_member_update` for updates to `Member.status` and `Member.activities`.
-- Webhooks are changed significantly: `WebhookAdapter` is removed, and synchronous requests using `requests` is now inside `SyncWebhook`.
-- `edit` methods no longer updates cache and instead returns modified instance.
-- `Client.logout` is removed; use `Client.close` instead.
-- `Message.type` for replies are now `MessageType.reply`.
-- `Reaction.custom_emoji` property is changed to `Reaction.is_custom_emoji` method.
-- `missing_perms` attributes and arguments are renamed to `missing_permissions`.
-- Many arguments are now specified as positional-only or keyword-only; e.g. `oauth_url` now takes keyword-only arguments, and methods starting with `get_` or `fetch_` take positional-only arguments.
+-   Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
+-   Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to
+    `avatar.url`. `User.avatar` returns `None` in case the default avatar is used.
+-   `on_presence_update` replaces `on_member_update` for updates to `Member.status` and `Member.activities`.
+-   Webhooks are changed significantly: `WebhookAdapter` is removed, and synchronous requests using `requests` is now
+    inside `SyncWebhook`.
+-   `edit` methods no longer updates cache and instead returns modified instance.
+-   `Client.logout` is removed; use `Client.close` instead.
+-   `Message.type` for replies are now `MessageType.reply`.
+-   `Reaction.custom_emoji` property is changed to `Reaction.is_custom_emoji` method.
+-   `missing_perms` attributes and arguments are renamed to `missing_permissions`.
+-   Many arguments are now specified as positional-only or keyword-only; e.g. `oauth_url` now takes keyword-only
+    arguments, and methods starting with `get_` or `fetch_` take positional-only arguments.
 
-## Changing requirements 
+## Changing requirements
 
-In order to avoid conflicts between the libraries, you must uninstall `discord.py`. You can do so by using the following command in your terminal:
+In order to avoid conflicts between the libraries, you must uninstall `discord.py`. You can do so by using the following
+command in your terminal:
 
 === "Windows"
 
@@ -41,11 +52,14 @@ In order to avoid conflicts between the libraries, you must uninstall `discord.p
     python3 -m pip uninstall discord
     ```
 
-To install `disnake`, you can follow the instructions on [this page](000-prerequisites/001-installing-python.md#installing-disnake).
+To install `disnake`, you can follow the instructions on
+[this page](000-prerequisites/001-installing-python.md#installing-disnake).
 
 ## Rewriting your bot
 
-As discussed above, rewriting your code from an older `discord.py` version to `disnake` will require some major syntax changes. But if you're migrating from `discord.py 2.0`, all that's left now is changing the library references throughout the code, since the base code for both the libraries is practically the same. 
+As discussed above, rewriting your code from an older `discord.py` version to `disnake` will require some major syntax
+changes. But if you're migrating from `discord.py 2.0`, all that's left now is changing the library references
+throughout the code, since the base code for both the libraries is practically the same.
 
 There are three ways to switch between libraries:
 
@@ -62,7 +76,8 @@ There are three ways to switch between libraries:
 
 #### Import `disnake as discord`
 
-Import `disnake as discord` into your code (and delete the lines where you import `discord`). This reduces the effort of changing all references throughout your code.
+Import `disnake as discord` into your code (and delete the lines where you import `discord`). This reduces the effort of
+changing all references throughout your code.
 
 ```py
 import disnake as discord
@@ -71,7 +86,9 @@ from disnake.ext import commands
 
 #### Using the `discord` shim
 
-Using the `discord` shim allows you to use `disnake`, without the need to import it directly or importing it as discord - thus eliminating the need to change your code at all. To install the shim, you can use the following command in your terminal:
+Using the `discord` shim allows you to use `disnake`, without the need to import it directly or importing it as
+discord - thus eliminating the need to change your code at all. To install the shim, you can use the following command
+in your terminal:
 
 === "Windows"
 
@@ -95,4 +112,5 @@ Using the `discord` shim allows you to use `disnake`, without the need to import
 
     We don't recommend using the shim, as it is updated less frequently and may break the behaviour of interactions/components in some cases. If possible, proceed with one of the other two procedures mentioned.
 
-And that's it! Since `disnake` is a fork of `discord.py`, it inherits a lot of similarities - though we recommend you to always run your code to fix any possible issues.
+And that's it! Since `disnake` is a fork of `discord.py`, it inherits a lot of similarities - though we recommend you to
+always run your code to fix any possible issues.
