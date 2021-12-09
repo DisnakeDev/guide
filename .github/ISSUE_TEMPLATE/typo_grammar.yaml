@@ -11,7 +11,7 @@ body:
     attributes:
       label: Affected pages
       description: "Which articles/pages on the guide are affected? (Use links, or repo filenames)"
-      placeholder: >
+      placeholder: |
         - guide.disnake.dev/example
         - guide.disnake.dev/another-example
         - 100-directory/101-example.md
