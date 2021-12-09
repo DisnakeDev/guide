@@ -1,4 +1,4 @@
-name: Typo/Grammar Report
+name: Typo/grammar report
 description: Issues regarding incorrect spelling/grammar, missing information, etc.
 labels: ["t: spelling/grammar"]
 body:
@@ -6,12 +6,12 @@ body:
     attributes:
       value: >
         Thanks for taking the time to open an issue! We advise you to make the report descriptive of the issue, with links and images wherever required. 
-        Also make sure to go through the [`Contributing Guidelines`](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md)!
+        Also make sure to go through the [Contributing Guidelines](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md).
   - type: textarea
     attributes:
       label: Affected pages
       description: "Which articles/pages on the guide are affected? (Use links, or repo filenames)"
-      placeholder: >
+      placeholder: |
         - guide.disnake.dev/example
         - guide.disnake.dev/another-example
         - 100-directory/101-example.md
