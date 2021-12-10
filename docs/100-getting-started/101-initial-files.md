@@ -44,8 +44,8 @@ project directory and paste in your token. You can access your token inside othe
 
     If you're using Git, you should not commit this file and should ignore it via `.gitignore`.
 
-You can alternatively also use the [python-dotenv package][python-dotenv] to either load the env variables into the
-environment, or make a `config` dict out of the env values.
+You can use the [python-dotenv package][python-dotenv] to either load the `env` variables into the environment, or make
+a `config` dict out of the env values.
 
 === "load_dotenv()"
 
