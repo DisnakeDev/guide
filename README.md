@@ -1,4 +1,4 @@
-<img src="docs/assets/disnake-thin-banner.png" align="center" width="100%">
+<img src="docs/assets/disnake-readme-banner.png" align="center" width="100%">
 
 # Disnake Guide (WIP)
 
