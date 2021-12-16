@@ -88,7 +88,7 @@ nav:
     - migrating-from-dpy.md
 
     - Prerequisites:
-        - 000-prerequisites/001-installing-python.md
+        - 000-prerequisites/001-installing-disnake.md
         - 000-prerequisites/002-creating-your-application.md
         - 000-prerequisites/003-inviting-your-bot.md
 
