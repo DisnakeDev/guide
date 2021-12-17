@@ -41,4 +41,4 @@ async def dictembed(ctx):
     await ctx.send(embed=disnake.Embed.from_dict(embed_dict))
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")

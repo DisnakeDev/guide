@@ -45,4 +45,4 @@ async def fullembed(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
