@@ -1,3 +1,3 @@
-# Credits
+# Links & Credits
 
-[vcokltfre's Tutorial](https://vcokltfre.dev/)
+Content inspired from [vcokltfre's Tutorial](https://vcokltfre.dev/).
