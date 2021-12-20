@@ -52,8 +52,7 @@ command in your terminal:
     python3 -m pip uninstall discord
     ```
 
-To install `disnake`, you can follow the instructions on
-[this page](000-prerequisites/001-installing-python.md#installing-disnake).
+To install `disnake`, you can follow the instructions on [this page](000-prerequisites/001-installing-disnake).
 
 ## Rewriting your bot
 
