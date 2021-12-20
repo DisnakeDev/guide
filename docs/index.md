@@ -19,7 +19,7 @@ The concept we will be going over, include:
 This guide will showcase the various features and events that our library has, while giving you an idea of how these
 functions work together as well as how the syntax looks in production.
 
-## Pre-Required Knowledge
+<h2>Pre-Required Knowledge</h2>
 
 While we appreciate the process of making Discord bots, creating a bot with `disnake` requires a decent amount of
 experience on working with Python and object-oriented programming. You _can_ go forward and make a bot with little to no
