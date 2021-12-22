@@ -1,7 +1,9 @@
+# Site Config.
 site_name: Disnake Guide
 site_description: A guide for disnake.
 site_url: https://guide.disnake.dev/
 
+# Theme Config.
 theme:
 
     name: material
@@ -31,10 +33,16 @@ theme:
             icon: material/weather-night
             name: Dark Mode
 
+extra_css:
+    - stylesheets/lightmode.css
+    - stylesheets/darkmode.css
+
+# GitHub Config.
 repo_name: DisnakeDev/disnake
 repo_url: https://github.com/DisnakeDev/disnake
 edit_uri: ""
 
+# Plugins, Variables and Extensions
 plugins:
 
     - search
@@ -81,6 +89,8 @@ markdown_extensions:
     - toc:
         permalink: True
 
+
+# Navigation
 nav:
 
     - index.md
@@ -95,8 +105,7 @@ nav:
     - Getting Started:
         - 100-getting-started/101-initial-files.md
         - 100-getting-started/102-creating-commands.md
-        - 100-getting-started/103-command-handling.md
-        - 100-getting-started/104-event-handling.md
+        - 100-getting-started/103-using-cogs.md
 
     - Interactions:
         - 200-interactions/201-interactions.md
@@ -113,7 +122,3 @@ nav:
     
     - Frequently Asked Questions:
         - 400-faq/401-good-practices.md
-
-extra_css:
-    - stylesheets/lightmode.css
-    - stylesheets/darkmode.css
