@@ -128,7 +128,7 @@ async def on_ready():
 
 
 # Login to Discord with the bot's token.
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 This is how you create a client instance for your Discord bot and login to Discord. Open your terminal and run

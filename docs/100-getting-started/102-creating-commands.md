@@ -43,7 +43,7 @@ async def on_ready():
     print("The bot is ready!")
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 The first step is to use the `@bot.slash_command` coroutine, along with an `async` function in order to define the code
@@ -67,7 +67,7 @@ async def ping(inter):
     ...
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 The `inter` passed into the function is analogous to context, or `ctx` used in prefix commands - it passes through all
@@ -107,7 +107,7 @@ async def ping(inter):
     ...
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 ???+ Tip "Using `test_guilds` in `commands.Bot()`"
@@ -143,7 +143,7 @@ async def ping(inter):
     await inter.response.send_message("Pong!")
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 ![](../assets/img-creating-commands/001.png){ width="60%" }
@@ -173,7 +173,7 @@ async def server(inter):
     )
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 ![](../assets/img-creating-commands/002.png){ width="60%" }
@@ -209,7 +209,7 @@ async def user(inter):
     await inter.response.send_message(f"Your tag: {inter.author}\nYour ID: {inter.author.id}")
 
 
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 ![](../assets/img-creating-commands/003.png){ width="60%" }

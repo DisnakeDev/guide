@@ -15,4 +15,4 @@ async def on_ready():
 
 
 YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
-bot.run(YOUR_BOT_TOKEN)
+bot.run("YOUR_BOT_TOKEN")
