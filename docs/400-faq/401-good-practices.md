@@ -1,5 +1,29 @@
 # Good practices
 
+## Loading multiple cogs
+
+Since you would eventually have multiple cogs and cog files inside a folder, you definitely shouldn't load each of them
+separately with `bot.load_extension()`. You'll end up creating a giant chain that would look something like this.
+
+```python linenums="1"
+bot.load_extension("cogs.hello")
+bot.load_extension("cogs.ping")
+bot.load_extension("cogs.pls")
+bot.load_extension("cogs.help")
+bot.load_extension("cogs.me")
+```
+
+You can easily create a `for` loop that loads each cog in the folder. This will also eliminate the need of adding a new
+`bot.load_extension()` line each time you create a new cog file.
+
+```python linenums="1"
+import os
+
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py"):
+        client.load_extension(f"cogs.{filename[:-3]}")
+```
+
 ## Running code when a cog is loaded
 
 Most people are used to running everything in `__init__` but that doesn't allow running async code. In this case you can
