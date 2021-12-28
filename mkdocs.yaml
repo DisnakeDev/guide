@@ -24,7 +24,7 @@ theme:
     palette:
         - media: "(prefers-color-scheme: light)"
           scheme: light
-          toggle: 
+          toggle:
             icon: material/weather-sunny
             name: Light Mode
         - media: "(prefers-color-scheme: dark)"
@@ -75,7 +75,7 @@ markdown_extensions:
     - pymdownx.inlinehilite
     - pymdownx.superfences
     - pymdownx.tabbed:
-        alternate_style: true 
+        alternate_style: true
     - pymdownx.snippets
     - pymdownx.details
 
@@ -111,7 +111,7 @@ nav:
         - 200-interactions/201-interactions.md
         - 200-interactions/202-application-commands.md
         - 200-interactions/203-message-components.md
-        
+
     - Popular Topics:
         - 300-popular-topics/301-threads.md
         - 300-popular-topics/302-embeds.md
@@ -119,6 +119,6 @@ nav:
         - 300-popular-topics/304-webhooks.md
         - 300-popular-topics/305-permissions.md
         - 300-popular-topics/306-intents.md
-    
+
     - Frequently Asked Questions:
         - 400-faq/401-good-practices.md
