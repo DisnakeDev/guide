@@ -3,7 +3,7 @@
 You might have seen some special messages on Discord (often sent by bots/webhooks), that have a colored border, embedded
 images, text fields and other properties. These elements are referred to as **Embeds**, and this section will cover how
 you can create and send one with your bot. This is done with the
-[`disnake.Embed()`]({{ disnakedocs }}/api.html?highlight=embed#embed)
+[`disnake.Embed()`]({{disnakedocs}}/api.html?highlight=embed#embed)
 
 This section will extensively cover the attributes and methods used with embeds. Thus, we recommend skipping to your
 desired topic via the table of contents.
@@ -55,14 +55,14 @@ await ctx.send(embed=embed)
     It is not strictly necessary to use all elements showcased above. You're free to leave some out as per your requirements.
 
 The colour of the embed (via the `colour` parameter) accepts a
-[`disnake.Colour`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Colour) instance, a HEX string or an integer.
+[`disnake.Colour`]({{disnakedocs}}/api.html?highlight=embed#disnake.Colour) instance, a HEX string or an integer.
 
 To add a blank field to the embed, you can use `embed.add_field(name='\u200b', value='\u200b')`.
 
 ## Creating an embed
 
-You can use the [`Embed`]({{ disnakedocs }}/api.html?highlight=embed#embed) instance for the creation and manipulation
-of embeds.
+You can use the [`Embed`]({{disnakedocs}}/api.html?highlight=embed#embed) instance for the creation and manipulation of
+embeds.
 
 ```python linenums="1" title="embed.py"
 embed = disnake.Embed(
@@ -77,7 +77,7 @@ embed = disnake.Embed(
 ### Setting the author
 
 You can set the author of the embed with the
-[`set_author`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.set_footer) attribute. Note that this code will
+[`set_author`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.set_footer) attribute. Note that this code will
 come after you have defined `embed` via `embed = disnake.Embed(...)`.
 
 ```python linenums="1" title="embed.py"
@@ -96,7 +96,7 @@ Since we have set a URL in this case, clicking on "Embed Author" will redirect t
 ### Setting the footer
 
 You can set the footer of the embed with the
-[`set_footer`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.set_footer) attribute. Note that this code will
+[`set_footer`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.set_footer) attribute. Note that this code will
 come after you have defined `embed` via `embed = disnake.Embed(...)`.
 
 ```python linenums="1" title="embed.py"
@@ -111,7 +111,7 @@ embed.set_footer(
 ### Setting the thumbnail
 
 The thumbnail of the embed is shown in it's top right corner. It can be set using the
-[`set_thumbnail`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.set_thumbnail) attribute.
+[`set_thumbnail`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.set_thumbnail) attribute.
 
 ```python linenums="1" title="embed.py"
 embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
@@ -122,7 +122,7 @@ embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
 ### Using timestamps
 
 Timestamps are shown in the footer of the embed, indicating the time at which the embed was sent/initiated. This can be
-done using the [`timestamp`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.timestamp) parameter of
+done using the [`timestamp`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.timestamp) parameter of
 `disnake.Embed()`. Note that you will need to install and import the [`datetime`][datetime-pypi] package into your
 script.
 
@@ -144,7 +144,7 @@ embed = disnake.Embed(
 ### Inserting fields
 
 Embed fields have two parameters - a name(or title) and a value, inside the
-[`add_field`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.add_field) attribute. It is also possible to use
+[`add_field`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.add_field) attribute. It is also possible to use
 markdown in both parameters.
 
 ```python linenums="1" title="embed.py"
@@ -160,13 +160,13 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 ![](../assets/img-embeds/007.png){ width="55%" }
 
 These attributes also fully support the use of markdown, as well as highlight links. You can also insert fields at a
-particular position, with a specified index using [`embed.insert_field_at(index,
-...)`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.insert_field_at).
+particular position, with a specified index using
+[`embed.insert_field_at(index, ...)`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.insert_field_at).
 
 ### Inserting images
 
-This can be done using the [`set_image`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.set_image) attribute,
-which accepts either a URL or a [`disnake.File()`]({{ disnakedocs }}/api.html?highlight=embed#file) object.
+This can be done using the [`set_image`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.set_image) attribute,
+which accepts either a URL or a [`disnake.File()`]({{disnakedocs}}/api.html?highlight=embed#file) object.
 
 ```python linenums="1" title="embed.py"
 # Using a URL
@@ -187,7 +187,7 @@ Otherwise, the embed will not be sent.
 ## Dictionaries to embeds
 
 A `dict` datatype (and essentially a `json` file) can be converted into an embed, using the
-[`Embed.from_dict()`]({{ disnakedocs }}/api.html?highlight=embed#disnake.Embed.from_dict) method. We can recreate the
+[`Embed.from_dict()`]({{disnakedocs}}/api.html?highlight=embed#disnake.Embed.from_dict) method. We can recreate the
 embed made at the start of this page, using the same.
 
 ```python linenums="1" title="embed.py"
@@ -217,8 +217,8 @@ await channel.send(embed=disnake.Embed.from_dict(embed_dict))
 
 This will give the exact same result as the embed shown [here](./#embed-preview). Note that the timestamp passed through
 a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`).
-You can learn more about the `dict` format of embeds in the [official Discord
-documentation]({{ devdocs }}/resources/channel#embed-object).
+You can learn more about the `dict` format of embeds in the
+[official Discord documentation]({{devdocs}}/resources/channel#embed-object).
 
 ## Embed notes
 
@@ -245,11 +245,11 @@ you can come back to:
 -   The sum of all characters from all embed structures in a message must not exceed 6000 characters.
 -   Ten embeds can be sent per message.
 
-<sup>Source: [Discord API Documentation]({{ devdocs }}/resources/channel#embed-limits)</sup>
+<sup>Source: [Discord API Documentation]({{devdocs}}/resources/channel#embed-limits)</sup>
 
 ## Resulting code
 
 The code for the full embeds showcased in this section (using `set` methods and the `from_dict` method) can be found on
-the GitHub repository [here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-embeds).
+the GitHub repository [here]({{guiderepo}}/tree/main/docs/extra-code-samples/code-embeds).
 
 [datetime-pypi]: https://pypi.org/project/DateTime/

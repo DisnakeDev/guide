@@ -1,6 +1,6 @@
 # Migrating from discord.py
 
-After the discontinuation of `discord.py` (refer [this gist]({{ futureofdpy }})), many forks of the API wrapper branched
+After the discontinuation of `discord.py` (refer [this gist]({{futureofdpy}})), many forks of the API wrapper branched
 onward to maintain the library, in order to keep it updated with the latest features and Discord API changes - `disnake`
 is one such fork.
 
@@ -12,8 +12,8 @@ as possible.
 
 `disnake` is based on `discord.py 2.0`, which had major syntax changes from its previous version. Therefore, if you're
 shifting to `disnake` from a version of `discord.py` lower than 2.0, you will have to make some important syntax changes
-in your code. You can refer [this page]({{ breakingchanges }}) for the full list of breaking changes in
-`discord.py 2.0`, though we will list some primary API reference changes here:
+in your code. You can refer [this page]({{breakingchanges}}) for the full list of breaking changes in `discord.py 2.0`,
+though we will list some primary API reference changes here:
 
 -   Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
 -   Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to

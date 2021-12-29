@@ -8,7 +8,7 @@ get it online! Let's start by creating a `.env` file for your client token and a
 As explained in the "What is a token, anyway?" section, your token is essentially your bot's password, and you should
 protect it as best as possible. This can be done through a `.env` file, or by using environment variables.
 
-Open your application in the [Discord Developer Portal]({{ devportal }}) and go to the `Bot` page to copy your token.
+Open your application in the [Discord Developer Portal]({{devportal}}) and go to the `Bot` page to copy your token.
 
 ### Using environment variables
 
@@ -141,7 +141,7 @@ This is how you create a client instance for your Discord bot and login to Disco
 ## Resulting code
 
 If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository
-[here]({{ guiderepo }}/tree/main/docs/extra-code-samples/code-initial-files).
+[here]({{guiderepo}}/tree/main/docs/extra-code-samples/code-initial-files).
 
 [python-dotenv]: https://pypi.org/project/python-dotenv/
 [glitch-article]: https://glitch.happyfox.com/kb/article/18

@@ -59,8 +59,8 @@ invite URL for it.
         The person adding the bot needs "Manage Server" permissions to do so.
 
 If you want to generate this URL dynamically at run-time inside your bot and using the
-[`disnake.Permissions`]({{ disnakedocs }}/api.html#disnake.Permissions) interface, you can use
-[`disnake.utils.oauth_url()`]({{ disnakedocs }}/api.html#disnake.utils.oauth_url).
+[`disnake.Permissions`]({{disnakedocs}}/api.html#disnake.Permissions) interface, you can use
+[`disnake.utils.oauth_url()`]({{disnakedocs}}/api.html#disnake.utils.oauth_url).
 
 [discord-page]: https://www.discord.com
 [discord-app-page]: https://discord.com/developers/applications
