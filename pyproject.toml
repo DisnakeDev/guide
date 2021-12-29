@@ -1,17 +1,5 @@
 [tool.taskipy.tasks]
-build  = {
-    cmd = 'mkdocs build',
-    help = 'Build the guide under 'site' directory.'
-}
-lint = {
-    cmd = 'pre-commit run --all-files',
-    help = 'Run pre-commit checks on all files.'
-}
-serve = {
-    cmd = 'mkdocs serve --dev-addr 127.0.0.1:8005',
-    help = 'Build and serve the docs on an autoreloading server at 127.0.0.1:8005.'
-}
-deploy = {
-    cmd = 'task lint && mkdocs gh-deploy',
-    help = 'Lint, build, and deploy the docs to GitHub Pages.'
-}
+build  = {cmd = 'mkdocs build', help = 'Build the guide under 'site' directory.'}
+lint = {cmd = 'pre-commit run --all-files', help = 'Run pre-commit checks on all files.'}
+serve = {cmd = 'mkdocs serve --dev-addr 127.0.0.1:8005', help = 'Build and serve the docs on an autoreloading server at 127.0.0.1:8005.'}
+deploy = {cmd = 'task lint && mkdocs gh-deploy', help = 'Lint, build, and deploy the docs to GitHub Pages.'}
