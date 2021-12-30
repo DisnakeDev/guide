@@ -4,8 +4,6 @@ repos:
     hooks:
       - id: check-case-conflict
       - id: end-of-file-fixer
-      - id: mixed-line-ending
-        args: [--fix=lf]
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
   # for code in .md files
