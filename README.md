@@ -8,9 +8,9 @@
     <a href="https://guide.disnake.dev/"><img src="https://img.shields.io/github/deployments/DisnakeDev/guide/github-pages?style=flat-square&color=blue" alt="GitHub checks" /></a>
 </p>
 
-WelcomeThe purpose of this guide is to make your journey with `disnake` easier, whether you're an experienced developer
-just getting into coding Discord bots, or an advanced bot developer who has decided to proceed with `disnake` as their
-library of choice.
+Welcome! The purpose of this guide is to make your journey with `disnake` easier, whether you're an experienced
+developer just getting into coding Discord bots, or an advanced bot developer who has decided to proceed with `disnake`
+as their library of choice.
 
 The concept we will be going over, include:
 
