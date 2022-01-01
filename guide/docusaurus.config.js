@@ -3,8 +3,8 @@
 const config = {
   title: 'Disnake Guide',
   tagline: '',
-  url: 'https://abhigyantrips.dev/',
-  baseUrl: '/disnake-guide-react/',
+  url: 'https://www.abhigyantrips.dev/',
+  baseUrl: '/docusaurus-guide/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
