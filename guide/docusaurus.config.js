@@ -4,7 +4,7 @@ const config = {
   title: 'Disnake Guide',
   tagline: '',
   url: 'https://www.abhigyantrips.dev/',
-  baseUrl: '/docusaurus-guide/',
+  baseUrl: '/disnake-guide-react/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
