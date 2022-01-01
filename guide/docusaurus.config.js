@@ -61,10 +61,6 @@ const config = {
           },
         ],
       },
-      footer: {
-        style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} Disnake Development. Built with Docusaurus.`,
-      },
     },
 };
 
