@@ -6,7 +6,7 @@ resource.
 
 !!! Note
 
-    If you have already made your bot application, you can skip this document and move on to [`initial-files`](../100-getting-started/101-initial-files.md).
+    If you have already made your bot application, you can skip this document and move on to [`initial-files`](../getting-started/initial-files.md).
 
 ## Creating a bot account
 
@@ -95,7 +95,7 @@ it on that amount. Your token gets leaked somewhere, and now someone else has it
 -   Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible! In the
-[initial files](../100-getting-started/101-initial-files.md) page of the guide, we cover how to safely store your token
+[initial files](../getting-started/initial-files.md) page of the guide, we cover how to safely store your token
 in a configuration file.
 
 !!! Danger
