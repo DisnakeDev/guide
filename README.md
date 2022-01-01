@@ -31,7 +31,7 @@ functions work together as well as how the syntax looks in production.
 
 For more info on development/contributions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-<br>
+<br />
 <p align="center">
     <a href="https://docs.disnake.dev/">Documentation</a>
     ⁕
@@ -41,4 +41,4 @@ For more info on development/contributions, see [CONTRIBUTING.md](./CONTRIBUTING
     ⁕
     <a href="https://discord.gg/discord-api">Discord API</a>
 </p>
-<br>
+<br />
