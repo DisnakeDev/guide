@@ -54,9 +54,11 @@ invite URL for it.
 7.  Now the resulting URL can be used to add your bot to a server. Copy and paste the URL into your browser, choose a
     server to invite the bot to, and click `Authorize`.
 
-    !!! Note
+    :::info
 
-        The person adding the bot needs "Manage Server" permissions to do so.
+    The person adding the bot needs "Manage Server" permissions to do so.
+    
+    :::
 
 If you want to generate this URL dynamically at run-time inside your bot and using the
 [`disnake.Permissions`](https://docs.disnake.dev/en/latest/api.html#disnake.Permissions) interface, you can use

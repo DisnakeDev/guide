@@ -50,9 +50,11 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 await ctx.send(embed=embed)
 ```
 
-!!! Note
+:::note
 
-    It is not strictly necessary to use all elements showcased above. You're free to leave some out as per your requirements.
+It is not strictly necessary to use all elements showcased above. You're free to leave some out as per your requirements.
+
+:::
 
 The colour of the embed (via the `colour` parameter) accepts a
 [`disnake.Colour`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Colour) instance, a HEX string or an integer.

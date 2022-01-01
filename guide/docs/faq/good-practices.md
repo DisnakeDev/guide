@@ -54,9 +54,11 @@ from disnake.ext import commands
 bot = commands.Bot(..., reload=True)
 ```
 
-!!! Warning
+:::caution
 
-    This should be used purely for debugging. Please do not use this in production.
+This should be used purely for debugging. Please do not use this in production.
+
+:::
 
 ## Converting arguments in commands
 

@@ -15,9 +15,11 @@ Open your application in the [Discord Developer Portal](https://discord.com/deve
 Environment variables are special values for your environment (e.g., terminal session, docker container, or environment
 variable file). You can pass these values into your code's scope so that you can use them.
 
-!!! Note Inline End
+:::note
 
-    When referring to a `.env` file, keep in mind that you can name this file whatever you prefer. For example, the file can be named `token.env` or `secret.env`.
+When referring to a `.env` file, keep in mind that you can name this file whatever you prefer. For example, the file can be named `token.env` or `secret.env`.
+
+:::
 
 Storing data in a `.env` file is a common way of keeping your sensitive values safe. Create a `.env` file in your
 project directory and paste in your token. You can access your token inside other files by using `os.environ`.
@@ -40,9 +42,11 @@ project directory and paste in your token. You can access your token inside othe
     YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
     ```
 
-!!! Danger
+:::danger
 
-    If you're using Git, you should not commit this file and should ignore it via `.gitignore`.
+If you're using Git, you should not commit this file and should ignore it via `.gitignore`.
+
+:::
 
 You can use the [python-dotenv package][python-dotenv] to either load the `env` variables into the environment, or make
 a `config` dict out of the env values.
@@ -77,13 +81,15 @@ a `config` dict out of the env values.
 Keep in mind that the values imported from the `.env` file are **in string format**. Therefore if you would like to,
 say, use them for calculations, you'll have to convert them via `int()`
 
-??? Info "Online editors (Glitch, Heroku, Replit, etc.)"
+:::info Online editors (Glitch, Heroku, Replit, etc.)
 
-    While we generally do not recommend using online editors as hosting solutions, but rather invest in a proper virtual private server, these services do offer ways to keep your credentials safe as well! Please see the respective service's documentation and help articles for more information on how to keep sensitive values safe:
+While we generally do not recommend using online editors as hosting solutions, but rather invest in a proper virtual private server, these services do offer ways to keep your credentials safe as well! Please see the respective service's documentation and help articles for more information on how to keep sensitive values safe:
 
-    - Glitch: [Storing secrets in .env][glitch-article]
-    - Heroku: [Configuration variables][heroku-article]
-    - Replit: [Secrets and environment variables][replit-article]
+- Glitch: [Storing secrets in .env][glitch-article]
+- Heroku: [Configuration variables][heroku-article]
+- Replit: [Secrets and environment variables][replit-article]
+
+:::
 
 ### Git and `.gitignore`
 
@@ -100,11 +106,13 @@ secrets.env
 config.json
 ```
 
-!!! Tip
+:::tip
 
-    [`__pycache__/`][pycache] has been included in `.gitignore` as it is simply cache that helps loading and running your script faster (this is an oversimplification). As it is of no particular importance, and is recompiled every time a change is made in the script, it is better to not commit the directory.
+[`__pycache__/`][pycache] has been included in `.gitignore` as it is simply cache that helps loading and running your script faster (this is an oversimplification). As it is of no particular importance, and is recompiled every time a change is made in the script, it is better to not commit the directory.
 
-    Also, you can specify certain extensions/directories in `.gitignore` files, as per the requirements of your project - [here is an example][gitignore-example]. Check out the [Git documentation on `.gitignore`][gitignore-article] for more information!
+Also, you can specify certain extensions/directories in `.gitignore` files, as per the requirements of your project - [here is an example][gitignore-example]. Check out the [Git documentation on `.gitignore`][gitignore-article] for more information!
+
+:::
 
 ## Creating the main file
 
@@ -134,9 +142,11 @@ bot.run("YOUR_BOT_TOKEN")
 This is how you create a client instance for your Discord bot and login to Discord. Open your terminal and run
 `python3 main.py` to start the process. If you see "The bot is ready!" after a few seconds, you're good to go!
 
-!!! Tip
+:::tip
 
-    After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands you've run in the terminal. Pressing up and then enter after closing the process is a quick way to start it up again.
+After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands you've run in the terminal. Pressing up and then enter after closing the process is a quick way to start it up again.
+
+:::
 
 ## Resulting code
 

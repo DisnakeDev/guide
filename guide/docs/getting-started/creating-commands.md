@@ -1,8 +1,10 @@
 # Creating commands
 
-!!! Note
+:::info
 
-    This page is a follow-up, and the base code used is from the previous page ([Initial files](./initial-files.md)). The code can be found on the GitHub repository [here](https://github.com/DisnakeDev/guide/tree/main/docs/extra-code-samples/code-intial-files).
+This page is a follow-up, and the base code used is from the previous page ([Initial files](./initial-files.md)). The code can be found on the GitHub repository [here](https://github.com/DisnakeDev/guide/tree/main/docs/extra-code-samples/code-intial-files).
+
+:::
 
 Discord also allows developers to register [slash commands](https://discord.com/developers/docs/interactions/application-commands), which
 provides users a first-class way of interacting directly with your application. These slash commands shall be covered by
@@ -13,11 +15,13 @@ the guide [here](../interactions/application-commands.md), in the **Interactions
 Bot commands that are initiated when a keyword is used along with a specified prefix (such as `!` or `$`) are known as
 **prefix commands** (are also often referred to as **text commands**).
 
-!!! Warning "Message Intent - Privileged"
+:::caution Message Intent - Privileged
 
-    It is to be noted that handling prefix commands require the **message intent**, which allows the bot to get content and data of messages sent by users. This intent has recently been privileged, i.e., it needs to be manually enabled for the bot application, and its requirement will eventually be reviewed if your bot is in over 100 servers.
+It is to be noted that handling prefix commands require the **message intent**, which allows the bot to get content and data of messages sent by users. This intent has recently been privileged, i.e., it needs to be manually enabled for the bot application, and its requirement will eventually be reviewed if your bot is in over 100 servers.
 
-    You can read more about the message intent [here][message-intent-article].
+You can read more about the message intent [here][message-intent-article].
+
+:::
 
 Therefore, to minimize the permissions your bot has to use, we will be covering prefix commands under the **Popular
 Topics** section, and advancing with the basics of slash commands in this article; more advanced topics of the same will
@@ -74,9 +78,11 @@ The `inter` passed into the function is analogous to context, or `ctx` used in p
 information relative to the interaction - data regarding the user who initiated the command, as an example. It is also
 necessary for replying to the use of the command.
 
-???+ Note "Using `ctx` vs. `inter`"
+:::note Using `ctx` vs. `inter`
 
-    If you have experience with coding bots with [`discord.py`](https://discordpy.readthedocs.io/en/latest), you would be familiar with using `ctx` as an abbreviation for passing context into the function. This guide will primarily be using `inter`, as it is short for `interaction` and refers to [`disnake.ApplicationCommandInteraction()`](https://docs.disnake.dev/en/latest/api.html?highlight=applicationcommandinteraction#applicationcommandinteraction). Of course, you're open to using your preferred abbreviation in code.
+If you have experience with coding bots with [`discord.py`](https://discordpy.readthedocs.io/en/latest), you would be familiar with using `ctx` as an abbreviation for passing context into the function. This guide will primarily be using `inter`, as it is short for `interaction` and refers to [`disnake.ApplicationCommandInteraction()`](https://docs.disnake.dev/en/latest/api.html?highlight=applicationcommandinteraction#applicationcommandinteraction). Of course, you're open to using your preferred abbreviation in code.
+
+:::
 
 ### Registering commands in specific guilds
 
@@ -110,13 +116,15 @@ async def ping(inter):
 bot.run("YOUR_BOT_TOKEN")
 ```
 
-???+ Tip "Using `test_guilds` in `commands.Bot()`"
+:::tip Using `test_guilds` in `commands.Bot()`
 
-    When you have multiple commands registered under the same test guilds, it is convenient to only have your `guild_ids` defined once. Therefore, you can use the `test_guilds` argument in the `commands.Bot()` instance instead of passing `guild_ids` to every single command -
+When you have multiple commands registered under the same test guilds, it is convenient to only have your `guild_ids` defined once. Therefore, you can use the `test_guilds` argument in the `commands.Bot()` instance instead of passing `guild_ids` to every single command -
 
-    ``` python
-    bot = commands.Bot(test_guilds=[1234, 5678])
-    ```
+``` python
+bot = commands.Bot(test_guilds=[1234, 5678])
+```
+
+:::
 
 Now that you're all set with registering the slash command, you can proceed with responding to the initiated command.
 
@@ -178,9 +186,11 @@ bot.run("YOUR_BOT_TOKEN")
 
 ![](../assets/img-creating-commands/002.png)
 
-!!! Tip Inline End
+:::tip
 
-    Refer to the [Guild](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild) documentation for a list of all the available properties and methods.
+Refer to the [Guild](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild) documentation for a list of all the available properties and methods.
+
+:::
 
 You could also display the date the server was created, or the server's verification level. You would do those in the
 same manner - use `inter.guild.created_at` or `inter.guild.verification_level`, respectively.
@@ -214,9 +224,11 @@ bot.run("YOUR_BOT_TOKEN")
 
 ![](../assets/img-creating-commands/003.png)
 
-!!! Tip
+:::tip
 
-    Refer to the [User](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.User) and [Member](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.Member) documentation for a list of all the available properties and methods.
+Refer to the [`User`](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.User) and [`Member`](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.Member) documentation for a list of all the available properties and methods.
+
+:::
 
 And there you have it!
 

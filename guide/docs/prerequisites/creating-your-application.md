@@ -4,9 +4,11 @@ The steps mentioned further in this markdown are essentially a copy of the steps
 [mentioned in the documentation](https://docs.disnake.dev/en/latest/discord.html). Therefore, you can follow the steps from either
 resource.
 
-!!! Note
+:::note
 
-    If you have already made your bot application, you can skip this document and move on to [`initial-files`](../getting-started/initial-files.md).
+If you have already made your bot application, you can skip this document and move on to [`initial-files`](../getting-started/initial-files.md).
+
+:::
 
 ## Creating a bot account
 
@@ -67,9 +69,11 @@ And that’s it. You now have a bot account and you can login with that token.
 
 ## Regarding bot tokens
 
-!!! Danger
+:::danger
 
-    This section is critical, so pay close attention. It explains what your bot token is, as well as the security aspects of it.
+This section is critical, so pay close attention. It explains what your bot token is, as well as the security aspects of it.
+
+:::
 
 ### What is a token, anyway?
 
@@ -98,9 +102,11 @@ All that and much, much more. Sounds pretty terrible, right? So make sure to kee
 [initial files](../getting-started/initial-files.md) page of the guide, we cover how to safely store your token
 in a configuration file.
 
-!!! Danger
+:::danger
 
-    If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
+If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
+
+:::
 
 ## Discord's system messages
 
@@ -116,9 +122,11 @@ your bot token has been posted on the internet publicly, and was found by Discor
     </p>
 <br />
 
-!!! Warning
+:::caution
 
-    Since we do not know the extent to which Discord searches for bot tokens, or the time taken to inform the user about where the bot was found, we recommend not fully depending on this feature. But incase your bot token *is* found on the internet publicly (say, on  [a GitHub repository](https://www.github.com/)), you can expect Discord to send a system message to the account the bot is linked to.
+Since we do not know the extent to which Discord searches for bot tokens, or the time taken to inform the user about where the bot was found, we recommend not fully depending on this feature. But incase your bot token *is* found on the internet publicly (say, on  [a GitHub repository](https://www.github.com/)), you can expect Discord to send a system message to the account the bot is linked to.
+
+:::
 
 Note that Discord will never ask for your password or account token, and a system message will never request for the
 same. System messages from Discord will have a verified `SYSTEM` tag, and the bar at the bottom of the DM will mention -

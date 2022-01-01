@@ -4,9 +4,11 @@
 adding to its functions and abilities. They also allow you to break down and organize your bot's collection of
 commands/listeners (which is useful when your bot's command list becomes quite extensive).
 
-!!! Note
+:::note
 
-    Cogs are typically used alongside with **Extensions**. You can read more about them [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/extensions.html).
+Cogs are typically used alongside with **Extensions**. You can read more about them [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/extensions.html).
+
+:::
 
 ## Creating files
 
@@ -59,9 +61,11 @@ class PingCommand(commands.Cog):
         self.bot = bot
 ```
 
-!!! Note "Tip"
+:::tip
 
-    We typehint `bot: commands.Bot` here to give the IDE an idea of what the argument type is. It is not necessary, but can be useful in development when adding certain arguments to your commands.
+We typehint `bot: commands.Bot` here to give the IDE an idea of what the argument type is. It is not necessary, but can be useful in development when adding certain arguments to your commands.
+
+:::
 
 ### Registering commands
 

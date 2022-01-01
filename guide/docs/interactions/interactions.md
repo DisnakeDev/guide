@@ -44,16 +44,20 @@ response can **only be done once**. If you want to send secondary messages, cons
 4. [`is_done`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.is_done) - Indicates whether an interaction response
    has been done before
 
-!!! Note
+:::note
 
-    [`defer`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.defer) works differently depending on the type of interaction.
-    It creates *"Bot is thinking..."* message for application commands and
-    doesn't throw *"This interaction failed"* if you're not going to respond to message components.
+[`defer`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.defer) works differently depending on the type of interaction.
+It creates *"Bot is thinking..."* message for application commands and
+doesn't throw *"This interaction failed"* if you're not going to respond to message components.
 
-!!! Note
+:::
 
-    If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction.
-    Then when your response is ready you can edit the message using [`edit_original_message`](https://docs.disnake.dev/en/latest/api.html#disnake.Interaction.edit_original_message) method
+:::note
+
+If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction.
+Then when your response is ready you can edit the message using [`edit_original_message`](https://docs.disnake.dev/en/latest/api.html#disnake.Interaction.edit_original_message) method.
+
+:::
 
 ```python title="example.py"
 @bot.slash_command()
