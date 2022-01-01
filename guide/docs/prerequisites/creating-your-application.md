@@ -1,7 +1,7 @@
 # Creating your application
 
 The steps mentioned further in this markdown are essentially a copy of the steps
-[mentioned in the documentation]({{disnakedocs}}/discord.html). Therefore, you can follow the steps from either
+[mentioned in the documentation](https://docs.disnake.dev/en/latest/discord.html). Therefore, you can follow the steps from either
 resource.
 
 !!! Note
@@ -14,9 +14,9 @@ In order to work with the library and the Discord API in general, we must first 
 
 Creating a Bot account is a pretty straightforward process.
 
-1. Make sure you’re logged on to the [Discord website]({{discord}}).
+1. Make sure you’re logged on to the [Discord website](https://www.discord.com).
 
-2. Navigate to the [application page]({{devportal}}).
+2. Navigate to the [application page](https://discord.com/developers/applications).
 
 3. Click on the `New Application` button.
 

@@ -1,12 +1,12 @@
 # Creating cogs/extensions
 
-[**Cogs**]({{disnakedocs}}/ext/commands/cogs.html) are analogous to modules that extend the core of the bot - thus
+[**Cogs**](https://docs.disnake.dev/en/latest/ext/commands/cogs.html) are analogous to modules that extend the core of the bot - thus
 adding to its functions and abilities. They also allow you to break down and organize your bot's collection of
 commands/listeners (which is useful when your bot's command list becomes quite extensive).
 
 !!! Note
 
-    Cogs are typically used alongside with **Extensions**. You can read more about them [in the documentation]({{disnakedocs}}/ext/commands/extensions.html).
+    Cogs are typically used alongside with **Extensions**. You can read more about them [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/extensions.html).
 
 ## Creating files
 
@@ -135,7 +135,7 @@ syntax for loading an extension is `bot.load_extension("<folder_name>.<file_name
 
 And that concludes the use of cogs with `disnake`! You can now create multiple cogs to group and organize your
 commands/events, and load/unload them via your main file. More information on special cog methods and meta options can
-be found [in the documentation]({{disnakedocs}}/ext/commands/cogs.html).
+be found [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/cogs.html).
 
 ## Syntax changes
 
@@ -143,23 +143,23 @@ Cogs represent a fairly drastic change in the way you write commands and bots, s
 the primary syntax used in cogs:
 
 -   Each cog is a Python class that subclasses
-    [`commands.Cog`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.Cog).
+    [`commands.Cog`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog).
 -   Decorators for commands in cogs:
-    -   Command - [`commands.command()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.command)
+    -   Command - [`commands.command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.command)
     -   Slash command -
-        [`commands.slash_command()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.slash_command)
+        [`commands.slash_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.slash_command)
     -   User command -
-        [`commands.user_command()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.user_command)
+        [`commands.user_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.user_command)
     -   Message command -
-        [`commands.message_command()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.message_command)
+        [`commands.message_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.message_command)
 -   Every listener is marked with the
-    [`commands.Cog.listener()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.Cog.listener) decorator.
+    [`commands.Cog.listener()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog.listener) decorator.
 -   Cogs are then registered with the
-    [`Bot.add_cog()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.Bot.add_cog) call, and are subsequently
-    removed with the [`Bot.remove_cog()`]({{disnakedocs}}/ext/commands/api.html#disnake.ext.commands.Bot.remove_cog)
+    [`Bot.add_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.add_cog) call, and are subsequently
+    removed with the [`Bot.remove_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.remove_cog)
     call.
 
-<sup>Source: [Disnake Documentation]({{disnakedocs}}/ext/commands/cogs.html)</sup>
+<sup>Source: [Disnake Documentation](https://docs.disnake.dev/en/latest/ext/commands/cogs.html)</sup>
 
 Cogs represent a fairly drastic change in the way you write commands and bots. Thus, it is recommended that you get
 familiar with this syntax - since the code we use in this section is largely tailored for cogs.

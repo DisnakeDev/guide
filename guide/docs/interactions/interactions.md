@@ -6,7 +6,7 @@ component.
 ## Interactions and Bot Users
 
 We're all used to the way that Discord bots have worked for a long time. You make an application in
-[Developer Portal]({{devportal}}), make a new bot user, and copy the token. Interactions bring something entirely new -
+[Developer Portal](https://discord.com/developers/applications), make a new bot user, and copy the token. Interactions bring something entirely new -
 the ability to interact with an application _without needing a bot user in the guild_. Responding to the interaction
 doesn't require a bot token.
 
@@ -22,38 +22,38 @@ interaction failed" error.
 
 In fact, there are 3 types of interactions:
 
--   [`ApplicationCommandInteraction`]({{disnakedocs}}/api.html#applicationcommandinteraction) (for
+-   [`ApplicationCommandInteraction`](https://docs.disnake.dev/en/latest/api.html#applicationcommandinteraction) (for
     [application commands](./202-application-commands))
--   [`MessageInteraction`]({{disnakedocs}}/api.html#messageinteraction) (for
+-   [`MessageInteraction`](https://docs.disnake.dev/en/latest/api.html#messageinteraction) (for
     [message components](./203-message-components))
--   [`Interaction`]({{disnakedocs}}/api.html#interaction) (a base class, usually not used)
+-   [`Interaction`](https://docs.disnake.dev/en/latest/api.html#interaction) (a base class, usually not used)
 
 But responding is the same for both interactions types.
 
 ### `interaction.response`
 
-[`response`]({{disnakedocs}}/api.html#disnake.Interaction.response) attribute returns a
-[`InteractionResponse`]({{disnakedocs}}/api.html#disnake.InteractionResponse) instance that has 4 usable methods. A
+[`response`](https://docs.disnake.dev/en/latest/api.html#disnake.Interaction.response) attribute returns a
+[`InteractionResponse`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse) instance that has 4 usable methods. A
 response can **only be done once**. If you want to send secondary messages, consider using
-[`followup`]({{disnakedocs}}//api.html#disnake.Interaction.followup) webhook instead.
+[`followup`](https://docs.disnake.dev/en/latest//api.html#disnake.Interaction.followup) webhook instead.
 
-1. [`send_message`]({{disnakedocs}}/api.html#disnake.InteractionResponse.send_message) - Sends response message
-2. [`edit_message`]({{disnakedocs}}/api.html#disnake.InteractionResponse.edit_message) - Edits original message, you're
+1. [`send_message`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.send_message) - Sends response message
+2. [`edit_message`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.edit_message) - Edits original message, you're
    unable to use this in application command because there are no message while you responding
-3. [`defer`]({{disnakedocs}}/api.html#disnake.InteractionResponse.defer) - Defers the interaction
-4. [`is_done`]({{disnakedocs}}/api.html#disnake.InteractionResponse.is_done) - Indicates whether an interaction response
+3. [`defer`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.defer) - Defers the interaction
+4. [`is_done`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.is_done) - Indicates whether an interaction response
    has been done before
 
 !!! Note
 
-    [`defer`]({{disnakedocs}}/api.html#disnake.InteractionResponse.defer) works differently depending on the type of interaction.
+    [`defer`](https://docs.disnake.dev/en/latest/api.html#disnake.InteractionResponse.defer) works differently depending on the type of interaction.
     It creates *"Bot is thinking..."* message for application commands and
     doesn't throw *"This interaction failed"* if you're not going to respond to message components.
 
 !!! Note
 
     If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction.
-    Then when your response is ready you can edit the message using [`edit_original_message`]({{disnakedocs}}/api.html#disnake.Interaction.edit_original_message) method
+    Then when your response is ready you can edit the message using [`edit_original_message`](https://docs.disnake.dev/en/latest/api.html#disnake.Interaction.edit_original_message) method
 
 ```python title="example.py"
 @bot.slash_command()
