@@ -8,13 +8,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Disnake Guide',
   tagline: '',
-  url: 'https://guide.disnake.dev',
-  baseUrl: '/',
+  url: 'https://abhigyantrips.dev/',
+  baseUrl: '/disnake-guide-react/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'Disnake Development', // Usually your GitHub org/user name.
-  projectName: 'Disnake Guide', // Usually your repo name.
+  organizationName: 'abhigyantrips',
+  projectName: 'disnake-guide-react', 
 
   presets: [
     [
@@ -22,9 +22,9 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/DisnakeDev/guide',
+          editUrl: 'https://github.com/abhigyantrips/disnake-guide-vuepress',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -40,7 +40,7 @@ const config = {
         title: 'Disnake Guide',
         logo: {
           alt: 'Disnake Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.png',
         },
         items: [
           {
@@ -63,35 +63,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/DisnakeDev/guide',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discord.gg/gJDbCw8aQy',
-              },
-            ],
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} Disnake Development. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
       },
     }),
 };
