@@ -4,7 +4,6 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-/** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Disnake Guide',
   tagline: '',
@@ -34,8 +33,10 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
+      colorMode: {
+        defaultMode: 'dark'
+      },
       navbar: {
         title: 'Disnake Guide',
         logo: {
@@ -44,11 +45,10 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
+            href: 'https://discord.gg/gJDbCw8aQy',
+            label: 'Discord',
             position: 'left',
-            label: 'Guide',
-          },
+          },          
           {
             href: 'https://docs.disnake.dev/',
             label: 'Documentation',
@@ -65,7 +65,7 @@ const config = {
         style: 'dark',
         copyright: `Copyright © ${new Date().getFullYear()} Disnake Development. Built with Docusaurus.`,
       },
-    }),
+    },
 };
 
 module.exports = config;
