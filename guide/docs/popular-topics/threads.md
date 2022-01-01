@@ -1,0 +1,54 @@
+# Threads
+
+Threads are [`Messagable`]({{disnakedocs}}/api.html#messageable) objects, and can be thought of as sub-channels inside
+existing channels. They allow organization of multiple topics in a channel by temporarily giving them a separate space.
+
+## Thread-related methods
+
+#### Creating and deleting threads
+
+A thread can be created by using the [`create_thread()`]({{disnakedocs}}/api.html#disnake.TextChannel.create_thread)
+method on a [`Message`]({{disnakedocs}}/api.html#disnake.Message) or
+[`TextChannel`]({{disnakedocs}}/api.html#disnake.TextChannel) object.
+
+```python linenums="1" title="threads.py"
+# Using the 'Message' object.
+message = bot.fetch_message(1234567890)
+await message.create_thread(
+    name="This message will act as the thread's starting message.",
+    auto_archive_duration=60,
+)
+
+# Using the 'TextChannel' object.
+channel = bot.get_channel(...)
+await channel.create_thread(
+    name="This thread requires a starting message to be specified.",
+    auto_archive_duration=60,
+    message=message,
+)
+```
+
+#### Joining and leaving threads
+
+#### Archiving, unarchiving and locking threads
+
+#### Public and private threads
+
+#### Adding and removing members
+
+## Thread-related events
+
+Threads introduce some new gateway events, which are listed below. You can find more information on these
+[in the documentation]({{disnakedocs}}/api.html#disnake.on_thread_join).
+
+-   [`on_thread_join`]({{disnakedocs}}/api.html#disnake.on_thread_join)
+
+-   [`on_thread_remove`]({{disnakedocs}}/api.html#disnake.on_thread_remove)
+
+-   [`on_thread_member_join`]({{disnakedocs}}/api.html#disnake.on_thread_member_join)
+
+-   [`on_thread_member_remove`]({{disnakedocs}}/api.html#disnake.on_thread_member_remove)
+
+-   [`on_thread_delete`]({{disnakedocs}}/api.html#disnake.on_thread_delete)
+
+-   [`on_thread_update`]({{disnakedocs}}/api.html#disnake.on_thread_update)
