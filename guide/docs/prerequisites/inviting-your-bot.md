@@ -14,7 +14,7 @@ invite URL for it.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        ![](../assets/img-inviting-your-bot/001.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/001.png)
     </p>
     <br />
 
@@ -23,7 +23,7 @@ invite URL for it.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        ![](../assets/img-inviting-your-bot/002.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/002.png)
     </p>
     <br />
 
@@ -33,7 +33,7 @@ invite URL for it.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        ![](../assets/img-inviting-your-bot/003.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/003.png)
     </p>
     <br />
 
@@ -47,7 +47,7 @@ invite URL for it.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        ![](../assets/img-inviting-your-bot/004.png){ width="75%" }
+        ![](../assets/img-inviting-your-bot/004.png)
     </p>
     <br />
 

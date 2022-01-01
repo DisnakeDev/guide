@@ -12,7 +12,7 @@ desired topic via the table of contents.
 
 Here is an example of how an embed may look. We will go over embed construction in the next part of this article.
 
-![](../assets/img-embeds/001.png){ width="70%" }
+![](../assets/img-embeds/001.png)
 
 The code for this embed is given below.
 
@@ -72,7 +72,7 @@ embed = disnake.Embed(
 )
 ```
 
-![](../assets/img-embeds/002.png){ width="33%" }
+![](../assets/img-embeds/002.png)
 
 ### Setting the author
 
@@ -88,7 +88,7 @@ embed.set_author(
 )
 ```
 
-![](../assets/img-embeds/003.png){ width="34%" }
+![](../assets/img-embeds/003.png)
 
 Since we have set a URL in this case, clicking on "Embed Author" will redirect the user to the
 [`disnake.dev`](https://disnake.dev/) website.
@@ -106,7 +106,7 @@ embed.set_footer(
 )
 ```
 
-![](../assets/img-embeds/004.png){ width="33%" }
+![](../assets/img-embeds/004.png)
 
 ### Setting the thumbnail
 
@@ -117,7 +117,7 @@ The thumbnail of the embed is shown in it's top right corner. It can be set usin
 embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
 ```
 
-![](../assets/img-embeds/005.png){ width="74%" }
+![](../assets/img-embeds/005.png)
 
 ### Using timestamps
 
@@ -139,7 +139,7 @@ embed = disnake.Embed(
 )
 ```
 
-![](../assets/img-embeds/006.png){ width="74%" }
+![](../assets/img-embeds/006.png)
 
 ### Inserting fields
 
@@ -157,7 +157,7 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 ```
 
-![](../assets/img-embeds/007.png){ width="55%" }
+![](../assets/img-embeds/007.png)
 
 These attributes also fully support the use of markdown, as well as highlight links. You can also insert fields at a
 particular position, with a specified index using
@@ -176,7 +176,7 @@ embed.set_image(url="https://disnake.dev/assets/disnake-thin-banner.png")
 embed.set_image(file=disnake.File("path/to/file.png"))
 ```
 
-![](../assets/img-embeds/008.png){ width="72%" }
+![](../assets/img-embeds/008.png)
 
 ## Sending an embed
 
