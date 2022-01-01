@@ -2,14 +2,15 @@
 
 const config = {
   title: 'Disnake Guide',
-  tagline: '',
+
   url: 'https://www.abhigyantrips.dev/',
   baseUrl: '/disnake-guide-react/',
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
+
   organizationName: 'abhigyantrips',
   projectName: 'disnake-guide-react', 
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
 
   presets: [
     [
@@ -19,7 +20,7 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/abhigyantrips/disnake-guide-vuepress',
+          editUrl: 'https://github.com/abhigyantrips/disnake-guide-react',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
