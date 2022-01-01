@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # Production
-/build
+build/
 
 # Generated files
 .docusaurus
