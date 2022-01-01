@@ -9,7 +9,7 @@ const config = {
   tagline: '',
   url: 'https://abhigyantrips.dev/',
   baseUrl: '/disnake-guide-react/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'abhigyantrips',
