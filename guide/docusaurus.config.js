@@ -58,6 +58,9 @@ const config = {
           },
         ],
       },
+      prism: {
+        theme: require('prism-react-renderer/themes/vsDark'),
+      },
     },
 };
 
