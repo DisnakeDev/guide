@@ -1,5 +1,22 @@
 # Creating commands
 
+<!-- Import Discord components -->
+import {
+	DiscordButton,
+	DiscordButtons,
+	DiscordEmbed,
+	DiscordEmbedField,
+	DiscordEmbedFields,
+	DiscordInteraction,
+	DiscordMarkdown,
+	DiscordMention,
+	DiscordMessage,
+	DiscordMessages,
+	DiscordReaction,
+	DiscordReactions,
+} from '@discord-message-components/react';
+import '@discord-message-components/react/styles';
+
 :::info
 
 This page is a follow-up, and the base code used is from the previous page ([Initial files](./initial-files.mdx)). The code can be found on the GitHub repository [here](https://github.com/DisnakeDev/guide/tree/main/docs/extra-code-samples/code-intial-files).
@@ -154,12 +171,21 @@ async def ping(inter):
 bot.run("YOUR_BOT_TOKEN")
 ```
 
-![](../assets/img-creating-commands/001.png)
+<br />
+<DiscordMessages>
+    <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
+        <div slot="interactions">
+            <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">ping</DiscordInteraction>
+        </div>
+        Pong!
+    </DiscordMessage>
+</DiscordMessages>
+<br />
 
 ### Server info command
 
 `inter.guild` refers to the guild the interaction was sent in (a
-[Guild instance](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild)), which exposes properties such as `.name` or
+[`Guild`](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild) instance), which exposes properties such as `.name` or
 `.member_count`.
 
 ```python linenums="1" title="main.py" hl_lines="12-16"
@@ -184,7 +210,17 @@ async def server(inter):
 bot.run("YOUR_BOT_TOKEN")
 ```
 
-![](../assets/img-creating-commands/002.png)
+<br />
+<DiscordMessages>
+    <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
+        <div slot="interactions">
+            <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">server</DiscordInteraction>
+        </div>
+        Server name: Disnake Guide <br />
+        Total members: 2
+    </DiscordMessage>
+</DiscordMessages>
+<br />
 
 :::tip
 
@@ -222,7 +258,17 @@ async def user(inter):
 bot.run("YOUR_BOT_TOKEN")
 ```
 
-![](../assets/img-creating-commands/003.png)
+<br />
+<DiscordMessages>
+    <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
+        <div slot="interactions">
+            <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">server</DiscordInteraction>
+        </div>
+        Your tag: AbhigyanTrips#1234 <br />
+        Your ID: 123456789012345678
+    </DiscordMessage>
+</DiscordMessages>
+<br />
 
 :::tip
 
