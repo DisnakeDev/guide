@@ -5,7 +5,7 @@ const config = {
 
   url: 'https://www.abhigyantrips.dev/',
   baseUrl: '/disnake-guide-react/',
-  favicon: 'img/favicon.ico',
+  favicon: 'public/favicon.ico',
 
   organizationName: 'abhigyantrips',
   projectName: 'disnake-guide-react', 
@@ -38,7 +38,7 @@ const config = {
         title: 'Disnake Guide',
         logo: {
           alt: 'Disnake Logo',
-          src: 'img/logo.png',
+          src: 'public/logo.png',
         },
         items: [
           {

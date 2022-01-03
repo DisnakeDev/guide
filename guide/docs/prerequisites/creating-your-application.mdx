@@ -16,7 +16,7 @@ In order to work with the library and the Discord API in general, we must first 
 
 Creating a Bot account is a pretty straightforward process.
 
-1. Make sure you’re logged on to the [Discord website](https://www.discord.com).
+1. Make sure you're logged on to the [Discord website](https://www.discord.com).
 
 2. Navigate to the [application page](https://discord.com/developers/applications).
 
@@ -25,7 +25,7 @@ Creating a Bot account is a pretty straightforward process.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        <img src="./images/new-application.png" alt="New Application button" width="40%"/>
+        <img src={require("./images/new-application.png").default} alt="New Application button" width="40%"/>
     </p>
     <br />
 
@@ -34,7 +34,7 @@ Creating a Bot account is a pretty straightforward process.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        <img src="./images/application-name.png" alt="Create Application modal" width="60%"/>
+        <img src={require("./images/application-name.png").default} alt="Create Application modal" width="60%"/>
     </p>
     <br />
 
@@ -45,19 +45,19 @@ Creating a Bot account is a pretty straightforward process.
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        <img src="./images/build-a-bot.png" alt="Build-A-Bot" width="75%"/>
+        <img src={require("./images/build-a-bot.png").default} alt="Build-A-Bot" width="75%"/>
     </p>
     <br />
 
 6. Make sure that `Public Bot` is ticked if you want others to invite your bot.
 
     - You should also make sure that `Require OAuth2 Code Grant` is unchecked unless you are developing a service that
-      needs it. If you’re unsure, then **leave it unchecked**.
+      needs it. If you're unsure, then **leave it unchecked**.
 
     <!-- prettier-ignore -->
     <br />
     <p align = "center">
-        <img src="./images/new-bot.png" alt="New Bot" width="75%"/>
+        <img src={require("./images/new-bot.png").default} alt="New Bot" width="75%"/>
     </p>
     <br />
 
@@ -65,7 +65,7 @@ Creating a Bot account is a pretty straightforward process.
 
     - This is **not** the Client Secret at the General Information page.
 
-And that’s it. You now have a bot account and you can login with that token.
+And that's it. You now have a bot account and you can login with that token.
 
 ## Regarding bot tokens
 
@@ -77,7 +77,7 @@ This section is critical, so pay close attention. It explains what your bot toke
 
 ### What is a token, anyway?
 
-It should be worth noting that the token is **essentially your bot’s password**. You should **never** share this with
+It should be worth noting that the token is **essentially your bot's password**. You should **never** share this with
 someone else. In doing so, someone can log in to your bot and do malicious things, such as leaving servers, ban all
 members inside a server, or pinging everyone maliciously.
 
@@ -118,7 +118,7 @@ your bot token has been posted on the internet publicly, and was found by Discor
 
 <br />
 <p align = "center">
-    <img src="./images/system-message.png" alt="System message" width="75%"/>
+    <img src={require("./images/system-message.png").default} alt="System message" width="90%"/>
 </p>
 <br />
 
@@ -134,7 +134,7 @@ same. System messages from Discord will have a verified `SYSTEM` tag, and the ba
 
 <br />
 <p align = "center">
-    <img src="./images/system-dm.png" alt="System DM" width="50%"/>
+    <img src={require("./images/system-dm.png").default} alt="System DM" width="50%"/>
 </p>
 <br />
 
