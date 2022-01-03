@@ -71,7 +71,7 @@ The first step is to use the `@bot.slash_command` coroutine, along with an `asyn
 for your slash command. Below is a script demonstrating the same (focus on the use of `inter`, which is short for
 `interaction`).
 
-```python linenums="1" title="main.py" hl_lines="12-14"
+```python linenums="1" title="main.py" {12-14}
 import disnake
 from disnake.ext import commands
 
@@ -113,7 +113,7 @@ update with your code changes right away. Thus, you can use the `guild_ids` argu
 instantaneously registered in a list of specified servers. (We recommend including your separate development server in
 this list.)
 
-```python linenums="1" title="main.py" hl_lines="12-14"
+```python linenums="1" title="main.py" {12-14}
 import disnake
 from disnake.ext import commands
 
@@ -151,7 +151,7 @@ You can respond to a slash command initiated by the user, using `inter.response.
 using `ctx.send()`, in that you can respond to the interaction with embeds, files, buttons/select menus or just plain
 text.
 
-```python linenums="1" title="main.py" hl_lines="14"
+```python linenums="1" title="main.py" {14}
 import disnake
 from disnake.ext import commands
 
@@ -188,7 +188,7 @@ bot.run("YOUR_BOT_TOKEN")
 [`Guild`](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild) instance), which exposes properties such as `.name` or
 `.member_count`.
 
-```python linenums="1" title="main.py" hl_lines="12-16"
+```python linenums="1" title="main.py" {12-16}
 import disnake
 from disnake.ext import commands
 
@@ -238,7 +238,7 @@ A "user" refers to a Discord user. `inter.author` refers to the user the interac
 [Member instance](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.Member) in server contexts), which exposes properties
 such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
-```python linenums="1" title="main.py" hl_lines="12-14"
+```python linenums="1" title="main.py" {12-14}
 import disnake
 from disnake.ext import commands
 

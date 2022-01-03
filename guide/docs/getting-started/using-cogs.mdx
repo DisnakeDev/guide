@@ -72,7 +72,7 @@ We typehint `bot: commands.Bot` here to give the IDE an idea of what the argumen
 Now, to define a command inside the class, we will use the `commands.command()` decorator. It functions the same as
 `bot.command()`, but works in cogs as well.
 
-```python linenums="1" title="ping.py" hl_lines="9-12"
+```python linenums="1" title="ping.py" {10-13}
 from disnake.ext import commands
 
 
@@ -95,7 +95,7 @@ Note that we're using `self` as the first argument, since the command function i
 The last thing that needs to be added to this file is a `setup` function, so that disnake can load the cog when it is
 added to `main.py`.
 
-```python linenums="1" title="ping.py" hl_lines="14-15"
+```python linenums="1" title="ping.py" {16,17}
 from disnake.ext import commands
 
 
@@ -129,7 +129,7 @@ async def on_ready():
     print("The bot is ready!")
 
 
-bot.load_extension("cogs.ping")  # Note that we did not mention the .py extension.
+bot.load_extension("cogs.ping")  # Note: We did not mention the .py extension.
 
 bot.run("YOUR_BOT_TOKEN")
 ```

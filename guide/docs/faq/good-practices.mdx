@@ -33,7 +33,7 @@ for filename in os.listdir("./cogs"):
 Most people are used to running everything in `__init__` but that doesn't allow running async code. In this case you can
 overwrite the special `cog_load` method.
 
-```python linenums="1" hl_lines="5-6"
+```python linenums="1" {5,6}
 class MyCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -52,7 +52,7 @@ A one of the lesser known disnake features is the `reload` kwarg for your bot. I
 edited; allowing you to test your code in real-time. This is especially useful if startup times for your bot are very
 slow, since only one extension will be reloaded at a time.
 
-```python linenums="1" hl_lines="3"
+```python linenums="1" {3}
 from disnake.ext import commands
 
 bot = commands.Bot(..., reload=True)
