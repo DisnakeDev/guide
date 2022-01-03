@@ -1,5 +1,9 @@
 # Initial files
 
+<!-- Imports for content tabs -->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Once you [add your bot to a server](../prerequisites/inviting-your-bot.mdx), the next step is to start coding and
 get it online! Let's start by creating a `.env` file for your client token and a main file for your bot application.
 
@@ -24,23 +28,28 @@ When referring to a `.env` file, keep in mind that you can name this file whatev
 Storing data in a `.env` file is a common way of keeping your sensitive values safe. Create a `.env` file in your
 project directory and paste in your token. You can access your token inside other files by using `os.environ`.
 
-=== "secret.env"
+<Tabs>
+<TabItem value="main.py" label="main.py">
 
-    ```
-    # Each line in a .env file should hold a KEY=value pair.
-    YOUR_BOT_TOKEN=OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
-    ```
+``` python
+# Importing "os" module.
+import os
 
-=== "main.py"
+# Getting .env value.
+# You can name this variable in the script however you like.
+YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
+```
 
-    ``` python
-    # Importing "os" module.
-    import os
+</TabItem>
+<TabItem value="secret.env" label="secret.env">
 
-    # Getting .env value.
-    # You can name this variable in the script however you like.
-    YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
-    ```
+```python
+# Each line in a .env file should hold a KEY=value pair.
+YOUR_BOT_TOKEN=OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
+```
+
+</TabItem>
+</Tabs>
 
 :::danger
 
@@ -51,32 +60,37 @@ If you're using Git, you should not commit this file and should ignore it via `.
 You can use the [python-dotenv package][python-dotenv] to either load the `env` variables into the environment, or make
 a `config` dict out of the env values.
 
-=== "load_dotenv()"
+<Tabs>
+<TabItem value="load_dotenv" label="load_dotenv">
 
-    ``` python
-    import os
-    from dotenv import load_dotenv
+```python
+import os
+from dotenv import load_dotenv
 
-    load_dotenv()  # Take environment variables from .env.
+load_dotenv()  # Take environment variables from .env.
 
-    # Using the variables in your application, which uses environment variables
-    # (e.g. from 'os.environ()' or 'os.getenv()')
-    # as if they came from the actual environment.
-    YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
-    ```
+# Using the variables in your application, which uses environment variables
+# (e.g. from 'os.environ()' or 'os.getenv()')
+# as if they came from the actual environment.
+YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
+```
 
-=== "dotenv_values()"
+</TabItem>
+<TabItem value="dotenv_values" label="dotenv_values">
 
-    ``` python
-    from dotenv import dotenv_values
+```python
+from dotenv import dotenv_values
 
-    config = dotenv_values(".env")  # Makes a dict out of the values.
+config = dotenv_values(".env")  # Makes a dict out of the values.
 
-    # Thus, we get
-    # config = {YOUR_BOT_TOKEN: OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg}
-    # which can be used as:
-    YOUR_BOT_TOKEN = config["YOUR_BOT_TOKEN"]
-    ```
+# Thus, we get
+# config = {YOUR_BOT_TOKEN: OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg}
+# which can be used as:
+YOUR_BOT_TOKEN = config["YOUR_BOT_TOKEN"]
+```
+
+</TabItem>
+</Tabs>
 
 Keep in mind that the values imported from the `.env` file are **in string format**. Therefore if you would like to,
 say, use them for calculations, you'll have to convert them via `int()`
