@@ -3,26 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "docusaurus": "cd guide && docusaurus",
     "start": "cd guide && docusaurus start",
-    "build": "cd guide && docusaurus build",
-    "swizzle": "cd guide && docusaurus swizzle",
-    "deploy": "cd guide && docusaurus deploy",
-    "clear": "cd guide && docusaurus clear",
-    "serve": "cd guide && docusaurus serve",
-    "write-translations": "cd guide && docusaurus write-translations",
-    "write-heading-ids": "cd guide && docusaurus write-heading-ids"
+    "build": "cd guide && docusaurus build"
   },
   "dependencies": {
     "@discord-message-components/react": "^0.2.1",
-    "@docusaurus/core": "2.0.0-beta.14",
-    "@docusaurus/preset-classic": "2.0.0-beta.14",
-    "@mdx-js/react": "^1.6.21",
-    "clsx": "^1.1.1",
-    "prism-react-renderer": "^1.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-native": "^0.66.4"
+    "prism-react-renderer": "^1.2.1"
   },
   "browserslist": {
     "production": [
@@ -35,5 +21,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^2.0.0-beta.14",
+    "@docusaurus/preset-classic": "^2.0.0-beta.14",
+    "@mdx-js/react": "^1.6.22",
+    "clsx": "^1.1.1",
+    "eslint": "^8.6.0",
+    "eslint-plugin-mdx": "^1.16.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-native": "^0.66.4"
   }
 }
