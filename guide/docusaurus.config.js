@@ -2,13 +2,12 @@
 
 const config = {
   title: 'Disnake Guide',
-
-  url: 'https://www.abhigyantrips.dev/',
-  baseUrl: '/disnake-guide-react/',
+  url: 'https://www.abhigyantrips.github.io/',
   favicon: 'public/favicon.ico',
 
   organizationName: 'abhigyantrips',
   projectName: 'disnake-guide-react',
+  baseUrl: '/disnake-guide-react/',
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -39,7 +38,7 @@ const config = {
         title: 'Disnake Guide',
         logo: {
           alt: 'Disnake Logo',
-          src: 'public/logo.png',
+          src: 'public/disnake-logo.png',
         },
         items: [
           {
@@ -60,7 +59,8 @@ const config = {
         ],
       },
       prism: {
-        theme: require('prism-react-renderer/themes/vsDark'),
+		theme: require('prism-react-renderer/themes/github'),
+        darkTheme: require('prism-react-renderer/themes/vsDark'),
       },
     },
 };
