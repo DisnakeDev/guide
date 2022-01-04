@@ -1,0 +1,13 @@
+# https://editorconfig.org/
+
+root = true
+
+[*.{css,scss,js,jsx,ts,tsx,mdx,py}]
+end_of_line = lf
+indent_size = 4
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.mdx]
+trim_trailing_whitespace = false
