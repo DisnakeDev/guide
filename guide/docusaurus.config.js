@@ -31,6 +31,7 @@ const config = {
 
   themeConfig:
     {
+      image: 'public/disnake-thin-banner.png',
       colorMode: {
         defaultMode: 'dark'
       },
