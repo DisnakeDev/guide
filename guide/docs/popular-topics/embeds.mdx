@@ -68,7 +68,7 @@ Here is an example of how an embed may look. We will go over embed construction 
 
 The code for this embed is given below.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 # At the top of the file.
 import disnake
 from disnake.ext import commands
@@ -118,7 +118,7 @@ To add a blank field to the embed, you can use `embed.add_field(name='\u200b', v
 You can use the [`Embed`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#embed) instance for the creation and manipulation of
 embeds.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 embed = disnake.Embed(
     title="Embed Title",
     description="Embed Description",
@@ -146,7 +146,7 @@ You can set the author of the embed with the
 [`set_author`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Embed.set_footer) attribute. Note that this code will
 come after you have defined `embed` via `embed = disnake.Embed(...)`.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 embed.set_author(
     name="Embed Author",
     url="https://disnake.dev/",
@@ -180,7 +180,7 @@ You can set the footer of the embed with the
 [`set_footer`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Embed.set_footer) attribute. Note that this code will
 come after you have defined `embed` via `embed = disnake.Embed(...)`.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 embed.set_footer(
     text="Embed Footer",
     icon_url="https://disnake.dev/assets/disnake-logo.png",
@@ -211,7 +211,7 @@ embed.set_footer(
 The thumbnail of the embed is shown in it's top right corner. It can be set using the
 [`set_thumbnail`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Embed.set_thumbnail) attribute.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
 ```
 
@@ -247,7 +247,7 @@ done using the [`timestamp`](https://docs.disnake.dev/en/latest/api.html?highlig
 `disnake.Embed()`. Note that you will need to install and import the [`datetime`][datetime-pypi] package into your
 script.
 
-```python linenums="1" title="embed.py" {9}
+```python title="embed.py" {9}
 # At the top of your script
 import datetime
 
@@ -287,7 +287,7 @@ Embed fields have two parameters - a name(or title) and a value, inside the
 [`add_field`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Embed.add_field) attribute. It is also possible to use
 markdown in both parameters.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 # Regular Fields
 embed.add_field(name="Regular Title", value="Regular Value", inline=False)
 
@@ -340,7 +340,7 @@ particular position, with a specified index using
 This can be done using the [`set_image`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Embed.set_image) attribute,
 which accepts either a URL or a [`disnake.File()`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#file) object.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 # Using a URL
 embed.set_image(url="https://disnake.dev/assets/disnake-thin-banner.png")
 
@@ -382,7 +382,7 @@ A `dict` datatype (and essentially a `json` file) can be converted into an embed
 [`Embed.from_dict()`](https://docs.disnake.dev/en/latest/api.html?highlight=embed#disnake.Embed.from_dict) method. We can recreate the
 embed made at the start of this page, using the same.
 
-```python linenums="1" title="embed.py"
+```python title="embed.py"
 embed_dict = {
     "title": "Embed Title",
     "description": "Embed Description",

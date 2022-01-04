@@ -8,7 +8,8 @@ const config = {
   favicon: 'public/favicon.ico',
 
   organizationName: 'abhigyantrips',
-  projectName: 'disnake-guide-react', 
+  projectName: 'disnake-guide-react',
+
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
@@ -45,7 +46,7 @@ const config = {
             href: 'https://discord.gg/gJDbCw8aQy',
             label: 'Discord',
             position: 'left',
-          },          
+          },
           {
             href: 'https://docs.disnake.dev/',
             label: 'Documentation',
