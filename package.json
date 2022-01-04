@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cd guide && docusaurus start",
-    "build": "cd guide && docusaurus build"
+    "build": "cd guide && docusaurus build",
+    "deploy": "cd guide && docusaurus deploy"
   },
   "dependencies": {
     "@discord-message-components/react": "^0.2.1",
