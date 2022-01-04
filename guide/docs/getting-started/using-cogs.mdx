@@ -1,3 +1,8 @@
+---
+description: An in-depth section on creating cogs for your Discord bot.
+keywords: [disnake, bot, guide, tutorial, cogs, extensions, python]
+---
+
 # Creating cogs/extensions
 
 [**Cogs**](https://docs.disnake.dev/en/latest/ext/commands/cogs.html) are analogous to modules that extend the core of the bot - thus
@@ -129,7 +134,7 @@ async def on_ready():
     print("The bot is ready!")
 
 
-bot.load_extension("cogs.ping")  # Note: We did not mention the .py extension.
+bot.load_extension("cogs.ping")  # Note: We did not append the .py extension.
 
 bot.run("YOUR_BOT_TOKEN")
 ```
