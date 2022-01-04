@@ -407,7 +407,7 @@ embed_dict = {
 await channel.send(embed=disnake.Embed.from_dict(embed_dict))
 ```
 
-This will give the exact same result as the embed shown [here](./#embed-preview). Note that the timestamp passed through
+This will give the exact same result as the embed shown [here](#embed-preview). Note that the timestamp passed through
 a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`).
 You can learn more about the `dict` format of embeds in the
 [official Discord documentation](https://discord.com/developers/docs/resources/channel#embed-object).
@@ -418,10 +418,10 @@ You can learn more about the `dict` format of embeds in the
 -   The timestamp will automatically adjust the timezone depending on the user's device.
 -   Mentions of any kind in embeds will only render correctly within embed descriptions and field values.
 -   Mentions in embeds will not trigger a notification.
--   Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext'`)), but only in description
+-   Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext')`), but only in description
     and field values.
 
-<sup>Source: [Discord.js Guide](https://discordjs.guide/popular-topics/embeds.html#notes)</sup>
+<sup>Source: <a href="https://discordjs.guide/popular-topics/embeds.html#notes">Discord.js Guide</a></sup>
 
 ## Embed limits
 
@@ -437,7 +437,7 @@ you can come back to:
 -   The sum of all characters from all embed structures in a message must not exceed 6000 characters.
 -   Ten embeds can be sent per message.
 
-<sup>Source: [Discord API Documentation](https://discord.com/developers/docs/resources/channel#embed-limits)</sup>
+<sup>Source: <a href="https://discord.com/developers/docs/resources/channel#embed-limits">Discord API Documentation</a></sup>
 
 ## Resulting code
 
