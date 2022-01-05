@@ -103,9 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# Production
-build/
-
 # Generated files
 .docusaurus
 .cache-loader

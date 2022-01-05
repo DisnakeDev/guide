@@ -1,15 +1,27 @@
-name: deploy-site
+name: Deploy to GitHub Pages
 
-on: [push]
+on:
+  push:
+    branches: [main]
+    paths: [guide/**]
 
 jobs:
   deploy:
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: redkubes/docusaurus-deploy-action@master
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          source-folder: guide
-          git-user: abhigyantrips
-          git-password: ${{ secrets.GITHUB_TOKEN }}
-          deployment-branch: gh-pages
+          node-version: 14.x
+          cache: npm
+      - name: Build website
+        working-directory: guide
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./guide/build
