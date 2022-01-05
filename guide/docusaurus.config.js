@@ -26,6 +26,7 @@ const config = {
           customCss: [
 			require.resolve('./src/css/lightTheme.css'),
 			require.resolve('./src/css/darkTheme.css'),
+			require.resolve('./src/css/extraComponents.css'),
 		  ],
         },
       }),
