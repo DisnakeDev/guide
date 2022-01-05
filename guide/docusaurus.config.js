@@ -23,7 +23,10 @@ const config = {
           editUrl: 'https://github.com/abhigyantrips/disnake-guide-react/blob/main/guide',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+			require.resolve('./src/css/lightTheme.css'),
+			require.resolve('./src/css/darkTheme.css'),
+		  ],
         },
       }),
     ],
@@ -34,8 +37,8 @@ const config = {
       colorMode: {
         defaultMode: 'dark'
       },
-      image: '/public/disnake-thin-banner.png',
-      metaImage: '/public/disnake-thin-banner.png',
+      image: 'https://i.imgur.com/KsTvw5Z.png',
+      metaImage: 'https://i.imgur.com/KsTvw5Z.png',
       navbar: {
         title: 'Disnake Guide',
         logo: {
@@ -61,7 +64,7 @@ const config = {
         ],
       },
       prism: {
-		    theme: require('prism-react-renderer/themes/github'),
+		theme: require('prism-react-renderer/themes/github'),
         darkTheme: require('prism-react-renderer/themes/vsDark'),
       },
     },
