@@ -31,10 +31,11 @@ const config = {
 
   themeConfig:
     {
-      image: 'public/disnake-logo.png',
       colorMode: {
         defaultMode: 'dark'
       },
+      image: '/public/disnake-thin-banner.png',
+      metaImage: '/public/disnake-thin-banner.png',
       navbar: {
         title: 'Disnake Guide',
         logo: {
@@ -60,7 +61,7 @@ const config = {
         ],
       },
       prism: {
-		theme: require('prism-react-renderer/themes/github'),
+		    theme: require('prism-react-renderer/themes/github'),
         darkTheme: require('prism-react-renderer/themes/vsDark'),
       },
     },
