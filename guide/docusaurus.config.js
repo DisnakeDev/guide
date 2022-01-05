@@ -58,8 +58,8 @@ const config = {
           },
           {
             href: 'https://github.com/DisnakeDev/disnake',
-            label: 'GitHub',
-            position: 'left',
+            className: 'navbar-item-github',
+            position: 'right',
           },
         ],
       },

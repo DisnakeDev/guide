@@ -23,3 +23,13 @@ html[data-theme='light'] {
   .discord-messages {
 	border-radius: 0.4rem;
   }
+
+::selection {
+	background:    #f0c43f;
+	color: #333 !important;
+}
+
+::-moz-selection {
+	background:    #f0c43f;
+	color: #333 !important;
+}
