@@ -39,3 +39,7 @@ html[data-theme='dark'] .navbar-item-github:before {
 .discord-messages {
 	border-radius: 0.4rem;
 }
+
+.discord-light-theme .discord-embed .discord-embed-content .discord-embed-title {
+	color: #000; /* Some weird bug that kept the title white, idk. */
+}
