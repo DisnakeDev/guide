@@ -2,6 +2,7 @@
 
 .navbar-item-github:hover {
 	opacity: 0.6;
+	transition: ease 0.2s;
 }
 
 .navbar-item-github:before {

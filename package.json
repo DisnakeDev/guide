@@ -8,8 +8,7 @@
     "deploy": "cd guide && docusaurus deploy"
   },
   "dependencies": {
-    "@discord-message-components/react": "^0.2.1",
-    "prism-react-renderer": "^1.2.1"
+    "@discord-message-components/react": "^0.2.1"
   },
   "browserslist": {
     "production": [
