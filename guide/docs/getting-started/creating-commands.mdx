@@ -21,6 +21,7 @@ import {
 	DiscordReactions,
 } from '@discord-message-components/react';
 import '@discord-message-components/react/styles';
+import isDarkTheme from '../../src/hooks/isDarkTheme';
 
 :::info
 
@@ -177,7 +178,7 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <div slot="interactions">
             <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">ping</DiscordInteraction>
@@ -216,7 +217,7 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <div slot="interactions">
             <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">server</DiscordInteraction>
@@ -264,7 +265,7 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <div slot="interactions">
             <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">server</DiscordInteraction>

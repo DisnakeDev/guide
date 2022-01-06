@@ -1,5 +1,10 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+const lightTheme = require('prism-react-renderer/themes/github');
+
 module.exports = {
+  ...lightTheme,
   styles: [
+    ...lightTheme.styles,
     {
       types: ['title'],
       style: {

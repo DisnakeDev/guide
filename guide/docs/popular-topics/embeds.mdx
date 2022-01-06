@@ -21,6 +21,7 @@ import {
 	DiscordReactions,
 } from '@discord-message-components/react';
 import '@discord-message-components/react/styles';
+import isDarkTheme from '../../src/hooks/isDarkTheme';
 
 You might have seen some special messages on Discord (often sent by bots/webhooks), that have a colored border, embedded
 images, text fields and other properties. These elements are referred to as **Embeds**, and this section will cover how
@@ -35,7 +36,7 @@ desired topic via the table of contents.
 Here is an example of how an embed may look. We will go over embed construction in the next part of this article.
 
 <br />
-<DiscordMessages>
+<DiscordMessages lightTheme={!isDarkTheme()}>
 	<DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             embedTitle="Embed Title"
@@ -132,7 +133,7 @@ embed = disnake.Embed(
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
@@ -160,7 +161,7 @@ embed.set_author(
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
@@ -193,7 +194,7 @@ embed.set_footer(
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
@@ -221,7 +222,7 @@ embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
@@ -266,7 +267,7 @@ embed = disnake.Embed(
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
@@ -303,7 +304,7 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
@@ -354,7 +355,7 @@ embed.set_image(file=disnake.File("path/to/file.png"))
 ```
 
 <br />
-<DiscordMessages>
+<DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             borderColor="#f0c43f"
