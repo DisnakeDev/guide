@@ -38,6 +38,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Popular Topics',
+	  link: {type: 'doc', id: 'popular-topics/intro'},
       items: [
         'popular-topics/threads',
         'popular-topics/embeds',
