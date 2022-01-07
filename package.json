@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cd guide && docusaurus start",
     "build": "cd guide && docusaurus build",
-    "deploy": "cd guide && docusaurus deploy"
+    "deploy": "cd guide && docusaurus deploy",
+    "swizzle": "cd guide && docusaurus swizzle"
   },
   "dependencies": {
     "@discord-message-components/react": "^0.2.1"
