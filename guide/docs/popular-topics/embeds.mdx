@@ -40,7 +40,7 @@ Here is an example of how an embed may look. We will go over embed construction 
 	<DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
             embedTitle="Embed Title"
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
             url="https://disnake.dev/"
             thumbnail="https://i.imgur.com/udpCmI3.png"
             image="https://i.imgur.com/KsTvw5Z.png"
@@ -136,7 +136,7 @@ embed = disnake.Embed(
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
     		embedTitle="Embed Title"
             slot="embeds"
         >
@@ -164,7 +164,7 @@ embed.set_author(
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
 	    	embedTitle="Embed Title"
             authorName="Embed Author"
             authorIcon="https://i.imgur.com/udpCmI3.png"
@@ -197,7 +197,7 @@ embed.set_footer(
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
 	    	embedTitle="Embed Title"
             authorName="Embed Author"
             authorIcon="https://i.imgur.com/udpCmI3.png"
@@ -225,7 +225,7 @@ embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
 	    	embedTitle="Embed Thumbnail"
             thumbnail="https://i.imgur.com/udpCmI3.png" 
             authorName="Embed Author"
@@ -270,7 +270,7 @@ embed = disnake.Embed(
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
 	    	embedTitle="Timestamps"
             authorName="Embed Author"
             authorIcon="https://i.imgur.com/udpCmI3.png"
@@ -307,7 +307,7 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
 	    	embedTitle="Embed Title"
             authorName="Embed Author"
             authorIcon="https://i.imgur.com/udpCmI3.png"
@@ -358,7 +358,7 @@ embed.set_image(file=disnake.File("path/to/file.png"))
 <DiscordMessages  lightTheme={!isDarkTheme()}>
     <DiscordMessage author="Disnake Bot" avatar="https://i.imgur.com/udpCmI3.png" bot="true">
         <DiscordEmbed
-            borderColor="#f0c43f"
+            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
 	    	embedTitle="Images"
             image="https://i.imgur.com/KsTvw5Z.png"
             authorName="Embed Author"
