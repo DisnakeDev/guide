@@ -1,5 +1,5 @@
 {
-  "name": "guide",
+  "name": "disnake-guide",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,6 +7,12 @@
     "build": "cd guide && docusaurus build",
     "deploy": "cd guide && docusaurus deploy",
     "swizzle": "cd guide && docusaurus swizzle"
+  },
+  "repository": "https://github.com/DisnakeDev/guide.git",
+  "author": "abhigyantrips <abhigyantrips@gmail.com>",
+  "homepage": "https://guide.disnake.dev",
+  "bugs": {
+    "url": "https://github.com/DisnakeDev/guide/issues"
   },
   "dependencies": {
     "@discord-message-components/react": "^0.2.1"
