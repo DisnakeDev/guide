@@ -2,12 +2,12 @@
 
 const config = {
   	title: 'Disnake Guide',
-  	url: 'https://www.abhigyantrips.dev/',
+  	url: 'https://guide.disnake.dev/',
 	favicon: 'public/favicon.ico',
 
-  	organizationName: 'abhigyantrips',
-  	projectName: 'disnake-guide-react',
-  	baseUrl: '/disnake-guide-react/',
+  	organizationName: 'DisnakeDev',
+  	projectName: 'guide',
+  	baseUrl: '/',
 
   	onBrokenLinks: 'warn',
   	onBrokenMarkdownLinks: 'warn',
@@ -20,7 +20,7 @@ const config = {
 			docs: {
 			routeBasePath: '/',
 			sidebarPath: require.resolve('./sidebars.js'),
-			editUrl: 'https://github.com/abhigyantrips/disnake-guide-react/edit/main/guide',
+			editUrl: 'https://github.com/DisnakeDev/guide/edit/main/guide',
 			},
 			theme: {
 			customCss: [

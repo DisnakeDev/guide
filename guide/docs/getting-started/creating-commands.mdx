@@ -103,7 +103,7 @@ necessary for replying to the use of the command.
 
 :::note Using `ctx` vs. `inter`
 
-If you have experience with coding bots with [`discord.py`](https://discordpy.readthedocs.io/en/latest), you would be familiar with using `ctx` as an abbreviation for passing context into the function. This guide will primarily be using `inter`, as it is short for `interaction` and refers to [`disnake.ApplicationCommandInteraction()`](https://docs.disnake.dev/en/latest/api.html?highlight=applicationcommandinteraction#applicationcommandinteraction). Of course, you're open to using your preferred abbreviation in code.
+If you have experience with coding bots with [`discord.py`](https://discordpy.readthedocs.io/en/latest), you would be familiar with using `ctx` as an abbreviation for passing context into the function. This guide will primarily be using `inter`, as it is short for `interaction` and refers to [`disnake.ApplicationCommandInteraction`](https://docs.disnake.dev/en/latest/api.html#applicationcommandinteraction). Of course, you're open to using your preferred abbreviation in code.
 
 :::
 
@@ -191,7 +191,7 @@ bot.run("YOUR_BOT_TOKEN")
 ### Server info command
 
 `inter.guild` refers to the guild the interaction was sent in (a
-[`Guild`](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild) instance), which exposes properties such as `.name` or
+[`Guild`](https://docs.disnake.dev/en/latest/api.html#disnake.Guild) instance), which exposes properties such as `.name` or
 `.member_count`.
 
 ```python title="main.py" {12-16}
@@ -230,7 +230,7 @@ bot.run("YOUR_BOT_TOKEN")
 
 :::tip
 
-Refer to the [Guild](https://docs.disnake.dev/en/latest/api.html?highlight=guild#disnake.Guild) documentation for a list of all the available properties and methods.
+Refer to the [Guild](https://docs.disnake.dev/en/latest/api.html#disnake.Guild) documentation for a list of all the available properties and methods.
 
 :::
 
@@ -240,8 +240,8 @@ same manner - use `inter.guild.created_at` or `inter.guild.verification_level`, 
 ### User info command
 
 A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a
-[User instance](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.User) in DM contexts, or a
-[Member instance](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.Member) in server contexts), which exposes properties
+[User instance](https://docs.disnake.dev/en/latest/api.html#disnake.User) in DM contexts, or a
+[Member instance](https://docs.disnake.dev/en/latest/api.html#disnake.Member) in server contexts), which exposes properties
 such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
 ```python title="main.py" {12-14}
@@ -278,7 +278,7 @@ bot.run("YOUR_BOT_TOKEN")
 
 :::tip
 
-Refer to the [`User`](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.User) and [`Member`](https://docs.disnake.dev/en/latest/api.html?highlight=user#disnake.Member) documentation for a list of all the available properties and methods.
+Refer to the [`User`](https://docs.disnake.dev/en/latest/api.html#disnake.User) and [`Member`](https://docs.disnake.dev/en/latest/api.html#disnake.Member) documentation for a list of all the available properties and methods.
 
 :::
 
