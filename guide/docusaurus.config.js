@@ -48,14 +48,14 @@ const config = {
         },
         items: [
           {
-            href: 'https://discord.gg/gJDbCw8aQy',
-            label: 'Discord',
-            position: 'left',
-          },
-          {
             href: 'https://docs.disnake.dev/',
             label: 'Documentation',
             position: 'left',
+          },
+		  {
+            href: 'https://discord.gg/gJDbCw8aQy',
+            className: 'navbar-item-discord',
+            position: 'right',
           },
           {
             href: 'https://github.com/DisnakeDev/disnake',
