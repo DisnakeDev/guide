@@ -20,7 +20,7 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/abhigyantrips/disnake-guide-react/blob/main/guide',
+          editUrl: 'https://github.com/abhigyantrips/disnake-guide-react/edit/main/guide',
         },
         theme: {
           customCss: [
