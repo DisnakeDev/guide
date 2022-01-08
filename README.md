@@ -1,4 +1,4 @@
-[![Disnake Banner](https://raw.githubusercontent.com/DisnakeDev/guide/main/docs/assets/disnake-readme-banner.png)](https://disnake.dev/)
+[![Disnake Banner](https://raw.githubusercontent.com/DisnakeDev/disnake/master/assets/banner.png)](https://disnake.dev/)
 
 # Disnake Guide (WIP)
 
