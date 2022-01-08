@@ -3,7 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: [guide/**]
+    paths:
+      - guide/**
+      - package*.json
+  workflow_dispatch:
 
 jobs:
   deploy:
