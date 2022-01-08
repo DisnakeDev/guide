@@ -1,12 +1,21 @@
 [![Disnake Banner](https://raw.githubusercontent.com/DisnakeDev/guide/main/docs/assets/disnake-readme-banner.png)](https://disnake.dev/)
 
-# Disnake Guide (WIP)
+# Disnake Guide (Archive)
 
 <p align="center">
     <a href="https://discord.gg/gJDbCw8aQy"><img src="https://img.shields.io/discord/808030843078836254?style=flat-square&color=5865f2&logo=discord&logoColor=ffffff&label=discord" alt="Discord server invite" /></a>
     <a href="https://github.com/DisnakeDev/disnake/commits"><img src="https://img.shields.io/github/commit-activity/w/DisnakeDev/guide.svg?style=flat-square" alt="Commit activity" /></a>
     <a href="https://guide.disnake.dev/"><img src="https://img.shields.io/github/deployments/DisnakeDev/guide/github-pages?style=flat-square&color=blue" alt="GitHub checks" /></a>
 </p>
+
+## NOTE: Archive
+
+This repository no longer hosts the latest guide. This code currently exists for reference puposes, and will be removed
+in the future.
+
+The new guide can be found at https://github.com/DisnakeDev/guide.
+
+---
 
 Welcome! The purpose of this guide is to make your journey with `disnake` easier, whether you're an experienced
 developer just getting into coding Discord bots, or an advanced bot developer who has decided to proceed with `disnake`
