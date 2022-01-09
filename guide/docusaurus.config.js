@@ -21,6 +21,8 @@ const config = {
 			routeBasePath: '/',
 			sidebarPath: require.resolve('./sidebars.js'),
 			editUrl: 'https://github.com/DisnakeDev/guide/edit/main/guide',
+			showLastUpdateAuthor: true,
+          	showLastUpdateTime: true,
 			},
 			theme: {
 			customCss: [
