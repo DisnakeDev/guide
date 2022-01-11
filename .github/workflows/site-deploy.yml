@@ -2,7 +2,6 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]
     paths:
       - guide/**
       - package*.json
@@ -24,6 +23,7 @@ jobs:
           npm ci
           npm run build
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
