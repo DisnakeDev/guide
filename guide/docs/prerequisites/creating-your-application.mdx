@@ -6,12 +6,13 @@ keywords: [disnake, bot, guide, tutorial, create, application, python]
 # Creating your application
 
 The steps mentioned further in this markdown are essentially a copy of the steps
-[mentioned in the documentation](https://docs.disnake.dev/en/latest/discord.html). Therefore, you can follow the steps from either
-resource.
+[mentioned in the documentation](https://docs.disnake.dev/en/latest/discord.html). Therefore, you can follow the steps
+from either resource.
 
 :::note
 
-If you have already made your bot application, you can skip this document and move on to [`initial-files`](../getting-started/initial-files.mdx).
+If you have already made your bot application, you can skip this document and move on to
+[`initial-files`](../getting-started/initial-files.mdx).
 
 :::
 
@@ -76,7 +77,8 @@ And that's it. You now have a bot account and you can login with that token.
 
 :::danger
 
-This section is critical, so pay close attention. It explains what your bot token is, as well as the security aspects of it.
+This section is critical, so pay close attention. It explains what your bot token is, as well as the security aspects of
+it.
 
 :::
 
@@ -104,12 +106,13 @@ it on that amount. Your token gets leaked somewhere, and now someone else has it
 -   Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible! In the
-[initial files](../getting-started/initial-files.mdx) page of the guide, we cover how to safely store your token
-in a configuration file.
+[initial files](../getting-started/initial-files.mdx) page of the guide, we cover how to safely store your token in a
+configuration file.
 
 :::danger
 
-If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token and re-generates a new one. Now you need to use the new token to login.
+If you accidentally leaked your token, click the “Regenerate” button as soon as possible. This revokes your old token
+and re-generates a new one. Now you need to use the new token to login.
 
 :::
 
@@ -122,14 +125,17 @@ your bot token has been posted on the internet publicly, and was found by Discor
 **Such a message will look as follows:**
 
 <br />
-<p align = "center">
-    <img src={require("./images/system-message.png").default} alt="System message" width="90%"/>
+<p align="center">
+	<img src={require('./images/system-message.png').default} alt="System message" width="90%" />
 </p>
 <br />
 
 :::caution
 
-Since we do not know the extent to which Discord searches for bot tokens, or the time taken to inform the user about where the bot was found, we recommend not fully depending on this feature. But incase your bot token *is* found on the internet publicly (say, on  [a GitHub repository](https://www.github.com/)), you can expect Discord to send a system message to the account the bot is linked to.
+Since we do not know the extent to which Discord searches for bot tokens, or the time taken to inform the user about
+where the bot was found, we recommend not fully depending on this feature. But incase your bot token _is_ found on the
+internet publicly (say, on [a GitHub repository](https://www.github.com/)), you can expect Discord to send a system
+message to the account the bot is linked to.
 
 :::
 
@@ -138,8 +144,8 @@ same. System messages from Discord will have a verified `SYSTEM` tag, and the ba
 "This thread is reserved for official Discord notifications".
 
 <br />
-<p align = "center">
-    <img src={require("./images/system-dm.png").default} alt="System DM" width="50%"/>
+<p align="center">
+	<img src={require('./images/system-dm.png').default} alt="System DM" width="50%" />
 </p>
 <br />
 
@@ -206,7 +212,7 @@ invite URL for it.
     :::info
 
     The person adding the bot needs "Manage Server" permissions to do so.
-    
+
     :::
 
 If you want to generate this URL dynamically at run-time inside your bot and using the

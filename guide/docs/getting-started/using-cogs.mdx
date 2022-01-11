@@ -5,20 +5,21 @@ keywords: [disnake, bot, guide, tutorial, cogs, extensions, python]
 
 # Creating cogs/extensions
 
-[**Cogs**](https://docs.disnake.dev/en/latest/ext/commands/cogs.html) are analogous to modules that extend the core of the bot - thus
-adding to its functions and abilities. They also allow you to break down and organize your bot's collection of
-commands/listeners (which is useful when your bot's command list becomes quite extensive).
+[**Cogs**](https://docs.disnake.dev/en/latest/ext/commands/cogs.html) are analogous to modules that extend the core of
+the bot - thus adding to its functions and abilities. They also allow you to break down and organize your bot's
+collection of commands/listeners (which is useful when your bot's command list becomes quite extensive).
 
 :::note
 
-Cogs are typically used alongside with **Extensions**. You can read more about them [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/extensions.html).
+Cogs are typically used alongside with **Extensions**. You can read more about them
+[in the documentation](https://docs.disnake.dev/en/latest/ext/commands/extensions.html).
 
 :::
 
 ## Creating files
 
-What we code here will extend on the code from [**Initial Files**](./initial-files.mdx), and thus we assume that
-there already exists a `main.py` file in your directory with initiates a `commands.Bot()` instance.
+What we code here will extend on the code from [**Initial Files**](./initial-files.mdx), and thus we assume that there
+already exists a `main.py` file in your directory with initiates a `commands.Bot()` instance.
 
 ```python title="main.py"
 import disnake
@@ -68,7 +69,8 @@ class PingCommand(commands.Cog):
 
 :::tip
 
-We typehint `bot: commands.Bot` here to give the IDE an idea of what the argument type is. It is not necessary, but can be useful in development when adding certain arguments to your commands.
+We typehint `bot: commands.Bot` here to give the IDE an idea of what the argument type is. It is not necessary, but can
+be useful in development when adding certain arguments to your commands.
 
 :::
 
@@ -154,7 +156,8 @@ the primary syntax used in cogs:
 -   Each cog is a Python class that subclasses
     [`commands.Cog`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog).
 -   Decorators for commands in cogs:
-    -   Command - [`commands.command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.command)
+    -   Command -
+        [`commands.command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.command)
     -   Slash command -
         [`commands.slash_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.slash_command)
     -   User command -
@@ -162,13 +165,17 @@ the primary syntax used in cogs:
     -   Message command -
         [`commands.message_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.message_command)
 -   Every listener is marked with the
-    [`commands.Cog.listener()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog.listener) decorator.
+    [`commands.Cog.listener()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog.listener)
+    decorator.
 -   Cogs are then registered with the
-    [`Bot.add_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.add_cog) call, and are subsequently
-    removed with the [`Bot.remove_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.remove_cog)
+    [`Bot.add_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.add_cog) call,
+    and are subsequently removed with the
+    [`Bot.remove_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.remove_cog)
     call.
 
-<sup>Source: <a href="https://docs.disnake.dev/en/latest/ext/commands/cogs.html">Disnake Documentation</a></sup>
+<sup>
+	Source: <a href="https://docs.disnake.dev/en/latest/ext/commands/cogs.html">Disnake Documentation</a>
+</sup>
 
 Cogs represent a fairly drastic change in the way you write commands and bots. Thus, it is recommended that you get
 familiar with this syntax - since the code we use in this section is largely tailored for cogs.

@@ -6,6 +6,7 @@ keywords: [disnake, bot, guide, tutorial, embed, python]
 # Embeds
 
 <!-- Import Discord components -->
+
 import {
 	DiscordButton,
 	DiscordButtons,
@@ -38,36 +39,34 @@ Here is an example of how an embed may look. We will go over embed construction 
 <br />
 <DiscordMessages lightTheme={!isDarkTheme()}>
 	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            embedTitle="Embed Title"
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-            url="https://disnake.dev/"
-            thumbnail="/public/disnake-logo.png"
-            image="https://i.imgur.com/KsTvw5Z.png"
-            timestamp="01/01/2077"
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            footerIcon="/public/disnake-logo.png"
-            slot="embeds"
-        >
-            Embed Description
-            <DiscordEmbedFields slot="fields">
-                <DiscordEmbedField fieldTitle="Regular Title">
-                    Regular Value
-                </DiscordEmbedField>
-                <DiscordEmbedField inline="true" fieldTitle="Inline Title">
-                    Inline Value
-                </DiscordEmbedField>
-                <DiscordEmbedField inline="true" fieldTitle="Inline Title">
-                    Inline Value
-                </DiscordEmbedField>
-                <DiscordEmbedField inline="true" fieldTitle="Inline Title">
-                    Inline Value
-                </DiscordEmbedField>
-            </DiscordEmbedFields>
-            <span slot="footer">This is a footer.</span>
-        </DiscordEmbed>
+		<DiscordEmbed
+			embedTitle="Embed Title"
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			url="https://disnake.dev/"
+			thumbnail="/public/disnake-logo.png"
+			image="https://i.imgur.com/KsTvw5Z.png"
+			timestamp="01/01/2077"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			footerIcon="/public/disnake-logo.png"
+			slot="embeds"
+		>
+			Embed Description
+			<DiscordEmbedFields slot="fields">
+				<DiscordEmbedField fieldTitle="Regular Title">Regular Value</DiscordEmbedField>
+				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+					Inline Value
+				</DiscordEmbedField>
+				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+					Inline Value
+				</DiscordEmbedField>
+				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+					Inline Value
+				</DiscordEmbedField>
+			</DiscordEmbedFields>
+			<span slot="footer">This is a footer.</span>
+		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
 <br />
@@ -110,7 +109,8 @@ await ctx.send(embed=embed)
 
 :::note
 
-It is not strictly necessary to use all elements showcased above. You're free to leave some out as per your requirements.
+It is not strictly necessary to use all elements showcased above. You're free to leave some out as per your
+requirements.
 
 :::
 
@@ -121,8 +121,8 @@ To add a blank field to the embed, you can use `embed.add_field(name='\u200b', v
 
 ## Creating an embed
 
-You can use the [`Embed`](https://docs.disnake.dev/en/latest/api.html#embed) instance for the creation and manipulation of
-embeds.
+You can use the [`Embed`](https://docs.disnake.dev/en/latest/api.html#embed) instance for the creation and manipulation
+of embeds.
 
 ```python title="embed.py"
 embed = disnake.Embed(
@@ -133,16 +133,12 @@ embed = disnake.Embed(
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-    		embedTitle="Embed Title"
-            slot="embeds"
-        >
-            Embed Description
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'} embedTitle="Embed Title" slot="embeds">
+			Embed Description
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -161,19 +157,19 @@ embed.set_author(
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-	    	embedTitle="Embed Title"
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            slot="embeds"
-        >
-            Embed Description
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			embedTitle="Embed Title"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			slot="embeds"
+		>
+			Embed Description
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -194,21 +190,21 @@ embed.set_footer(
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-	    	embedTitle="Embed Title"
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            footerIcon="/public/disnake-logo.png"
-            slot="embeds"
-        >
-            Embed Description
-        <span slot="footer">Embed Footer</span>
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			embedTitle="Embed Title"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			footerIcon="/public/disnake-logo.png"
+			slot="embeds"
+		>
+			Embed Description
+			<span slot="footer">Embed Footer</span>
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -222,27 +218,28 @@ embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-	    	embedTitle="Embed Thumbnail"
-            thumbnail="/public/disnake-logo.png" 
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            footerIcon="/public/disnake-logo.png"
-            timestamp="01/01/2077"
-            slot="embeds"
-        >
-            It is shown in the top-right corner of the embed. You can set this as a URL, but <DiscordMarkdown>`disnake`</DiscordMarkdown> also
-            allows you to use a locally stored file instead, using the <DiscordMarkdown>`file`</DiscordMarkdown> parameter.
-            <br />
-            <br />
-            <DiscordMarkdown>`embed.set_thumbnail(file=disnake.File("asset/path.png"))`</DiscordMarkdown>
-        <span slot="footer">Embed Footer</span>
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			embedTitle="Embed Thumbnail"
+			thumbnail="/public/disnake-logo.png"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			footerIcon="/public/disnake-logo.png"
+			timestamp="01/01/2077"
+			slot="embeds"
+		>
+			It is shown in the top-right corner of the embed. You can set this as a URL, but{' '}
+			<DiscordMarkdown>`disnake`</DiscordMarkdown> also allows you to use a locally stored file instead, using the{' '}
+			<DiscordMarkdown>`file`</DiscordMarkdown> parameter.
+			<br />
+			<br />
+			<DiscordMarkdown>`embed.set_thumbnail(file=disnake.File("asset/path.png"))`</DiscordMarkdown>
+			<span slot="footer">Embed Footer</span>
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -267,23 +264,23 @@ embed = disnake.Embed(
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-	    	embedTitle="Timestamps"
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            footerIcon="/public/disnake-logo.png"
-            timestamp="01/01/2077"
-            slot="embeds"
-        >
-            Note that <DiscordMarkdown>`datetime.datetime.utcnow()`</DiscordMarkdown> can also be used here.
-            You can also specify the timezone via the <DiscordMarkdown>`tzinfo`</DiscordMarkdown> parameter.
-        <span slot="footer">Embed Footer</span>
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			embedTitle="Timestamps"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			footerIcon="/public/disnake-logo.png"
+			timestamp="01/01/2077"
+			slot="embeds"
+		>
+			Note that <DiscordMarkdown>`datetime.datetime.utcnow()`</DiscordMarkdown> can also be used here. You can
+			also specify the timezone via the <DiscordMarkdown>`tzinfo`</DiscordMarkdown> parameter.
+			<span slot="footer">Embed Footer</span>
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -304,36 +301,34 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-	    	embedTitle="Embed Title"
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            footerIcon="/public/disnake-logo.png"
-            timestamp="01/01/2077"
-            slot="embeds"
-        >
-            Embed Description
-            <DiscordEmbedFields slot="fields">
-                <DiscordEmbedField fieldTitle="Regular Title">
-                    Regular Value
-                </DiscordEmbedField>
-                <DiscordEmbedField inline="true" fieldTitle="Inline Title">
-                    Inline Value
-                </DiscordEmbedField>
-                <DiscordEmbedField inline="true" fieldTitle="Inline Title">
-                    Inline Value
-                </DiscordEmbedField>
-                <DiscordEmbedField inline="true" fieldTitle="Inline Title">
-                    Inline Value
-                </DiscordEmbedField>
-            </DiscordEmbedFields>
-        <span slot="footer">Embed Footer</span>
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			embedTitle="Embed Title"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			footerIcon="/public/disnake-logo.png"
+			timestamp="01/01/2077"
+			slot="embeds"
+		>
+			Embed Description
+			<DiscordEmbedFields slot="fields">
+				<DiscordEmbedField fieldTitle="Regular Title">Regular Value</DiscordEmbedField>
+				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+					Inline Value
+				</DiscordEmbedField>
+				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+					Inline Value
+				</DiscordEmbedField>
+				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+					Inline Value
+				</DiscordEmbedField>
+			</DiscordEmbedFields>
+			<span slot="footer">Embed Footer</span>
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -355,24 +350,25 @@ embed.set_image(file=disnake.File("path/to/file.png"))
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <DiscordEmbed
-            borderColor={isDarkTheme() ? "#f0c43f" : "#376fa1"}
-	    	embedTitle="Images"
-            image="https://i.imgur.com/KsTvw5Z.png"
-            authorName="Embed Author"
-            authorIcon="/public/disnake-logo.png"
-            authorUrl="https://disnake.dev/"
-            footerIcon="/public/disnake-logo.png"
-            timestamp="01/01/2077"
-            slot="embeds"
-        >
-            To use a local asset for images or thumbnail with the <DiscordMarkdown>`set_image`</DiscordMarkdown> attribute,
-            use the <DiscordMarkdown>`file`</DiscordMarkdown> kwarg which accepts a <DiscordMarkdown>`disnake.File()`</DiscordMarkdown> object.
-            <span slot="footer">Embed Footer</span>
-        </DiscordEmbed>
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed
+			borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+			embedTitle="Images"
+			image="https://i.imgur.com/KsTvw5Z.png"
+			authorName="Embed Author"
+			authorIcon="/public/disnake-logo.png"
+			authorUrl="https://disnake.dev/"
+			footerIcon="/public/disnake-logo.png"
+			timestamp="01/01/2077"
+			slot="embeds"
+		>
+			To use a local asset for images or thumbnail with the <DiscordMarkdown>`set_image`</DiscordMarkdown>{' '}
+			attribute, use the <DiscordMarkdown>`file`</DiscordMarkdown> kwarg which accepts a{' '}
+			<DiscordMarkdown>`disnake.File()`</DiscordMarkdown> object.
+			<span slot="footer">Embed Footer</span>
+		</DiscordEmbed>
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
@@ -413,8 +409,8 @@ embed_dict = {
 await channel.send(embed=disnake.Embed.from_dict(embed_dict))
 ```
 
-This will give the exact same result as the embed shown [here](#embed-preview). Note that the timestamp passed through
-a dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`).
+This will give the exact same result as the embed shown [here](#embed-preview). Note that the timestamp passed through a
+dictionary should be in ISO8601 format (which has been achieved here by using `datetime.datetime.now().isoformat()`).
 You can learn more about the `dict` format of embeds in the
 [official Discord documentation](https://discord.com/developers/docs/resources/channel#embed-object).
 
@@ -427,7 +423,9 @@ You can learn more about the `dict` format of embeds in the
 -   Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext')`), but only in description
     and field values.
 
-<sup>Source: <a href="https://discordjs.guide/popular-topics/embeds.html#notes">Discord.js Guide</a></sup>
+<sup>
+	Source: <a href="https://discordjs.guide/popular-topics/embeds.html#notes">Discord.js Guide</a>
+</sup>
 
 ## Embed limits
 
@@ -443,7 +441,9 @@ you can come back to:
 -   The sum of all characters from all embed structures in a message must not exceed 6000 characters.
 -   Ten embeds can be sent per message.
 
-<sup>Source: <a href="https://discord.com/developers/docs/resources/channel#embed-limits">Discord API Documentation</a></sup>
+<sup>
+	Source: <a href="https://discord.com/developers/docs/resources/channel#embed-limits">Discord API Documentation</a>
+</sup>
 
 ## Resulting code
 

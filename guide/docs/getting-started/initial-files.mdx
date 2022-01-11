@@ -6,18 +6,20 @@ keywords: [disnake, bot, guide, tutorial, initial files, initialization, python]
 # Initial files
 
 <!-- Imports for content tabs -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Once you [add your bot to a server](../prerequisites/inviting-your-bot.mdx), the next step is to start coding and
-get it online! Let's start by creating a `.env` file for your client token and a main file for your bot application.
+Once you [add your bot to a server](../prerequisites/inviting-your-bot.mdx), the next step is to start coding and get it
+online! Let's start by creating a `.env` file for your client token and a main file for your bot application.
 
 ## Creating configuration files
 
 As explained in the "What is a token, anyway?" section, your token is essentially your bot's password, and you should
 protect it as best as possible. This can be done through a `.env` file, or by using environment variables.
 
-Open your application in the [Discord Developer Portal](https://discord.com/developers/applications) and go to the `Bot` page to copy your token.
+Open your application in the [Discord Developer Portal](https://discord.com/developers/applications) and go to the `Bot`
+page to copy your token.
 
 ### Using environment variables
 
@@ -26,7 +28,8 @@ variable file). You can pass these values into your code's scope so that you can
 
 :::note
 
-When referring to a `.env` file, keep in mind that you can name this file whatever you prefer. For example, the file can be named `token.env` or `secret.env`.
+When referring to a `.env` file, keep in mind that you can name this file whatever you prefer. For example, the file can
+be named `token.env` or `secret.env`.
 
 :::
 
@@ -36,7 +39,7 @@ project directory and paste in your token. You can access your token inside othe
 <Tabs>
 <TabItem value="main.py" label="main.py">
 
-``` python
+```python
 # Importing "os" module.
 import os
 
@@ -50,7 +53,7 @@ YOUR_BOT_TOKEN = os.environ["YOUR_BOT_TOKEN"]
 
 ```python
 # Each line in a .env file should hold a KEY=value pair.
-YOUR_BOT_TOKEN=OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
+YOUR_BOT_TOKEN = OTA4MjgxMjk4NTU1MTA5Mzk2.YYzc4A.TB7Ng6DOnVDlpMS4idjGptsreFg
 ```
 
 </TabItem>
@@ -102,11 +105,13 @@ say, use them for calculations, you'll have to convert them via `int()`
 
 :::info Online editors (Glitch, Heroku, Replit, etc.)
 
-While we generally do not recommend using online editors as hosting solutions, but rather invest in a proper virtual private server, these services do offer ways to keep your credentials safe as well! Please see the respective service's documentation and help articles for more information on how to keep sensitive values safe:
+While we generally do not recommend using online editors as hosting solutions, but rather invest in a proper virtual
+private server, these services do offer ways to keep your credentials safe as well! Please see the respective service's
+documentation and help articles for more information on how to keep sensitive values safe:
 
-- Glitch: [Storing secrets in .env][glitch-article]
-- Heroku: [Configuration variables][heroku-article]
-- Replit: [Secrets and environment variables][replit-article]
+-   Glitch: [Storing secrets in .env][glitch-article]
+-   Heroku: [Configuration variables][heroku-article]
+-   Replit: [Secrets and environment variables][replit-article]
 
 :::
 
@@ -127,9 +132,13 @@ config.json
 
 :::tip
 
-[`__pycache__/`][pycache] has been included in `.gitignore` as it is simply cache that helps loading and running your script faster (this is an oversimplification). As it is of no particular importance, and is recompiled every time a change is made in the script, it is better to not commit the directory.
+[`__pycache__/`][pycache] has been included in `.gitignore` as it is simply cache that helps loading and running your
+script faster (this is an oversimplification). As it is of no particular importance, and is recompiled every time a
+change is made in the script, it is better to not commit the directory.
 
-Also, you can specify certain extensions/directories in `.gitignore` files, as per the requirements of your project - [here is an example][gitignore-example]. Check out the [Git documentation on `.gitignore`][gitignore-article] for more information!
+Also, you can specify certain extensions/directories in `.gitignore` files, as per the requirements of your project -
+[here is an example][gitignore-example]. Check out the [Git documentation on `.gitignore`][gitignore-article] for more
+information!
 
 :::
 
@@ -163,7 +172,8 @@ This is how you create a client instance for your Discord bot and login to Disco
 
 :::tip
 
-After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands you've run in the terminal. Pressing up and then enter after closing the process is a quick way to start it up again.
+After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands
+you've run in the terminal. Pressing up and then enter after closing the process is a quick way to start it up again.
 
 :::
 

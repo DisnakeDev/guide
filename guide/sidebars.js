@@ -6,7 +6,7 @@ const sidebars = {
 		{
 			type: 'doc',
 			label: 'Introduction',
-			id: 'intro'
+			id: 'intro',
 		},
 		{
 			type: 'category',
@@ -20,11 +20,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Getting Started',
-			items: [
-				'getting-started/initial-files',
-				'getting-started/creating-commands',
-				'getting-started/using-cogs',
-			],
+			items: ['getting-started/initial-files', 'getting-started/creating-commands', 'getting-started/using-cogs'],
 		},
 		{
 			type: 'category',
@@ -38,7 +34,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Popular Topics',
-			link: {type: 'doc', id: 'popular-topics/intro'},
+			link: { type: 'doc', id: 'popular-topics/intro' },
 			items: [
 				'popular-topics/threads',
 				'popular-topics/embeds',
@@ -51,9 +47,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Frequently Asked Questions',
-			items: [
-				'faq/good-practices'
-			],
+			items: ['faq/good-practices'],
 		},
 	],
 };
