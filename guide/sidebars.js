@@ -13,8 +13,8 @@ const sidebars = {
 			label: 'Prerequisites',
 			items: [
 				'prerequisites/installing-disnake',
+				'prerequisites/migrating-from-dpy',
 				'prerequisites/creating-your-application',
-				'prerequisites/inviting-your-bot',
 			],
 		},
 		{
