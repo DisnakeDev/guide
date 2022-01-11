@@ -17,7 +17,10 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
-      - name: Restore cache
+      - name: Run pre-commit
+        uses: pre-commit/action@v2.0.3
+
+      - name: Cache npm
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -29,6 +32,7 @@ jobs:
         run: |
           npm ci
           npm run build
+
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
