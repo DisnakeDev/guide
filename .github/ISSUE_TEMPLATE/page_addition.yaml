@@ -1,0 +1,40 @@
+name: Page/section addition
+description: Suggestion for a new page/section that doesn't already exist.
+labels: ["t: request"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to open an issue! We advise you to make the report descriptive of the issue, with links and images wherever required.
+        Also make sure to go through the [Contributing Guidelines](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md).
+  - type: input
+    attributes:
+      label: Expands on
+      description: If the page/section expands on an existing article, mention the same here. (With links/repo filenames)
+      placeholder: guide.disnake.dev/intents
+  - type: input
+    attributes:
+      label: "Title"
+      description: Short, one-line summary of the addition.
+      placeholder: Using gateway intents
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Description"
+      description: A short description of what this would showcase. If you have screenshots, examples, or links, add them here.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: If any extra information is required, mention the same here.
+  - type: dropdown
+    attributes:
+      label: Would you like to implement this yourself?
+      multiple: false
+      options:
+        - Yes, I will be contributing this addition.
+        - No, I am only suggesting this addition.
+    validations:
+      required: true

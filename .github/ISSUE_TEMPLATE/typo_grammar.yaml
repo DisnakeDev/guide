@@ -1,0 +1,43 @@
+name: Typo/grammar report
+description: Issues regarding incorrect spelling/grammar, missing information, etc.
+labels: ["t: spelling/grammar"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to open an issue! We advise you to make the report descriptive of the issue, with links and images wherever required.
+        Also make sure to go through the [Contributing Guidelines](https://github.com/DisnakeDev/guide/blob/main/CONTRIBUTING.md).
+  - type: textarea
+    attributes:
+      label: Affected pages
+      description: "Which articles/pages on the guide are affected? (Use links, or repo filenames)"
+      placeholder: |
+        - guide.disnake.dev/example
+        - guide.disnake.dev/another-example
+        - 100-directory/101-example.md
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Current text
+      description: >
+        Current text at fault. (Include the line/paragraph number, if applicable.)
+      placeholder: >
+        - guide.disnake.dev/example
+            * P2 L40 - "disnek"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Recommended text
+      description: >
+        Replace the text at fault. (If possible, include sources that verify your suggestions.)
+      placeholder: >
+        - guide.disnake.dev/example
+          * P2 L40 - "disnek" -> "disnake" (www.example.com/this-is-valid)
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: If any extra information is required, mention the same here.

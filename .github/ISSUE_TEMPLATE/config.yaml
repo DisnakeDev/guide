@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discord server
+    about: Use our official Discord server to ask for help.
+    url: https://discord.gg/gJDbCw8aQy
+  - name: disnake issues
+    about: Issue tracker for the disnake library.
+    url: https://github.com/DisnakeDev/disnake/issues/new/choose
