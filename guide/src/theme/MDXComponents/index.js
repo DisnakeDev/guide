@@ -21,6 +21,7 @@ import {
 	DiscordReactions,
 } from '@discord-message-components/react';
 import '@discord-message-components/react/styles';
+import isDarkTheme from '../../hooks/isDarkTheme';
 import ResultingCode from '../../components/ResultingCode';
 
 function unwrapMDXElement(element) {
@@ -77,7 +78,11 @@ const MDXComponents = {
 		return <ResultingCode />;
 	},
 	DiscordMessages: (props) => {
-		return <DiscordMessages {...props}>{props.children}</DiscordMessages>;
+		return (
+			<DiscordMessages {...props} lightTheme={!isDarkTheme()}>
+				{props.children}
+			</DiscordMessages>
+		);
 	},
 	DiscordMessage: (props) => {
 		return <DiscordMessage {...props}>{props.children}</DiscordMessage>;
@@ -86,7 +91,11 @@ const MDXComponents = {
 		return <DiscordMention {...props}>{props.children}</DiscordMention>;
 	},
 	DiscordEmbed: (props) => {
-		return <DiscordEmbed {...props}>{props.children}</DiscordEmbed>;
+		return (
+			<DiscordEmbed {...props} borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}>
+				{props.children}
+			</DiscordEmbed>
+		);
 	},
 	DiscordEmbedFields: (props) => {
 		return <DiscordEmbedFields {...props}>{props.children}</DiscordEmbedFields>;

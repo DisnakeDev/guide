@@ -5,10 +5,6 @@ keywords: [disnake, bot, guide, tutorial, creating, commands, python]
 
 # Creating commands
 
-<!-- Import Discord components -->
-
-import isDarkTheme from '../../src/hooks/isDarkTheme';
-
 :::info
 
 This page is a follow-up, and the base code used is from the previous page ([Initial files](./initial-files.mdx)). The
@@ -175,7 +171,7 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages lightTheme={!isDarkTheme()}>
+<DiscordMessages>
 	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
 		<div slot="interactions">
 			<DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">
@@ -216,7 +212,7 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages lightTheme={!isDarkTheme()}>
+<DiscordMessages>
 	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
 		<div slot="interactions">
 			<DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">
@@ -267,7 +263,7 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages lightTheme={!isDarkTheme()}>
+<DiscordMessages>
 	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
 		<div slot="interactions">
 			<DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">
