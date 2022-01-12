@@ -5,15 +5,17 @@ keywords: [disnake, bot, guide, tutorial, thread, python]
 
 # Threads
 
-Threads are [`Messagable`](https://docs.disnake.dev/en/latest/api.html#messageable) objects, and can be thought of as sub-channels inside
-existing channels. They allow organization of multiple topics in a channel by temporarily giving them a separate space.
+Threads are [`Messagable`](https://docs.disnake.dev/en/latest/api.html#messageable) objects, and can be thought of as
+sub-channels inside existing channels. They allow organization of multiple topics in a channel by temporarily giving
+them a separate space.
 
 ## Thread-related methods
 
 #### Creating and deleting threads
 
-A thread can be created by using the [`create_thread()`](https://docs.disnake.dev/en/latest/api.html#disnake.TextChannel.create_thread)
-method on a [`Message`](https://docs.disnake.dev/en/latest/api.html#disnake.Message) or
+A thread can be created by using the
+[`create_thread()`](https://docs.disnake.dev/en/latest/api.html#disnake.TextChannel.create_thread) method on a
+[`Message`](https://docs.disnake.dev/en/latest/api.html#disnake.Message) or
 [`TextChannel`](https://docs.disnake.dev/en/latest/api.html#disnake.TextChannel) object.
 
 ```python title="threads.py"

@@ -1,10 +1,12 @@
 # Migrating from discord.py
 
 <!-- Imports for content tabs -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-After the discontinuation of `discord.py` (refer [this gist](https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1)), many forks of the API wrapper branched
+After the discontinuation of `discord.py` (refer
+[this gist](https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1)), many forks of the API wrapper branched
 onward to maintain the library, in order to keep it updated with the latest features and Discord API changes - `disnake`
 is one such fork.
 
@@ -16,8 +18,8 @@ as possible.
 
 `disnake` is based on `discord.py 2.0`, which had major syntax changes from its previous version. Therefore, if you're
 shifting to `disnake` from a version of `discord.py` lower than 2.0, you will have to make some important syntax changes
-in your code. You can refer [this page](https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58) for the full list of breaking changes in `discord.py 2.0`,
-though we will list some primary API reference changes here:
+in your code. You can refer [this page](https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58) for the full
+list of breaking changes in `discord.py 2.0`, though we will list some primary API reference changes here:
 
 -   Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
 -   Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to
@@ -81,7 +83,8 @@ There are three ways to switch between libraries:
     from disnake.ext import commands
     ```
 
-2. With your favorite editor, replace every `discord` reference in your code with `disnake` (this is fairly simple, if your editor has a "Find & Replace" tool).
+2. With your favorite editor, replace every `discord` reference in your code with `disnake` (this is fairly simple, if
+   your editor has a "Find & Replace" tool).
 
 #### Import `disnake as discord`
 
@@ -125,7 +128,8 @@ python3 -m pip install disnake[discord]
 
 :::warning
 
-We don't recommend using the shim, as it is updated less frequently and may break the behaviour of interactions/components in some cases. If possible, proceed with one of the other two procedures mentioned.
+We don't recommend using the shim, as it is updated less frequently and may break the behaviour of
+interactions/components in some cases. If possible, proceed with one of the other two procedures mentioned.
 
 :::
 

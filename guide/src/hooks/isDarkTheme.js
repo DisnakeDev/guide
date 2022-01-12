@@ -1,16 +1,16 @@
-import {useEffect, useState} from "react";
-import useThemeContext from '@theme/hooks/useThemeContext'
+import { useEffect, useState } from 'react';
+import useThemeContext from '@theme/hooks/useThemeContext';
 
 export default function isDarkTheme() {
-    const [themeContext, setThemeContext] = useState({});
+	const [themeContext, setThemeContext] = useState({});
 
-    const realThemeContext = useThemeContext();
+	const realThemeContext = useThemeContext();
 
-    useEffect(() => {
-        setThemeContext(realThemeContext)
-    }, [realThemeContext]);
+	useEffect(() => {
+		setThemeContext(realThemeContext);
+	}, [realThemeContext]);
 
-    const {isDarkTheme} = themeContext;
+	const { isDarkTheme } = themeContext;
 
-	return(isDarkTheme)
+	return isDarkTheme;
 }

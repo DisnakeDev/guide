@@ -6,6 +6,7 @@ keywords: [disnake, bot, guide, tutorial, creating, commands, python]
 # Creating commands
 
 <!-- Import Discord components -->
+
 import {
 	DiscordButton,
 	DiscordButtons,
@@ -25,13 +26,16 @@ import isDarkTheme from '../../src/hooks/isDarkTheme';
 
 :::info
 
-This page is a follow-up, and the base code used is from the previous page ([Initial files](./initial-files.mdx)). The code can be found on the GitHub repository [here](https://github.com/DisnakeDev/guide/tree/master/docs/extra-code-samples/code-intial-files).
+This page is a follow-up, and the base code used is from the previous page ([Initial files](./initial-files.mdx)). The
+code can be found on the GitHub repository
+[here](https://github.com/DisnakeDev/guide/tree/master/docs/extra-code-samples/code-intial-files).
 
 :::
 
-Discord also allows developers to register [slash commands](https://discord.com/developers/docs/interactions/application-commands), which
-provides users a first-class way of interacting directly with your application. These slash commands shall be covered by
-the guide [here](../interactions/application-commands.mdx), in the **Interactions** section.
+Discord also allows developers to register
+[slash commands](https://discord.com/developers/docs/interactions/application-commands), which provides users a
+first-class way of interacting directly with your application. These slash commands shall be covered by the guide
+[here](../interactions/application-commands.mdx), in the **Interactions** section.
 
 ## A note on prefix commands
 
@@ -40,7 +44,9 @@ Bot commands that are initiated when a keyword is used along with a specified pr
 
 :::caution Message Intent - Privileged
 
-It is to be noted that handling prefix commands require the **message intent**, which allows the bot to get content and data of messages sent by users. This intent has recently been privileged, i.e., it needs to be manually enabled for the bot application, and its requirement will eventually be reviewed if your bot is in over 100 servers.
+It is to be noted that handling prefix commands require the **message intent**, which allows the bot to get content and
+data of messages sent by users. This intent has recently been privileged, i.e., it needs to be manually enabled for the
+bot application, and its requirement will eventually be reviewed if your bot is in over 100 servers.
 
 You can read more about the message intent [here][message-intent-article].
 
@@ -53,8 +59,8 @@ be covered in the [**Interactions**](../interactions/application-commands.mdx) s
 ## Registering commands
 
 This section covers the bare minimum to get you started with registering slash commands. Once again, you can refer to
-[this page](../interactions/application-commands.mdx) for an in-depth coverage of topics, including guild
-commands, global commands, options, option types, autocomplete and choices.
+[this page](../interactions/application-commands.mdx) for an in-depth coverage of topics, including guild commands,
+global commands, options, option types, autocomplete and choices.
 
 Now, we shall continue with the base code used in the previous section.
 
@@ -103,7 +109,11 @@ necessary for replying to the use of the command.
 
 :::note Using `ctx` vs. `inter`
 
-If you have experience with coding bots with [`discord.py`](https://discordpy.readthedocs.io/en/latest), you would be familiar with using `ctx` as an abbreviation for passing context into the function. This guide will primarily be using `inter`, as it is short for `interaction` and refers to [`disnake.ApplicationCommandInteraction`](https://docs.disnake.dev/en/latest/api.html#applicationcommandinteraction). Of course, you're open to using your preferred abbreviation in code.
+If you have experience with coding bots with [`discord.py`](https://discordpy.readthedocs.io/en/latest), you would be
+familiar with using `ctx` as an abbreviation for passing context into the function. This guide will primarily be using
+`inter`, as it is short for `interaction` and refers to
+[`disnake.ApplicationCommandInteraction`](https://docs.disnake.dev/en/latest/api.html#applicationcommandinteraction). Of
+course, you're open to using your preferred abbreviation in code.
 
 :::
 
@@ -141,9 +151,11 @@ bot.run("YOUR_BOT_TOKEN")
 
 :::tip Using `test_guilds` in `commands.Bot()`
 
-When you have multiple commands registered under the same test guilds, it is convenient to only have your `guild_ids` defined once. Therefore, you can use the `test_guilds` argument in the `commands.Bot()` instance instead of passing `guild_ids` to every single command -
+When you have multiple commands registered under the same test guilds, it is convenient to only have your `guild_ids`
+defined once. Therefore, you can use the `test_guilds` argument in the `commands.Bot()` instance instead of passing
+`guild_ids` to every single command -
 
-``` python
+```python
 bot = commands.Bot(test_guilds=[1234, 5678])
 ```
 
@@ -178,21 +190,23 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <div slot="interactions">
-            <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">ping</DiscordInteraction>
-        </div>
-        Pong!
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<div slot="interactions">
+			<DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">
+				ping
+			</DiscordInteraction>
+		</div>
+		Pong!
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
 ### Server info command
 
 `inter.guild` refers to the guild the interaction was sent in (a
-[`Guild`](https://docs.disnake.dev/en/latest/api.html#disnake.Guild) instance), which exposes properties such as `.name` or
-`.member_count`.
+[`Guild`](https://docs.disnake.dev/en/latest/api.html#disnake.Guild) instance), which exposes properties such as `.name`
+or `.member_count`.
 
 ```python title="main.py" {12-16}
 import disnake
@@ -217,20 +231,23 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <div slot="interactions">
-            <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">server</DiscordInteraction>
-        </div>
-        Server name: Disnake Guide <br />
-        Total members: 2
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<div slot="interactions">
+			<DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">
+				server
+			</DiscordInteraction>
+		</div>
+		Server name: Disnake Guide <br />
+		Total members: 2
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
 :::tip
 
-Refer to the [Guild](https://docs.disnake.dev/en/latest/api.html#disnake.Guild) documentation for a list of all the available properties and methods.
+Refer to the [Guild](https://docs.disnake.dev/en/latest/api.html#disnake.Guild) documentation for a list of all the
+available properties and methods.
 
 :::
 
@@ -241,8 +258,8 @@ same manner - use `inter.guild.created_at` or `inter.guild.verification_level`, 
 
 A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a
 [User instance](https://docs.disnake.dev/en/latest/api.html#disnake.User) in DM contexts, or a
-[Member instance](https://docs.disnake.dev/en/latest/api.html#disnake.Member) in server contexts), which exposes properties
-such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
+[Member instance](https://docs.disnake.dev/en/latest/api.html#disnake.Member) in server contexts), which exposes
+properties such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
 ```python title="main.py" {12-14}
 import disnake
@@ -265,20 +282,24 @@ bot.run("YOUR_BOT_TOKEN")
 ```
 
 <br />
-<DiscordMessages  lightTheme={!isDarkTheme()}>
-    <DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
-        <div slot="interactions">
-            <DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">server</DiscordInteraction>
-        </div>
-        Your tag: AbhigyanTrips#1234 <br />
-        Your ID: 123456789012345678
-    </DiscordMessage>
+<DiscordMessages lightTheme={!isDarkTheme()}>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<div slot="interactions">
+			<DiscordInteraction author="AbhigyanTrips" avatar="https://i.imgur.com/8xd9SHa.png" command="true">
+				server
+			</DiscordInteraction>
+		</div>
+		Your tag: AbhigyanTrips#1234 <br />
+		Your ID: 123456789012345678
+	</DiscordMessage>
 </DiscordMessages>
 <br />
 
 :::tip
 
-Refer to the [`User`](https://docs.disnake.dev/en/latest/api.html#disnake.User) and [`Member`](https://docs.disnake.dev/en/latest/api.html#disnake.Member) documentation for a list of all the available properties and methods.
+Refer to the [`User`](https://docs.disnake.dev/en/latest/api.html#disnake.User) and
+[`Member`](https://docs.disnake.dev/en/latest/api.html#disnake.Member) documentation for a list of all the available
+properties and methods.
 
 :::
 
