@@ -68,3 +68,9 @@ html[data-theme='dark'] .navbar-item-discord:before {
 .discord-light-theme .discord-embed .discord-embed-content .discord-embed-title {
 	color: #000; /* Some weird bug that kept the title white, idk. */
 }
+
+/* Last Updated span */
+
+span.theme-last-updated {
+	font-style: normal;
+}
