@@ -6,6 +6,8 @@ They provide users a first-class way of interacting directly with your bot that 
 
 ## Slash commands
 
+
+
 ### Creating
 
 ## User and Message commands

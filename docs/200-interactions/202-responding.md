@@ -74,8 +74,25 @@ async def followup(inter: ApplicationCommandInteraction):
 
 This returns [`InteractionMessage`]({{ disnakedocs }}/api.html#disnake.InteractionMessage) that inherits from ordinary [`Message`]({{ disnakedocs }}/api.html#disnake.Message) with changes to `edit()` and `delete()` to work.
 
-### `interaction.[edit|delete]_original_message`
+### `interaction.edit|delete_original_message`
 
-This two coroutines works the similar way as [`InteractionMessage.[edit|delete]()`](#interactionoriginal_message). The difference is that these coroutines do not fetch original message and save 1 HTTP request.
+This two coroutines works the similar way as [`InteractionMessage.edit|delete()`](#interactionoriginal_message). The difference is that these coroutines do not fetch original message and save 1 HTTP request. Useful if you need to edit a message without regard to context.
 
 ## Ephemerality
+
+Let's talk about secrets. You can make a response that will be shown only to invoker so no one will be able to interact with ephemeral message against interaction author.
+
+To make a response ephemeral you must use a `ephemeral` kwarg. See examples below.
+
+```python 
+await interaction.response.send_message("Top secret message!", ephemeral=True)
+
+await interaction.followup.send("Top secret message!", ephemeral=True)
+
+await interaction.response.defer(ephemeral=True)
+```
+
+!!! Note
+
+    If you make your `defer` application command response ephemeral the thinking state message will shown only to invoker.
+    
