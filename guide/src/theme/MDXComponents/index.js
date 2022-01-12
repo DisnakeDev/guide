@@ -22,6 +22,10 @@ import {
 } from '@discord-message-components/react';
 import '@discord-message-components/react/styles';
 import isDarkTheme from '../../hooks/isDarkTheme';
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import ResultingCode from '../../components/ResultingCode';
 
 function unwrapMDXElement(element) {
@@ -76,6 +80,12 @@ const MDXComponents = {
 	h6: Heading('h6'),
 	ResultingCode: () => {
 		return <ResultingCode />;
+	},
+	Tabs: (props) => {
+		return <Tabs {...props}>{props.children}</Tabs>;
+	},
+	TabItem: (props) => {
+		return <TabItem {...props}>{props.children}</TabItem>;
 	},
 	DiscordMessages: (props) => {
 		return (
