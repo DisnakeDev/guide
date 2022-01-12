@@ -49,8 +49,18 @@ const config = {
 			},
 			items: [
 				{
-					href: 'https://docs.disnake.dev/',
-					label: 'Documentation',
+					to: 'https://docs.disnake.dev/',
+					label: 'Docs',
+					position: 'left',
+				},
+				{
+					to: '/',
+					label: 'Guide',
+					position: 'left',
+				},
+				{
+					to: 'https://docs.disnake.dev/en/latest/api.html',
+					label: 'API Reference',
 					position: 'left',
 				},
 				{
