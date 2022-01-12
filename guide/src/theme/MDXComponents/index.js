@@ -6,6 +6,21 @@ import Heading from '@theme/Heading';
 import Details from '@theme/Details';
 import './styles.css';
 
+import {
+	DiscordButton,
+	DiscordButtons,
+	DiscordEmbed,
+	DiscordEmbedField,
+	DiscordEmbedFields,
+	DiscordInteraction,
+	DiscordMarkdown,
+	DiscordMention,
+	DiscordMessage,
+	DiscordMessages,
+	DiscordReaction,
+	DiscordReactions,
+} from '@discord-message-components/react';
+import '@discord-message-components/react/styles';
 import ResultingCode from '../../components/ResultingCode';
 
 function unwrapMDXElement(element) {
@@ -42,7 +57,7 @@ const MDXComponents = {
 		return <CodeBlock {...(isValidElement(children) ? children?.props : { ...props })} />;
 	},
 	details: (props) => {
-		const items = React.Children.toArray(props.children); // Split summary item from the rest to pass it as a separate prop to the Detais theme component
+		const items = React.Children.toArray(props.children);
 
 		const summary = items.find((item) => item?.props?.mdxType === 'summary');
 		const children = <>{items.filter((item) => item !== summary)}</>;
@@ -60,6 +75,42 @@ const MDXComponents = {
 	h6: Heading('h6'),
 	ResultingCode: () => {
 		return <ResultingCode />;
+	},
+	DiscordMessages: (props) => {
+		return <DiscordMessages {...props}>{props.children}</DiscordMessages>;
+	},
+	DiscordMessage: (props) => {
+		return <DiscordMessage {...props}>{props.children}</DiscordMessage>;
+	},
+	DiscordMention: (props) => {
+		return <DiscordMention {...props}>{props.children}</DiscordMention>;
+	},
+	DiscordEmbed: (props) => {
+		return <DiscordEmbed {...props}>{props.children}</DiscordEmbed>;
+	},
+	DiscordEmbedFields: (props) => {
+		return <DiscordEmbedFields {...props}>{props.children}</DiscordEmbedFields>;
+	},
+	DiscordEmbedField: (props) => {
+		return <DiscordEmbedField {...props}>{props.children}</DiscordEmbedField>;
+	},
+	DiscordInteraction: (props) => {
+		return <DiscordInteraction {...props}>{props.children}</DiscordInteraction>;
+	},
+	DiscordMarkdown: (props) => {
+		return <DiscordMarkdown {...props}>{props.children}</DiscordMarkdown>;
+	},
+	DiscordButtons: (props) => {
+		return <DiscordButtons {...props}>{props.children}</DiscordButtons>;
+	},
+	DiscordButton: (props) => {
+		return <DiscordButton {...props}>{props.children}</DiscordButton>;
+	},
+	DiscordReactions: (props) => {
+		return <DiscordReactions {...props}>{props.children}</DiscordReactions>;
+	},
+	DiscordReaction: (props) => {
+		return <DiscordReaction {...props}>{props.children}</DiscordReaction>;
 	},
 };
 export default MDXComponents;
