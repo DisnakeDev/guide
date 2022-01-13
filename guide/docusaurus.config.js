@@ -39,8 +39,16 @@ const config = {
 		colorMode: {
 			defaultMode: 'dark',
 		},
-		image: 'https://i.imgur.com/KsTvw5Z.png',
-		metaImage: 'https://i.imgur.com/KsTvw5Z.png',
+		metadata: [
+			{
+				name: 'og:image',
+				content: 'public/disnake-meta-image.png',
+			},
+			{
+				name: 'theme-color',
+				content: '#f0c43f',
+			},
+		],
 		navbar: {
 			title: 'Disnake Guide',
 			logo: {
