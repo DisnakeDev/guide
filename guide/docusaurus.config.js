@@ -48,6 +48,10 @@ const config = {
 				name: 'theme-color',
 				content: '#f0c43f',
 			},
+			{
+				name: 'twitter:card',
+				content: 'summary',
+			},
 		],
 		navbar: {
 			title: 'Disnake Guide',
