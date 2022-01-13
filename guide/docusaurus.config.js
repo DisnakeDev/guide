@@ -42,7 +42,7 @@ const config = {
 		metadata: [
 			{
 				name: 'og:image',
-				content: 'public/disnake-meta-image.png',
+				content: 'https://guide.disnake.dev/public/disnake-meta-image.png',
 			},
 			{
 				name: 'theme-color',
