@@ -5,7 +5,7 @@ keywords: [disnake, bot, guide, tutorial, thread, python]
 
 # Threads
 
-Threads are [`Messagable`](https://docs.disnake.dev/en/latest/api.html#messageable) objects, and can be thought of as
+Threads are <DocsLink reference="disnake.abc.Messageable">Messageable</DocsLink> objects, and can be thought of as
 sub-channels inside existing channels. They allow organization of multiple topics in a channel by temporarily giving
 them a separate space.
 
@@ -13,10 +13,10 @@ them a separate space.
 
 #### Creating and deleting threads
 
-A thread can be created by using the
-[`create_thread()`](https://docs.disnake.dev/en/latest/api.html#disnake.TextChannel.create_thread) method on a
-[`Message`](https://docs.disnake.dev/en/latest/api.html#disnake.Message) or
-[`TextChannel`](https://docs.disnake.dev/en/latest/api.html#disnake.TextChannel) object.
+A thread can be created by using the <DocsLink reference="disnake.TextChannel.create_thread">create_thread()</DocsLink>
+method on a <DocsLink reference="disnake.Message">Message</DocsLink> or
+
+<DocsLink reference="disnake.TextChannel">TextChannel</DocsLink> object.
 
 ```python title="threads.py"
 # Using the 'Message' object.
@@ -48,14 +48,14 @@ await channel.create_thread(
 Threads introduce some new gateway events, which are listed below. You can find more information on these
 [in the documentation](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_join).
 
--   [`on_thread_join`](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_join)
+-   <DocsLink reference="disnake.on_thread_join">on_thread_join</DocsLink>
 
--   [`on_thread_remove`](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_remove)
+-   <DocsLink reference="disnake.on_thread_remove">on_thread_remove</DocsLink>
 
--   [`on_thread_member_join`](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_member_join)
+-   <DocsLink reference="disnake.on_thread_member_join">on_thread_member_join</DocsLink>
 
--   [`on_thread_member_remove`](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_member_remove)
+-   <DocsLink reference="disnake.on_thread_member_remove">on_thread_member_remove</DocsLink>
 
--   [`on_thread_delete`](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_delete)
+-   <DocsLink reference="disnake.on_thread_delete">on_thread_delete</DocsLink>
 
--   [`on_thread_update`](https://docs.disnake.dev/en/latest/api.html#disnake.on_thread_update)
+-   <DocsLink reference="disnake.on_thread_update">on_thread_update</DocsLink>

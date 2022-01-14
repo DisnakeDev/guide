@@ -154,24 +154,35 @@ Cogs represent a fairly drastic change in the way you write commands and bots, s
 the primary syntax used in cogs:
 
 -   Each cog is a Python class that subclasses
-    [`commands.Cog`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog).
+    <DocsLink ext="commands" reference="disnake.ext.commands.Cog">
+    	commands.Cog
+    </DocsLink>
+    .
 -   Decorators for commands in cogs:
-    -   Command -
-        [`commands.command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.command)
+    -   Command - <DocsLink ext="commands" reference="disnake.ext.commands.command">commands.command()</DocsLink>
     -   Slash command -
-        [`commands.slash_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.slash_command)
+        <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">
+        	commands.slash_command()
+        </DocsLink>
     -   User command -
-        [`commands.user_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.user_command)
+        <DocsLink ext="commands" reference="disnake.ext.commands.user_command">
+        	commands.user_command()
+        </DocsLink>
     -   Message command -
-        [`commands.message_command()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.message_command)
+        <DocsLink ext="commands" reference="disnake.ext.commands.message_command">
+        	commands.message_command()
+        </DocsLink>
 -   Every listener is marked with the
-    [`commands.Cog.listener()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Cog.listener)
-    decorator.
+    <DocsLink ext="commands" reference="disnake.ext.commands.Cog.listener">
+    	commands.Cog.listener()
+    </DocsLink> decorator.
 -   Cogs are then registered with the
-    [`Bot.add_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.add_cog) call,
-    and are subsequently removed with the
-    [`Bot.remove_cog()`](https://docs.disnake.dev/en/latest/ext/commands/api.html#disnake.ext.commands.Bot.remove_cog)
-    call.
+    <DocsLink ext="commands" reference="disnake.ext.commands.Bot.add_cog">
+    	Bot.add_cog
+    </DocsLink> call, and are subsequently removed with the
+    <DocsLink ext="commands" reference="disnake.ext.commands.Bot.remove_cog">
+    	Bot.remove_cog
+    </DocsLink> call.
 
 <sup>
 	Source: <a href="https://docs.disnake.dev/en/latest/ext/commands/cogs.html">Disnake Documentation</a>

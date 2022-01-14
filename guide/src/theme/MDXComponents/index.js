@@ -26,6 +26,7 @@ import isDarkTheme from '../../hooks/isDarkTheme';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import DocsLink from '../../components/DocsLink';
 import ResultingCode from '../../components/ResultingCode';
 
 function unwrapMDXElement(element) {
@@ -78,6 +79,9 @@ const MDXComponents = {
 	h4: Heading('h4'),
 	h5: Heading('h5'),
 	h6: Heading('h6'),
+	DocsLink: (props) => {
+		return <DocsLink {...props}>{props.children}</DocsLink>;
+	},
 	ResultingCode: () => {
 		return <ResultingCode />;
 	},
