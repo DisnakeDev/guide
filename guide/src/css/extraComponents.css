@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'uni-sans-caps';
+	src: url('/fonts/uni-sans.heavy-caps.otf') format('opentype');
+}
+
 /* Navbar social icons */
 
 .navbar-item-github:hover {
@@ -73,4 +78,13 @@ html[data-theme='dark'] .navbar-item-discord:before {
 
 span.theme-last-updated {
 	font-style: normal;
+}
+
+/* Extra */
+
+.navbar__title {
+	color: var(--ifm-color-primary-dark);
+	font-family: 'uni-sans-caps';
+	font-size: 1.35rem;
+	padding-left: 0.25rem;
 }

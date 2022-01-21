@@ -54,7 +54,7 @@ const config = {
 			},
 		],
 		navbar: {
-			title: 'Disnake Guide',
+			title: 'Disnake',
 			logo: {
 				alt: 'Disnake Logo',
 				src: 'public/disnake-logo.png',
