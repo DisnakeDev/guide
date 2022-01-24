@@ -58,6 +58,7 @@ const config = {
 			logo: {
 				alt: 'Disnake Logo',
 				src: 'public/disnake-logo.png',
+				href: 'https://disnake.dev/',
 			},
 			items: [
 				{

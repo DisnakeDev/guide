@@ -25,9 +25,10 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Interactions',
+			link: { type: 'doc', id: 'interactions/intro' },
 			items: [
-				'interactions/interactions',
-				'interactions/application-commands',
+				'interactions/slash-commands',
+				'interactions/user-message-commands',
 				'interactions/message-components',
 			],
 		},
