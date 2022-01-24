@@ -1,38 +1,7 @@
-# What are interactions?
+# Slash Commands
 
-An **Interaction** is the message that your bot receives when a user initiates an application command or a message
-component.
-
-## Interactions and Bot Users
-
-We're all used to the way that Discord bots have worked for a long time. You make an application in
-[Developer Portal](https://discord.com/developers/applications), make a new bot user, and copy the token. Interactions
-bring something entirely new - the ability to interact with an application _without needing a bot user in the guild_.
-Responding to the interaction doesn't require a bot token.
-
-`disnake` is primarily focused on using the gateway events, so you still need a bot user. Check out
-[`hikari-py`](https://github.com/hikari-py/hikari) with their REST-API part for this purpose.
-
-Welcome to the new world.
-
-## Responding to interactions
-
-You have only 3 seconds to respond to the interaction. If do not have time to do it, Discord will shown "This
-interaction failed" error.
-
-In fact, there are 3 types of interactions:
-
--   <DocsLink reference="disnake.ApplicationCommandInteraction" /> (for <a href="/interactions/application-commands">
-    	application commands
-    </a>
-    )
--   <DocsLink reference="disnake.MessageInteraction" /> (for <a href="/interactions/message-components">
-    	message components
-    </a>
-    )
--   <DocsLink reference="disnake.Interaction" /> (a base class, usually not used)
-
-But responding is the same for both interactions types.
+Application commands are commands that your bot can register to Discord. They provide users a first-class way of
+interacting directly with your bot that feels deeply integrated into Discord.
 
 ### `interaction.response`
 
@@ -40,6 +9,9 @@ But responding is the same for both interactions types.
 	InteractionResponse
 </DocsLink> instance that has 4 usable methods. A response can <b>only be done once</b>. If you want to send secondary
 messages, consider using a <DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
+
+<br />
+<br />
 
 1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message
 2. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits original message, you're
@@ -59,9 +31,7 @@ going to respond to message components.
 :::note
 
 If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction. Then
-when your response is ready you can edit the message using
-
-<DocsLink reference="disnake.InteractionResponse.edit_original_message">edit_original_message</DocsLink> method.
+when your response is ready you can edit the message using <DocsLink reference="disnake.InteractionResponse.edit_original_message">edit_original_message</DocsLink> method.
 
 :::
 

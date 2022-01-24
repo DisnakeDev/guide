@@ -1,0 +1,21 @@
+---
+slug: /interactions
+hide_table_of_contents: true
+description: This section covers application commands and message components.
+---
+
+# Interactions
+
+**Interactions** here refers to client-integrated elements that a bot can create - giving users a first class way to interact with your application. Currently, interactions can be classified under 3 categories:
+
+-   [Slash Commands](https://discord.com/developers/docs/interactions/application-commands#slash-commands): They can be accessed via the textbox, and return the values the user submitted with the command.
+-   [User/Message Commands](https://discord.com/developers/docs/interactions/application-commands#user-commands): They are available under **Apps** in user/message context menus, and the response includes the resolved user or message on which the action was taken.
+-   [Message Components](https://discord.com/developers/docs/interactions/message-components): They refer to views, buttons and select menus that can be added to the messages your bot sends. There components return identifying information about the components that were used, along with metadata regarding how the action was triggered.
+
+:::note Interactions and Bot Users
+
+Interactions are essentially webhooks under the hood (and responding to interactions doesn't require a bot token). Thus, you can have an interaction-only application that can be accessed by users **without having a bot user** in the guild.
+
+Since `disnake` is primarily focused on using the gateway events, you will still require a bot user. You can check out other libraries like [`hikari`](https://www.hikari-py.dev/) for utilizing this feature.
+
+:::
