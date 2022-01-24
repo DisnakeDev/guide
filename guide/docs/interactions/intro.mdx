@@ -6,11 +6,78 @@ description: This section covers application commands and message components.
 
 # Interactions
 
-**Interactions** here refers to client-integrated elements that a bot can create - giving users a first class way to interact with your application. Currently, interactions can be classified under 3 categories:
+**Interactions** here refers to client-integrated elements that a bot can create - giving users a way to interact directly with your application. Currently, interactions can be classified under three categories:
 
--   [Slash Commands](https://discord.com/developers/docs/interactions/application-commands#slash-commands): They can be accessed via the textbox, and return the values the user submitted with the command.
--   [User/Message Commands](https://discord.com/developers/docs/interactions/application-commands#user-commands): They are available under **Apps** in user/message context menus, and the response includes the resolved user or message on which the action was taken.
--   [Message Components](https://discord.com/developers/docs/interactions/message-components): They refer to views, buttons and select menus that can be added to the messages your bot sends. There components return identifying information about the components that were used, along with metadata regarding how the action was triggered.
+<div class="container">
+	<div class="row">
+		<div class="col padding-vert--md">
+			<div class="card">
+				<div class="card__image">
+					<a href="/interactions/slash-commands">
+						<img
+							src={require('./images/slash-commands-intro.png').default}
+							alt="Slash Commands Intro Image"
+						/>
+					</a>
+				</div>
+				<div class="card__body">
+					<a href="/interactions/slash-commands">
+						<h4>Slash Commands</h4>
+					</a>
+					<small>
+						They can be accessed via the textbox, and return the values the user submitted with the command.
+					</small>
+				</div>
+			</div>
+		</div>
+		<br />
+		<div class="col padding-vert--md">
+			<div class="card">
+				<div class="card__image">
+					<a href="/interactions/user-message-commands">
+						<img
+							src={require('./images/user-message-commands-intro.png').default}
+							alt="Slash Commands Intro Image"
+						/>
+					</a>
+				</div>
+				<div class="card__body">
+					<a href="/interactions/user-message-commands">
+						<h4>User/Message Commands</h4>
+					</a>
+					<small>
+						They are available under <b>Apps</b> in user/message context menus, responding with the resolved
+						user or message on which the action was taken.
+					</small>
+				</div>
+			</div>
+		</div>
+		<br />
+		<div class="col padding-vert--md">
+			<div class="card">
+				<div class="card__image">
+					<a href="/interactions/message-components">
+						<img
+							src={require('./images/message-components-intro.png').default}
+							alt="Slash Commands Intro Image"
+						/>
+					</a>
+				</div>
+				<div class="card__body">
+					<a href="/interactions/message-components">
+						<h4>Message Components</h4>
+					</a>
+					<small>
+						They refer to views, buttons and select menus that can be added to the messages your bot
+						sends.{' '}
+					</small>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br />
 
 :::note Interactions and Bot Users
 
