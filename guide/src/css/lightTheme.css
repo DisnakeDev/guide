@@ -1,11 +1,11 @@
 html[data-theme='light'] {
-	--ifm-color-primary: #376fa1;
-	--ifm-color-primary-light: #f2cd5b;
-	--ifm-color-primary-lighter: #f3d169;
-	--ifm-color-primary-lightest: #f7de93;
-	--ifm-color-primary-dark: #eebb23;
-	--ifm-color-primary-darker: #edb715;
-	--ifm-color-primary-darkest: #c5980f;
+	--ifm-color-primary: hsl(211, 44%, 40%);
+	--ifm-color-primary-light: hsl(211, 43%, 44%);
+	--ifm-color-primary-lighter: hsl(211, 43%, 45%);
+	--ifm-color-primary-lightest: hsl(211, 46%, 52%);
+	--ifm-color-primary-dark: hsl(212, 43%, 36%);
+	--ifm-color-primary-darker: hsl(212, 43%, 34%);
+	--ifm-color-primary-darkest: hsl(211, 43%, 28%);
 	--ifm-code-font-size: 95%;
 }
 

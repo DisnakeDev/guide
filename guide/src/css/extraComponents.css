@@ -83,7 +83,7 @@ span.theme-last-updated {
 /* Extra */
 
 .navbar__title {
-	color: var(--ifm-color-primary-dark);
+	color: var(--ifm-color-primary);
 	font-family: 'uni-sans-caps';
 	font-size: 1.35rem;
 	padding-left: 0.25rem;
