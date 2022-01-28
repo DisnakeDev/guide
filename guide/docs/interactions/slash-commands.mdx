@@ -1,8 +1,26 @@
 # Slash Commands
 
-**Slash Commands** is one of the types of [**Interactions**](/interactions) an application can create. It provides users a first-class way to interact with your bot.
+A **slash command** is one of the types of client-integrated interactions a bot can create. Unlike prefix commands, these do not require the message intent.
 
-### `interaction.response`
+This section will go in-depth on the creation, types and handling of slash commands with `disnake`.
+
+:::note
+
+A bot needs to be authorized with the `applications.commands` scope in order to create slash commands in a guild.
+
+:::
+
+To create a slash command, you need to use the `@bot.slash_command` decorator.
+
+## Registering commands
+
+### Global commands
+
+### Guild commands
+
+## Responding to commands
+
+### Sending responses
 
 <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a <DocsLink reference="disnake.InteractionResponse">
 	InteractionResponse
@@ -47,6 +65,10 @@ async def defer(inter: ApplicationCommandInteraction):
     await inter.edit_original_message("The wait is over, my comrades!")
 ```
 
-### `interaction.followup`
+### Follow-ups
 
 Often used when you need to send secondary messages after responding.
+
+## Options and choices
+
+## Groups and subcommands
