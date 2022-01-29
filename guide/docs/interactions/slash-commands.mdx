@@ -12,13 +12,13 @@ A bot needs to be authorized with the `applications.commands` scope in order to 
 
 To create a slash command, you need to use the `@bot.slash_command` decorator.
 
-```python 
+```python
 @bot.slash_command(
-	name="ping",
-	description="Returns websocket latency.",
+    name="ping",
+    description="Returns websocket latency.",
 )
 async def ping(inter: disnake.ApplicationCommandInteraction):
-	...
+    ...
 ```
 
 <br />
