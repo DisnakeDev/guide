@@ -70,7 +70,7 @@ async def command(
 </TabItem>
 <TabItem value="discord.py" label="discord.py">
 
-```python linenums="1"
+```python
 class DataConverter(commands.Converter):
     async def convert(self, ctx: commands.Context, arg: str):
         parts = arg.split(",")
@@ -149,7 +149,7 @@ async def command(
 
 Instead of using `inter.target` you should be using a parameter of your command.
 
-```python linenums="1"
+```python
 @commands.user_command()
 async def command(self, inter: disnake.ApplicationCommandInteraction, user: disnake.User):
     await inter.response.send_message(f"Used on {user.mention}")
@@ -160,7 +160,7 @@ async def command(self, inter: disnake.ApplicationCommandInteraction, user: disn
 You may use docstrings for command and option descriptions. Everything before `Parameters` is the command description.
 Everything after `Parameters` are the option descriptions.
 
-```python linenums="1"
+```python
 @commands.slash_command()
 async def command(
     self,
@@ -184,7 +184,7 @@ async def command(
 While disnake does provide a `@commands.guild_only()` decorator, it still makes you handle `guild` being optional in
 case you're using linters. To solve this you should be using `GuildCommandInteraction`.
 
-```python linenums="1"
+```python
 # before
 @commands.slash_command()
 @commands.guild_only()
