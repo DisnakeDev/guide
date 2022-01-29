@@ -1,0 +1,26 @@
+# Error Handling
+
+When our commands fail to parse we will, by default, receive a noisy error in `stderr` of our console that tells us
+that an error has happened and has been silently ignored.
+
+In order to handle our errors, we must use something called an error handler. There is a global error handler, called <DocsLink ext="commands" reference="disnake.disnake.ext.commands.on_command_error">on_command_error()</DocsLink> which works
+like any other event in the <DocsLink ext="commands" reference="event-reference">Event Reference</DocsLink>. This global error handler is called for every error reached.
+
+Most of the time however, we want to handle an error local to the command itself. Luckily, commands come with local error
+handlers that allow us to do just that. First we decorate an error handler function with <DocsLink ext="commands" reference="disnake.ext.commands.Command.error">Command.error()</DocsLink>:
+
+```python
+@bot.command()
+async def info(ctx, *, member: disnake.Member):
+    """Tells you some info about the member."""
+    msg = f"{member} joined on {member.joined_at} and has {len(member.roles)} roles."
+    await ctx.send(msg)
+
+
+@info.error
+async def info_error(ctx, error):
+    if isinstance(error, commands.BadArgument):
+        await ctx.send("I could not find that member...")
+```
+
+The first parameter of the error handler is the <DocsLink ext="commands" reference="disnake.ext.commands.Context">Context</DocsLink> while the second one is an exception that is derived from <DocsLink ext="commands" reference="disnake.ext.commands.CommandError">CommandError</DocsLink>. A list of errors is found in the <DocsLink ext="commands" reference="ext-commands-api-errors">Exceptions</DocsLink> page of the documentation.

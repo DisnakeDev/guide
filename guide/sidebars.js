@@ -42,6 +42,7 @@ const sidebars = {
 				'popular-topics/reactions',
 				'popular-topics/webhooks',
 				'popular-topics/permissions',
+				'popular-topics/errors',
 				'popular-topics/intents',
 			],
 		},
