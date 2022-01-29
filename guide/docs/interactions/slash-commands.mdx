@@ -12,6 +12,28 @@ A bot needs to be authorized with the `applications.commands` scope in order to 
 
 To create a slash command, you need to use the `@bot.slash_command` decorator.
 
+```python 
+@bot.slash_command(
+	name="ping",
+	description="Returns websocket latency.",
+)
+async def ping(inter: disnake.ApplicationCommandInteraction):
+	...
+```
+
+<br />
+<DiscordMessages>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<div slot="interactions">
+			<DiscordInteraction author="AbhigyanTrips" avatar="/public/message-author.png" command="true">
+				ping
+			</DiscordInteraction>
+		</div>
+		Pong!
+	</DiscordMessage>
+</DiscordMessages>
+<br />
+
 ## Registering commands
 
 ### Global commands
