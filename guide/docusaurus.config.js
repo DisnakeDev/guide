@@ -92,6 +92,11 @@ const config = {
 			theme: require('./src/utils/prismLight'),
 			darkTheme: require('./src/utils/prismDark'),
 		},
+		algolia: {
+			appId: 'WPCP8YA273',
+			apiKey: '5a21886b115baa4f6819b23d0a1e87c0',
+			indexName: 'guide-disnake',
+		},
 	},
 };
 
