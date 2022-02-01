@@ -90,10 +90,12 @@ If you want to keep some of your slash commands global and make some of them loc
 ```python
 bot = commands.Bot("!")
 
+
 @bot.slash_command()
 async def global_command(inter):
     """This command is visible everywhere"""
     ...
+
 
 @bot.slash_command(guild_ids=[123456789])
 async def local_command(inter):
