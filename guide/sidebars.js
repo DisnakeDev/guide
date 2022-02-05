@@ -49,7 +49,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Frequently Asked Questions',
-			items: ['faq/good-practices'],
+			items: ['faq/general', 'faq/coroutines', 'faq/extensions', 'faq/good-practices'],
 		},
 	],
 };
