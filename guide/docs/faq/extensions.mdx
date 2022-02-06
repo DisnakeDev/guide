@@ -1,4 +1,6 @@
-# Commands Extension
+# Extensions
+
+Questions regarding `disnake.ext.commands` and `disnake.ext.tasks` belong here.
 
 :::note
 
@@ -6,76 +8,81 @@ This is placeholder content that has been taken directly from the [documentation
 
 :::
 
-Questions regarding `disnake.ext.commands` belong here.
+### Why does `on_message` make my commands stop working?
 
-Why does `on_message` make my commands stop working?
+Overriding the default provided `on_message` forbids any extra commands from running. To fix this, add a
+`bot.process_commands(message)` line at the end of your `on_message`. For example:
 
+```python title="extensions.py"
+@bot.event
+async def on_message(message):
+    # Do some extra stuff here
+
+    await bot.process_commands(message)
 ```
 
-Overriding the default provided ``on_message`` forbids any extra commands from running. To fix this, add a
-``bot.process_commands(message)`` line at the end of your ``on_message``. For example: ::
+Alternatively, you can place your `on_message` logic into a **listener**. In this setup, you should not
+manually call `bot.process_commands()`. This also allows you to do multiple things asynchronously in response
+to a message. Example:
 
-    @bot.event
-    async def on_message(message):
-        # do some extra stuff here
+```python title="extensions.py"
+@bot.listen("on_message")
+async def whatever_you_want_to_call_it(message):
+    await do_stuff_here()
+    # Do not process commands here
+```
 
-        await bot.process_commands(message)
+### Why do my arguments require quotes?
 
-Alternatively, you can place your ``on_message`` logic into a **listener**. In this setup, you should not
-manually call ``bot.process_commands()``. This also allows you to do multiple things asynchronously in response
-to a message. Example::
+In a simple command defined as:
 
-    @bot.listen('on_message')
-    async def whatever_you_want_to_call_it(message):
-        # do stuff here
-        # do not process commands here
+```python title="extensions.py"
+@bot.command()
+async def echo(ctx, message: str):
+    await ctx.send(message)
+```
 
-Why do my arguments require quotes?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Calling it via `?echo a b c` will only fetch the first argument and disregard the rest. To fix this you should either call
+it via `?echo "a b c"` or change the signature to have "consume rest" behaviour. Example:
 
-In a simple command defined as: ::
+```python title="extensions.py"
+@bot.command()
+async def echo(ctx, *, message: str):
+    await ctx.send(message)
+```
 
-    @bot.command()
-    async def echo(ctx, message: str):
-        await ctx.send(message)
+This will allow you to use `?echo a b c` without needing the quotes.
 
-Calling it via ``?echo a b c`` will only fetch the first argument and disregard the rest. To fix this you should either call
-it via ``?echo "a b c"`` or change the signature to have "consume rest" behaviour. Example: ::
+### How do I get the original `message`?
 
-    @bot.command()
-    async def echo(ctx, *, message: str):
-        await ctx.send(message)
-
-This will allow you to use ``?echo a b c`` without needing the quotes.
-
-How do I get the original ``message``\?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :class:`~ext.commands.Context` contains an attribute, :attr:`~.Context.message` to get the original
+The <DocsLink ext="commands" reference="disnake.ext.commands.Context" /> contains an attribute, <DocsLink ext="commands" reference="disnake.ext.commands.Context.message">message</DocsLink> to get the original
 message.
 
-Example: ::
+Example:
 
-    @bot.command()
-    async def length(ctx):
-        await ctx.send(f'Your message is {len(ctx.message.content)} characters long.')
+```python title="extensions.py"
+@bot.command()
+async def length(ctx):
+    await ctx.send(f"Your message is {len(ctx.message.content)} characters long.")
+```
 
-How do I make a subcommand?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### How do I make a subcommand?
 
-Use the :func:`~ext.commands.group` decorator. This will transform the callback into a :class:`~ext.commands.Group` which will allow you to add commands into
+Use the <DocsLink ext="commands" reference="disnake.ext.commands.group">group()</DocsLink> decorator. This will transform the callback into a <DocsLink ext="commands" reference="disnake.ext.commands.Group" /> which will allow you to add commands into
 the group operating as "subcommands". These groups can be arbitrarily nested as well.
 
-Example: ::
+Example:
 
-    @bot.group()
-    async def git(ctx):
-        if ctx.invoked_subcommand is None:
-            await ctx.send('Invalid git command passed...')
+```python title="extensions.py"
+@bot.group()
+async def git(ctx):
+    if ctx.invoked_subcommand is None:
+        await ctx.send("Invalid git command passed...")
 
-    @git.command()
-    async def push(ctx, remote: str, branch: str):
-        await ctx.send(f'Pushing to {remote} {branch}')
 
-This could then be used as ``?git push origin master``.
+@git.command()
+async def push(ctx, remote: str, branch: str):
+    await ctx.send(f"Pushing to {remote} {branch}.")
 ```
+
+This could then be used as `?git push origin master`.
