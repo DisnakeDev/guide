@@ -13,7 +13,7 @@ This is placeholder content that has been taken directly from the [documentation
 Overriding the default provided `on_message` forbids any extra commands from running. To fix this, add a
 `bot.process_commands(message)` line at the end of your `on_message`. For example:
 
-```python title="extensions.py"
+```python
 @bot.event
 async def on_message(message):
     # Do some extra stuff here
@@ -25,7 +25,7 @@ Alternatively, you can place your `on_message` logic into a **listener**. In thi
 manually call `bot.process_commands()`. This also allows you to do multiple things asynchronously in response
 to a message. Example:
 
-```python title="extensions.py"
+```python
 @bot.listen("on_message")
 async def whatever_you_want_to_call_it(message):
     await do_stuff_here()
@@ -36,7 +36,7 @@ async def whatever_you_want_to_call_it(message):
 
 In a simple command defined as:
 
-```python title="extensions.py"
+```python
 @bot.command()
 async def echo(ctx, message: str):
     await ctx.send(message)
@@ -45,7 +45,7 @@ async def echo(ctx, message: str):
 Calling it via `?echo a b c` will only fetch the first argument and disregard the rest. To fix this you should either call
 it via `?echo "a b c"` or change the signature to have "consume rest" behaviour. Example:
 
-```python title="extensions.py"
+```python
 @bot.command()
 async def echo(ctx, *, message: str):
     await ctx.send(message)
@@ -60,7 +60,7 @@ message.
 
 Example:
 
-```python title="extensions.py"
+```python
 @bot.command()
 async def length(ctx):
     await ctx.send(f"Your message is {len(ctx.message.content)} characters long.")
@@ -73,7 +73,7 @@ the group operating as "subcommands". These groups can be arbitrarily nested as 
 
 Example:
 
-```python title="extensions.py"
+```python
 @bot.group()
 async def git(ctx):
     if ctx.invoked_subcommand is None:

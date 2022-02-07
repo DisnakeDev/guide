@@ -8,153 +8,167 @@ This is placeholder content that has been taken directly from the [documentation
 
 General questions regarding library usage belong here.
 
-## Where can I find usage examples?
+### Where can I find usage examples?
 
-Example code can be found in the `examples folder <https://github.com/DisnakeDev/disnake/tree/master/examples>`\_
-in the repository.
+Example code can be found in the [examples folder](https://github.com/DisnakeDev/disnake/tree/master/examples) in the repository.
 
-## How do I set the "Playing" status?
+### How do I set the "Playing" status?
 
-The `activity` keyword argument may be passed in the :class:`Client` constructor or :meth:`Client.change_presence`, given an :class:`Activity` object.
+The `activity` keyword argument may be passed in the <DocsLink reference="disnake.Client" /> constructor or <DocsLink reference="disnake.Client.change_presence" />, given an <DocsLink reference="disnake.Activity" /> object.
 
-The constructor may be used for static activities, while :meth:`Client.change_presence` may be used to update the activity at runtime.
+The constructor may be used for static activities, while <DocsLink reference="disnake.Client.change_presence" /> may be used to update the activity at runtime.
 
-.. warning::
+:::warning
 
-    It is highly discouraged to use :meth:`Client.change_presence` or API calls in :func:`on_ready` as this event may be called many times while running, not just once.
+It is highly discouraged to use <DocsLink reference="disnake.Client.change_presence" /> or API calls in <DocsLink reference="disnake.on_ready" /> as this event may be called many times while running, not just once. There is a high chance of disconnecting if presences are changed right after connecting.
 
-    There is a high chance of disconnecting if presences are changed right after connecting.
+:::
 
-The status type (playing, listening, streaming, watching) can be set using the :class:`ActivityType` enum.
+The status type (playing, listening, streaming, watching) can be set using the <DocsLink reference="disnake.ActivityType" /> enum.
 For memory optimisation purposes, some activities are offered in slimmed-down versions:
 
--   :class:`Game`
--   :class:`Streaming`
+-   <DocsLink reference="disnake.Game" />
+-   <DocsLink reference="disnake.Streaming" />
 
-Putting both of these pieces of info together, you get the following: ::
+Putting both of these pieces of info together, you get the following:
 
-    client = disnake.Client(activity=disnake.Game(name='my game'))
+```python
+client = disnake.Client(activity=disnake.Game(name="My game"))
 
-    # or, for watching:
-    activity = disnake.Activity(name='my activity', type=disnake.ActivityType.watching)
-    client = disnake.Client(activity=activity)
-
-How do I send a message to a specific channel?
-
+# Or, for watching:
+activity = disnake.Activity(
+    name="My activity",
+    type=disnake.ActivityType.watching,
+)
+client = disnake.Client(activity=activity)
 ```
 
-You must fetch the channel directly and then call the appropriate method. Example: ::
+### How do I send a message to a specific channel?
 
-    channel = client.get_channel(12324234183172)
-    await channel.send('hello')
+You must fetch the channel directly and then call the appropriate method. Example:
 
-How do I send a DM?
-~~~~~~~~~~~~~~~~~~~
+```python
+channel = client.get_channel(12324234183172)
+await channel.send("hello")
+```
 
-Get the :class:`User` or :class:`Member` object and call :meth:`abc.Messageable.send`. For example: ::
+### How do I send a DM?
 
-    user = client.get_user(381870129706958858)
-    await user.send('👀')
+Get the <DocsLink reference="disnake.User" /> or <DocsLink reference="disnake.Member" /> object and call <DocsLink reference="disnake.abc.Messageable.send" />. For example:
 
-If you are responding to an event, such as :func:`on_message`, you already have the :class:`User` object via :attr:`Message.author`: ::
+```python
+user = client.get_user(381870129706958858)
+await user.send("👀")
+```
 
-    await message.author.send('👋')
+If you are responding to an event, such as <DocsLink reference="disnake.on_message" />, you already have the <DocsLink reference="disnake.User" /> object via <DocsLink reference="disnake.Message.author" />:
 
-How do I get the ID of a sent message?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```python
+await message.author.send("👋")
+```
 
-:meth:`abc.Messageable.send` returns the :class:`Message` that was sent.
-The ID of a message can be accessed via :attr:`Message.id`: ::
+### How do I get the ID of a sent message?
 
-    message = await channel.send('hmm…')
-    message_id = message.id
+The <DocsLink reference="disnake.abc.Messageable.send" /> method returns the <DocsLink reference="disnake.Message" /> that was sent.
+The ID of a message can be accessed via <DocsLink reference="disnake.Message.id" />:
 
-How do I upload an image?
-~~~~~~~~~~~~~~~~~~~~~~~~~
+```python
+message = await channel.send("hmm…")
+message_id = message.id
+```
 
-To upload something to Discord you have to use the :class:`File` object.
+### How do I upload an image?
 
-A :class:`File` accepts two parameters, the file-like object (or file path) and the filename
+To upload something to Discord you have to use the <DocsLink reference="disnake.File" /> object.
+
+A <DocsLink reference="disnake.File" /> accepts two parameters, the file-like object (or file path) and the filename
 to pass to Discord when uploading.
 
-If you want to upload an image it's as simple as: ::
+If you want to upload an image it's as simple as:
 
-    await channel.send(file=disnake.File('my_file.png'))
+```python
+await channel.send(file=disnake.File("my_file.png"))
+```
 
-If you have a file-like object you can do as follows: ::
+If you have a file-like object you can do as follows:
 
-    with open('my_file.png', 'rb') as fp:
-        await channel.send(file=disnake.File(fp, 'new_filename.png'))
+```python
+with open("my_file.png", "rb") as fp:
+    await channel.send(file=disnake.File(fp, "new_filename.png"))
+```
 
-To upload multiple files, you can use the ``files`` keyword argument instead of ``file``\: ::
+To upload multiple files, you can use the `files` keyword argument instead of `file`:
 
-    my_files = [
-        disnake.File('result.zip'),
-        disnake.File('teaser_graph.png'),
-    ]
-    await channel.send(files=my_files)
+```python
+my_files = [
+    disnake.File("result.zip"),
+    disnake.File("teaser_graph.png"),
+]
+await channel.send(files=my_files)
+```
 
-If you want to upload something from a URL, you will have to use an HTTP request using :doc:`aiohttp <aio:index>`
-and then pass an :class:`io.BytesIO` instance to :class:`File` like so:
+If you want to upload something from a URL, you will have to use an HTTP request using [`aiohttp`](https://docs.aiohttp.org/en/stable/index.html)
+and then pass an [io.BytesIO](https://docs.python.org/3/library/io.html#io.BytesIO) instance
+to <DocsLink reference="disnake.File" /> like so:
 
-.. code-block:: python3
+```python
+import io
+import aiohttp
 
-    import io
-    import aiohttp
+async with aiohttp.ClientSession() as session:
+    async with session.get(my_url) as resp:
+        if resp.status != 200:
+            return await channel.send("Could not download file...")
+        data = io.BytesIO(await resp.read())
+        await channel.send(file=disnake.File(data, "cool_image.png"))
+```
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(my_url) as resp:
-            if resp.status != 200:
-                return await channel.send("Could not download file...")
-            data = io.BytesIO(await resp.read())
-            await channel.send(file=disnake.File(data, "cool_image.png"))
+### How can I add a reaction to a message?
 
-
-How can I add a reaction to a message?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You use the :meth:`Message.add_reaction` method.
+You use the <DocsLink reference="disnake.Message.add_reaction" /> method.
 
 If you want to use unicode emoji, you must pass a valid unicode code point in a string. In your code, you can write this in a few different ways:
 
-- ``'👍'``
-- ``'\U0001F44D'``
-- ``'\N{THUMBS UP SIGN}'``
+-   `'👍'`
+-   `'\U0001F44D'`
+-   `'\N{THUMBS UP SIGN}'`
 
-Quick example: ::
+Quick example:
 
-    emoji = '\N{THUMBS UP SIGN}'
-    # or '\U0001f44d' or '👍'
-    await message.add_reaction(emoji)
+```python
+emoji = "\N{THUMBS UP SIGN}"
+# or '\U0001f44d' or '👍'
+await message.add_reaction(emoji)
+```
 
 In case you want to use emoji that come from a message, you already get their code points in the content without needing
-to do anything special. You **cannot** send ``':thumbsup:'`` style shorthands.
+to do anything special. You **cannot** send `':thumbsup:'` style shorthands.
 
-For custom emoji, you should pass an instance of :class:`Emoji`. You can also pass a ``'<:name:id>'`` string, but if you
-can use said emoji, you should be able to use :meth:`Client.get_emoji` to get an emoji via ID or use :func:`utils.find`/
-:func:`utils.get` on :attr:`Client.emojis` or :attr:`Guild.emojis` collections.
+For custom emoji, you should pass an instance of <DocsLink reference="disnake.Emoji" />. You can also pass a `'<:name:id>'` string, but if you
+can use said emoji, you should be able to use <DocsLink reference="disnake.Client.get_emoji" /> to get an emoji via ID or use <DocsLink reference="disnake.utils.find" />
+or <DocsLink reference="disnake.utils.get" /> on <DocsLink reference="disnake.Client.emojis" /> or <DocsLink reference="disnake.Guild.emojis" /> collections.
 
-The name and ID of a custom emoji can be found with the client by prefixing ``:custom_emoji:`` with a backslash.
-For example, sending the message ``\:python3:`` with the client will result in ``<:python3:232720527448342530>``.
+The name and ID of a custom emoji can be found with the client by prefixing `:custom_emoji:` with a backslash.
+For example, sending the message `\:python3:` with the client will result in `<:python3:232720527448342530>`.
 
-Quick example: ::
+Quick example:
 
+```python
+# If you have the ID already
+emoji = client.get_emoji(310177266011340803)
+await message.add_reaction(emoji)
 
-    # if you have the ID already
-    emoji = client.get_emoji(310177266011340803)
+# No ID, do a lookup
+emoji = disnake.utils.get(guild.emojis, name="LUL")
+if emoji:
     await message.add_reaction(emoji)
 
-    # no ID, do a lookup
-    emoji = disnake.utils.get(guild.emojis, name='LUL')
-    if emoji:
-        await message.add_reaction(emoji)
-
-    # if you have the name and ID of a custom emoji:
-    emoji = '<:python3:232720527448342530>'
-    await message.add_reaction(emoji)
-
-How do I pass a coroutine to the player's "after" function?
+# If you have the name and ID of a custom emoji:
+emoji = "<:python3:232720527448342530>"
+await message.add_reaction(emoji)
 ```
+
+### How do I pass a coroutine to the player's "after" function?
 
 The library's music player launches on a separate thread, ergo it does not execute inside a coroutine.
 This does not mean that it is not possible to call a coroutine in the `after` parameter. To do so you must pass a callable
@@ -162,107 +176,97 @@ that wraps up a couple of aspects.
 
 The first gotcha that you must be aware of is that calling a coroutine is not a thread-safe operation. Since we are
 technically in another thread, we must take caution in calling thread-safe operations so things do not bug out. Luckily for
-us, :mod:`asyncio` comes with a :func:`asyncio.run_coroutine_threadsafe` function that allows us to call
+us, [`asyncio`](https://docs.python.org/3/library/asyncio.html#module-asyncio) comes with a [`asyncio.run_coroutine_threadsafe`](https://docs.python.org/3/library/asyncio-task.html#asyncio.run_coroutine_threadsafe) function that allows us to call
 a coroutine from another thread.
 
-However, this function returns a :class:`~concurrent.futures.Future` and to actually call it we have to fetch its result. Putting all of
-this together we can do the following: ::
+However, this function returns a [`Future`](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future) and to actually call it we have to fetch its result. Putting all of
+this together we can do the following:
 
-    def my_after(error):
-        coro = some_channel.send('Song is done!')
-        fut = asyncio.run_coroutine_threadsafe(coro, client.loop)
-        try:
-            fut.result()
-        except:
-            # an error happened sending the message
-            pass
+```python
+def my_after(error):
+    coro = some_channel.send("Song is done!")
+    fut = asyncio.run_coroutine_threadsafe(coro, client.loop)
+    try:
+        fut.result()
+    except:
+        # An error happened sending the message
+        pass
 
-    voice.play(disnake.FFmpegPCMAudio(url), after=my_after)
 
-How do I run something in the background?
-
+voice.play(disnake.FFmpegPCMAudio(url), after=my_after)
 ```
 
-`Check the background_task.py example. <https://github.com/DisnakeDev/disnake/blob/master/examples/background_task.py>`_
+### How do I run something in the background?
 
-How do I get a specific model?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Check the [`background_task.py` example](https://github.com/DisnakeDev/disnake/blob/master/examples/background_task.py).
+
+### How do I get a specific model?
 
 There are multiple ways of doing this. If you have a specific model's ID then you can use
 one of the following functions:
 
-- :meth:`Client.get_channel`
-- :meth:`Client.get_guild`
-- :meth:`Client.get_user`
-- :meth:`Client.get_emoji`
-- :meth:`Guild.get_member`
-- :meth:`Guild.get_channel`
-- :meth:`Guild.get_role`
+-   <DocsLink reference="disnake.Client.get_channel" />
+-   <DocsLink reference="disnake.Client.get_guild" />
+-   <DocsLink reference="disnake.Client.get_user" />
+-   <DocsLink reference="disnake.Client.get_emoji" />
+-   <DocsLink reference="disnake.Client.get_member" />
+-   <DocsLink reference="disnake.Client.get_channel" />
+-   <DocsLink reference="disnake.Client.get_role" />
 
 The following use an HTTP request:
 
-- :meth:`abc.Messageable.fetch_message`
-- :meth:`Client.fetch_user`
-- :meth:`Client.fetch_guilds`
-- :meth:`Client.fetch_guild`
-- :meth:`Guild.fetch_emoji`
-- :meth:`Guild.fetch_emojis`
-- :meth:`Guild.fetch_member`
+-   <DocsLink reference="disnake.abc.Messageable.fetch_message" />
+-   <DocsLink reference="disnake.Client.fetch_user" />
+-   <DocsLink reference="disnake.Client.fetch_guilds" />
+-   <DocsLink reference="disnake.Client.fetch_guild" />
+-   <DocsLink reference="disnake.Client.fetch_emojis" />
+-   <DocsLink reference="disnake.Client.fetch_emoji" />
+-   <DocsLink reference="disnake.Client.fetch_member" />
 
-
-If the functions above do not help you, then use of :func:`utils.find` or :func:`utils.get` would serve some use in finding
+If the functions above do not help you, then use of <DocsLink reference="disnake.utils.find" /> or <DocsLink reference="disnake.utils.get" /> would serve some use in finding
 specific models.
 
-Quick example: ::
+Quick example:
 
-    # find a guild by name
-    guild = disnake.utils.get(client.guilds, name='My Server')
+```python
+# Find a guild by name
+guild = disnake.utils.get(client.guilds, name="My Server")
 
-    # make sure to check if it's found
-    if guild is not None:
-        # find a channel by name
-        channel = disnake.utils.get(guild.text_channels, name='cool-channel')
+# Make sure to check if it's found
+if guild is not None:
+    # Find a channel by name
+    channel = disnake.utils.get(guild.text_channels, name="cool-channel")
+```
 
-How do I make a web request?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### How do I make a web request?
 
 To make a request, you should use a non-blocking library.
-This library already uses and requires a 3rd party library for making requests, :doc:`aiohttp <aio:index>`.
+This library already uses and requires a 3rd party library for making requests, [`aiohttp`](https://docs.aiohttp.org/en/stable/index.html).
 
-Quick example: ::
+Quick example:
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get('http://aws.random.cat/meow') as r:
-            if r.status == 200:
-                js = await r.json()
-
-See `aiohttp's full documentation <http://aiohttp.readthedocs.io/en/stable/>`_ for more information.
-
-How do I use a local image file for an embed image?
+```python
+async with aiohttp.ClientSession() as session:
+    async with session.get("http://aws.random.cat/meow") as r:
+        if r.status == 200:
+            js = await r.json()
 ```
 
-Discord special-cases uploading an image attachment and using it within an embed so that it will not
-display separately, but instead in the embed's thumbnail, image, footer or author icon.
+See [`aiohttp`'s full documentation](http://aiohttp.readthedocs.io/en/stable/) for more information.
 
-To do so, upload the image normally with :meth:`abc.Messageable.send`,
-and set the embed's image URL to `attachment://image.png`,
-where `image.png` is the filename of the image you will send.
+### How do I use a local image file for an embed image?
 
-Quick example: ::
+Setting a local image for the embed can be done using the `file` argument of <DocsLink reference="disnake.Embed.set_image" /> method. It accepts a <DocsLink reference="disnake.File" /> object.
 
-    file = disnake.File("path/to/my/image.png", filename="image.png")
-    embed = disnake.Embed()
-    embed.set_image(url="attachment://image.png")
-    await channel.send(file=file, embed=embed)
+Quick example:
 
-.. note ::
-
-    Due to a Discord limitation, filenames may not include underscores.
-
-Is there an event for audit log entries being created?
-
+```python
+embed = disnake.Embed()
+embed.set_image(file=disnake.File("path/to/file.png"))
+await channel.send(embed=embed)
 ```
+
+### Is there an event for audit log entries being created?
 
 Since Discord does not dispatch this information in the gateway, the library cannot provide this information.
 This is currently a Discord limitation.
-```
