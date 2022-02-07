@@ -8,6 +8,7 @@ const config = {
 	organizationName: 'DisnakeDev',
 	projectName: 'guide',
 	baseUrl: '/',
+	trailingSlash: false,
 
 	onBrokenLinks: 'warn',
 	onBrokenMarkdownLinks: 'warn',
