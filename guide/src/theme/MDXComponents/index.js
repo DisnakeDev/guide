@@ -44,24 +44,19 @@ const MDXComponents = {
 		return <Head {...props}>{unwrappedChildren}</Head>;
 	},
 	code: (props) => {
-		const { children } = props;
-
-		if (isValidElement(children)) {
-			return children;
-		}
-
-		return !children.includes('\n') ? <code {...props} /> : <CodeBlock {...props} />;
+		const shouldBeInline = React.Children.toArray(props.children).every(
+			(el) => typeof el === 'string' && !el.includes('\n')
+		);
+		return shouldBeInline ? <code {...props} /> : <CodeBlock {...props} />;
 	},
 	a: (props) => <Link {...props} />,
-	pre: (props) => {
-		const { children } = props;
-
-		if (isValidElement(children) && isValidElement(children?.props?.children)) {
-			return children.props.children;
-		}
-
-		return <CodeBlock {...(isValidElement(children) ? children?.props : { ...props })} />;
-	},
+	pre: (props) => (
+		<CodeBlock
+			{...(isValidElement(props.children) && props.children.props.originalType === 'code'
+				? props.children?.props
+				: { ...props })}
+		/>
+	),
 	details: (props) => {
 		const items = React.Children.toArray(props.children);
 
@@ -73,12 +68,12 @@ const MDXComponents = {
 			</Details>
 		);
 	},
-	h1: Heading('h1'),
-	h2: Heading('h2'),
-	h3: Heading('h3'),
-	h4: Heading('h4'),
-	h5: Heading('h5'),
-	h6: Heading('h6'),
+	h1: (props) => <Heading as="h1" {...props} />,
+	h2: (props) => <Heading as="h2" {...props} />,
+	h3: (props) => <Heading as="h3" {...props} />,
+	h4: (props) => <Heading as="h4" {...props} />,
+	h5: (props) => <Heading as="h5" {...props} />,
+	h6: (props) => <Heading as="h6" {...props} />,
 	DocsLink: (props) => {
 		return <DocsLink {...props}>{props.children}</DocsLink>;
 	},
@@ -136,4 +131,5 @@ const MDXComponents = {
 		return <DiscordReaction {...props}>{props.children}</DiscordReaction>;
 	},
 };
+
 export default MDXComponents;

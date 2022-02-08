@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import useThemeContext from '@theme/hooks/useThemeContext';
+import { useColorMode } from '@docusaurus/theme-common';
 
 export default function isDarkTheme() {
 	const [themeContext, setThemeContext] = useState({});
 
-	const realThemeContext = useThemeContext();
+	const realThemeContext = useColorMode();
 
 	useEffect(() => {
 		setThemeContext(realThemeContext);

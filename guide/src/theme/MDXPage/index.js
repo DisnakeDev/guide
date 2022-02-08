@@ -9,9 +9,10 @@ import styles from './styles.module.css';
 
 function MDXPage(props) {
 	const { content: MDXPageContent } = props;
-	const { frontMatter, metadata } = MDXPageContent;
-	const { title, description, wrapperClassName, hide_table_of_contents: hideTableOfContents } = frontMatter;
-	const { permalink } = metadata;
+	const {
+		metadata: { title, description, permalink, frontMatter },
+	} = MDXPageContent;
+	const { wrapperClassName, hide_table_of_contents: hideTableOfContents } = frontMatter;
 	return (
 		<Layout
 			title={title}

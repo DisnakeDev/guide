@@ -1,6 +1,6 @@
 // @ts-check
 
-const config = {
+module.exports = {
 	title: 'Disnake Guide',
 	url: 'https://guide.disnake.dev/',
 	favicon: 'public/favicon.ico',
@@ -38,7 +38,7 @@ const config = {
 
 	themeConfig: {
 		colorMode: {
-			defaultMode: 'dark',
+			respectPrefersColorScheme: true,
 		},
 		metadata: [
 			{
@@ -89,6 +89,7 @@ const config = {
 				},
 			],
 		},
+		autoCollapseSidebarCategories: true,
 		prism: {
 			theme: require('./src/utils/prismLight'),
 			darkTheme: require('./src/utils/prismDark'),
@@ -100,5 +101,3 @@ const config = {
 		},
 	},
 };
-
-module.exports = config;
