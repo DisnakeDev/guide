@@ -235,12 +235,9 @@ same manner - use `inter.guild.created_at` or `inter.guild.verification_level`, 
 
 ### User info command
 
-A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a
-
-<DocsLink reference="disnake.User">User</DocsLink> instance in DM contexts, or a<DocsLink reference="disnake.Member">
-	Member
-</DocsLink> instance in server contexts), which exposes properties such as `.name` or `.id`. (Using just `inter.author`
-will give the user's full tag.)
+A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by
+(a <DocsLink reference="disnake.User">User</DocsLink> instance in DM contexts, or a <DocsLink reference="disnake.Member">Member</DocsLink> instance in server contexts), which exposes properties
+such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
 
 ```python title="main.py" {12-14}
 import disnake
