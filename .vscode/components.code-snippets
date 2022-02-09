@@ -1,0 +1,40 @@
+// https://code.visualstudio.com/docs/editor/userdefinedsnippets
+
+{
+    "image": {
+        "scope": "markdown",
+        "prefix": [":image", ":img"],
+        "description": "Insert an image",
+        "body": [
+            "<div align=\"center\">",
+            "\t<img src=\"${1:https://disnake.dev/assets/disnake-logo.png}\" alt=\"${2:Image description}\" width=\"${3:Image width}\" />",
+            "</div>",
+        ],
+    },
+    "codeblock": {
+        "scope": "markdown",
+        "prefix": [":code", ":codeblock"],
+        "description": "Insert a code block",
+        "body": [
+            "```${1:python} title=\"${2:Title}\" {${3:Highlights}}",
+            "$0",
+            "```",
+        ],
+    },
+    "resulting-code": {
+        "scope": "markdown",
+        "prefix": ":result",
+        "description": "Insert resulting code of section",
+        "body": [
+            "<ResultingCode />",
+        ]
+    },
+    "docs-link": {
+        "scope": "markdown",
+        "prefix": [":docs", ":docs-link"],
+        "description": "Insert a link to documentation",
+        "body": [
+            "<DocsLink ext=\"${1:Extension}\" reference=\"${2:Reference}\" />"
+        ]
+    },
+}

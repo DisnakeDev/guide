@@ -1,0 +1,75 @@
+// https://code.visualstudio.com/docs/editor/userdefinedsnippets
+// https://docusaurus.io/docs/markdown-features/admonitions
+
+{
+    "note": {
+        "scope": "markdown",
+        "prefix": ":note",
+        "description": "Insert a note admonition",
+        "body": [
+            ":::note ${1:Admonition title}",
+            "",
+            "${2:Admonition text}",
+            "",
+            ":::",
+            "",
+            "$0"
+        ],
+    },
+    "tip": {
+        "scope": "markdown",
+        "prefix": ":tip",
+        "description": "Insert a tip admonition",
+        "body": [
+            ":::tip ${1:Admonition title}",
+            "",
+            "${2:Admonition text}",
+            "",
+            ":::",
+            "",
+            "$0"
+        ],
+    },
+    "info": {
+        "scope": "markdown",
+        "prefix": ":info",
+        "description": "Insert an info admonition",
+        "body": [
+            ":::info ${1:Admonition title}",
+            "",
+            "${2:Admonition text}",
+            "",
+            ":::",
+            "",
+            "$0"
+        ],
+    },
+    "caution": {
+        "scope": "markdown",
+        "prefix": ":caution",
+        "description": "Insert a caution admonition",
+        "body": [
+            ":::caution ${1:Admonition title}",
+            "",
+            "${2:Admonition text}",
+            "",
+            ":::",
+            "",
+            "$0"
+        ],
+    },
+    "danger": {
+        "scope": "markdown",
+        "prefix": ":danger",
+        "description": "Insert a danger admonition",
+        "body": [
+            ":::danger ${1:Admonition title}",
+            "",
+            "${2:Admonition text}",
+            "",
+            ":::",
+            "",
+            "$0"
+        ],
+    },
+}
