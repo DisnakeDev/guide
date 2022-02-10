@@ -153,14 +153,36 @@ be found [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/
 Cogs represent a fairly drastic change in the way you write commands and bots, so here's a list you can come back to for
 the primary syntax used in cogs:
 
--   Each cog is a Python class that subclasses <DocsLink ext="commands" reference="disnake.ext.commands.Cog">commands.Cog</DocsLink>.
+-   Each cog is a Python class that subclasses
+    <DocsLink ext="commands" reference="disnake.ext.commands.Cog">
+    	commands.Cog
+    </DocsLink>
+    .
 -   Decorators for commands in cogs:
     -   Command - <DocsLink ext="commands" reference="disnake.ext.commands.command">commands.command()</DocsLink>
-    -   Slash command - <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">commands.slash_command()</DocsLink>
-    -   User command - <DocsLink ext="commands" reference="disnake.ext.commands.user_command">commands.user_command()</DocsLink>
-    -   Message command - <DocsLink ext="commands" reference="disnake.ext.commands.message_command">commands.message_command()</DocsLink>
--   Every listener is marked with the <DocsLink ext="commands" reference="disnake.ext.commands.Cog.listener">commands.Cog.listener()</DocsLink> decorator.
--   Cogs are then registered with the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.add_cog">Bot.add_cog</DocsLink> call, and are subsequently removed with the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.remove_cog">Bot.remove_cog</DocsLink> call.
+    -   Slash command -
+        <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">
+        	commands.slash_command()
+        </DocsLink>
+    -   User command -
+        <DocsLink ext="commands" reference="disnake.ext.commands.user_command">
+        	commands.user_command()
+        </DocsLink>
+    -   Message command -
+        <DocsLink ext="commands" reference="disnake.ext.commands.message_command">
+        	commands.message_command()
+        </DocsLink>
+-   Every listener is marked with the
+    <DocsLink ext="commands" reference="disnake.ext.commands.Cog.listener">
+    	commands.Cog.listener()
+    </DocsLink> decorator.
+-   Cogs are then registered with the
+    <DocsLink ext="commands" reference="disnake.ext.commands.Bot.add_cog">
+    	Bot.add_cog
+    </DocsLink> call, and are subsequently removed with the
+    <DocsLink ext="commands" reference="disnake.ext.commands.Bot.remove_cog">
+    	Bot.remove_cog
+    </DocsLink> call.
 
 <sup>
 	Source: <a href="https://docs.disnake.dev/en/latest/ext/commands/cogs.html">Disnake Documentation</a>

@@ -14,7 +14,9 @@ them a separate space.
 ### Creating and deleting threads
 
 A thread can be created by using the <DocsLink reference="disnake.TextChannel.create_thread">create_thread()</DocsLink>
-method on a <DocsLink reference="disnake.Message">Message</DocsLink> or <DocsLink reference="disnake.TextChannel">TextChannel</DocsLink> object.
+method on a <DocsLink reference="disnake.Message">Message</DocsLink> or
+
+<DocsLink reference="disnake.TextChannel">TextChannel</DocsLink> object.
 
 ```python title="threads.py"
 # Using the 'Message' object
@@ -45,7 +47,9 @@ await thread.delete()
 ### Joining and leaving threads
 
 Both joining and leaving a thread require you to have a <DocsLink reference="disnake.Thread">Thread</DocsLink> object,
-on which you can use the <DocsLink reference="disnake.Thread.join">join()</DocsLink> and <DocsLink reference="disnake.Thread.leave">leave()</DocsLink> methods for the respective action.
+on which you can use the <DocsLink reference="disnake.Thread.join">join()</DocsLink> and
+
+<DocsLink reference="disnake.Thread.leave">leave()</DocsLink> methods for the respective action.
 
 ```python title="threads.py"
 thread = channel.get_thread(...)  # You can also use bot.get_channel(...)
@@ -74,8 +78,10 @@ thread = channel.get_thread(...)
 await thread.edit(auto_archive_duration=60)
 ```
 
-Configuring a thread to be archived, unarchived or locked can be done using the <DocsLink reference="disnake.Thread.edit">edit()</DocsLink> method, via the `archived` and `locked` parameters. Both of
-these attributes accept a boolean value.
+Configuring a thread to be archived, unarchived or locked can be done using the
+
+<DocsLink reference="disnake.Thread.edit">edit()</DocsLink> method, via the `archived` and `locked` parameters. Both of these
+attributes accept a boolean value.
 
 ```python title="threads.py"
 thread = channel.get_thread(...)
@@ -94,7 +100,10 @@ using the <DocsLink reference="disnake.TextChannel.create_thread">create_thread(
 [a previous section](#creating-and-deleting-threads).
 
 Private threads are those which are only accessible to moderators and the members invited by the thread creator. A
-private thread can be created by specifying the `type` in the <DocsLink reference="disnake.TextChannel">create_thread()</DocsLink> method as <DocsLink reference="disnake.ChannelType.private_thread">private_thread</DocsLink>.
+private thread can be created by specifying the `type` in the
+
+<DocsLink reference="disnake.TextChannel">create_thread()</DocsLink> method as
+<DocsLink reference="disnake.ChannelType.private_thread">private_thread</DocsLink>.
 
 ```python title="threads.py" {6}
 channel = bot.get_channel(...)

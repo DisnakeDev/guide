@@ -40,8 +40,8 @@ be covered in the [**Interactions**](/interactions) section.
 ## Registering commands
 
 This section covers the bare minimum to get you started with registering slash commands. Once again, you can refer to
-[this page](/interactions/slash-commands) for an in-depth coverage of topics, including guild commands,
-global commands, options, option types, autocomplete and choices.
+[this page](/interactions/slash-commands) for an in-depth coverage of topics, including guild commands, global commands,
+options, option types, autocomplete and choices.
 
 Now, we shall continue with the base code used in the previous section.
 
@@ -235,9 +235,12 @@ same manner - use `inter.guild.created_at` or `inter.guild.verification_level`, 
 
 ### User info command
 
-A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by
-(a <DocsLink reference="disnake.User">User</DocsLink> instance in DM contexts, or a <DocsLink reference="disnake.Member">Member</DocsLink> instance in server contexts), which exposes properties
-such as `.name` or `.id`. (Using just `inter.author` will give the user's full tag.)
+A "user" refers to a Discord user. `inter.author` refers to the user the interaction was sent by (a
+
+<DocsLink reference="disnake.User">User</DocsLink> instance in DM contexts, or a<DocsLink reference="disnake.Member">
+	Member
+</DocsLink> instance in server contexts), which exposes properties such as `.name` or `.id`. (Using just `inter.author`
+will give the user's full tag.)
 
 ```python title="main.py" {12-14}
 import disnake

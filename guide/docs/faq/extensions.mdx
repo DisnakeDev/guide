@@ -4,7 +4,8 @@ Questions regarding `disnake.ext.commands` and `disnake.ext.tasks` belong here.
 
 :::note
 
-This content has been taken directly from the [documentation](https://docs.disnake.dev/en/latest/faq.html), and inherited from `discord.py`. It will most likely be rewritten in the future.
+This content has been taken directly from the [documentation](https://docs.disnake.dev/en/latest/faq.html), and
+inherited from `discord.py`. It will most likely be rewritten in the future.
 
 :::
 
@@ -21,9 +22,8 @@ async def on_message(message):
     await bot.process_commands(message)
 ```
 
-Alternatively, you can place your `on_message` logic into a **listener**. In this setup, you should not
-manually call `bot.process_commands()`. This also allows you to do multiple things asynchronously in response
-to a message. Example:
+Alternatively, you can place your `on_message` logic into a **listener**. In this setup, you should not manually call
+`bot.process_commands()`. This also allows you to do multiple things asynchronously in response to a message. Example:
 
 ```python
 @bot.listen("on_message")
@@ -42,8 +42,8 @@ async def echo(ctx, message: str):
     await ctx.send(message)
 ```
 
-Calling it via `?echo a b c` will only fetch the first argument and disregard the rest. To fix this you should either call
-it via `?echo "a b c"` or change the signature to have "consume rest" behaviour. Example:
+Calling it via `?echo a b c` will only fetch the first argument and disregard the rest. To fix this you should either
+call it via `?echo "a b c"` or change the signature to have "consume rest" behaviour. Example:
 
 ```python
 @bot.command()
@@ -55,8 +55,11 @@ This will allow you to use `?echo a b c` without needing the quotes.
 
 ### How do I get the original `message`?
 
-The <DocsLink ext="commands" reference="disnake.ext.commands.Context" /> contains an attribute, <DocsLink ext="commands" reference="disnake.ext.commands.Context.message">message</DocsLink> to get the original
-message.
+The <DocsLink ext="commands" reference="disnake.ext.commands.Context" /> contains an attribute,
+
+<DocsLink ext="commands" reference="disnake.ext.commands.Context.message">
+	message
+</DocsLink> to get the original message.
 
 Example:
 
@@ -68,8 +71,9 @@ async def length(ctx):
 
 ### How do I make a subcommand?
 
-Use the <DocsLink ext="commands" reference="disnake.ext.commands.group">group()</DocsLink> decorator. This will transform the callback into a <DocsLink ext="commands" reference="disnake.ext.commands.Group" /> which will allow you to add commands into
-the group operating as "subcommands". These groups can be arbitrarily nested as well.
+Use the <DocsLink ext="commands" reference="disnake.ext.commands.group">group()</DocsLink> decorator. This will
+transform the callback into a <DocsLink ext="commands" reference="disnake.ext.commands.Group" /> which will allow you to
+add commands into the group operating as "subcommands". These groups can be arbitrarily nested as well.
 
 Example:
 

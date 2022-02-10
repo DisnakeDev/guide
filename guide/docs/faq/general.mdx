@@ -4,28 +4,38 @@ General questions regarding library usage belong here.
 
 :::note
 
-This content has been taken directly from the [documentation](https://docs.disnake.dev/en/latest/faq.html), and inherited from `discord.py`. It will most likely be rewritten in the future.
+This content has been taken directly from the [documentation](https://docs.disnake.dev/en/latest/faq.html), and
+inherited from `discord.py`. It will most likely be rewritten in the future.
 
 :::
 
 ### Where can I find usage examples?
 
-Example code can be found in the [examples folder](https://github.com/DisnakeDev/disnake/tree/master/examples) in the repository.
+Example code can be found in the [examples folder](https://github.com/DisnakeDev/disnake/tree/master/examples) in the
+repository.
 
 ### How do I set the "Playing" status?
 
-The `activity` keyword argument may be passed in the <DocsLink reference="disnake.Client" /> constructor or <DocsLink reference="disnake.Client.change_presence" />, given an <DocsLink reference="disnake.Activity" /> object.
+The `activity` keyword argument may be passed in the <DocsLink reference="disnake.Client" /> constructor or
 
-The constructor may be used for static activities, while <DocsLink reference="disnake.Client.change_presence" /> may be used to update the activity at runtime.
+<DocsLink reference="disnake.Client.change_presence" />, given an <DocsLink reference="disnake.Activity" /> object.
+
+The constructor may be used for static activities, while <DocsLink reference="disnake.Client.change_presence" /> may be
+used to update the activity at runtime.
 
 :::warning
 
-It is highly discouraged to use <DocsLink reference="disnake.Client.change_presence" /> or API calls in <DocsLink reference="disnake.on_ready" /> as this event may be called many times while running, not just once. There is a high chance of disconnecting if presences are changed right after connecting.
+It is highly discouraged to use <DocsLink reference="disnake.Client.change_presence" /> or API calls in
+
+<DocsLink reference="disnake.on_ready" /> as this event may be called many times while running, not just once. There is a
+high chance of disconnecting if presences are changed right after connecting.
 
 :::
 
-The status type (playing, listening, streaming, watching) can be set using the <DocsLink reference="disnake.ActivityType" /> enum.
-For memory optimisation purposes, some activities are offered in slimmed-down versions:
+The status type (playing, listening, streaming, watching) can be set using the
+
+<DocsLink reference="disnake.ActivityType" /> enum. For memory optimisation purposes, some activities are offered in slimmed-down
+versions:
 
 -   <DocsLink reference="disnake.Game" />
 -   <DocsLink reference="disnake.Streaming" />
@@ -54,14 +64,18 @@ await channel.send("hello")
 
 ### How do I send a DM?
 
-Get the <DocsLink reference="disnake.User" /> or <DocsLink reference="disnake.Member" /> object and call <DocsLink reference="disnake.abc.Messageable.send" />. For example:
+Get the <DocsLink reference="disnake.User" /> or <DocsLink reference="disnake.Member" /> object and call
+
+<DocsLink reference="disnake.abc.Messageable.send" />. For example:
 
 ```python
 user = client.get_user(381870129706958858)
 await user.send("👀")
 ```
 
-If you are responding to an event, such as <DocsLink reference="disnake.on_message" />, you already have the <DocsLink reference="disnake.User" /> object via <DocsLink reference="disnake.Message.author" />:
+If you are responding to an event, such as <DocsLink reference="disnake.on_message" />, you already have the
+
+<DocsLink reference="disnake.User" /> object via <DocsLink reference="disnake.Message.author" />:
 
 ```python
 await message.author.send("👋")
@@ -69,8 +83,8 @@ await message.author.send("👋")
 
 ### How do I get the ID of a sent message?
 
-The <DocsLink reference="disnake.abc.Messageable.send" /> method returns the <DocsLink reference="disnake.Message" /> that was sent.
-The ID of a message can be accessed via <DocsLink reference="disnake.Message.id" />:
+The <DocsLink reference="disnake.abc.Messageable.send" /> method returns the <DocsLink reference="disnake.Message" />
+that was sent. The ID of a message can be accessed via <DocsLink reference="disnake.Message.id" />:
 
 ```python
 message = await channel.send("hmm…")
@@ -81,8 +95,8 @@ message_id = message.id
 
 To upload something to Discord you have to use the <DocsLink reference="disnake.File" /> object.
 
-A <DocsLink reference="disnake.File" /> accepts two parameters, the file-like object (or file path) and the filename
-to pass to Discord when uploading.
+A <DocsLink reference="disnake.File" /> accepts two parameters, the file-like object (or file path) and the filename to
+pass to Discord when uploading.
 
 If you want to upload an image it's as simple as:
 
@@ -107,9 +121,10 @@ my_files = [
 await channel.send(files=my_files)
 ```
 
-If you want to upload something from a URL, you will have to use an HTTP request using [`aiohttp`](https://docs.aiohttp.org/en/stable/index.html)
-and then pass an [io.BytesIO](https://docs.python.org/3/library/io.html#io.BytesIO) instance
-to <DocsLink reference="disnake.File" /> like so:
+If you want to upload something from a URL, you will have to use an HTTP request using
+[`aiohttp`](https://docs.aiohttp.org/en/stable/index.html) and then pass an
+[io.BytesIO](https://docs.python.org/3/library/io.html#io.BytesIO) instance to <DocsLink reference="disnake.File" />
+like so:
 
 ```python
 import io
@@ -127,7 +142,8 @@ async with aiohttp.ClientSession() as session:
 
 You use the <DocsLink reference="disnake.Message.add_reaction" /> method.
 
-If you want to use unicode emoji, you must pass a valid unicode code point in a string. In your code, you can write this in a few different ways:
+If you want to use unicode emoji, you must pass a valid unicode code point in a string. In your code, you can write this
+in a few different ways:
 
 -   `'👍'`
 -   `'\U0001F44D'`
@@ -144,12 +160,15 @@ await message.add_reaction(emoji)
 In case you want to use emoji that come from a message, you already get their code points in the content without needing
 to do anything special. You **cannot** send `':thumbsup:'` style shorthands.
 
-For custom emoji, you should pass an instance of <DocsLink reference="disnake.Emoji" />. You can also pass a `'<:name:id>'` string, but if you
-can use said emoji, you should be able to use <DocsLink reference="disnake.Client.get_emoji" /> to get an emoji via ID or use <DocsLink reference="disnake.utils.find" />
-or <DocsLink reference="disnake.utils.get" /> on <DocsLink reference="disnake.Client.emojis" /> or <DocsLink reference="disnake.Guild.emojis" /> collections.
+For custom emoji, you should pass an instance of <DocsLink reference="disnake.Emoji" />. You can also pass a
+`'<:name:id>'` string, but if you can use said emoji, you should be able to use
 
-The name and ID of a custom emoji can be found with the client by prefixing `:custom_emoji:` with a backslash.
-For example, sending the message `\:python3:` with the client will result in `<:python3:232720527448342530>`.
+<DocsLink reference="disnake.Client.get_emoji" /> to get an emoji via ID or use
+<DocsLink reference="disnake.utils.find" /> or <DocsLink reference="disnake.utils.get" /> on
+<DocsLink reference="disnake.Client.emojis" /> or <DocsLink reference="disnake.Guild.emojis" /> collections.
+
+The name and ID of a custom emoji can be found with the client by prefixing `:custom_emoji:` with a backslash. For
+example, sending the message `\:python3:` with the client will result in `<:python3:232720527448342530>`.
 
 Quick example:
 
@@ -170,17 +189,19 @@ await message.add_reaction(emoji)
 
 ### How do I pass a coroutine to the player's "after" function?
 
-The library's music player launches on a separate thread, ergo it does not execute inside a coroutine.
-This does not mean that it is not possible to call a coroutine in the `after` parameter. To do so you must pass a callable
-that wraps up a couple of aspects.
+The library's music player launches on a separate thread, ergo it does not execute inside a coroutine. This does not
+mean that it is not possible to call a coroutine in the `after` parameter. To do so you must pass a callable that wraps
+up a couple of aspects.
 
 The first gotcha that you must be aware of is that calling a coroutine is not a thread-safe operation. Since we are
-technically in another thread, we must take caution in calling thread-safe operations so things do not bug out. Luckily for
-us, [`asyncio`](https://docs.python.org/3/library/asyncio.html#module-asyncio) comes with a [`asyncio.run_coroutine_threadsafe`](https://docs.python.org/3/library/asyncio-task.html#asyncio.run_coroutine_threadsafe) function that allows us to call
-a coroutine from another thread.
+technically in another thread, we must take caution in calling thread-safe operations so things do not bug out. Luckily
+for us, [`asyncio`](https://docs.python.org/3/library/asyncio.html#module-asyncio) comes with a
+[`asyncio.run_coroutine_threadsafe`](https://docs.python.org/3/library/asyncio-task.html#asyncio.run_coroutine_threadsafe)
+function that allows us to call a coroutine from another thread.
 
-However, this function returns a [`Future`](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future) and to actually call it we have to fetch its result. Putting all of
-this together we can do the following:
+However, this function returns a
+[`Future`](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future) and to actually call it
+we have to fetch its result. Putting all of this together we can do the following:
 
 ```python
 def my_after(error):
@@ -202,8 +223,8 @@ Check the [`background_task.py` example](https://github.com/DisnakeDev/disnake/b
 
 ### How do I get a specific model?
 
-There are multiple ways of doing this. If you have a specific model's ID then you can use
-one of the following functions:
+There are multiple ways of doing this. If you have a specific model's ID then you can use one of the following
+functions:
 
 -   <DocsLink reference="disnake.Client.get_channel" />
 -   <DocsLink reference="disnake.Client.get_guild" />
@@ -223,8 +244,9 @@ The following use an HTTP request:
 -   <DocsLink reference="disnake.Client.fetch_emoji" />
 -   <DocsLink reference="disnake.Client.fetch_member" />
 
-If the functions above do not help you, then use of <DocsLink reference="disnake.utils.find" /> or <DocsLink reference="disnake.utils.get" /> would serve some use in finding
-specific models.
+If the functions above do not help you, then use of <DocsLink reference="disnake.utils.find" /> or
+
+<DocsLink reference="disnake.utils.get" /> would serve some use in finding specific models.
 
 Quick example:
 
@@ -240,8 +262,8 @@ if guild is not None:
 
 ### How do I make a web request?
 
-To make a request, you should use a non-blocking library.
-This library already uses and requires a 3rd party library for making requests, [`aiohttp`](https://docs.aiohttp.org/en/stable/index.html).
+To make a request, you should use a non-blocking library. This library already uses and requires a 3rd party library for
+making requests, [`aiohttp`](https://docs.aiohttp.org/en/stable/index.html).
 
 Quick example:
 
@@ -256,7 +278,9 @@ See [`aiohttp`'s full documentation](http://aiohttp.readthedocs.io/en/stable/) f
 
 ### How do I use a local image file for an embed image?
 
-Setting a local image for the embed can be done using the `file` argument of <DocsLink reference="disnake.Embed.set_image" /> method. It accepts a <DocsLink reference="disnake.File" /> object.
+Setting a local image for the embed can be done using the `file` argument of
+
+<DocsLink reference="disnake.Embed.set_image" /> method. It accepts a <DocsLink reference="disnake.File" /> object.
 
 Quick example:
 
@@ -268,5 +292,5 @@ await channel.send(embed=embed)
 
 ### Is there an event for audit log entries being created?
 
-Since Discord does not dispatch this information in the gateway, the library cannot provide this information.
-This is currently a Discord limitation.
+Since Discord does not dispatch this information in the gateway, the library cannot provide this information. This is
+currently a Discord limitation.

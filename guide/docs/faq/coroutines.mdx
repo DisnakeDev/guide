@@ -4,13 +4,17 @@ Questions regarding coroutines and asyncio belong here.
 
 :::note
 
-This content has been taken directly from the [documentation](https://docs.disnake.dev/en/latest/faq.html), and inherited from `discord.py`. It will most likely be rewritten in the future.
+This content has been taken directly from the [documentation](https://docs.disnake.dev/en/latest/faq.html), and
+inherited from `discord.py`. It will most likely be rewritten in the future.
 
 :::
 
 ### What is a coroutine?
 
-A [coroutine](https://docs.python.org/3/library/asyncio-task.html#coroutine) is a function that must be invoked with `await` or `yield from`. When Python encounters an `await` it stops the function's execution at that point and works on other things until it comes back to that point and finishes off its work. This allows for your program to be doing multiple things at the same time without using threads or complicated multiprocessing.
+A [coroutine](https://docs.python.org/3/library/asyncio-task.html#coroutine) is a function that must be invoked with
+`await` or `yield from`. When Python encounters an `await` it stops the function's execution at that point and works on
+other things until it comes back to that point and finishes off its work. This allows for your program to be doing
+multiple things at the same time without using threads or complicated multiprocessing.
 
 **If you forget to await a coroutine then the coroutine will not run. Never forget to await a coroutine.**
 
@@ -20,12 +24,18 @@ You can only use `await` inside `async def` functions and nowhere else.
 
 ### What does "blocking" mean?
 
-In asynchronous programming a blocking call is essentially all the parts of the function that are not `await`. Do not despair however, because not all forms of blocking are bad! Using blocking calls is inevitable, but you must work to make sure that you don't excessively block functions. Remember, if you block for too long then your bot will freeze since it has not stopped the function's execution at that point to do other things.
+In asynchronous programming a blocking call is essentially all the parts of the function that are not `await`. Do not
+despair however, because not all forms of blocking are bad! Using blocking calls is inevitable, but you must work to
+make sure that you don't excessively block functions. Remember, if you block for too long then your bot will freeze
+since it has not stopped the function's execution at that point to do other things.
 
-If logging is enabled, this library will attempt to warn you that blocking is occurring with the message: `Heartbeat blocked for more than N seconds.` See [Setting Up Logging](https://docs.disnake.dev/en/latest/logging.html#logging-setup) for details on enabling logging.
+If logging is enabled, this library will attempt to warn you that blocking is occurring with the message:
+`Heartbeat blocked for more than N seconds.` See
+[Setting Up Logging](https://docs.disnake.dev/en/latest/logging.html#logging-setup) for details on enabling logging.
 
-A common source of blocking for too long is something like [`time.sleep`](https://docs.python.org/3/library/time.html#time.sleep). Don't do that. Use [`asyncio.sleep`](https://docs.python.org/3/library/asyncio-task.html#asyncio.sleep)
-instead. Similar to this example:
+A common source of blocking for too long is something like
+[`time.sleep`](https://docs.python.org/3/library/time.html#time.sleep). Don't do that. Use
+[`asyncio.sleep`](https://docs.python.org/3/library/asyncio-task.html#asyncio.sleep) instead. Similar to this example:
 
 ```python
 # Bad
@@ -35,7 +45,12 @@ time.sleep(10)
 await asyncio.sleep(10)
 ```
 
-Another common source of blocking for too long is using HTTP requests with the famous module [Requests: HTTP for Humans™](https://docs.python-requests.org/en/latest/). While [Requests: HTTP for Humans™](https://docs.python-requests.org/en/latest/) is an amazing module for non-asynchronous programming, it is not a good choice for [`asyncio`](https://docs.python.org/3/library/asyncio.html#module-asyncio) because certain requests can block the event loop too long. Instead, use the [`aiohttp`](https://docs.aiohttp.org/en/stable/index.html) library which is installed on the side with this library.
+Another common source of blocking for too long is using HTTP requests with the famous module
+[Requests: HTTP for Humans™](https://docs.python-requests.org/en/latest/). While
+[Requests: HTTP for Humans™](https://docs.python-requests.org/en/latest/) is an amazing module for non-asynchronous
+programming, it is not a good choice for [`asyncio`](https://docs.python.org/3/library/asyncio.html#module-asyncio)
+because certain requests can block the event loop too long. Instead, use the
+[`aiohttp`](https://docs.aiohttp.org/en/stable/index.html) library which is installed on the side with this library.
 
 Consider the following example:
 

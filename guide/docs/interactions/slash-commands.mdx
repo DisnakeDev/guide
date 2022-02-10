@@ -1,6 +1,7 @@
 # Slash Commands
 
-A **slash command** is one of the types of client-integrated interactions a bot can create. Unlike prefix commands, these do not require the message content intent.
+A **slash command** is one of the types of client-integrated interactions a bot can create. Unlike prefix commands,
+these do not require the message content intent.
 
 This section will go in-depth on the creation, types and handling of slash commands with `disnake`.
 
@@ -36,20 +37,19 @@ async def ping(inter: disnake.ApplicationCommandInteraction):
 
 ## Registering commands
 
-Unlike prefix commands, slash commands must be registered in Discord first. Otherwise they won't pop up if you press "/".
-By default, the library registers / updates your slash commands automatically.
-It does so on bot start or when one or several cogs are unloaded / reloaded.
+Unlike prefix commands, slash commands must be registered in Discord first. Otherwise they won't pop up if you press
+"/". By default, the library registers / updates your slash commands automatically. It does so on bot start or when one
+or several cogs are unloaded / reloaded.
 
 :::note
 
-The library doesn't make unnecessary API requests during this process.
-If registered commands match the commands in your code, no API requests are made.
-Otherwise only one bulk overwrite request is done.
+The library doesn't make unnecessary API requests during this process. If registered commands match the commands in your
+code, no API requests are made. Otherwise only one bulk overwrite request is done.
 
 :::
 
-If you want to disable the automatic registration, set the `sync_commands` parameter of `commands.Bot` to `False`.
-If you want to see how exactly the list of registered commands changes, set the `sync_commands_debug` parameter to `True`.
+If you want to disable the automatic registration, set the `sync_commands` parameter of `commands.Bot` to `False`. If
+you want to see how exactly the list of registered commands changes, set the `sync_commands_debug` parameter to `True`.
 
 ```python
 bot = commands.Bot("!", sync_commands_debug=True)
@@ -59,33 +59,33 @@ It will print which commands were added, edited, deleted or untouched. It also d
 
 ### Global commands
 
-Global slash commands are visible everywhere, including your bot DMs.
-If you don't specify the `test_guilds` parameter of `commands.Bot`, all your slash commands are global.
+Global slash commands are visible everywhere, including your bot DMs. If you don't specify the `test_guilds` parameter
+of `commands.Bot`, all your slash commands are global.
 
 :::note
 
-The first registration of global commands may take up to 1 hour.
-However, they show up instantly in the bot DMs.
+The first registration of global commands may take up to 1 hour. However, they show up instantly in the bot DMs.
 
 :::
 
 :::note
 
-You don't have to keep your bot online this whole time. You can turn it off once `on_ready` fires.
-Once all commands have appeared, they show up instantly in any new guild.
+You don't have to keep your bot online this whole time. You can turn it off once `on_ready` fires. Once all commands
+have appeared, they show up instantly in any new guild.
 
 :::
 
 ### Guild commands
 
-If you specify the `test_guilds` parameter of `commands.Bot`, all slash commands in your code are no longer global.
-The following code will register all slash commands only in 2 guilds:
+If you specify the `test_guilds` parameter of `commands.Bot`, all slash commands in your code are no longer global. The
+following code will register all slash commands only in 2 guilds:
 
 ```python
 bot = commands.Bot("!", test_guilds=[123456789, 987654321])  # guild IDs
 ```
 
-If you want to keep some of your slash commands global and make some of them local, specify the `guild_ids` parameter of `@bot.slash_command()`:
+If you want to keep some of your slash commands global and make some of them local, specify the `guild_ids` parameter of
+`@bot.slash_command()`:
 
 ```python
 bot = commands.Bot("!")
@@ -113,8 +113,11 @@ Guild commands show up instantly after registration.
 
 ### Sending responses
 
-The <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a <DocsLink reference="disnake.InteractionResponse">InteractionResponse</DocsLink> instance that has 4 usable methods. A response can <b>only be done once</b>. If you want to send secondary
-messages, consider using a <DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
+The <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a
+
+<DocsLink reference="disnake.InteractionResponse">InteractionResponse</DocsLink> instance that has 4 usable methods. A response
+can <b>only be done once</b>. If you want to send secondary messages, consider using a
+<DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
 
 <br />
 <br />
@@ -137,7 +140,9 @@ going to respond to message components.
 :::note
 
 If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction. Then
-when your response is ready you can edit the message using <DocsLink reference="disnake.InteractionResponse.edit_original_message">edit_original_message</DocsLink> method.
+when your response is ready you can edit the message using
+
+<DocsLink reference="disnake.InteractionResponse.edit_original_message">edit_original_message</DocsLink> method.
 
 :::
 

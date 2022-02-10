@@ -183,8 +183,9 @@ embed.set_footer(
 
 ### Setting the thumbnail
 
-The thumbnail of the embed is shown in it's top right corner. It can be set using
-the <DocsLink reference="disnake.Embed.set_thumbnail">set_thumbnail</DocsLink> attribute.
+The thumbnail of the embed is shown in it's top right corner. It can be set using the
+
+<DocsLink reference="disnake.Embed.set_thumbnail">set_thumbnail</DocsLink> attribute.
 
 ```python title="embed.py"
 embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
@@ -256,8 +257,10 @@ embed = disnake.Embed(
 
 ### Inserting fields
 
-Embed fields have two parameters - a name(or title) and a value, inside the <DocsLink reference="disnake.Embed.add_field">add_field</DocsLink> attribute.
-It is also possible to use markdown in both parameters.
+Embed fields have two parameters - a name(or title) and a value, inside the
+
+<DocsLink reference="disnake.Embed.add_field">add_field</DocsLink> attribute. It is also possible to use markdown in both
+parameters.
 
 ```python title="embed.py"
 # Regular Fields
@@ -301,7 +304,9 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 <br />
 
 These attributes also fully support the use of markdown, as well as highlight links. You can also insert fields at a
-particular position, with a specified index using <DocsLink reference="disnake.Embed.insert_field_at">embed.insert_field_at(index, ...)</DocsLink>.
+particular position, with a specified index using
+
+<DocsLink reference="disnake.Embed.insert_field_at">embed.insert_field_at(index, ...)</DocsLink>.
 
 ### Inserting images
 
@@ -346,8 +351,10 @@ Otherwise, the embed will not be sent.
 
 ## Dictionaries to embeds
 
-A `dict` datatype (and essentially a `json` file) can be converted into an embed, using the <DocsLink reference="disnake.Embed.from_dict">Embed.from_dict()</DocsLink> method.
-We can recreate the embed made at the start of this page, using the same.
+A `dict` datatype (and essentially a `json` file) can be converted into an embed, using the
+
+<DocsLink reference="disnake.Embed.from_dict">Embed.from_dict()</DocsLink> method. We can recreate the embed made at the
+start of this page, using the same.
 
 ```python title="embed.py"
 embed_dict = {
