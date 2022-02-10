@@ -30,6 +30,7 @@ const sidebars = {
 				'interactions/slash-commands',
 				'interactions/user-message-commands',
 				'interactions/message-components',
+				'interactions/modals',
 			],
 		},
 		{
