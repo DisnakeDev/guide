@@ -29,7 +29,7 @@ functions work together as well as how the syntax looks in production.
 
 ## Development
 
-For more info on development/contributions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+For more info on development/contributions, see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 <br />
 <p align="center">
