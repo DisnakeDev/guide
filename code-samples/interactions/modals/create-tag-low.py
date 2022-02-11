@@ -4,11 +4,11 @@ from disnake.enums import TextInputStyle
 
 
 class Modals(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.slash_command()
-    async def create_tag_low(self, inter: disnake.AppCmdInter) -> None:
+    async def create_tag_low(self, inter: disnake.AppCmdInter):
         """Sends a Modal to create a tag but with a low-level implementation."""
         await inter.response.send_modal(
             title="Create Tag",
@@ -41,5 +41,5 @@ class Modals(commands.Cog):
         await modal_inter.response.send_message(embed=embed)
 
 
-def setup(bot: commands.Bot) -> None:
+def setup(bot: commands.Bot):
     bot.add_cog(Modals(bot))

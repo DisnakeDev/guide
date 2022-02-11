@@ -4,7 +4,7 @@ from disnake.enums import TextInputStyle
 
 
 class MyModal(disnake.ui.Modal):
-    def __init__(self) -> None:
+    def __init__(self):
         components = [
             disnake.ui.TextInput(
                 label="Name",
@@ -22,7 +22,7 @@ class MyModal(disnake.ui.Modal):
         ]
         super().__init__(title="Create Tag", custom_id="create_tag", components=components)
 
-    async def callback(self, inter: disnake.ModalInteraction) -> None:
+    async def callback(self, inter: disnake.ModalInteraction):
         embed = disnake.Embed(title="Tag Creation")
         for key, value in inter.text_values.items():
             embed.add_field(name=key.capitalize(), value=value[:1024], inline=False)
@@ -30,14 +30,14 @@ class MyModal(disnake.ui.Modal):
 
 
 class Modals(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.slash_command()
-    async def create_tag(self, inter: disnake.AppCmdInter) -> None:
+    async def create_tag(self, inter: disnake.AppCmdInter):
         """Sends a Modal to create a tag."""
         await inter.response.send_modal(modal=MyModal())
 
 
-def setup(bot: commands.Bot) -> None:
+def setup(bot: commands.Bot):
     bot.add_cog(Modals(bot))
