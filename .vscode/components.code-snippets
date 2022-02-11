@@ -6,9 +6,11 @@
         "prefix": [":image", ":img"],
         "description": "Insert an image",
         "body": [
-            "<div align=\"center\">",
+            "<br />",
+            "<p align=\"center\">",
             "\t<img src=\"${1:https://disnake.dev/assets/disnake-logo.png}\" alt=\"${2:Image description}\" width=\"${3:Image width}\" />",
-            "</div>",
+            "</p>",
+            "<br />",
         ],
     },
     "codeblock": {
