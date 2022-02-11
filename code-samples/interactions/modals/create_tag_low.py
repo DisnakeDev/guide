@@ -16,14 +16,14 @@ class Modals(commands.Cog):
             components=[
                 disnake.ui.TextInput(
                     label="Name",
-                    placeholder="",
+                    placeholder="Bar Tag",
                     custom_id="name",
                     style=TextInputStyle.short,
                     max_length=50,
                 ),
                 disnake.ui.TextInput(
                     label="Description",
-                    placeholder="The description of the tag",
+                    placeholder="Lorem ipsum dolor sit amet.",
                     custom_id="description",
                     style=TextInputStyle.paragraph,
                 ),
@@ -36,8 +36,8 @@ class Modals(commands.Cog):
         )
 
         embed = disnake.Embed(title="Tag Creation")
-        for key, value in modal_inter.values.items():
-            embed.add_field(name=key.capitalize(), value=value, inline=False)
+        for key, value in modal_inter.text_values.items():
+            embed.add_field(name=key.capitalize(), value=value[:1024], inline=False)
         await modal_inter.response.send_message(embed=embed)
 
 
