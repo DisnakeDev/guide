@@ -28,6 +28,7 @@ import TabItem from '@theme/TabItem';
 
 import DocsLink from '../../components/DocsLink';
 import ResultingCode from '../../components/ResultingCode';
+import WorkInProgress from '../../components/WorkInProgress';
 
 function unwrapMDXElement(element) {
 	if (element?.props?.mdxType && element?.props?.originalType) {
@@ -79,6 +80,9 @@ const MDXComponents = {
 	},
 	ResultingCode: () => {
 		return <ResultingCode />;
+	},
+	WorkInProgress: () => {
+		return <WorkInProgress />;
 	},
 	Tabs: (props) => {
 		return <Tabs {...props}>{props.children}</Tabs>;
