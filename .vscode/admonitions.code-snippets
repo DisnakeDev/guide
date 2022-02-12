@@ -46,7 +46,7 @@
     },
     "caution": {
         "scope": "markdown",
-        "prefix": ":caution",
+        "prefix": [":caution", ":warning", ":warn"],
         "description": "Insert a caution admonition",
         "body": [
             ":::caution ${1:Admonition title}",
