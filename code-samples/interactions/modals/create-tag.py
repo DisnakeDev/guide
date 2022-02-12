@@ -3,8 +3,12 @@ from disnake.ext import commands
 from disnake.enums import TextInputStyle
 
 
+bot = commands.Bot(command_prefix="!")
+
+
 class MyModal(disnake.ui.Modal):
     def __init__(self):
+        # The details of the modal, and its components
         components = [
             disnake.ui.TextInput(
                 label="Name",
@@ -20,24 +24,28 @@ class MyModal(disnake.ui.Modal):
                 style=TextInputStyle.paragraph,
             ),
         ]
-        super().__init__(title="Create Tag", custom_id="create_tag", components=components)
+        super().__init__(
+            title="Create Tag",
+            custom_id="create_tag",
+            components=components,
+        )
 
+    # The callback received when the user input is completed.
     async def callback(self, inter: disnake.ModalInteraction):
         embed = disnake.Embed(title="Tag Creation")
         for key, value in inter.text_values.items():
-            embed.add_field(name=key.capitalize(), value=value[:1024], inline=False)
+            embed.add_field(
+                name=key.capitalize(),
+                value=value[:1024],
+                inline=False,
+            )
         await inter.response.send_message(embed=embed)
 
 
-class Modals(commands.Cog):
-    def __init__(self, bot: commands.Bot):
-        self.bot = bot
-
-    @commands.slash_command()
-    async def create_tag(self, inter: disnake.AppCmdInter):
-        """Sends a Modal to create a tag."""
-        await inter.response.send_modal(modal=MyModal())
+@bot.slash_command()
+async def tags(inter: disnake.AppCmdInter):
+    """Sends a Modal to create a tag."""
+    await inter.response.send_modal(modal=MyModal())
 
 
-def setup(bot: commands.Bot):
-    bot.add_cog(Modals(bot))
+bot.run("YOUR_BOT_TOKEN")
