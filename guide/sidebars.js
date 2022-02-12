@@ -29,8 +29,8 @@ const sidebars = {
 			items: [
 				'interactions/slash-commands',
 				'interactions/message-components',
-				'interactions/modals',
 				'interactions/user-message-commands',
+				'interactions/modals',
 			],
 		},
 		{
