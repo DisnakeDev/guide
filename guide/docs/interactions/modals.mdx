@@ -79,27 +79,23 @@ class MyModal(disnake.ui.Modal):
         await inter.response.send_message(embed=embed)
 
 
-# The class of the cog. (Irrelevant)
-class Modals(commands.Cog):
-    def __init__(self, bot: commands.Bot):
-        self.bot = bot
-
-    @commands.slash_command()
-    async def tags(self, inter: disnake.AppCmdInter):
-        """Sends a Modal to create a tag."""
-        await inter.response.send_modal(modal=MyModal())
+bot = commands.Bot(command_prefix="!")
 
 
-# The cog setup function. (Irrelevant)
-def setup(bot: commands.Bot):
-    bot.add_cog(Modals(bot))
+@bot.slash_command()
+async def tags(inter: disnake.AppCmdInter):
+    """Sends a Modal to create a tag."""
+    await inter.response.send_modal(modal=MyModal())
+
+
+bot.run("YOUR_BOT_TOKEN")
 ```
 
 ## Creating a modal
 
 A modal can be created and sent using two different methods, just like other message components:
 
--   Subclassing <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> to define the components, and sending it through the `modal` attribute of <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> (as done in the example above).
+-   Subclassing <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> to define the components, and sending it through the `modal` parameter of <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> (as done in the example above).
 -   Defining the attributes and components of the modal inside <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> itself. This is considered a "lower-level" implementation of modals - we will use the same term to refer to it in this section.
 
 A <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object has the following attributes:
@@ -144,24 +140,22 @@ await inter.response.send_modal(
 
 -   `label`: The label of the text input.
 -   `custom_id`: An ID specified to the text input.
--   `style`: Utilizes one of <DocsLink reference="disnake.TextInputStyle" /> for the component.
+-   `style`: Utilizes one of <DocsLink reference="disnake.TextInputStyle" /> for the component. Defaults to <DocsLink reference="disnake.TextInputStyle.short">short</DocsLink>.
 -   `placeholder`: The placeholder text that is shown if nothing is entered.
--   `value`: The pre-filled value of the text input (upto character limit).
+-   `value`: The pre-filled value of the text input (up to `max_length`).
 -   `required`: Whether the text input is required. Defaults to `True`.
 -   `min_length` and `max_length`: Set the minimum and maximum length of the inputs respectively.
 
 These attributes can be used per `TextInput` component, as follows.
 
 ```python title="textinput.py"
-components = [
-    disnake.ui.TextInput(
-        label="Name",
-        placeholder="Foo Tag",
-        custom_id="name",
-        style=TextInputStyle.short,
-        max_length=50,
-    ),
-]
+disnake.ui.TextInput(
+    label="Name",
+    placeholder="Foo Tag",
+    custom_id="name",
+    style=TextInputStyle.short,
+    max_length=50,
+)
 ```
 
 The <DocsLink reference="disnake.TextInputStyle" /> attribute currently has two styles, which have multiple aliases:
@@ -169,7 +163,7 @@ The <DocsLink reference="disnake.TextInputStyle" /> attribute currently has two 
 -   `short` - Represents a single-line text input component. Also called `single_line`.
 -   `long` - Represents a multi-line text input component. Also called `multi_line` or `paragraph`.
 
-## Modal coroutines
+## Modal events
 
 ### <DocsLink reference="disnake.ui.Modal.callback">`callback`</DocsLink>
 
@@ -184,7 +178,7 @@ The <DocsLink reference="disnake.TextInputStyle" /> attribute currently has two 
 
 ## Modal limits
 
--   A modal can have a total of **5 components**.
+-   A modal can have a total of **5 action rows**.
 -   The `placeholder` has a maximum value of **100 characters**.
 -   The `custom_id` has a maximum value of **100 characters**, for both modals and text inputs.
 -   The pre-defined `value` has a maximum length of **4000 characters** (overriden by the developer-defined limit).
