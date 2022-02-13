@@ -5,7 +5,8 @@
   "scripts": {
     "start": "docusaurus start guide",
     "build": "docusaurus build guide",
-    "deploy": "docusaurus deploy guide"
+    "deploy": "docusaurus deploy guide",
+    "serve": "docusaurus serve guide"
   },
   "repository": "https://github.com/DisnakeDev/guide.git",
   "author": "abhigyantrips <abhigyantrips@gmail.com>",
