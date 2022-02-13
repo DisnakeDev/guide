@@ -178,9 +178,13 @@ The <DocsLink reference="disnake.TextInputStyle" /> attribute currently has two 
 
 ## Modal limits
 
+There are a few limits to be aware of while using modals due to the API's limitations. Here is a quick reference you can come back to:
+
 -   A modal can have a total of **5 action rows**.
--   The `placeholder` has a maximum value of **100 characters**.
--   The `custom_id` has a maximum value of **100 characters**, for both modals and text inputs.
+-   A modal's `title` has a maximum length of **45 characters**.
+-   The text input `label` has a maximum length of **45 characters**.
+-   The text input `placeholder` is limited to **100 characters**.
+-   The `custom_id` is limited to **100 characters**, for both modals and text inputs.
 -   The pre-defined `value` has a maximum length of **4000 characters** (overriden by the developer-defined limit).
 -   The minimum and maximum values of a text input can be set from **0-4000 characters** and **1-4000 characters** respectively.
 
