@@ -29,7 +29,7 @@ async def tags_low(inter: disnake.AppCmdInter):
         ],
     )
 
-    modal_inter: disnake.ModalInteraction = await self.bot.wait_for(
+    modal_inter: disnake.ModalInteraction = await bot.wait_for(
         "modal_submit",
         check=lambda i: i.custom_id == "create_tag_low" and i.author.id == inter.author.id,
         timeout=300,
