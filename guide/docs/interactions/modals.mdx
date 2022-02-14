@@ -1,14 +1,13 @@
 ---
-description: Modals act as client-integrated pop-ups, that can prompt the user for text input.
+description: Modals act as client-integrated popups, that can prompt the user for text input.
 keywords: [disnake, bot, guide, tutorial, modals, text inputs, python]
 ---
 
 # Modals & Text Inputs
 
-Modals are how you can prompt users for further detailed input. They act as client-integrated pop-ups, and work in tandem
+Modals are how you can prompt users for further detailed input. They act as client-integrated popups, and work in tandem
 with interactive components called [Text Inputs](https://discord.com/developers/docs/interactions/message-components#text-inputs).
-These inputs can have various forms, that can accept information from the user on prompt, and use the callback to receive
-and process that information.
+These inputs can have various formats to accept information from the user on prompt, and use the callback to process that information.
 
 This section goes in-depth on using modals with other interactive components, and responding to interactions with them.
 
@@ -39,7 +38,7 @@ Once the user inputs information into the modal, the bot will receive a callback
 </DiscordMessages>
 <br />
 
-This was done using the following code, in the form of a cog.
+This was done using the following code.
 
 ```python title="modals.py"
 # At the top of the file.
@@ -96,7 +95,7 @@ async def tags(inter: disnake.AppCmdInter):
 bot.run("YOUR_BOT_TOKEN")
 ```
 
-The implementation of this command using the lower-level interface can be found [here](https://github.com/DisnakeDev/guide/tree/main/code-samples/interactions/modals/create-tag-low.py)
+The implementation of this command using the lower-level interface can be found [here](https://github.com/DisnakeDev/guide/tree/main/code-samples/interactions/modals/create-tag-low.py).
 
 ## Creating a modal
 
@@ -136,7 +135,6 @@ class MyModal(disnake.ui.Modal):
 await inter.response.send_modal(
     title="Modal Title",
     custom_id="modal_id",
-    timeout=300,
     components=[...],
 )
 ```
@@ -202,6 +200,40 @@ class MyModal(disnake.ui.Modal):
         await inter.response.send_message("User input was received!")
 ```
 
+If you're using the lower-level interface for sending the modal, you'll have to utilize an event/listener to check for the custom ID and respond to the interaction. There is an <DocsLink reference="disnake.on_modal_submit" /> event for this purpose.
+
+```python title="modals.py" {8-12}
+@bot.slash_command()
+async def tags(inter: disnake.ApplicationCommandInteraction):
+    ...
+    await inter.response.send_modal(..., custom_id="modal_custom_id")
+
+
+...
+
+
+@bot.event()
+async def on_modal_submit(inter: disnake.ModalInteraction):
+
+    if inter.custom_id == "modal_custom_id":
+        await do_stuff_here()
+```
+
+You can alternatively use <DocsLink ext="commands" reference="disnake.ext.commands.Bot.wait_for">bot.wait_for()</DocsLink> for this purpose, inside the command itself.
+
+```python title="modals.py" {}
+@bot.slash_command()
+async def tags(inter: disnake.ApplicationCommandInteraction):
+    ...
+    await inter.response.send_modal(..., custom_id="modal_custom_id")
+
+    modal_inter: disnake.ModalInteraction = await bot.wait_for(
+        "modal_submit",
+        check=lambda i: i.custom_id == "modal_custom_id" and i.author.id == inter.author.id,
+        timeout=300,
+    )
+```
+
 ### <DocsLink reference="disnake.ui.Modal.on_error">`on_error()`</DocsLink>
 
 Received when the modal submission encounters an error. It returns the error as well as a <DocsLink reference="disnake.ModalInteraction" /> object that can be used to respond to the user.
@@ -230,6 +262,7 @@ No interaction object is passed to the <DocsLink reference="disnake.ui.Modal.on_
 
 ## Modal notes
 
+-   The only component that can currently be used with modals is <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink>. Buttons and select menus cannot be used inside modals.
 -   You can add components to a <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object using the <DocsLink reference="disnake.ui.Modal.append_component">append_component()</DocsLink> method. To directly add text inputs, use <DocsLink reference="disnake.ui.Modal.add_text_input">add_text_input()</DocsLink> instead.
 -   The <DocsLink reference="disnake.TextInputStyle" /> defaults to `short`, if not specified for the component.
 -   All <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink> components are required by default.
