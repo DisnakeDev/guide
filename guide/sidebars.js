@@ -28,8 +28,9 @@ const sidebars = {
 			link: { type: 'doc', id: 'interactions/intro' },
 			items: [
 				'interactions/slash-commands',
-				'interactions/user-message-commands',
 				'interactions/message-components',
+				'interactions/user-message-commands',
+				'interactions/modals',
 			],
 		},
 		{

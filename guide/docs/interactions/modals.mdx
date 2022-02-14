@@ -1,0 +1,284 @@
+---
+description: Modals act as client-integrated popups, that can prompt the user for text input.
+keywords: [disnake, bot, guide, tutorial, modals, text inputs, python]
+---
+
+# Modals & Text Inputs
+
+Modals are how you can prompt users for further detailed input. They act as client-integrated popups, and work in tandem
+with interactive components called [Text Inputs](https://discord.com/developers/docs/interactions/message-components#text-inputs).
+These inputs can have various formats to accept information from the user on prompt, and use the callback to process that information.
+
+This section goes in-depth on using modals with other interactive components, and responding to interactions with them.
+
+## Modal preview
+
+Here is an example of how a modal may look. We will go over modal construction in the next part of this article.
+
+<br />
+<p align="center">
+	<img src={require('./images/modals-preview.png').default} alt="Modal preview" width="60%" />
+</p>
+<br />
+
+Once the user inputs information into the modal, the bot will receive a callback that includes the values. As an example, this information has been portrayed in an embed below.
+
+<br />
+<DiscordMessages>
+	<DiscordMessage author="Disnake Bot" avatar="/public/disnake-logo.png" bot="true">
+		<DiscordEmbed embedTitle="Tag Creation" slot="embeds">
+			<DiscordEmbedFields slot="fields">
+				<DiscordEmbedField fieldTitle="Name">This is the tag's name.</DiscordEmbedField>
+				<DiscordEmbedField fieldTitle="Description">
+					This is the tag's description. It can be as long as 4000 characters.
+				</DiscordEmbedField>
+			</DiscordEmbedFields>
+		</DiscordEmbed>
+	</DiscordMessage>
+</DiscordMessages>
+<br />
+
+This was done using the following code.
+
+```python title="modals.py"
+# At the top of the file.
+import disnake
+from disnake.ext import commands
+from disnake.enums import TextInputStyle
+
+# Subclassing the modal.
+class MyModal(disnake.ui.Modal):
+    def __init__(self):
+        # The details of the modal, and its components
+        components = [
+            disnake.ui.TextInput(
+                label="Name",
+                placeholder="Foo Tag",
+                custom_id="name",
+                style=TextInputStyle.short,
+                max_length=50,
+            ),
+            disnake.ui.TextInput(
+                label="Description",
+                placeholder="Lorem ipsum dolor sit amet.",
+                custom_id="description",
+                style=TextInputStyle.paragraph,
+            ),
+        ]
+        super().__init__(
+            title="Create Tag",
+            custom_id="create_tag",
+            components=components,
+        )
+
+    # The callback received when the user input is completed.
+    async def callback(self, inter: disnake.ModalInteraction):
+        embed = disnake.Embed(title="Tag Creation")
+        for key, value in inter.text_values.items():
+            embed.add_field(
+                name=key.capitalize(),
+                value=value[:1024],
+                inline=False,
+            )
+        await inter.response.send_message(embed=embed)
+
+
+bot = commands.Bot(command_prefix="!")
+
+
+@bot.slash_command()
+async def tags(inter: disnake.AppCmdInter):
+    """Sends a Modal to create a tag."""
+    await inter.response.send_modal(modal=MyModal())
+
+
+bot.run("YOUR_BOT_TOKEN")
+```
+
+The implementation of this command using the lower-level interface can be found [here](https://github.com/DisnakeDev/guide/tree/main/code-samples/interactions/modals/create-tag-low.py).
+
+## Creating a modal
+
+A modal can be created and sent using two different methods, just like other message components:
+
+-   Subclassing <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> to define the components, and sending it through the `modal` parameter of <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> (as done in the example above).
+-   Defining the attributes and components of the modal inside <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> itself. This is considered a "lower-level" implementation of modals - we will use the same term to refer to it in this section.
+
+A <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object has the following attributes:
+
+-   `title` - The title of the modal.
+-   `custom_id` - An ID specified to the modal. This can be accessed via <DocsLink reference="disnake.ModalInteraction" />.
+-   `timeout` - The time (in seconds) after which the modal is removed from cache. Defaults to **600 seconds**.
+-   `components` - The list of components to be displayed in the modal. Limited to **5 action rows**.
+
+:::caution
+
+Modals without timeouts are not supported. There is no event dispatched when the modal is closed by the user, and thus the modal would not be removed from cache without a timeout.
+
+:::
+
+These attributes can be used while creating a modal, as follows.
+
+```python title="modals.py"
+# Subclassing the modal.
+class MyModal(disnake.ui.Modal):
+    def __init__(self):
+        super().__init__(
+            title="Modal Title",
+            custom_id="modal_id",
+            timeout=300,
+            components=[...],
+        )
+
+
+# Using the lower-level interface. (inside a function)
+await inter.response.send_modal(
+    title="Modal Title",
+    custom_id="modal_id",
+    components=[...],
+)
+```
+
+:::note
+
+It is recommended that you pseudo-randomize a modal's `custom_id` by storing the interaction's ID in it. The reason being that a user can close a modal without triggering an event, and reopen one with the same command. In such cases, the `wait_for` for the old modal will still be active, which will resume execution for both commands.
+
+In the lower-level interface, you can implement this like so:
+
+```diff title="modals.py"
+- custom_id="create_tag_low",
++ custom_id=f"create_tag_low-{inter.id}",
+
+% in wait_for
+- check=lambda i: i.custom_id == "create_tag_low" and i.author.id == inter.author.id,
++ check=lambda i: i.custom_id == f"create_tag_low-{inter.id}",
+```
+
+:::
+
+## `TextInput` components
+
+`TextInput` is a component in itself, like buttons and select menus. It is responsible for receiving user input in the form of text, and cannot be used outside of modals. It has the following customizable attributes.
+
+-   `label` - The label of the text input.
+-   `custom_id` - An ID specified to the text input.
+-   `style` - Utilizes one of <DocsLink reference="disnake.TextInputStyle" /> for the component. Defaults to <DocsLink reference="disnake.TextInputStyle.short">short</DocsLink>.
+-   `placeholder` - The placeholder text that is shown if nothing is entered.
+-   `value` - The pre-filled value of the text input (up to `max_length`).
+-   `required` - Whether the text input is required. Defaults to `True`.
+-   `min_length` and `max_length` - Set the minimum and maximum length of the inputs respectively.
+
+These attributes can be used per `TextInput` component, as follows.
+
+```python title="textinput.py"
+disnake.ui.TextInput(
+    label="Name",
+    placeholder="Foo Tag",
+    custom_id="name",
+    style=TextInputStyle.short,
+    max_length=50,
+)
+```
+
+The <DocsLink reference="disnake.TextInputStyle" /> attribute currently has two styles, which have multiple aliases:
+
+-   `short` - Represents a single-line text input component. Also called `single_line`.
+-   `long` - Represents a multi-line text input component. Also called `multi_line` or `paragraph`.
+
+## Modal callback methods
+
+### <DocsLink reference="disnake.ui.Modal.callback">`callback()`</DocsLink>
+
+It refers to the callback associated with the modal, and returns a <DocsLink reference="disnake.ModalInteraction" /> object which includes the values input by the user. It is overriden by subclasses, allowing the developer to define the action done on the modal input received.
+
+```python title="modals.py" {5,6}
+class MyModal(disnake.ui.Modal):
+    def __init__(self):
+        super().__init__(...)
+
+    async def callback(self, inter: disnake.ModalInteraction):
+        await inter.response.send_message("User input was received!")
+```
+
+If you're using the lower-level interface for sending the modal, you'll have to utilize an event/listener to check for the custom ID and respond to the interaction. There is an <DocsLink reference="disnake.on_modal_submit" /> event for this purpose.
+
+```python title="modals.py" {8-12}
+@bot.slash_command()
+async def tags(inter: disnake.ApplicationCommandInteraction):
+    ...
+    await inter.response.send_modal(..., custom_id="modal_custom_id")
+
+
+...
+
+
+@bot.event()
+async def on_modal_submit(inter: disnake.ModalInteraction):
+
+    if inter.custom_id == "modal_custom_id":
+        await do_stuff_here()
+```
+
+You can alternatively use <DocsLink ext="commands" reference="disnake.ext.commands.Bot.wait_for">bot.wait_for()</DocsLink> for this purpose, inside the command itself.
+
+```python title="modals.py" {}
+@bot.slash_command()
+async def tags(inter: disnake.ApplicationCommandInteraction):
+    ...
+    await inter.response.send_modal(..., custom_id="modal_custom_id")
+
+    modal_inter: disnake.ModalInteraction = await bot.wait_for(
+        "modal_submit",
+        check=lambda i: i.custom_id == "modal_custom_id" and i.author.id == inter.author.id,
+        timeout=300,
+    )
+```
+
+### <DocsLink reference="disnake.ui.Modal.on_error">`on_error()`</DocsLink>
+
+Received when the modal submission encounters an error. It returns the error as well as a <DocsLink reference="disnake.ModalInteraction" /> object that can be used to respond to the user.
+
+````python title="modals.py" {5-7}
+class MyModal(disnake.ui.Modal):
+    def __init__(self):
+        super().__init__(...)
+
+    async def on_error(self, error: Exception, inter: disnake.ModalInteraction):
+        await inter.response.send_message(f"An error occured!\n```{error}```")
+
+
+# The default implementation prints the traceback to stderr.
+````
+
+### <DocsLink reference="disnake.ui.Modal.on_timeout">`on_timeout()`</DocsLink>
+
+Called when the user does not respond before specified timeout; the modal is removed from cache without an interaction being made.
+
+:::note
+
+No interaction object is passed to the <DocsLink reference="disnake.ui.Modal.on_timeout">on_timeout()</DocsLink> method. It is to be subclassed solely for backend functions.
+
+:::
+
+## Modal notes
+
+-   The only component that can currently be used with modals is <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink>. Buttons and select menus cannot be used inside modals.
+-   You can add components to a <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object using the <DocsLink reference="disnake.ui.Modal.append_component">append_component()</DocsLink> method. To directly add text inputs, use <DocsLink reference="disnake.ui.Modal.add_text_input">add_text_input()</DocsLink> instead.
+-   The <DocsLink reference="disnake.TextInputStyle" /> defaults to `short`, if not specified for the component.
+-   All <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink> components are required by default.
+
+## Modal limits
+
+There are a few limits to be aware of while using modals due to the API's limitations. Here is a quick reference you can come back to:
+
+-   A modal can have a total of **5 action rows**.
+-   A modal's `title` has a maximum length of **45 characters**.
+-   The text input `label` has a maximum length of **45 characters**.
+-   The text input `placeholder` is limited to **100 characters**.
+-   The `custom_id` is limited to **100 characters**, for both modals and text inputs.
+-   The pre-defined `value` has a maximum length of **4000 characters** (overriden by the developer-defined limit).
+-   The minimum and maximum values of a text input can be set from **0-4000 characters** and **1-4000 characters** respectively.
+
+## Resulting code
+
+<ResultingCode />
