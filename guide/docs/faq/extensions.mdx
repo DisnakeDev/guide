@@ -1,6 +1,6 @@
 # Extensions
 
-Questions regarding `disnake.ext.commands` and `disnake.ext.tasks` belong here.
+Questions regarding `disnake.ext.commands`, `disnake.ext.tasks` and `disnake.ui` belong here.
 
 :::note
 
@@ -86,3 +86,11 @@ async def push(ctx, remote: str, branch: str):
 ```
 
 This could then be used as `?git push origin master`.
+
+### Which components can I use with modals?
+
+The only component that can currently be used with modals is <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink>. The API does not have integration for any other inputs as of now.
+
+### Do modals support autocomplete?
+
+Modals (or text inputs) do not support autocomplete. This is a Discord limitation.
