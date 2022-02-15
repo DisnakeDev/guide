@@ -119,7 +119,7 @@ Modals without timeouts are not supported. There is no event dispatched when the
 
 These attributes can be used while creating a modal, as follows.
 
-```python title="modals.py"
+```python title="modals.py" {4-9}
 # Subclassing the modal.
 class MyModal(disnake.ui.Modal):
     def __init__(self):
@@ -202,7 +202,7 @@ class MyModal(disnake.ui.Modal):
 
 If you're using the lower-level interface for sending the modal, you'll have to utilize an event/listener to check for the custom ID and respond to the interaction. There is an <DocsLink reference="disnake.on_modal_submit" /> event for this purpose.
 
-```python title="modals.py" {8-12}
+```python title="modals.py" {10-14}
 @bot.slash_command()
 async def tags(inter: disnake.ApplicationCommandInteraction):
     ...
@@ -236,18 +236,15 @@ async def tags(inter: disnake.ApplicationCommandInteraction):
 
 ### <DocsLink reference="disnake.ui.Modal.on_error">`on_error()`</DocsLink>
 
-Received when the modal submission encounters an error. It returns the error as well as a <DocsLink reference="disnake.ModalInteraction" /> object that can be used to respond to the user.
+Received when the modal submission encounters an error. It returns the error as well as a <DocsLink reference="disnake.ModalInteraction" /> object that can be used to respond to the user. The default implementation prints the traceback to `stderr`.
 
-````python title="modals.py" {5-7}
+````python title="modals.py" {5,6}
 class MyModal(disnake.ui.Modal):
     def __init__(self):
         super().__init__(...)
 
     async def on_error(self, error: Exception, inter: disnake.ModalInteraction):
-        await inter.response.send_message(f"An error occured!\n```{error}```")
-
-
-# The default implementation prints the traceback to stderr.
+        await inter.response.send_message(f"An error occurred!\n```{error}```")
 ````
 
 ### <DocsLink reference="disnake.ui.Modal.on_timeout">`on_timeout()`</DocsLink>
