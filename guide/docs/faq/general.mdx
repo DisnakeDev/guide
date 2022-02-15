@@ -14,13 +14,13 @@ Example code can be found in the [examples folder](https://github.com/DisnakeDev
 
 ### How do I set the "Playing" status?
 
-The `activity` keyword argument may be passed in the <DocsLink reference="disnake.Client" /> constructor or <DocsLink reference="disnake.Client.change_presence" />, given an <DocsLink reference="disnake.Activity" /> object.
+The `activity` keyword argument may be passed in the <DocsLink ext="commands" reference="disnake.ext.commands.Bot">commands.Bot</DocsLink> constructor or <DocsLink ext="commands" reference="disnake.ext.commands.Bot.change_presence">Bot.change_presence</DocsLink>, given an <DocsLink reference="disnake.Activity" /> object.
 
-The constructor may be used for static activities, while <DocsLink reference="disnake.Client.change_presence" /> may be used to update the activity at runtime.
+The constructor may be used for static activities, while <DocsLink ext="commands" reference="disnake.ext.commands.Bot.change_presence">Bot.change_presence</DocsLink> may be used to update the activity at runtime.
 
 :::warning
 
-It is highly discouraged to use <DocsLink reference="disnake.Client.change_presence" /> or API calls in <DocsLink reference="disnake.on_ready" /> as this event may be called many times while running, not just once. There is a high chance of disconnecting if presences are changed right after connecting.
+It is highly discouraged to use <DocsLink ext="commands" reference="disnake.ext.commands.Bot.change_presence">Bot.change_presence</DocsLink> or API calls in <DocsLink reference="disnake.on_ready" /> as this event may be called many times while running, not just once. There is a high chance of disconnecting if presences are changed right after connecting.
 
 :::
 
@@ -33,14 +33,14 @@ For memory optimisation purposes, some activities are offered in slimmed-down ve
 Putting both of these pieces of info together, you get the following:
 
 ```python
-client = disnake.Client(activity=disnake.Game(name="My game"))
+bot = commands.Bot(..., activity=disnake.Game(name="My game"))
 
 # Or, for watching:
 activity = disnake.Activity(
     name="My activity",
     type=disnake.ActivityType.watching,
 )
-client = disnake.Client(activity=activity)
+bot = commands.Bot(..., activity=activity)
 ```
 
 ### How do I send a message to a specific channel?
@@ -48,7 +48,7 @@ client = disnake.Client(activity=activity)
 You must fetch the channel directly and then call the appropriate method. Example:
 
 ```python
-channel = client.get_channel(12324234183172)
+channel = bot.get_channel(12324234183172)
 await channel.send("hello")
 ```
 
@@ -57,7 +57,7 @@ await channel.send("hello")
 Get the <DocsLink reference="disnake.User" /> or <DocsLink reference="disnake.Member" /> object and call <DocsLink reference="disnake.abc.Messageable.send" />. For example:
 
 ```python
-user = client.get_user(381870129706958858)
+user = bot.get_user(381870129706958858)
 await user.send("👀")
 ```
 
@@ -145,8 +145,8 @@ In case you want to use emoji that come from a message, you already get their co
 to do anything special. You **cannot** send `':thumbsup:'` style shorthands.
 
 For custom emoji, you should pass an instance of <DocsLink reference="disnake.Emoji" />. You can also pass a `'<:name:id>'` string, but if you
-can use said emoji, you should be able to use <DocsLink reference="disnake.Client.get_emoji" /> to get an emoji via ID or use <DocsLink reference="disnake.utils.find" />
-or <DocsLink reference="disnake.utils.get" /> on <DocsLink reference="disnake.Client.emojis" /> or <DocsLink reference="disnake.Guild.emojis" /> collections.
+can use said emoji, you should be able to use <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_emoji" /> to get an emoji via ID or use <DocsLink reference="disnake.utils.find" />
+or <DocsLink reference="disnake.utils.get" /> on <DocsLink ext="commands" reference="disnake.ext.commands.Bot.emojis" /> or <DocsLink reference="disnake.Guild.emojis" /> collections.
 
 The name and ID of a custom emoji can be found with the client by prefixing `:custom_emoji:` with a backslash.
 For example, sending the message `\:python3:` with the client will result in `<:python3:232720527448342530>`.
@@ -155,7 +155,7 @@ Quick example:
 
 ```python
 # If you have the ID already
-emoji = client.get_emoji(310177266011340803)
+emoji = bot.get_emoji(310177266011340803)
 await message.add_reaction(emoji)
 
 # No ID, do a lookup
@@ -185,7 +185,7 @@ this together we can do the following:
 ```python
 def my_after(error):
     coro = some_channel.send("Song is done!")
-    fut = asyncio.run_coroutine_threadsafe(coro, client.loop)
+    fut = asyncio.run_coroutine_threadsafe(coro, bot.loop)
     try:
         fut.result()
     except:
@@ -205,23 +205,23 @@ Check the [`background_task.py` example](https://github.com/DisnakeDev/disnake/b
 There are multiple ways of doing this. If you have a specific model's ID then you can use
 one of the following functions:
 
--   <DocsLink reference="disnake.Client.get_channel" />
--   <DocsLink reference="disnake.Client.get_guild" />
--   <DocsLink reference="disnake.Client.get_user" />
--   <DocsLink reference="disnake.Client.get_emoji" />
--   <DocsLink reference="disnake.Client.get_member" />
--   <DocsLink reference="disnake.Client.get_channel" />
--   <DocsLink reference="disnake.Client.get_role" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_channel" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_guild" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_user" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_emoji" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_member" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_channel" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_role" />
 
 The following use an HTTP request:
 
 -   <DocsLink reference="disnake.abc.Messageable.fetch_message" />
--   <DocsLink reference="disnake.Client.fetch_user" />
--   <DocsLink reference="disnake.Client.fetch_guilds" />
--   <DocsLink reference="disnake.Client.fetch_guild" />
--   <DocsLink reference="disnake.Client.fetch_emojis" />
--   <DocsLink reference="disnake.Client.fetch_emoji" />
--   <DocsLink reference="disnake.Client.fetch_member" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_user" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_guilds" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_guild" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_emojis" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_emoji" />
+-   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_member" />
 
 If the functions above do not help you, then use of <DocsLink reference="disnake.utils.find" /> or <DocsLink reference="disnake.utils.get" /> would serve some use in finding
 specific models.
@@ -230,7 +230,7 @@ Quick example:
 
 ```python
 # Find a guild by name
-guild = disnake.utils.get(client.guilds, name="My Server")
+guild = disnake.utils.get(bot.guilds, name="My Server")
 
 # Make sure to check if it's found
 if guild is not None:

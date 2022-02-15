@@ -8,7 +8,7 @@ This content has been taken directly from the [documentation](https://docs.disna
 
 An intent basically allows a bot to subscribe to specific buckets of events. The events that correspond to each intent is documented in the individual attribute of the <DocsLink reference="disnake.Intents">Intents</DocsLink> documentation.
 
-These intents are passed to the constructor of <DocsLink reference="disnake.Client" /> or its subclasses (<DocsLink reference="disnake.AutoShardedClient" />, <DocsLink ext="commands" reference="disnake.ext.commands.AutoShardedBot" />, <DocsLink ext="commands" reference="disnake.ext.commands.Bot" />) with the `intents` argument.
+These intents are passed to the constructor of <DocsLink ext="commands" reference="disnake.ext.commands.Bot">commands.Bot</DocsLink> or its subclasses (<DocsLink reference="disnake.AutoShardedClient" />, <DocsLink ext="commands" reference="disnake.ext.commands.AutoShardedBot" />, <DocsLink ext="commands" reference="disnake.ext.commands.Bot" />) with the `intents` argument.
 
 If intents are not passed, then the library defaults to every intent being enabled except the privileged intents, currently <DocsLink reference="disnake.Intents.members" /> and <DocsLink reference="disnake.Intents.presences" />.
 
