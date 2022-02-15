@@ -18,7 +18,7 @@ method on a <DocsLink reference="disnake.Message">Message</DocsLink> or <DocsLin
 
 ```python title="threads.py"
 # Using the 'Message' object
-message = bot.fetch_message(1234567890)
+message = channel.fetch_message(1234567890)
 await message.create_thread(
     name="This message will act as the thread's starting message.",
     auto_archive_duration=60,
