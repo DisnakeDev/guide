@@ -54,7 +54,7 @@ something like this:
 ### Inheriting a class
 
 The first step is to create a class in `ping.py` that inherits from the `commands.Cog`, along with a constructor that
-takes in the bot as its only argument and saves it. This is where we will be putting in our commands.
+takes in the `bot` object as its only argument and saves it. This is where we will be putting in our commands.
 
 ```python title="ping.py"
 from disnake.ext import commands
@@ -76,8 +76,8 @@ be useful in development when adding certain arguments to your commands.
 
 ### Registering commands
 
-Now, to define a command inside the class, we will use the `commands.command()` decorator. It functions the same as
-`bot.command()`, but works in cogs as well.
+Now, to define a slash command inside the class, we will use the `commands.slash_command()` decorator. It functions the same as
+`bot.slash_command()`, but works in cogs as well.
 
 ```python title="ping.py" {10-13}
 from disnake.ext import commands
@@ -89,10 +89,10 @@ class PingCommand(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.command()
-    async def ping(self, ctx: commands.Context):
+    @commands.slash_command()
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
         """Get the bot's current websocket latency."""
-        await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
+        await inter.response.send_message(f"Pong! {round(self.bot.latency * 1000)}ms")
 ```
 
 Note that we're using `self` as the first argument, since the command function is inside a class.
@@ -112,10 +112,10 @@ class PingCommand(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.command()
-    async def ping(self, ctx: commands.Context):
+    @commands.slash_command()
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
         """Get the bot's current websocket latency."""
-        await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
+        await inter.response.send_message(f"Pong! {round(self.bot.latency * 1000)}ms")
 
 
 def setup(bot: commands.Bot):
