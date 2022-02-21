@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from disnake.enums import TextInputStyle
+from disnake import TextInputStyle
 
 
 bot = commands.Bot()
