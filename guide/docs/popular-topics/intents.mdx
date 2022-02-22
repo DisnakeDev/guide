@@ -15,7 +15,7 @@ An intent basically allows a bot to subscribe to specific buckets of events. The
 
 These intents are passed to the constructor of <DocsLink ext="commands" reference="disnake.ext.commands.Bot">commands.Bot</DocsLink> or its subclasses (<DocsLink reference="disnake.AutoShardedClient" />, <DocsLink ext="commands" reference="disnake.ext.commands.AutoShardedBot" />, <DocsLink ext="commands" reference="disnake.ext.commands.Bot" />) with the `intents` argument.
 
-If intents are not passed, then the library defaults to every intent being enabled except the privileged intents, currently <DocsLink reference="disnake.Intents.members" /> and <DocsLink reference="disnake.Intents.presences" />.
+If intents are not passed, then the library defaults to every intent being enabled except the privileged intents, currently <DocsLink reference="disnake.Intents.members" />, <DocsLink reference="disnake.Intents.presences" /> and <DocsLink reference="disnake.Intents.message_content" /> .
 
 ## What intents are needed?
 
@@ -35,7 +35,7 @@ client = disnake.Client(intents=intents)
 # or,
 from disnake.ext import commands
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"), intents=intents)
 ```
 
 :::note
@@ -58,7 +58,7 @@ client = disnake.Client(intents=intents)
 # or
 from disnake.ext import commands
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix=commands.when_mentioned, intents=intents)
 ```
 
 ## Privileged Intents
@@ -105,6 +105,11 @@ Even if you enable intents through the developer portal, you still have to enabl
 ## Do I need privileged intents?
 
 This is a quick checklist to see if you need specific privileged intents.
+
+### Message Content Intent
+
+-   Whether you want a prefix that isn't the bot mention.
+-   Whether you want to see what the content of a message was. This includes content, embeds, attachments, and components.
 
 ### Presence Intent
 
@@ -187,8 +192,28 @@ client = disnake.Client(intents=intents)
 # or
 from disnake.ext import commands
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix=commands.when_mentioned, intents=intents)
 ```
+
+### Why do most messages have no content?
+
+As of April 30th 2022, Discord has blocked message content from being sent to bots that do not declare the :attr:`Intents.message_content` intent when connecting to discord.
+
+If you are on version 2.4 or before, your bot will be able to access message content without the intent enabled in the code. However, as of version 2.5, it is required to enable :attr:`Intents.message_content` to receive message content over the gateway.
+
+Message content refers to four attributes on the <DocsLink reference="disnake.Message" /> object:
+
+-   <DocsLink reference="disnake.Message.content">content</DocsLink>
+-   <DocsLink reference="disnake.Message.embeds">embeds</DocsLink>
+-   <DocsLink reference="disnake.Message.attachments">attachments</DocsLink>
+-   <DocsLink reference="disnake.Message.components">components</DocsLink>
+
+You will always receive message content in the following cases even without the message content intent:
+
+-   Messages the bot sends
+-   Messages the bot receives in <DocsLink reference="disnake.DMChannel" /> instances
+-   Messages in which the bot is mentioned
+-   Messages received as part of an interaction (for example, a message command)
 
 ### Why does `on_ready` take so long to fire?
 
