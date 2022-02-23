@@ -8,8 +8,8 @@ export default function ResultingCode() {
 	return(
 		<div>
 			<p>
-				The code showcased in this section can be found on our GitHub repository
-				<a href={codeSampleURL + location.pathname.slice(1)} target="_blank" rel="noopener noreferrer"> here</a>.
+				The code showcased in this section can be found on our GitHub repository{' '}
+				<a href={codeSampleURL + location.pathname.slice(1)} target="_blank" rel="noopener noreferrer">here</a>.
 			</p>
 		</div>
 	);
