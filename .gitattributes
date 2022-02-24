@@ -1,4 +1,4 @@
 *.mdx linguist-language=javascript
 *.env linguist-language=python
 
-*text=auto
+* text=auto
