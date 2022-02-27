@@ -50,6 +50,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Frequently Asked Questions',
+			link: { type: 'doc', id: 'faq/intro' },
 			items: ['faq/general', 'faq/administrative', 'faq/coroutines', 'faq/extensions', 'faq/good-practices'],
 		},
 	],
