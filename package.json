@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cd guide && docusaurus start",
-    "build": "cd guide && docusaurus build",
-    "deploy": "cd guide && docusaurus deploy",
-    "serve": "cd guide && docusaurus serve",
-    "swizzle": "cd guide && docusaurus swizzle"
+    "start": "docusaurus start guide",
+    "build": "docusaurus build guide",
+    "deploy": "docusaurus deploy guide",
+    "serve": "docusaurus serve guide"
   },
   "repository": "https://github.com/DisnakeDev/guide.git",
   "author": "abhigyantrips <abhigyantrips@gmail.com>",

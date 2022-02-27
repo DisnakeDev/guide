@@ -131,3 +131,9 @@ html[data-theme='dark'] .DocSearch {
 	--docsearch-key-gradient: var(--ifm-background-color);
 	--docsearch-key-shadow: 0 0 0 1px var(--ifm-color-emphasis-400);
 }
+
+/* Docusaurus Variables */
+
+:root {
+	--doc-sidebar-width: 310px !important;
+}
