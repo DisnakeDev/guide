@@ -1,7 +1,8 @@
-import disnake
-from disnake.ext import commands
-from disnake import TextInputStyle
+import asyncio
 
+import disnake
+from disnake import TextInputStyle
+from disnake.ext import commands
 
 bot = commands.Bot()
 
@@ -28,12 +29,16 @@ async def tags_low(inter: disnake.AppCmdInter):
             ),
         ],
     )
-
-    modal_inter: disnake.ModalInteraction = await bot.wait_for(
-        "modal_submit",
-        check=lambda i: i.custom_id == "create_tag_low" and i.author.id == inter.author.id,
-        timeout=300,
-    )
+    try:
+        modal_inter: disnake.ModalInteraction = await bot.wait_for(
+            "modal_submit",
+            check=lambda i: i.custom_id == "create_tag_low" and i.author.id == inter.author.id,
+            timeout=300,
+        )
+    except asyncio.TimeoutError:
+        # user didn't submit the modal, so a timeout error is raised
+        # we don't have any action to take, so just return early
+        return
 
     embed = disnake.Embed(title="Tag Creation")
     for key, value in modal_inter.text_values.items():
