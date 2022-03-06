@@ -7,7 +7,7 @@ import TOC from '@theme/TOC';
 import { ThemeClassNames } from '@docusaurus/theme-common';
 import styles from './styles.module.css';
 
-function MDXPage(props) {
+export default function MDXPage(props) {
 	const { content: MDXPageContent } = props;
 	const {
 		metadata: { title, description, permalink, frontMatter },
@@ -42,5 +42,3 @@ function MDXPage(props) {
 		</Layout>
 	);
 }
-
-export default MDXPage;
