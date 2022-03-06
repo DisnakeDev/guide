@@ -201,6 +201,12 @@ As of April 30th 2022, Discord has blocked message content from being sent to bo
 
 If you are on version 2.4 or before, your bot will be able to access message content without the intent enabled in the code. However, as of version 2.5, it is required to enable <DocsLink reference="disnake.Intents.message_content">message_content</DocsLink> to receive message content over the gateway.
 
+:::note
+
+No matter which disnake version you use, you will be required to turn on the message_content intent in the [discord development portal](https://discord.com/developers/applications).
+
+:::
+
 Message content refers to four attributes on the <DocsLink reference="disnake.Message" /> object:
 
 -   <DocsLink reference="disnake.Message.content">content</DocsLink>
