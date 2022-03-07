@@ -5,7 +5,7 @@ import { MDXProvider } from '@mdx-js/react';
 import MDXComponents from '@theme/MDXComponents';
 import TOC from '@theme/TOC';
 import { ThemeClassNames } from '@docusaurus/theme-common';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 export default function MDXPage(props) {
 	const { content: MDXPageContent } = props;

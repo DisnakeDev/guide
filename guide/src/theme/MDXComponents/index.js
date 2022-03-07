@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 import CodeBlock from '@theme/CodeBlock';
 import Heading from '@theme/Heading';
 import Details from '@theme/Details';
-import './styles.css';
+import './styles.scss';
 
 import {
 	DiscordButton,
