@@ -1,0 +1,25 @@
+html[data-theme="light"] {
+	--ifm-color-primary: hsl(211, 44%, 40%);
+	--ifm-color-primary-light: hsl(211, 43%, 44%);
+	--ifm-color-primary-lighter: hsl(211, 43%, 45%);
+	--ifm-color-primary-lightest: hsl(211, 46%, 52%);
+	--ifm-color-primary-dark: hsl(212, 43%, 36%);
+	--ifm-color-primary-darker: hsl(212, 43%, 34%);
+	--ifm-color-primary-darkest: hsl(211, 43%, 28%);
+	--ifm-code-font-size: 95%;
+
+	--custom-code-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] {
+	--ifm-color-primary: hsl(47, 83%, 55%);
+	--ifm-color-primary-light: hsl(47, 82%, 63%);
+	--ifm-color-primary-lighter: hsl(47, 82%, 66%);
+	--ifm-color-primary-lightest: hsl(47, 82%, 76%);
+	--ifm-color-primary-dark: hsl(48, 100%, 46%);
+	--ifm-color-primary-darker: hsl(47, 100%, 45%);
+	--ifm-color-primary-darkest: hsl(47, 100%, 38%);
+	--ifm-code-font-size: 95%;
+
+	--custom-code-highlight-color: rgba(255, 255, 255, 0.1);
+}
