@@ -13,6 +13,8 @@ module.exports = {
 	onBrokenLinks: 'warn',
 	onBrokenMarkdownLinks: 'warn',
 
+	plugins: ['docusaurus-plugin-sass'],
+
 	presets: [
 		[
 			'classic',
@@ -26,11 +28,7 @@ module.exports = {
 					showLastUpdateTime: true,
 				},
 				theme: {
-					customCss: [
-						require.resolve('./src/css/lightTheme.css'),
-						require.resolve('./src/css/darkTheme.css'),
-						require.resolve('./src/css/extraComponents.css'),
-					],
+					customCss: [require.resolve('./src/styles/index.scss')],
 				},
 			}),
 		],

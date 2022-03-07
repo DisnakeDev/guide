@@ -1,0 +1,48 @@
+// Discord Message Components
+
+.discord-messages {
+	border-radius: 0.4rem;
+}
+
+.discord-light-theme .discord-embed .discord-embed-content .discord-embed-title {
+	color: #000; // Some weird bug that kept the title white, idk.
+}
+
+// Text Selection
+
+html[data-theme="dark"] ::selection {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme="dark"] ::-moz-selection {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme="light"] ::selection {
+	background: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="light"] ::-moz-selection {
+	background: rgba(0, 0, 0, 0.1);
+}
+
+// Sidebar
+
+:root {
+	--doc-sidebar-width: 310px !important;
+}
+
+// Codeblocks
+
+.docusaurus-highlight-code-line {
+	background-color: var(--custom-code-highlight-color);
+	display: block;
+	margin: 0 calc(-1 * var(--ifm-pre-padding));
+	padding: 0 var(--ifm-pre-padding);
+}
+
+// Last Updated Span
+
+span.theme-last-updated {
+	font-style: normal;
+}
