@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "docusaurus start guide",
-    "build": "docusaurus build guide",
-    "deploy": "docusaurus deploy guide",
-    "serve": "docusaurus serve guide"
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve",
+    "swizzle": "docusaurus swizzle"
   },
   "repository": "https://github.com/DisnakeDev/guide.git",
   "author": "abhigyantrips <abhigyantrips@gmail.com>",
@@ -30,8 +31,8 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/core": "^2.0.0-beta.15",
-    "@docusaurus/preset-classic": "^2.0.0-beta.15",
+    "@docusaurus/core": "^2.0.0-beta.17",
+    "@docusaurus/preset-classic": "^2.0.0-beta.17",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "eslint": "^8.6.0",
