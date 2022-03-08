@@ -9,6 +9,7 @@ import './styles.scss';
 import {
 	DiscordButton,
 	DiscordButtons,
+	DiscordDefaultOptions,
 	DiscordEmbed,
 	DiscordEmbedField,
 	DiscordEmbedFields,
@@ -17,6 +18,7 @@ import {
 	DiscordMention,
 	DiscordMessage,
 	DiscordMessages,
+	DiscordOptionsContext,
 	DiscordReaction,
 	DiscordReactions,
 } from '@discord-message-components/react';
@@ -38,6 +40,21 @@ function unwrapMDXElement(element) {
 
 	return element;
 }
+
+const discordOptions = {
+	...DiscordDefaultOptions,
+	profiles: {
+		user: {
+			author: 'AbhigyanTrips',
+			avatar: '/public/message-author.png',
+		},
+		bot: {
+			author: 'Disnake Bot',
+			avatar: '/public/disnake-logo.png',
+			bot: true,
+		},
+	},
+};
 
 const MDXComponents = {
 	head: (props) => {
@@ -95,9 +112,11 @@ const MDXComponents = {
 	},
 	DiscordMessages: (props) => {
 		return (
-			<DiscordMessages {...props} lightTheme={!isDarkTheme()}>
-				{props.children}
-			</DiscordMessages>
+			<DiscordOptionsContext.Provider value={discordOptions}>
+				<DiscordMessages {...props} lightTheme={!isDarkTheme()}>
+					{props.children}
+				</DiscordMessages>
+			</DiscordOptionsContext.Provider>
 		);
 	},
 	DiscordMessage: (props) => {
