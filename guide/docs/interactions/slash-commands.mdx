@@ -155,7 +155,7 @@ async def ping(inter: ApplicationCommandInteraction):
 async def defer(inter: ApplicationCommandInteraction):
     await inter.response.defer()
     await asyncio.sleep(10)
-    await inter.edit_original_message("The wait is over, my comrades!")
+    await inter.edit_original_message(content="The wait is over, my comrades!")
 ```
 
 ### Follow-ups
