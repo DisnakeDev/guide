@@ -3,7 +3,7 @@
 # Disnake Guide (WIP)
 
 <p align="center">
-    <a href="https://discord.gg/gJDbCw8aQy"><img src="https://img.shields.io/discord/808030843078836254?style=flat-square&color=5865f2&logo=discord&logoColor=ffffff&label=discord" alt="Discord server invite" /></a>
+    <a href="https://discord.gg/disnake"><img src="https://img.shields.io/discord/808030843078836254?style=flat-square&color=5865f2&logo=discord&logoColor=ffffff&label=discord" alt="Discord server invite" /></a>
     <a href="https://github.com/DisnakeDev/disnake/commits"><img src="https://img.shields.io/github/commit-activity/w/DisnakeDev/guide.svg?style=flat-square" alt="Commit activity" /></a>
     <a href="https://guide.disnake.dev/"><img src="https://img.shields.io/github/deployments/DisnakeDev/guide/github-pages?style=flat-square&color=blue" alt="GitHub checks" /></a>
 </p>
@@ -37,8 +37,8 @@ For more info on development/contributions, see [CONTRIBUTING.md](./.github/CONT
     ⁕
     <a href="https://guide.disnake.dev/">Guide</a>
     ⁕
-    <a href="https://discord.gg/gJDbCw8aQy">Discord Server</a>
+    <a href="https://discord.gg/disnake">Discord Server</a>
     ⁕
-    <a href="https://discord.gg/discord-api">Discord API</a>
+    <a href="https://discord.gg/discord-developers">Discord Developers</a>
 </p>
 <br />
