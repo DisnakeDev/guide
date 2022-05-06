@@ -197,13 +197,13 @@ bot = commands.Bot(command_prefix=commands.when_mentioned, intents=intents)
 
 ### Why do most messages have no content?
 
-As of April 30th 2022, Discord has blocked message content from being sent to bots that do not declare the <DocsLink reference="disnake.Intents.message_content">message_content</DocsLink> intent when connecting to discord.
+After August 31st 2022, Discord will start blocking message content from being sent to bots that don't have the message content intent enabled.
 
 If you are on version 2.4 or before, your bot will be able to access message content without the intent enabled in the code. However, as of version 2.5, it is required to enable <DocsLink reference="disnake.Intents.message_content">message_content</DocsLink> to receive message content over the gateway.
 
 :::note
 
-No matter which disnake version you use, you will be required to turn on the message_content intent in the [Discord Developer Portal](https://discord.com/developers/applications).
+Starting with version 2.5, or once the intent deadline has passed, you will be required to turn on the message content intent in the [Discord Developer Portal](https://discord.com/developers/applications) as well.
 
 :::
 
@@ -217,7 +217,7 @@ Message content refers to four attributes on the <DocsLink reference="disnake.Me
 You will always receive message content in the following cases even without the message content intent:
 
 -   Messages the bot sends
--   Messages the bot receives in <DocsLink reference="disnake.DMChannel" /> instances
+-   Messages the bot receives in DMs
 -   Messages in which the bot is mentioned
 -   Messages received as part of an interaction (for example, a message command)
 
