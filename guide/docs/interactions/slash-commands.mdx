@@ -64,21 +64,7 @@ It will print which commands were added, edited, deleted or untouched. It also d
 ### Global commands
 
 Global slash commands are visible everywhere, including your bot DMs.
-If you don't specify the `test_guilds` parameter of `commands.Bot`, all your slash commands are global.
-
-:::note
-
-The first registration of global commands may take up to 1 hour.
-However, they show up instantly in the bot DMs.
-
-:::
-
-:::note
-
-You don't have to keep your bot online this whole time. You can turn it off once `on_ready` fires.
-Once all commands have appeared, they show up instantly in any new guild.
-
-:::
+If you don't specify the `test_guilds` parameter of `commands.Bot`, all your slash commands are global by default.
 
 ### Guild commands
 

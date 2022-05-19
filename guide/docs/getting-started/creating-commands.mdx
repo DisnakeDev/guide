@@ -100,14 +100,9 @@ Of course, you're open to using your preferred abbreviation in code.
 ### Registering commands in specific guilds
 
 Note that servers are referred to as "guilds" in the Discord API and disnake library. On running the above code, the
-slash command will be registered globally, and will be accessible on all servers the bot is in. The caveat being that
-global registration of slash commands can take up to 1 hour (refer to
-[Discord's documentation](https://discord.com/developers/docs/interactions/application-commands#create-global-application-command)).
+slash command will be registered globally, and will be accessible on all servers the bot is in.
 
-When you're trying to test your changes to code in real time, it can be immensely useful to have the command's function
-update with your code changes right away. Thus, you can use the `guild_ids` argument for the command to be
-instantaneously registered in a list of specified servers. (We recommend including your separate development server in
-this list.)
+You can also use the `guild_ids` argument for the command to only be registered in a list of specified servers, for example your development server.
 
 ```python title="main.py" {12-14}
 import disnake
