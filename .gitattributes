@@ -1,4 +1,13 @@
-*.mdx linguist-language=javascript
-*.env linguist-language=python
-
+# Normalize line endings to LF
 * text=auto
+
+.git* text
+*.json text
+*.env text linguist-language=python
+*.{yml, yaml} text
+*.{css,scss,js,jsx,ts,tsx} text
+*.py text
+*.mdx text linguist-detectable
+
+*.png binary
+*.{jpeg,jpg} binary

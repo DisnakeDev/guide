@@ -82,7 +82,11 @@ module.exports = {
 				},
 			],
 		},
-		autoCollapseSidebarCategories: true,
+		docs: {
+			sidebar: {
+				autoCollapseCategories: true,
+			},
+		},
 		prism: {
 			theme: require('./src/utils/prismLight'),
 			darkTheme: require('./src/utils/prismDark'),

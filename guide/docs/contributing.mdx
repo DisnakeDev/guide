@@ -1,0 +1,47 @@
+---
+hide_sidebar: true
+---
+
+# Contributing
+
+First off, thanks for taking the time to contribute. This guide uses [Docusaurus](https://docusaurus.io/) for building the guide itself, and [`pre-commit`](https://pre-commit.com/) for various formatting/cleanup tasks, like formatting Python codeblocks. Make sure to install their respective CLIs, as they're utilized by our `npm` scripts.
+
+## Local development
+
+Clone the repo to your desired folder, and `cd` into it.
+
+```
+git clone https://github.com/DisnakeDev/guide.git
+cd guide/guide
+```
+
+Further, install the dependencies using `npm install`.
+
+### Starting the server
+
+To build and serve a preview of your site locally, run the following commands while in root:
+
+```
+cd guide
+npm run start
+```
+
+This will serve the site on `http://localhost:3000/`. To specifiy the port of the devserver, you can use the `--port` option.
+
+```
+npm run start -- --port=8000
+```
+
+## Linting
+
+Linting your edits/additions is critical to ensure the consistency of the material with the rest of the guide.
+
+## Using components
+
+### `<DocsLink />`
+
+### `<ResultingCode />`
+
+### `<WorkInProgress />`
+
+## Commit convention

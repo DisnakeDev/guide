@@ -1,10 +1,12 @@
-import React, { isValidElement } from 'react';
-import Head from '@docusaurus/Head';
-import Link from '@docusaurus/Link';
-import CodeBlock from '@theme/CodeBlock';
-import Heading from '@theme/Heading';
-import Details from '@theme/Details';
-import './styles.scss';
+import React from 'react';
+import MDXHead from '@theme/MDXComponents/Head';
+import MDXCode from '@theme/MDXComponents/Code';
+import MDXA from '@theme/MDXComponents/A';
+import MDXPre from '@theme/MDXComponents/Pre';
+import MDXDetails from '@theme/MDXComponents/Details';
+import MDXHeading from '@theme/MDXComponents/Heading';
+import MDXUl from '@theme/MDXComponents/Ul';
+import MDXImg from '@theme/MDXComponents/Img';
 
 import {
 	DiscordButton,
@@ -32,15 +34,6 @@ import DocsLink from '../../components/DocsLink';
 import ResultingCode from '../../components/ResultingCode';
 import WorkInProgress from '../../components/WorkInProgress';
 
-function unwrapMDXElement(element) {
-	if (element?.props?.mdxType && element?.props?.originalType) {
-		const { mdxType, originalType, ...newProps } = element.props;
-		return React.createElement(element.props.originalType, newProps);
-	}
-
-	return element;
-}
-
 const discordOptions = {
 	...DiscordDefaultOptions,
 	profiles: {
@@ -57,44 +50,19 @@ const discordOptions = {
 };
 
 const MDXComponents = {
-	head: (props) => {
-		const unwrappedChildren = React.Children.map(props.children, (child) => unwrapMDXElement(child));
-		return <Head {...props}>{unwrappedChildren}</Head>;
-	},
-	code: (props) => {
-		const inlineElements = ['a', 'b', 'big', 'i', 'span', 'em', 'strong', 'sup', 'sub', 'small'];
-		const shouldBeInline = React.Children.toArray(props.children).every(
-			(el) =>
-				(typeof el === 'string' && !el.includes('\n')) ||
-				(React.isValidElement(el) && inlineElements.includes(el.props.mdxType))
-		);
-		return shouldBeInline ? <code {...props} /> : <CodeBlock {...props} />;
-	},
-	a: (props) => <Link {...props} />,
-	pre: (props) => (
-		<CodeBlock
-			{...(isValidElement(props.children) && props.children.props.originalType === 'code'
-				? props.children?.props
-				: { ...props })}
-		/>
-	),
-	details: (props) => {
-		const items = React.Children.toArray(props.children);
-
-		const summary = items.find((item) => item?.props?.mdxType === 'summary');
-		const children = <>{items.filter((item) => item !== summary)}</>;
-		return (
-			<Details {...props} summary={summary}>
-				{children}
-			</Details>
-		);
-	},
-	h1: (props) => <Heading as="h1" {...props} />,
-	h2: (props) => <Heading as="h2" {...props} />,
-	h3: (props) => <Heading as="h3" {...props} />,
-	h4: (props) => <Heading as="h4" {...props} />,
-	h5: (props) => <Heading as="h5" {...props} />,
-	h6: (props) => <Heading as="h6" {...props} />,
+	head: MDXHead,
+	code: MDXCode,
+	a: MDXA,
+	pre: MDXPre,
+	details: MDXDetails,
+	ul: MDXUl,
+	img: MDXImg,
+	h1: (props) => <MDXHeading as="h1" {...props} />,
+	h2: (props) => <MDXHeading as="h2" {...props} />,
+	h3: (props) => <MDXHeading as="h3" {...props} />,
+	h4: (props) => <MDXHeading as="h4" {...props} />,
+	h5: (props) => <MDXHeading as="h5" {...props} />,
+	h6: (props) => <MDXHeading as="h6" {...props} />,
 	DocsLink: (props) => {
 		return <DocsLink {...props}>{props.children}</DocsLink>;
 	},
@@ -157,4 +125,5 @@ const MDXComponents = {
 		return <DiscordReaction {...props}>{props.children}</DiscordReaction>;
 	},
 };
+
 export default MDXComponents;
