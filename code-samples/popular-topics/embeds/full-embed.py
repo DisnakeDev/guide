@@ -18,6 +18,7 @@ async def fullembed(ctx):
         title="Embed Title",
         description="Embed Description",
         color=disnake.Colour.yellow(),
+        url="https://disnake.dev/",
         timestamp=datetime.datetime.now(),
     )
 
