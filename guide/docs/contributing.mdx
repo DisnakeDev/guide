@@ -6,6 +6,11 @@ hide_sidebar: true
 
 First off, thanks for taking the time to contribute. This guide uses [Docusaurus](https://docusaurus.io/) for building the guide itself, and [`pre-commit`](https://pre-commit.com/) for various formatting/cleanup tasks, like formatting Python codeblocks. Make sure to install their respective CLIs, as they're utilized by our `npm` scripts.
 
+## Prerequisites
+
+-   node v16 or newer
+-   pre-commit
+
 ## Local development
 
 Clone the repo to your desired folder, and `cd` into it.
@@ -26,7 +31,7 @@ cd guide
 npm run start
 ```
 
-This will serve the site on `http://localhost:3000/`. To specifiy the port of the devserver, you can use the `--port` option.
+This will serve the site on `http://localhost:3000/`. To specify the port of the devserver, you can use the `--port` option.
 
 ```
 npm run start -- --port=8000
