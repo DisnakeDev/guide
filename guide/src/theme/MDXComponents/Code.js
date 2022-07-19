@@ -5,7 +5,7 @@ export default function MDXCode(props) {
 	const shouldBeInline = React.Children.toArray(props.children).every(
 		(el) =>
 			(typeof el === 'string' && !el.includes('\n')) ||
-			(isValidElement(el) && inlineElements.includes(el.props.mdxType))
+			(isValidElement(el) && inlineElements.includes(el.props?.mdxType))
 	);
 	return shouldBeInline ? <code {...props} /> : <CodeBlock {...props} />;
 }
