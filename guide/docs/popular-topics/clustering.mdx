@@ -1,0 +1,278 @@
+---
+description: This section covers how to cluster your bot as it scales.
+keywords: [disnake, bot, guide, tutorial, python, clustering, sharding]
+---
+
+# Clustering your bot
+
+:::note
+
+This content relates directly to the experiences of the author. You should tailor your solution
+to your bots needs as at this scale, everyone has different requirements.
+
+:::
+
+As your bot scales, simply using <DocsLink ext="commands" reference="disnake.ext.commands.AutoShardedBot">commands.AutoShardedBot</DocsLink> to handle your sharding becomes unfeasible.
+
+As you continue to run your bot on a single process (_Think of one process as calling_ `python3 main.py` _once_), you may begin to notice your bots responses are slowing down among other actions. This is often a sign that you need to start clustering your bot, however, the simplest way to figure out if you need clustering or not is to simply look at your shard count.
+
+Clustering is a simple way to distribute the load of your bot across multiple processes. Essentially, this means a single process will only handle commands for **X** amount of shards. For the purposes of this guide, the terms "process" and "cluster" are interchangeable.
+
+Personally, over at <a href="https://suggestions.gg/">SuggestionsBot</a> we need to run **1** cluster for every **10** shards the bot needs to connect. So with **53** shards at the time of writing, this means we need to run **6** clusters.
+
+:::note
+
+This number varies wildly, with bots such as <a href="https://gearbot.rocks/">GearBot</a> needing **1** cluster for every **2** shards and purely comes down to how computationally intensive your bot is.
+
+I would start with **1** cluster for every **5** to **10** shards and then modify these numbers depending on how your bot performs.
+
+:::
+
+## Files required
+
+For the purposes of this guide, we will be deploying our bot using <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">docker-compose</a>. Further to this, you will also need some form of docker container library. For the purposes of this guide we will be using <a href="https://docs.github.com/en/actions">GitHub Actions</a> to deploy our images to the <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-docker-registry">GitHub Docker Registry</a>
+
+Within this guide we are going to work with a fictional bot called `Dave`. `Dave` has a repository under the GitHub user `Skelmis` and will be designed to have **2** clusters serving **16** shards.
+
+The following section details all the files you will require for subsequent parts of this guide.
+
+### Dockerfile
+
+This Dockerfile will run the `main.py` file with Python 3.10 using the requirements defined in `requirements.txt`
+
+```shell title="Dockerfile"
+FROM python:3.10
+
+RUN mkdir -p /bot
+WORKDIR bot
+
+COPY ./requirements.txt /bot/requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . /bot
+
+CMD python3 main.py
+```
+
+:::note
+
+This is a simplistic example. For more fine-grained control you may consider setting enviroment variables such as
+`ENV PIP_NO_CACHE_DIR=false` or using a smaller Python docker image.
+
+:::
+
+### docker-compose
+
+```yaml title="docker-compose.yml"
+version: '2'
+
+services:
+    dave_cluster_1:
+        container_name: 'dave_cluster_1'
+        image: docker.pkg.github.com/skelmis/dave/dave
+        environment:
+            CLUSTER: 1
+            IS_PRODUCTION: 1
+            TOKEN: ...
+    dave_cluster_2:
+        container_name: 'dave_cluster_2'
+        environment:
+            CLUSTER: 2
+        extends:
+            service: dave_cluster_1
+```
+
+Explanation:
+
+-   `CLUSTER` is a number representing what number cluster this Docker image is. This starts from **1**.
+-   `IS_PRODUCTION` should be present in any production instances to tell the bot to launch the required clusters.
+-   `TOKEN` should be your bot token.
+
+When using the `extends` directive, our new image (`dave_cluster_2` in this case) inherits from `dave_cluster_1`. This reduces the amount of duplicate environment variables as the only difference between clusters is the id which is provided by the `CLUSTER` enviroment variable.
+
+For further security with your `TOKEN` and other environment variables, look into using a <a href="https://devilbox.readthedocs.io/en/latest/configuration-files/docker-compose-override-yml.html">docker-compose.override.yml</a> file to avoid accidentally pushing these variables to your source control.
+
+### GitHub action
+
+This file should be placed in the directory `.github/workflows`
+
+```yaml title=".github/workflows/publish-image.yml"
+name: Publish Docker Image
+on:
+    push:
+        branches: [master]
+jobs:
+    push_to_registry:
+        name: Push Docker image to GitHub Packages
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out the repo
+              uses: actions/checkout@v2
+
+            - name: Push to GitHub Packages
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ github.actor }}
+                  password: ${{ github.token }}
+                  registry: docker.pkg.github.com
+                  repository: <GitHub Username>/<Repo>/<Name>
+                  tags: latest
+                  build_args: BRANCH=${{ github.ref }},COMMIT=${{ github.sha }}
+```
+
+You should replace the following with their lowercase version:
+
+-   `<GitHub Username>` with your username.
+-   `<Repo>` with your bot's repository.
+-   `<Name>` with a name of your choice, I like to just re-use `<Repo>`
+
+For example, if my bot was in a repository called `Dave` under the GitHub account `Skelmis` then it would look like this. `repository: skelmis/dave/dave`
+
+You may also tag your image, for the purposes of this guide we will use `latest`
+
+:::note
+
+Make sure the branch in `branches: [ master ]` is correct for your repository.
+
+:::
+
+### Bot files
+
+This bot file is extremely simple, however, the concepts and classes used are transferable to your own bots.
+
+```python title="main.py"
+import os
+import logging
+
+import disnake
+from disnake.ext import commands
+
+log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
+async def main():
+	# Values set here clearly indicate we are not in production
+	cluster_id = 0
+	total_shards = 1
+
+	cluster_kwargs = {}
+	if os.environ.get("IS_PRODUCTION"):
+		total_shards = 16
+		cluster_id = int(os.environ["CLUSTER"])
+		offset = cluster_id - 1 # As we start at 1
+		number_of_shards_per_cluster = 10
+
+		# Calculate the shard id's this cluster should handle
+		# For example on cluster 1 this would be equal to
+		# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        shard_ids = [
+            i
+            for i in range(
+                offset * number_of_shards_per_cluster,
+                (offset * number_of_shards_per_cluster) + number_of_shards_per_cluster,
+            )
+            if i < total_shards
+        ]
+		cluster_kwargs = {
+            "shard_ids": shard_ids,
+            "shard_count": total_shards,
+        }
+
+	bot = commands.AutoShardedInteractionBot(
+		intents=disnake.Intents.default(),
+		**cluster_kwargs
+	)
+	bot.cluster_id = cluster_id
+	bot.total_shards = total_shards
+
+	@bot.event
+	async def on_ready():
+		log.info("Cluster %s is now ready.", bot.cluster_id)
+
+	@bot.slash_command()
+	async def ping(interaction: disnake.CommandInteraction):
+		"""Pong!"""
+		await interaction.send("Pong!")
+
+	await bot.start(os.environ["TOKEN"])
+```
+
+:::note
+
+It is not included here, however, a file called `requirements.txt` should exist with the requirements relevant to running your bot.
+
+:::
+
+## Publishing your Docker image
+
+Assuming you have followed the guide correctly up until this point, you should now have everything you need to start deploying your Docker image and by extension your bot.
+
+Everytime you push code to your GitHub repo, the GitHub action we defined earlier should run and publish a new version of your bots Docker image for the world to see. **It's as simple as that.**
+
+## Deploying your bot
+
+To complete this step, at-least one successful deployment of your GitHub action must have occurred.
+
+On your server simply copy the `docker-compose.yml` file from earlier. If you are unsure on how to do this, I recommend a tool such as <a href="https://filezilla-project.org/">FileZilla</a>.
+
+:::note
+
+All these commands should be run in the same directory as your `docker-compose.yml` file.
+
+:::
+
+### Pulling the latest Docker image
+
+In order to pull the latest Docker image from your Docker container registry, simply run the following.
+
+```shell
+docker-compose pull
+```
+
+### Starting your bot
+
+For when you wish to run the bot and view the logs in the current terminal instance.
+
+```shell
+docker-compose up
+```
+
+:::note
+
+Your bot will stop when you close this terminal.
+
+:::
+
+For more general purpose usage I recommend:
+
+```shell
+docker-compose up -d
+```
+
+This command will start all of your clusters in "detached mode", this essentially means in the background. That means you can safely exit your current terminal and the bot will continue running.
+
+### Inspect your bots logs
+
+If your running in detached mode, you will not see your bots output. While not always useful, there are still times you will need to see your bots output.
+
+```shell
+docker-compose logs
+```
+
+Will allow you to view your bots logs up until the time you ran the command.
+
+If you wish to have a 'live view' of your logs, try the following command.
+
+```shell
+docker-compose logs -f
+```
+
+### Shutting down your bot
+
+More advanced bots may feature commands to shut down individual clusters, etc, however that is outside the scope of this guide.
+
+```shell
+docker-compose down
+```
+
+Will shut down all clusters. If you wish to gracefully handle this shutdown you will likely need to handle that in your code as this simply shuts the Docker container itself down.
