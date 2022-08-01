@@ -18,15 +18,13 @@ As you continue to run your bot on a single process (_Think of one process as ca
 
 Clustering is a simple way to distribute the load of your bot across multiple processes. Essentially, this means a single process will only handle commands for **X** amount of shards. For the purposes of this guide, the terms "process" and "cluster" are interchangeable.
 
-Personally, over at <a href="https://suggestions.gg/">SuggestionsBot</a> we need to run **1** cluster for every **10** shards the bot needs to connect. So with **53** shards at the time of writing, this means we need to run **6** clusters.
+A good starting point would be around **5** shards per cluster. After beginning to cluster keep an eye on your bot and how each cluster is fairing in order to determine the true amount of shards per cluster your bot requires.
 
-:::note
+Some factors which are good indicators include:
 
-This number varies wildly, with bots such as <a href="https://gearbot.rocks/">GearBot</a> needing **1** cluster for every **2** shards and purely comes down to how computationally intensive your bot is.
-
-I would start with **1** cluster for every **5** to **10** shards and then modify these numbers depending on how your bot performs.
-
-:::
+-   Noticing in your logs that the websocket is falling behind regularly
+-   CPU cores maxing out under regular load
+-   Noticeable slowness on Discord
 
 ## Files required
 
@@ -150,21 +148,22 @@ from disnake.ext import commands
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
+
 async def main():
-	# Values set here clearly indicate we are not in production
-	cluster_id = 0
-	total_shards = 1
+    # Values set here clearly indicate we are not in production
+    cluster_id = 0
+    total_shards = 1
 
-	cluster_kwargs = {}
-	if os.environ.get("IS_PRODUCTION"):
-		total_shards = 16
-		cluster_id = int(os.environ["CLUSTER"])
-		offset = cluster_id - 1 # As we start at 1
-		number_of_shards_per_cluster = 10
+    cluster_kwargs = {}
+    if os.environ.get("IS_PRODUCTION"):
+        total_shards = 16
+        cluster_id = int(os.environ["CLUSTER"])
+        offset = cluster_id - 1  # As we start at 1
+        number_of_shards_per_cluster = 10
 
-		# Calculate the shard id's this cluster should handle
-		# For example on cluster 1 this would be equal to
-		# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        # Calculate the shard id's this cluster should handle
+        # For example on cluster 1 this would be equal to
+        # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         shard_ids = [
             i
             for i in range(
@@ -173,28 +172,25 @@ async def main():
             )
             if i < total_shards
         ]
-		cluster_kwargs = {
+        cluster_kwargs = {
             "shard_ids": shard_ids,
             "shard_count": total_shards,
         }
 
-	bot = commands.AutoShardedInteractionBot(
-		intents=disnake.Intents.default(),
-		**cluster_kwargs
-	)
-	bot.cluster_id = cluster_id
-	bot.total_shards = total_shards
+    bot = commands.AutoShardedInteractionBot(intents=disnake.Intents.default(), **cluster_kwargs)
+    bot.cluster_id = cluster_id
+    bot.total_shards = total_shards
 
-	@bot.event
-	async def on_ready():
-		log.info("Cluster %s is now ready.", bot.cluster_id)
+    @bot.event
+    async def on_ready():
+        log.info("Cluster %s is now ready.", bot.cluster_id)
 
-	@bot.slash_command()
-	async def ping(interaction: disnake.CommandInteraction):
-		"""Pong!"""
-		await interaction.send("Pong!")
+    @bot.slash_command()
+    async def ping(interaction: disnake.CommandInteraction):
+        """Pong!"""
+        await interaction.send("Pong!")
 
-	await bot.start(os.environ["TOKEN"])
+    await bot.start(os.environ["TOKEN"])
 ```
 
 :::note
