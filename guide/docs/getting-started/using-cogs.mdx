@@ -19,7 +19,7 @@ Cogs are typically used alongside with **Extensions**. You can read more about t
 ## Creating files
 
 What we code here will extend on the code from [**Initial Files**](./initial-files.mdx), and thus we assume that there
-already exists a `main.py` file in your directory with initiates a `commands.Bot()` instance.
+already exists a `main.py` file in your directory which initiates a `commands.Bot()` instance.
 
 ```python title="main.py"
 import disnake
@@ -80,6 +80,7 @@ Now, to define a slash command inside the class, we will use the `commands.slash
 `bot.slash_command()`, but works in cogs as well.
 
 ```python title="ping.py" {10-13}
+import disnake
 from disnake.ext import commands
 
 
@@ -103,6 +104,7 @@ The last thing that needs to be added to this file is a `setup` function, so tha
 added to `main.py`.
 
 ```python title="ping.py" {16,17}
+import disnake
 from disnake.ext import commands
 
 
