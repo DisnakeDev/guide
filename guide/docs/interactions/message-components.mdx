@@ -1,8 +1,31 @@
 ---
 description: They refer to views, buttons and select menus that can be added to the messages your bot sends.
-hide_table_of_contents: true
 ---
 
 # Message Components
 
-<WorkInProgress />
+Components allow users to interact with your bot through interactive UI elements. In this section, we will discuss how bots can receive and process information from these elements through the library.
+
+## Buttons
+
+<br />
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="user" command={true}>
+				buttons
+			</DiscordInteraction>
+		</div>
+		Need help?
+		<div slot="actions">
+			<DiscordButtons>
+				<DiscordButton type="success">Yes</DiscordButton>
+				<DiscordButton type="danger">No</DiscordButton>
+				<DiscordButton type="secondary">Maybe?</DiscordButton>
+			</DiscordButtons>
+		</div>
+	</DiscordMessage>
+</DiscordMessages>
+<br />
+
+## Select menus
