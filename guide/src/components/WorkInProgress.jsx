@@ -6,7 +6,7 @@ export default function WorkInProgress() {
 		<div align="center">
 			<br />
 			<br />
-			<img src="https://cataas.com/cat/gif" width="330px" style={{borderRadius: 0.4 + "rem"}} />
+			<img src="https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif" width="330px" style={{borderRadius: 0.4 + "rem"}} />
 			<br />
 			<br />
 			<h3>
