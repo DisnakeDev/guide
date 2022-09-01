@@ -19,12 +19,44 @@ Components allow users to interact with your bot through interactive UI elements
 			<DiscordButtons>
 				<DiscordButton type="success">Yes</DiscordButton>
 				<DiscordButton type="danger">No</DiscordButton>
-				<DiscordButton type="secondary">Maybe?</DiscordButton>
 			</DiscordButtons>
 		</div>
 	</DiscordMessage>
 </DiscordMessages>
 <br />
+
+The code for this command is given below.
+
+```python title="buttons.py"
+# At the top of the file.
+import disnake
+from disnake.ext import commands
+
+# The slash command that responds with a message.
+@bot.slash_command()
+async def buttons(inter: disnake.ApplicationCommandInteraction):
+    await inter.response.send_message(
+        "Need help?",
+        components=[
+            disnake.ui.Button(label="Yes", style=disnake.ButtonStyle.success, custom_id="yes"),
+            disnake.ui.Button(label="No", style=disnake.ButtonStyle.danger, custom_id="no"),
+        ],
+    )
+
+
+@bot.listen("on_button_click")
+async def help_listener(inter: disnake.MessageInteraction):
+    if inter.component.custom_id not in ["yes", "no"]:
+        # We filter out any other button presses except
+        # the components we wish to process.
+        return
+
+    if inter.component.custom_id == "yes":
+        await inter.response.send_message("Contact us at https://discord.gg/disnake!")
+
+    if inter.component.custom_id == "no":
+        await inter.response.send_message("Got it. Signing off!")
+```
 
 ## Building and sending buttons
 
@@ -58,10 +90,12 @@ Components allow users to interact with your bot through interactive UI elements
 
 :::note
 
-`Link` buttons do not have a `custom_id`, and do not send an interaction event when clicked.
+`Link` buttons _cannot_ have a `custom_id`, and _do not_ send an interaction event when clicked.
 
 :::
 
 ### Disabled buttons
 
 ## Receiving button callback
+
+## Views vs. low-level components
