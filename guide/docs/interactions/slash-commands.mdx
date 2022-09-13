@@ -140,7 +140,7 @@ async def local_command(inter):
 ### Sending responses {#response}
 
 The <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a <DocsLink reference="disnake.InteractionResponse">InteractionResponse</DocsLink>
-instance that has 4 ways to respond to an ApplicationCommandInteraction.
+instance that has four ways of responding to an ApplicationCommandInteraction.
 A response can <b>only be done once</b>.
 If you want to send secondary messages, consider using a <DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
 
@@ -150,8 +150,8 @@ An interaction can only be responded to **once**. After a response is made, **no
 :::
 
 1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message.
-1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits original message, for example
-   in component or modal interactions. Cannot be used with application commands.
+1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example in
+   component or component+modal interactions. Cannot be used with application commands.
 1. <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> - Defers the interaction.
 1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a <DocsLink reference="disnake.ui.Modal">
    	Modal
