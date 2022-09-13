@@ -162,7 +162,7 @@ An interaction can only be responded to **once**. After a response is made, **no
 If you're going to run long processes (more than 3 seconds) before responding, you should first <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> the interaction,
 as interactions expire after 3 seconds and later responses will fail.
 Deferring an interaction response shows a loading indicator to the user, and gives you more time to prepare a complete response.
-Once your response is ready, you can edit the original response using the <DocsLink reference="disnake.InteractionResponse.edit_original_message">edit_original_message</DocsLink> method.
+Once your response is ready, you can edit the original response using the <DocsLink reference="disnake.Interaction.edit_original_message">Interaction.edit_original_message</DocsLink> method.
 
 :::
 
