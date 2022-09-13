@@ -35,7 +35,7 @@ async def ping(inter: disnake.ApplicationCommandInteraction):
 				ping
 			</DiscordInteraction>
 		</div>
-		Pong!
+		Latency: <DiscordMarkdown>`42ms`</DiscordMarkdown>!
 	</DiscordMessage>
 </DiscordMessages>
 <br />
@@ -189,15 +189,31 @@ Followups are a way to send a message after responding. There are two important 
 
 At their core, followups are simply <DocsLink reference="disnake.Webhook">Webhook</DocsLink> instances. The only special thing about them is that the `wait` parameter is treated as if it is always set to `True`.
 
-One possible use for a followup might be to send instructions that will be visible if a modal is not submitted.
+Take this as an example of how followups could be used:
 
 ```python
 @bot.slash_command()
-async def confirm(inter: ApplicationCommandInteraction):
-    await inter.response.send_modal(
-        title="Confirm",
-        custom_id="confirm-or-deny",
-        components=[disnake.ui.TextInput(label="confirm?", custom_id="confirm")],
-    )
-    await inter.followup.send(content="Please don't deny that modal!", ephemeral=True)
+async def timer(inter: disnake.ApplicationCommandInteraction, seconds: int):
+    await inter.response.send_message(f"Setting a timer for {seconds} seconds.")
+    await asyncio.sleep(seconds)
+    await inter.followup.send(f"{inter.author.mention}, your timer expired!")
 ```
+
+<br />
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="user" command="true">
+				timer
+			</DiscordInteraction>
+		</div>
+		Setting a timer for 30 seconds.
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="bot">Setting a timer for 30 seconds.</DiscordInteraction>
+		</div>
+		<DiscordMention profile="user"></DiscordMention>, your timer expired!
+	</DiscordMessage>
+</DiscordMessages>
+<br />
