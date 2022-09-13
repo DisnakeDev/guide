@@ -5,14 +5,14 @@ keywords: [disnake, bot, guide, tutorial, cogs, extensions, python]
 
 # Creating cogs/extensions
 
-[**Cogs**](https://docs.disnake.dev/en/latest/ext/commands/cogs.html) are analogous to modules that extend the core of
+[**Cogs**](https://docs.disnake.dev/en/stable/ext/commands/cogs.html) are analogous to modules that extend the core of
 the bot - thus adding to its functions and abilities. They also allow you to break down and organize your bot's
 collection of commands/listeners (which is useful when your bot's command list becomes quite extensive).
 
 :::note
 
 Cogs are typically used alongside with **Extensions**. You can read more about them
-[in the documentation](https://docs.disnake.dev/en/latest/ext/commands/extensions.html).
+[in the documentation](https://docs.disnake.dev/en/stable/ext/commands/extensions.html).
 
 :::
 
@@ -148,7 +148,7 @@ syntax for loading an extension is `bot.load_extension("<folder_name>.<file_name
 
 And that concludes the use of cogs with `disnake`! You can now create multiple cogs to group and organize your
 commands/events, and load/unload them via your main file. More information on special cog methods and meta options can
-be found [in the documentation](https://docs.disnake.dev/en/latest/ext/commands/cogs.html).
+be found [in the documentation](https://docs.disnake.dev/en/stable/ext/commands/cogs.html).
 
 ## Syntax changes
 
@@ -165,7 +165,7 @@ the primary syntax used in cogs:
 -   Cogs are then registered with the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.add_cog">Bot.add_cog</DocsLink> call, and are subsequently removed with the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.remove_cog">Bot.remove_cog</DocsLink> call.
 
 <sup>
-	Source: <a href="https://docs.disnake.dev/en/latest/ext/commands/cogs.html">Disnake Documentation</a>
+	Source: <a href="https://docs.disnake.dev/en/stable/ext/commands/cogs.html">Disnake Documentation</a>
 </sup>
 
 Cogs represent a fairly drastic change in the way you write commands and bots. Thus, it is recommended that you get
