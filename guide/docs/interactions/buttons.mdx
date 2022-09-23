@@ -53,8 +53,7 @@ async def help_listener(inter: disnake.MessageInteraction):
 
     if inter.component.custom_id == "yes":
         await inter.response.send_message("Contact us at https://discord.gg/disnake!")
-
-    if inter.component.custom_id == "no":
+    elif inter.component.custom_id == "no":
         await inter.response.send_message("Got it. Signing off!")
 ```
 
