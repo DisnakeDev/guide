@@ -35,12 +35,12 @@ async def ping(inter: disnake.ApplicationCommandInteraction):
 				ping
 			</DiscordInteraction>
 		</div>
-		Pong!
+		Latency: <DiscordMarkdown>`42ms`</DiscordMarkdown>!
 	</DiscordMessage>
 </DiscordMessages>
 <br />
 
-If using a cog, the <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">@commands.slash_command</DocsLink> decorator should be used instead.
+If you're using cogs, the <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">@commands.slash_command</DocsLink> decorator should be used instead.
 
 ```python
 class Meta(commands.Cog):
@@ -56,9 +56,9 @@ class Meta(commands.Cog):
 
 ### Parameters
 
-While some commands can exist without arguments, most commands will need to take user input to be useful. To define an option, its as simple as defining an argument to the callback.
+While some commands can exist without arguments, most commands will need to take user input to be useful. Adding an option is as simple as defining a parameter on the callback.
 
-Here’s an example of a command with one integer option (without a description):
+Here's an example of a command with one integer option (without a description):
 
 ```python
 @bot.slash_command(description="Multiplies the number by 7")
@@ -66,7 +66,7 @@ async def multiply(inter, number: int):
     await inter.response.send_message(number * 7)
 ```
 
-To make a parameter optional, provide a default value for the option.
+To make a parameter optional, provide a default value for the option:
 
 ```python
 @bot.slash_command(description="Multiplies the number by a multiplier")
@@ -74,20 +74,20 @@ async def multiply(inter, number: int, multiplier: int = 7):
     await inter.response.send_message(number * multiplier)
 ```
 
+<!-- TODO
 ### Subcommands
-
-<!----TODO---->
+-->
 
 ## Registering commands
 
-Unlike prefix commands, slash commands must be registered in Discord first. Otherwise they won't pop up if you press "/".
-By default, the library registers or updates your slash commands automatically.
-It does so on bot start or when one or several cogs are unloaded or reloaded.
+Unlike prefix commands, slash commands must be registered with Discord first, otherwise they won't show up if you press "/".
+By default, the library registers and updates your slash commands automatically.
+It does so on bot start or when cogs are loaded, unloaded, or reloaded.
 
 :::note
 
-The library doesn't make unnecessary API requests during this process.
-If registered commands match the commands in your code, no API requests are made.
+The library avoids unnecessary API requests during this process.
+If the registered commands match the commands in your code, no API requests are made.
 Otherwise only one bulk overwrite request is done.
 
 :::
@@ -99,7 +99,7 @@ If you want to see how exactly the list of registered commands changes, set the 
 bot = commands.Bot("!", sync_commands_debug=True)
 ```
 
-It will print which commands were added, edited, deleted or untouched. It also depends on your logging level.
+It will print (or use the logger, if enabled) which commands were added, edited, deleted or left untouched.
 
 ### Global commands
 
@@ -139,31 +139,30 @@ async def local_command(inter):
 
 ### Sending responses {#response}
 
-The <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a <DocsLink reference="disnake.InteractionResponse">InteractionResponse</DocsLink> instance that has 4 ways to respond to an ApplicationCommandInteraction. A response can <b>only be done once</b>. If you want to send secondary
-messages, consider using a <DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
+The <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a <DocsLink reference="disnake.InteractionResponse">InteractionResponse</DocsLink>
+instance that has four ways of responding to an ApplicationCommandInteraction.
+A response can <b>only be done once</b>.
+If you want to send secondary messages, consider using a <DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
 
 :::warning
 
-A response can only be used **once**. After a response is made, **no more responses can be made.** See the [followup](#followup) object for sending messages after responding.
+An interaction can only be responded to **once**. After a response is made, **no more responses can be made.** See the [followup](#followup) object for sending messages after responding.
 :::
 
-1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message
-2. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits original message, you're
-   unable to use this in application command because there are no message while you responding
-3. <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> - Defers the interaction
-4. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - send a <DocsLink reference="disnake.ui.Modal">
+1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message.
+1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example in
+   component or component+modal interactions. Cannot be used with application commands.
+1. <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> - Defers the interaction.
+1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a <DocsLink reference="disnake.ui.Modal">
    	Modal
    </DocsLink> as a response.
 
-Additionally, there is one method that does not make a response:
-
-5. <DocsLink reference="disnake.InteractionResponse.is_done">is_done</DocsLink> - Indicates whether an interaction response
-   has been done.
-
 :::note
 
-If you're going to run long processes (more than 3 seconds) while responding, you must first defer the interaction. Then
-when your response is ready you can edit the message using <DocsLink reference="disnake.InteractionResponse.edit_original_message">edit_original_message</DocsLink> method.
+If you're going to run long processes (more than 3 seconds) before responding, you should first <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> the interaction,
+as interactions expire after 3 seconds and later responses will fail.
+Deferring an interaction response shows a loading indicator to the user, and gives you more time to prepare a complete response.
+Once your response is ready, you can edit the original response using the <DocsLink reference="disnake.Interaction.edit_original_response">Interaction.edit_original_response</DocsLink> method.
 
 :::
 
@@ -177,27 +176,44 @@ async def ping(inter: ApplicationCommandInteraction):
 async def defer(inter: ApplicationCommandInteraction):
     await inter.response.defer()
     await asyncio.sleep(10)
-    await inter.edit_original_message(content="The wait is over, my comrades!")
+    await inter.edit_original_response(content="The wait is over, my comrades!")
 ```
 
 ### Followups
 
 Followups are a way to send a message after responding. There are two important restrictions for when a followup can be used:
 
--   the interaction must have been responded to in the first 3 seconds (see [responding](#responses)).
--   the interaction must not be expired. Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
+-   The interaction must have been responded to (see [responding](#responses)).
+-   The interaction must not be expired (i.e. hasn't exceeded the 15 minute limit).
+    Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
 
-At their core, followups are simply <DocsLink reference="disnake.Webhook">Webhook</DocsLink> instances. There is nothing special, except that the `wait` parameter is treated as if it is alwys set to `True`.
+At their core, followups are simply <DocsLink reference="disnake.Webhook">Webhook</DocsLink> instances. The only special thing about them is that the `wait` parameter is treated as if it is always set to `True`.
 
-One possible use for a followup might be to send instructions that will be visible if a modal is not submitted.
+Take this as an example of how followups could be used:
 
 ```python
 @bot.slash_command()
-async def confirm(inter: ApplicationCommandInteraction):
-    await inter.response.send_modal(
-        title="Confirm",
-        custom_id="confirm-or-deny",
-        components=[disnake.ui.TextInput(label="confirm?", custom_id="confirm")],
-    )
-    await inter.followup.send(content="Please don't deny that modal!", ephemeral=True)
+async def timer(inter: disnake.ApplicationCommandInteraction, seconds: int):
+    await inter.response.send_message(f"Setting a timer for {seconds} seconds.")
+    await asyncio.sleep(seconds)
+    await inter.followup.send(f"{inter.author.mention}, your timer expired!")
 ```
+
+<br />
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="user" command="true">
+				timer
+			</DiscordInteraction>
+		</div>
+		Setting a timer for 30 seconds.
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="bot">Setting a timer for 30 seconds.</DiscordInteraction>
+		</div>
+		<DiscordMention profile="user"></DiscordMention>, your timer expired!
+	</DiscordMessage>
+</DiscordMessages>
+<br />

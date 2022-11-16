@@ -4,8 +4,14 @@
 .git* text
 *.json text
 *.env text linguist-language=python
-*.{yml, yaml} text
-*.{css,scss,js,jsx,ts,tsx} text
+*.yml text
+*.yaml text
+*.css text
+*.scss text
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
 *.py text
 *.mdx text linguist-detectable
 
