@@ -8,6 +8,7 @@ import MDXHeading from '@theme/MDXComponents/Heading';
 import MDXUl from '@theme/MDXComponents/Ul';
 import MDXImg from '@theme/MDXComponents/Img';
 import Admonition from '@theme/Admonition';
+import Mermaid from '@theme/Mermaid';
 
 import {
 	DiscordButton,
@@ -65,6 +66,7 @@ const MDXComponents = {
 	h5: (props) => <MDXHeading as="h5" {...props} />,
 	h6: (props) => <MDXHeading as="h6" {...props} />,
 	admonition: Admonition,
+	mermaid: Mermaid,
 	DocsLink: (props) => {
 		return <DocsLink {...props}>{props.children}</DocsLink>;
 	},
