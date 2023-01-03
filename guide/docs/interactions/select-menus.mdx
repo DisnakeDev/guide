@@ -30,6 +30,7 @@ A message can have a maximum of 5 rows of components. Select components each tak
 
 ### Example of StringSelects
 
+
 ```python title="stringselect.py"
 import os
 
@@ -44,8 +45,8 @@ class AnimalDropdown(disnake.ui.StringSelect):
         # Define the options that will be presented inside the dropdown
         # you may not have more than 25 options
         # there is a value keyword that is being omitted, but that is useful if
-        # you wish to display a value to the user, but handle a different value
-        # here within the code
+        # you wish to display a label to the user, but handle a different value
+        # here within the code, like an index number or database id
         options = [
             disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal"),
             disnake.SelectOption(label="Cat", description="Cats are your favorite type of animal"),
@@ -74,13 +75,16 @@ class AnimalDropdown(disnake.ui.StringSelect):
         # `Self` refers to this StringSelect object, and the `values`
         # attribute contains a list of the user's selected options
         # We only want the first one
-        await inter.response.send_message(f"You favorite type of animal is: {self.values[0]}")
+        await inter.response.send_message(f"Your favorite type of animal is: {self.values[0]}")
 
 
 # Now that we have created the Select object with it's options and callback, we need to attach it to a
 # view that will be displayed to the user in the command response.
 # Views have a default of 180s before timing out and the bot will stop listening for those events
-# you may pass any float here, or `None` if you wish to remove the timeout
+# you may pass any float here, or `None` if you wish to remove the timeout. Note: If None is passed
+# this view will persist only until the bot is restarted.  If you wish to have persistent views,
+# consider using low-level or check out the persistent view example: 
+# https://github.com/DisnakeDev/disnake/blob/master/examples/views/persistent.py
 class DropDownView(disnake.ui.View):
     def __init__(self):
         # You would pass a new `timeout=` if you wish to alter it, but
@@ -92,7 +96,7 @@ class DropDownView(disnake.ui.View):
 
 
 # Finally, we create a basic bot instance with a command that will utilize the created view and dropdown
-bot = commands.InteractionBot(command_sync_flags=commands.CommandSyncFlags.all())
+bot = commands.InteractionBot()
 
 
 @bot.listen()
@@ -149,7 +153,7 @@ To prevent this you have a couple of options.
 
 For this example we will disable the component `on_timeout`. However, if you wish to remove the view completely you can pass `view=None` instead of `view=self` as the example below shows.
 
-We'll continue with the origianl example from above, however I will only be altering the parts that matter.
+We'll continue with the original example from above, however I will only be altering the parts that matter.
 
 ```python title="viewtimeout.py"
 ...
@@ -203,7 +207,8 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
 
 As an alternative to using `Views`, it is possible to use SelectMenus as low-level components.
 These components do not need to be sent as part of a View and can be sent as is. However, you should take note
-that any each component being sent in this manner must have a `custom_id` explicitly set.
+that any each component being sent in this manner must have a `custom_id` explicitly set. It should also be noted
+that components will share listeners. This means `custom_id` should be unique for each component.
 
 The main advantage of this is that listeners, by nature, are persistent and will remain fully functional over bot reloads. Listeners are are stored in the bot
 strictly once, and are shared by all components. Because of this, the memory footprint will generally be smaller
@@ -235,7 +240,7 @@ async def fav_animal_listener(inter: disnake.MessageInteraction):
         return
 
     # now we can respond with the user's favorite animal
-    await inter.response.send_message(f"You favorite type of animal is: {inter.values[0]}")
+    await inter.response.send_message(f"Your favorite type of animal is: {inter.values[0]}")
 ```
 
 :::note
