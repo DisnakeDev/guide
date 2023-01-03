@@ -30,8 +30,10 @@ A message can have a maximum of 5 rows of components. Select components each tak
 
 ### Example of StringSelects
 
+<Tabs>
+<TabItem value="subclass" label="subclassing.py">
 
-```python title="stringselect.py"
+```python
 import os
 
 import disnake
@@ -83,7 +85,7 @@ class AnimalDropdown(disnake.ui.StringSelect):
 # Views have a default of 180s before timing out and the bot will stop listening for those events
 # you may pass any float here, or `None` if you wish to remove the timeout. Note: If None is passed
 # this view will persist only until the bot is restarted.  If you wish to have persistent views,
-# consider using low-level or check out the persistent view example: 
+# consider using low-level or check out the persistent view example:
 # https://github.com/DisnakeDev/disnake/blob/master/examples/views/persistent.py
 class DropDownView(disnake.ui.View):
     def __init__(self):
@@ -118,6 +120,46 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
 if __name__ == "__main__":
     bot.run(os.getenv("BOT_TOKEN"))
 ```
+
+</TabItem>
+<TabItem value="decorator" label="decorator.py">
+
+```python
+# instead of subclassing `disnake.ui.StringSelect`, this example shows how to use the
+# `@disnake.ui.string_select` decorator directly inside the view to create the dropdown
+# component.
+class AnimalView(disnake.ui.View):
+    def __init__(self):
+        super().__init__()
+
+        # rather than creating a large decorator, we can create the options for this component here
+        # this also works if you wish to pass a list of options to this view to create options dynamically
+        self.animal_callback.options = [
+            disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal"),
+            disnake.SelectOption(label="Cat", description="Cats are your favorite type of animal"),
+            disnake.SelectOption(
+                label="Snake", description="Snakes are your favorite type of animal"
+            ),
+            disnake.SelectOption(
+                label="Gerbil", description="Gerbils are your favorite type of animal"
+            ),
+        ]
+
+    @disnake.ui.string_select(
+        placeholder="Choose an animal",
+        min_values=1,
+        max_values=1,
+    )
+    async def animal_callback(
+        self, select: disnake.ui.StringSelect, inter: disnake.MessageInteraction
+    ):
+        # the main difference in this callback is that we will access the `StringSelect` directly
+        # since it is passed to the callback vs the subclass example where we access it via `Self`
+        await inter.response.send_message(f"You favorite type of animal is: {select.values[0]}")
+```
+
+</TabItem>
+</Tabs>
 
 ### Other Selects
 
