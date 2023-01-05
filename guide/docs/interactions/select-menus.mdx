@@ -10,13 +10,12 @@ You can require users to select a minimum/maximum number of options using <DocsL
 Select Menus are available as the following types:
 
 -   <DocsLink reference="disnake.ui.StringSelect">disnake.ui.StringSelect</DocsLink> Allows you to input custom string options
-    for users to select from */}
--   <DocsLink reference="disnake.ui.UserSelect">disnake.ui.UserSelect</DocsLink> User or Member objects as options (Note:
-    Options for this type of Select are populated by Discord) */}
--   <DocsLink reference="disnake.ui.RoleSelect">disnake.ui.RoleSelect</DocsLink> Role objects as options (Note: Options for
-    this type of Select are populated by Discord) */}
--   <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> Channel objects as options (Note:
-    Options for this type of Select are populated by Discord) */}
+    for users to select from, up to 25
+-   <DocsLink reference="disnake.ui.UserSelect">disnake.ui.UserSelect</DocsLink> User or Member objects as options
+-   <DocsLink reference="disnake.ui.RoleSelect">disnake.ui.RoleSelect</DocsLink> Role objects as options
+-   <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> Channel objects as options
+
+The options for user, role, and channel select menus are populated by Discord, and currently cannot be limited to a specific subset. See [below](#other-selects) for details.
 
 This guide will walk you through a pretty basic use-case for a StringSelect dropdowns using views and low-level components. If you need more examples, you can always check the examples in the [disnake repo](https://github.com/DisnakeDev/disnake/tree/master/examples).
 &nbsp;  
