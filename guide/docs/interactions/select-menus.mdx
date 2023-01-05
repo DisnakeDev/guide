@@ -268,7 +268,8 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
         "What is your favorite type of animal?",
         components=[
             disnake.ui.StringSelect(
-                options=["Dog", "Cat", "Snake", "Gerbil"], custom_id="fav_animal"
+                custom_id="fav_animal",
+                options=["Dog", "Cat", "Snake", "Gerbil"],
             )
         ],
     )
