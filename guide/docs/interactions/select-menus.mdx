@@ -275,7 +275,7 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
     )
 
 
-# now we create the listener that will handle the users's selection.  Similar to the callback we used above
+# Now we create the listener that will handle the users's selection, similar to the callback we used above
 @bot.listen("on_dropdown")
 async def fav_animal_listener(inter: disnake.MessageInteraction):
     # first we should check if the interaction is for the `fav_animal` dropdown we created
