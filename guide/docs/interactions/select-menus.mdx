@@ -247,12 +247,13 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
 
 ### Views vs. low-level components
 
-As an alternative to using `Views`, it is possible to use SelectMenus as low-level components.
-These components do not need to be sent as part of a View and can be sent as is. However, you should take note
-that any each component being sent in this manner must have a `custom_id` explicitly set. It should also be noted
-that components will share listeners. This means `custom_id` should be unique for each component.
+As an alternative to using `View`s, it is possible to use Select Menus as low-level components.
+These components do not need to be sent as part of a View and can be sent as is.
 
-The main advantage of this is that listeners, by nature, are persistent and will remain fully functional over bot reloads. Listeners are are stored in the bot
+Note that any component being sent in this manner must have a `custom_id` explicitly set. Component interactions are sent to all listeners,
+which means the `custom_id` should be unique for each component to be able to identify the component in your code.
+
+The main advantage of this is that listeners, by nature, are persistent and will remain fully functional over bot reloads. Listeners are stored in the bot
 strictly once, and are shared by all components. Because of this, the memory footprint will generally be smaller
 than that of an equivalent view.
 
