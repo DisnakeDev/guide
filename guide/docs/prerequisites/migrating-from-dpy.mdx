@@ -71,7 +71,7 @@ As discussed above, rewriting your code from an older `discord.py` version to `d
 changes. But if you're migrating from `discord.py 2.0`, all that's left now is changing the library references
 throughout the code, since the base code for both the libraries is practically the same.
 
-There are three ways to switch between libraries:
+There are two ways to switch between libraries:
 
 #### Replace `discord` with `disnake`
 
@@ -94,43 +94,6 @@ changing all references throughout your code.
 import disnake as discord
 from disnake.ext import commands
 ```
-
-#### Using the `discord` shim
-
-Using the `discord` shim allows you to use `disnake`, without the need to import it directly or importing it as
-discord - thus eliminating the need to change your code at all. To install the shim, you can use the following command
-in your terminal:
-
-<Tabs groupId="operating-systems">
-<TabItem value="windows" label="Windows">
-
-```
-py -3 -m pip install disnake[discord]
-```
-
-</TabItem>
-<TabItem value="macos" label="macOS">
-
-```
-python3 -m pip install disnake[discord]
-```
-
-</TabItem>
-<TabItem value="linux" label="Linux">
-
-```
-python3 -m pip install disnake[discord]
-```
-
-</TabItem>
-</Tabs>
-
-:::warning
-
-We don't recommend using the shim, as it is updated less frequently and may break the behaviour of
-interactions/components in some cases. If possible, proceed with one of the other two procedures mentioned.
-
-:::
 
 And that's it! Since `disnake` is a fork of `discord.py`, it inherits a lot of similarities - though we recommend you to
 always run your code to fix any possible issues.
