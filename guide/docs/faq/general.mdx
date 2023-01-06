@@ -53,9 +53,9 @@ bot = commands.Bot(..., activity=activity)
 You must get or fetch the channel directly and then call the appropriate method. Example:
 
 ```python
-channel = bot.get_channel(12324234183172) or await bot.fetch_channel(12324234183172)
-# if Bot.get_channel returns None because the channel is not in the Bot's cache then it'll 
+# If Bot.get_channel returns None because the channel is not in the Bot's cache, 
 # make an API call to fetch the channel
+channel = bot.get_channel(12324234183172) or await bot.fetch_channel(12324234183172)
 
 await channel.send("hello")
 ```
