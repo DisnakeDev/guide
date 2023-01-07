@@ -5,22 +5,25 @@ hide_table_of_contents: true
 
 # Reactions
 
-Reactions are Discord's way of adding emojis to other messages. Early on, before Discord introduced [components](../interactions/buttons.mdx), this system was largely used to make interactive messages and apps.  
+Reactions are Discord's way of adding emojis to other messages. Early on, before Discord introduced [components](../interactions/buttons.mdx), this system was largely used to make interactive messages and apps.
 Having bots react to messages is less common now, and is somewhat considered legacy behaviour.  
 This guide will teach you the basics of how they work, since they still have their use cases, like reaction role systems and polling.
 
 In Disnake, reactions are represented with <DocsLink reference="disnake.Reaction">Reaction</DocsLink> objects. Whenever you operate on a <DocsLink reference="disnake.Message">Message</DocsLink> you can access a list of reactions attached to that message.
 In this guide we will be providing an example using the <DocsLink reference="disnake.on_raw_reaction_add">on_raw_reaction_add / remove</DocsLink> events and a <DocsLink ext="commands" reference="disnake.ext.commands.Bot.message_command">message_command</DocsLink>'s <DocsLink reference="disnake.MessageCommandInteraction">interaction</DocsLink> to demonstrate.
 
+-   <DocsLink reference="disnake.Reactions.users">disnake.Reactions.users</DocsLink> won't be covered here since the docs
+    demonstrate its use elegantly.
+
 :::info
 **Reaction limitations**
 
--   Removing reactions that are not owned by the bot requires <DocsLink reference="disnake.Intents.reactions">Intents.reactions</DocsLink> to be set
--   Therefore <DocsLink reference="disnake.Intents.messages">Intents.messages</DocsLink> is indirectly required if you want to manipulate reactions
+-   To maintain a consistent reaction cache <DocsLink reference="disnake.Intents.reactions">Intents.reactions</DocsLink> is recommended to manipulate others reactions, and is required if you intend to utilize events.
 -   A message can have a maximum of 20 unique reactions on it at one time.
--   Reactions are inherently linked to emojis, and your bot will not have access to resend all emojis used by Discord users.
+-   Reactions are inherently linked to emojis, and your bot will not have access to resend all emojis used by Discord users. ( The bot can always react to others reactions )
 -   Dealing with reactions results in a fair amount of extra API calls, meaning it can have rate-limit implications on deployment scale.
 -   Using Reactions as a UX interface was never a intended behavior, and is ultimately inferior to the newer component style interface.
+
 :::
 
 <DiscordMessages>
@@ -49,17 +52,14 @@ In this guide we will be providing an example using the <DocsLink reference="dis
 ### Emojis
 
 Since reactions utilize Emojis this guide will also include a quick primer on how disnake handles emojis  
-Emojis have three forms:
+**Emojis have three forms:**
 
--   <DocsLink reference="disnake.Emoji">Emoji</DocsLink> Custom emojis
--   <DocsLink reference="disnake.PartialEmoji">PartialEmoji</DocsLink> Stripped down version of Emoji
--   [`string`](https://docs.python.org/3/library/string.html) String containing one or more emoji unicodepoints (Emoji modifiers complicates things but thats out of scope)
-
-**Which one you get is circumstancial:**  
-Emoji class: is primarely returned when custom emojis are grabbed from the guild/bot  
-PartialEmoji: are most often custom emojis too, but will usually represent custom emojis the bot can't access  
-Strings: are normally returned when Unicode CodePoints are used. These are the standard emojis most are familiar with (✅🎮💛💫)  
-but these can also come as a PartialEmoji
+-   <DocsLink reference="disnake.Emoji">Emoji</DocsLink> Custom emojis are primarely returned when custom emojis are grabbed
+    from the guild/bot
+-   <DocsLink reference="disnake.PartialEmoji">PartialEmoji</DocsLink> Stripped down version of Emoji. Which appears in raw
+    events or when the bot cannot access the custom emoji
+-   [`string`](https://docs.python.org/3/library/string.html) Strings: are normally returned when unicode emojis are used. These are the standard emojis most are familiar with (✅🎮💛💫)
+    but these will also come as a PartialEmoji in raw events
 
 There is also a small write up about this [here](../faq/general.mdx#how-can-i-add-a-reaction-to-a-message).
 
@@ -71,21 +71,23 @@ Some examples are also available in the [GitHub repository](https://github.com/D
 
 ### Example using on_reaction events
 
-There are a few reaction related events we can listen/subscribe to:
+There are a few reaction related [events](https://docs.disnake.dev/en/stable/api.html#event-reference) we can listen/subscribe to:
 
 -   <DocsLink reference="disnake.on_raw_reaction_add">on_raw_reaction_add</DocsLink>, called when a user adds a reaction
--   <DocsLink reference="disnake.on_raw_reaction_remove">on_raw_reaction_remove</DocsLink>, called when a user's reaction is removed
--   <DocsLink reference="disnake.on_raw_reaction_clear">on_raw_reaction_clear</DocsLink>, called when a message has all reactions removed
--   <DocsLink reference="disnake.on_raw_reaction_clear_emoji">on_raw_reaction_clear_emoji</DocsLink>, called when all reactions with a specific emoji are removed from a message
+-   <DocsLink reference="disnake.on_raw_reaction_remove">on_raw_reaction_remove</DocsLink>, called when a user's
+    reaction is removed
+-   <DocsLink reference="disnake.on_raw_reaction_clear">on_raw_reaction_clear</DocsLink>, called when a message has all
+    reactions removed
+-   <DocsLink reference="disnake.on_raw_reaction_clear_emoji">on_raw_reaction_clear_emoji</DocsLink>, called when all
+    reactions with a specific emoji are removed from a message
 
 There are non-raw equivalents, but they rely on the cache. If the message is not found in the internal cache, then the event is not called.  
 For this reason raw events are preferred, and you are only giving up on an included User/Member object that you can easily fetch if you need it.
 
--   More information about events can be found in the docs, [`here`](https://docs.disnake.dev/en/stable/api.html#event-reference)
-
 One important thing about raw_reaction events is that all the payloads are only populated with <DocsLink reference="disnake.PartialEmoji">PartialEmojis</DocsLink>  
 This is generally not an issue since it contains everything we need, but its something you should be aware of.  
-Raw reaction events come a <DocsLink reference="disnake.RawReactionActionEvent">RawReactionActionEvent</DocsLink> which is called `payload` in the examples.
+Raw reaction add/remove events come as <DocsLink reference="disnake.RawReactionActionEvent">RawReactionActionEvent</DocsLink> which is called `payload` in the examples.  
+The raw clearing events each have their own event payloads.
 
 ```python title="on_raw_reaction_add.py"
 @bot.listen()
@@ -151,75 +153,112 @@ Notice how second emoji resolved into **:disnake:** because the emoji is on a se
 	<DiscordMessage profile="bot">Reaction :disnake: added by: AbhigyanTrips!</DiscordMessage>
 </DiscordMessages>
 
-<br/>
+<br />
 
 :::caution
 We can only use custom emojis from servers the bot has joined, but we can use them interchangably on those servers.  
 Bots can make <DocsLink reference="disnake.ui.Button">buttons</DocsLink> using emojis from servers they're not members of, this may or may not be intended behaviour by Discord and should not be relied on.  
 :::
 
-Here's a few ways you could filter on reactions to do various things
+<br />
 
-```python title=react_actions.py
-import disnake
+**Here are a few examples on how reactions can be implemented:**
 
-# These lists are arbitrary and is just to provide context. Using static lists like this can be ok in small bots, but should really be supplied by a db.
+<Tabs>
+<TabItem value="deny_reactions.py" label="Deny a role using reactions">
+
+```python
 allowed_emojis = ["💙"]
-button_emojis = ["✅"]
 restricted_role_ids = [951263965235773480, 1060778008039919616]
-reaction_messages = [1060797825417478154]
-reaction_roles = {
-    "🎮": 1060778008039919616,
-    "🚀": 1007024363616350308,
-    "<:catpat:967269162386858055>": 1056775021281943583,
-}
 
 
 @bot.listen()
 async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
-    # This example is more to illustrate the different ways you can filter which emoji's are used and then you can do your actions on them
-    # All the functions in it have been tested, but you should add more checks and returns if you actually wanted all these functions at the same time
+
+    if payload.user_id == bot.user.id:
+        return
+    if not payload.guild_id:
+        return  # guild_id is None if its a DM
+
+    # Getting the channel, and fetching message as these will be useful
+    event_channel = bot.get_channel(payload.channel_id)
+    event_message = await event_channel.fetch_message(payload.message_id)
+
+    # Members with a restricted role, are only allowed to react with 💙 -- From the docs we know that str(PartialEmoji) returns either the codepoint or <:emoji:id>
+    if [role for role in payload.member.roles if role.id in restricted_role_ids] and not str(
+        payload.emoji
+    ) in allowed_emojis:
+        # Since the list did not return empty and is not a allowed emoji, we remove it
+        await event_message.remove_reaction(emoji=payload.emoji, member=payload.member)
+```
+
+</TabItem>
+
+<TabItem value="main2.py" label="Simple reaction button">
+
+```python
+# Since you can to un-react for the user we can emulate a button
+# This can be usefull if you want the functionality of buttons, but want a more compact look.
+
+button_emojis = ["✅"]  # What emojis to react to
+reaction_messages = [1060797825417478154]  # What messages to monitor
+
+
+@bot.listen()
+async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
+
+    if payload.user_id == bot.user.id:
+        return
+    if not payload.guild_id:
+        return
+    if payload.channel_id not in reaction_messages or str(payload.emoji) not in button_emojis:
+        return
+
+    # Getting the channel, and fetching message as these will be useful
+    event_channel = bot.get_channel(payload.channel_id)
+    event_message = await event_channel.fetch_message(payload.message_id)
+
+    await event_message.remove_reaction(
+        emoji=payload.emoji, member=payload.member
+    )  # Remove the reaction
+    awesome_function()  # Do some stuff
+    await event_channel.send("Done!", delete_after=10.0)
+    # Short message to let the user know it went ok. This is not an interaction so a message response is not strictly needed
+```
+
+</TabItem>
+<TabItem value="reaction_role.py" label="Simple reaction roles">
+
+```python
+# A very simple reaction role system
+
+reaction_messages = [1060797825417478154]  # What messages to monitor
+reaction_roles = {
+    "🎮": 1060778008039919616,
+    "🚀": 1007024363616350308,
+    "<:catpat:967269162386858055>": 1056775021281943583,
+}  # The emojis, and their corresponding role ids
+
+
+@bot.listen()
+async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
 
     # We usually don't want the bot to react to its own actions, nor DM's in this case
     if payload.user_id == bot.user.id:
         return
     if not payload.guild_id:
         return  # guild_id is None if its a DM
+    if (
+        str(payload.emoji) not in reaction_roles.keys()
+        or payload.message_id not in reaction_messages
+    ):
+        return
 
-    # Again, getting the channel, and fetching message as these will be useful
-    event_channel = bot.get_channel(payload.channel_id)
-    event_message = await event_channel.fetch_message(payload.message_id)
-
-    # Members with a restricted role, are only allowed to react with💙 -- From the docs we know that str(PartialEmoji) returns either the codepoint or <:emoji:id>
-    if [role for role in payload.member.roles if role.id in restricted_role_ids] and not str(
-        payload.emoji
-    ) in allowed_emojis:
-        # Since the list did not return empty and is not a allowed emoji, we remove it
-        await event_message.remove_reaction(emoji=payload.emoji, member=payload.member)
-
-    # Similar behavior can be useful if you want to use reactions as buttons. Since you have to un-react and react again to repeat the effect
-    # This can be usefull if you want the functionality of buttons, but want a more compact look.
-    # but its also a lot of extra api calls compared to components
-    if str(payload.emoji) in button_emojis:
-        # In a proper bot you would do more checks, against message_id most likely.
-        # As theese reactions might normaly be supplied by the bot in the first place
-
-        # Or if the member has the right roles in case the reaction has a moderation function for instance
-        # Otherwise the awesome_function() can end up going off at wrong places
-        await event_message.remove_reaction(
-            emoji=payload.emoji, member=payload.member
-        )  # Remove the reaction
-        awesome_function()
-        await event_channel.send("Done!", delete_after=10.0)
-        # Short message to let the user know it went ok. This is not an interaction so a message response is not strictly needed
-
-    # A very simple reaction role system
-    if str(payload.emoji) in reaction_roles.keys() and payload.message_id in reaction_messages:
-        role_to_apply = bot.get_guild(payload.guild_id).get_role(reaction_roles[str(payload.emoji)])
-        if (
-            role_to_apply and not role_to_apply in payload.member.roles
-        ):  # Check if we actually got a role, then check if the member already has it, if not add it
-            await payload.member.add_roles(role_to_apply)
+    role_to_apply = bot.get_guild(payload.guild_id).get_role(reaction_roles[str(payload.emoji)])
+    if (
+        role_to_apply and not role_to_apply in payload.member.roles
+    ):  # Check if we actually got a role, then check if the member already has it, if not add it
+        await payload.member.add_roles(role_to_apply)
 
 
 @bot.listen()
@@ -228,46 +267,32 @@ async def on_raw_reaction_remove(payload: disnake.RawReactionActionEvent):
         return
     if not payload.guild_id:
         return  # guild_id is None if its a DM
-
-    # Counterpart to the simple reaction role system
     if (
-        str(payload.emoji) in reaction_roles.keys() and payload.message_id in reaction_messages
-    ):  # Check that the emoji and message is correct
-        role_to_remove = bot.get_guild(payload.guild_id).get_role(
-            reaction_roles[str(payload.emoji)]
-        )
-        if (
-            role_to_apply and role_to_apply in payload.member.roles
-        ):  # Check if we actually got a role, then check if the member actually has it, then remove it
-            await payload.member.remove_roles(role_to_apply)
+        str(payload.emoji) not in reaction_roles.keys()
+        or payload.message_id not in reaction_messages
+    ):
+        return
+
+    role_to_remove = bot.get_guild(payload.guild_id).get_role(reaction_roles[str(payload.emoji)])
+    if (
+        role_to_apply and role_to_apply in payload.member.roles
+    ):  # Check if we actually got a role, then check if the member actually has it, then remove it
+        await payload.member.remove_roles(role_to_apply)
 ```
 
-### Example using message_command
+</TabItem>
 
-We could go with a `slash_command` here, but since we will be targeting other messages, it adds a complication because if the message is in a different channel from where the command is executed; the retrieved message will be `None`.
-Using a `message_command` instead side-steps this issue, since the targeted message will be present in the interaction object.
+</Tabs>
 
--   <DocsLink reference="disnake.Reactions.users">disnake.Reactions.users</DocsLink> won't be covered here since the docs
-    demonstrate its use elegantly.
+### Example using an ApplicationCommandInteraction
 
+Using a `message_command` here because the message object is always included in the message commands interaction instance.  
 This example is purely to demonstrate using the Reaction object since events deal with a similar but different class
 
 ```python title="message_command.py"
 @commands.message_command()
 async def list_reactions(self, inter: disnake.MessageCommandInteraction):
 
-    # Here's a very pythonic way of making a list of the reactions
-    response_string = (
-        "".join(
-            [
-                f"{index+1}. {reaction.emoji} - {reaction.count}\n"
-                for index, reaction in enumerate(inter.target.reactions)
-            ]
-        )
-        or "No Reactions found"
-    )
-
-    # Here it is broken up in case list comprehensions are too confusing
     response_string = ""  # Start with an empty string
     reaction_list = inter.target.reactions  # First we get the list of disnake.Reaction objects
     for index, reaction in enumerate(
@@ -289,7 +314,7 @@ async def list_reactions(self, inter: disnake.MessageCommandInteraction):
         await inter.target.add_reaction(reaction)
 
         # However we still cannot add new reactions we don't have access to.
-        # When listing through reactions PartialEmojis are generated if the bot does not have access to it, so we can filter on that to skip them
+        # PartialEmojis are generated if the bot does not have access to it, so we can filter on that to skip them
         if isinstance(reaction.emoji, disnake.PartialEmoji):
             continue
         await message.add_reaction(reaction)
