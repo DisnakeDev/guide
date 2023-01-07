@@ -9,8 +9,8 @@ Reactions are Discord's way of adding emojis to other messages. Early on, before
 Having bots react to messages is less common now, and is somewhat considered legacy behaviour.  
 This guide will teach you the basics of how they work, since they still have their use cases, like reaction role systems and polling.
 
-In Disnake reactions are represented with <DocsLink reference="disnake.Reaction">Reaction</DocsLink> objects. Whenever you operate on a <DocsLink reference="disnake.Message">Message</DocsLink> you can access a list of reactions attached to that message.
-In this guide we will be providing an example using the <DocsLink reference="disnake.on_raw_reaction_add">on_raw_reaction_add / remove</DocsLink> events and a message_command's <DocsLink reference="disnake.MessageCommandInteraction">interaction</DocsLink> to demonstrate.
+In Disnake, reactions are represented with <DocsLink reference="disnake.Reaction">Reaction</DocsLink> objects. Whenever you operate on a <DocsLink reference="disnake.Message">Message</DocsLink> you can access a list of reactions attached to that message.
+In this guide we will be providing an example using the <DocsLink reference="disnake.on_raw_reaction_add">on_raw_reaction_add / remove</DocsLink> events and a <DocsLink ext="commands" reference="disnake.ext.commands.Bot.message_command">message_command</DocsLink>'s <DocsLink reference="disnake.MessageCommandInteraction">interaction</DocsLink> to demonstrate.
 
 :::info
 **Reaction limitations**
