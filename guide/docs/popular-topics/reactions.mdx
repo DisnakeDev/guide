@@ -18,11 +18,11 @@ In this guide we will be providing an example using the <DocsLink reference="dis
 :::info
 **Reaction limitations**
 
--   To maintain a consistent reaction cache <DocsLink reference="disnake.Intents.reactions">Intents.reactions</DocsLink> is recommended to manipulate others reactions, and is required if you intend to utilize events.
+-   To maintain a consistent reaction cache, <DocsLink reference="disnake.Intents.reactions">Intents.reactions</DocsLink> is recommended to manipulate others' reactions, and is required if you intend to utilize events.
 -   A message can have a maximum of 20 unique reactions on it at one time.
 -   Reactions are inherently linked to emojis, and your bot will not have access to resend all emojis used by Discord users. ( The bot can always react to others reactions )
 -   Dealing with reactions results in a fair amount of extra API calls, meaning it can have rate-limit implications on deployment scale.
--   Using Reactions as a UX interface was never a intended behavior, and is ultimately inferior to the newer component style interface.
+-   Using Reactions for user interfaces was never intended behavior, and is ultimately inferior to the newer component interface.
 
 :::
 
@@ -310,7 +310,7 @@ async def list_reactions(self, inter: disnake.MessageCommandInteraction):
 
     for reaction in reaction_list:
 
-        # Since the reactions are present on the message, the bot can react to it, even tho it does not have access to the custom emoji
+        # Since the reactions are present on the message, the bot can react to it, even though it does not have access to the custom emoji
         await inter.target.add_reaction(reaction)
 
         # However we still cannot add new reactions we don't have access to.
