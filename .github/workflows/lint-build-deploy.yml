@@ -3,10 +3,12 @@ name: Lint, Build, Deploy
 on:
   push:
     paths:
+      - .github/**
       - guide/**
   pull_request:
     branches:
       - main
+      - dev
   workflow_dispatch:
 
 jobs:

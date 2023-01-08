@@ -50,10 +50,13 @@ bot = commands.Bot(..., activity=activity)
 
 ### How do I send a message to a specific channel?
 
-You must fetch the channel directly and then call the appropriate method. Example:
+You must get or fetch the channel directly and then call the appropriate method. Example:
 
 ```python
-channel = bot.get_channel(12324234183172)
+# If Bot.get_channel returns None because the channel is not in the Bot's cache,
+# make an API call to fetch the channel
+channel = bot.get_channel(12324234183172) or await bot.fetch_channel(12324234183172)
+
 await channel.send("hello")
 ```
 
