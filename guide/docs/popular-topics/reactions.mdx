@@ -168,27 +168,28 @@ Bots can make <DocsLink reference="disnake.ui.Button">buttons</DocsLink> using e
 <TabItem value="deny_reactions.py" label="Deny a role using reactions">
 
 ```python
+# Members with a restricted role are only allowed to react with 💙
+
 allowed_emojis = ["💙"]
 restricted_role_ids = [951263965235773480, 1060778008039919616]
 
 
 @bot.listen()
 async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
-
     if payload.user_id == bot.user.id:
         return
     if not payload.guild_id:
         return  # guild_id is None if its a DM
 
-    # Getting the channel, and fetching message as these will be useful
-    event_channel = bot.get_channel(payload.channel_id)
-    event_message = await event_channel.fetch_message(payload.message_id)
+    # From the docs we know that str(PartialEmoji) returns either the codepoint or <:emoji:id>
+    if (
+        any(payload.member.get_role(role) for role in restricted_role_ids)
+        and str(payload.emoji) not in allowed_emojis
+    ):
+        # Getting the channel, and fetching message as these will be useful
+        event_channel = bot.get_channel(payload.channel_id)
+        event_message = await event_channel.fetch_message(payload.message_id)
 
-    # Members with a restricted role, are only allowed to react with 💙 -- From the docs we know that str(PartialEmoji) returns either the codepoint or <:emoji:id>
-    if [role for role in payload.member.roles if role.id in restricted_role_ids] and not str(
-        payload.emoji
-    ) in allowed_emojis:
-        # Since the list did not return empty and is not a allowed emoji, we remove it
         await event_message.remove_reaction(emoji=payload.emoji, member=payload.member)
 ```
 
@@ -197,8 +198,8 @@ async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
 <TabItem value="main2.py" label="Simple reaction button">
 
 ```python
-# Since you can to un-react for the user we can emulate a button
-# This can be usefull if you want the functionality of buttons, but want a more compact look.
+# Since you can remove a user's reaction (given appropriate permissions), we can emulate a button.
+# This can be useful if you want the functionality of buttons, but want a more compact look.
 
 button_emojis = ["✅"]  # What emojis to react to
 reaction_messages = [1060797825417478154]  # What messages to monitor
@@ -206,24 +207,21 @@ reaction_messages = [1060797825417478154]  # What messages to monitor
 
 @bot.listen()
 async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
-
     if payload.user_id == bot.user.id:
         return
-    if not payload.guild_id:
-        return
-    if payload.channel_id not in reaction_messages or str(payload.emoji) not in button_emojis:
+    if payload.message_id not in reaction_messages or str(payload.emoji) not in button_emojis:
         return
 
     # Getting the channel, and fetching message as these will be useful
     event_channel = bot.get_channel(payload.channel_id)
     event_message = await event_channel.fetch_message(payload.message_id)
 
-    await event_message.remove_reaction(
-        emoji=payload.emoji, member=payload.member
-    )  # Remove the reaction
+    # Remove the reaction
+    await event_message.remove_reaction(emoji=payload.emoji, member=payload.member)
     awesome_function()  # Do some stuff
-    await event_channel.send("Done!", delete_after=10.0)
+
     # Short message to let the user know it went ok. This is not an interaction so a message response is not strictly needed
+    await event_channel.send("Done!", delete_after=10.0)
 ```
 
 </TabItem>
@@ -242,23 +240,20 @@ reaction_roles = {
 
 @bot.listen()
 async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
-
     # We usually don't want the bot to react to its own actions, nor DM's in this case
     if payload.user_id == bot.user.id:
         return
     if not payload.guild_id:
         return  # guild_id is None if its a DM
-    if (
-        str(payload.emoji) not in reaction_roles.keys()
-        or payload.message_id not in reaction_messages
-    ):
+
+    role_id = reaction_roles.get(str(payload.emoji))
+    if payload.message_id not in reaction_messages or not role_id:
         return
 
-    role_to_apply = bot.get_guild(payload.guild_id).get_role(reaction_roles[str(payload.emoji)])
-    if (
-        role_to_apply and not role_to_apply in payload.member.roles
-    ):  # Check if we actually got a role, then check if the member already has it, if not add it
-        await payload.member.add_roles(role_to_apply)
+    role = bot.get_guild(payload.guild_id).get_role(role_id)
+    # Check if we actually got a role, then check if the member already has it, if not add it
+    if role and role not in payload.member.roles:
+        await payload.member.add_roles(role)
 
 
 @bot.listen()
@@ -267,17 +262,15 @@ async def on_raw_reaction_remove(payload: disnake.RawReactionActionEvent):
         return
     if not payload.guild_id:
         return  # guild_id is None if its a DM
-    if (
-        str(payload.emoji) not in reaction_roles.keys()
-        or payload.message_id not in reaction_messages
-    ):
+
+    role_id = reaction_roles.get(str(payload.emoji))
+    if payload.message_id not in reaction_messages or not role_id:
         return
 
-    role_to_remove = bot.get_guild(payload.guild_id).get_role(reaction_roles[str(payload.emoji)])
-    if (
-        role_to_apply and role_to_apply in payload.member.roles
-    ):  # Check if we actually got a role, then check if the member actually has it, then remove it
-        await payload.member.remove_roles(role_to_apply)
+    role = bot.get_guild(payload.guild_id).get_role(role_id)
+    # Check if we actually got a role, then check if the member actually has it, then remove it
+    if role and role in payload.member.roles:
+        await payload.member.remove_roles(role)
 ```
 
 </TabItem>
