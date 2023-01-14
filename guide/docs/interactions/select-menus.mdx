@@ -215,11 +215,11 @@ class DropDownView(disnake.ui.View):
 
     # to handle this timeout, we'll need to override the default `on_timeout` method within the `View``
     async def on_timeout(self):
-        # now we will edit the original command response so that it displays the disabled view
-        # since `self.children` returns a list of the components attached to this `View` and we want to
+        # Now we will edit the original command response so that it displays the disabled view.
+        # Since `self.children` returns a list of the components attached to this `View` and we want to
         # disable the single component, we can access it with a simple [0] index
         self.children[0].disabled = True
-        # now we edit the message with this updated `View`
+        # Now, edit the message with this updated `View`
         await self.message.edit(view=self)
 
 ...
