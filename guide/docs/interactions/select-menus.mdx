@@ -61,10 +61,9 @@ class AnimalDropdown(disnake.ui.StringSelect):
             ),
         ]
 
-        # We will include a placeholder that will be shown until an option has been selected
-        # min and max values indicate the minimum number of options to select and the max allowed to be selected
-        # in this example we will only allow one option to be selected
-        # options will be where we pass the created options from above
+        # We will include a placeholder that will be shown until an option has been selected.
+        # The min and max values indicate the minimum and maximum number of options to be selected -
+        # in this example we will only allow one option to be selected.
         super().__init__(
             placeholder="Choose an animal",
             min_values=1,
