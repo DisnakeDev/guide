@@ -154,8 +154,8 @@ class AnimalView(disnake.ui.View):
     async def animal_callback(
         self, select: disnake.ui.StringSelect, inter: disnake.MessageInteraction
     ):
-        # the main difference in this callback is that we will access the `StringSelect` directly
-        # since it is passed to the callback vs the subclass example where we access it via `Self`
+        # The main difference in this callback is that we access the `StringSelect` through the
+        # parameter passed to the callback, vs the subclass example where we access it via `self`
         await inter.response.send_message(f"You favorite type of animal is: {select.values[0]}")
 ```
 
