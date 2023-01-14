@@ -45,11 +45,11 @@ from disnake.ext import commands
 class AnimalDropdown(disnake.ui.StringSelect):
     def __init__(self):
 
-        # Define the options that will be presented inside the dropdown
-        # you may not have more than 25 options
-        # there is a value keyword that is being omitted, but that is useful if
+        # Define the options that will be presented inside the dropdown.
+        # You may not have more than 25 options.
+        # There is a value keyword that is being omitted, which is useful if
         # you wish to display a label to the user, but handle a different value
-        # here within the code, like an index number or database id
+        # here within the code, like an index number or database id.
         options = [
             disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal"),
             disnake.SelectOption(label="Cat", description="Cats are your favorite type of animal"),
