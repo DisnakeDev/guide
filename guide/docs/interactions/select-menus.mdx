@@ -177,10 +177,11 @@ The selected option(s) that are available in `self.values` will be the selected 
 <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> has an extra keyword argument that is
 not available to the other SelectMenu types.{' '}
 
-`channel_types` will allow you to specify the types of channels made available as options, omit to add all available channels:
+`channel_types` will allow you to specify the types of channels made available as options (omit to show all available channels):
 
--   `channel_types=disnake.ChannelType.text` to display only guild text channels as options
--   `channel_types=disanke.ChannelType.voice` to display only guild voice channels as options.
+-   `channel_types=[ChannelType.text]` to display only guild text channels as options
+-   `channel_types=[ChannelType.voice, ChannelType.stage_voice]` to display only guild voice and stage channels as options
+-   etc.
 
 See <DocsLink reference="disnake.ChannelType">disnake.ChannelType</DocsLink> to see more channel types.
 :::
