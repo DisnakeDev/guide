@@ -222,10 +222,9 @@ class DropDownView(disnake.ui.View):
         # now we edit the message with this updated `View`
         await self.message.edit(view=self)
 
-
 ...
-...
-# the only changes we need to make to handle the updated view is to fetch the original response after
+# The only changes we need to make to handle the updated view is to fetch the original response after,
+# so that we can edit it later:
 # it has been sent.  This is required because `interaction.send` methods do not return a message object
 @bot.slash_command()
 async def animals(inter: disnake.ApplicationCommandInteraction):
