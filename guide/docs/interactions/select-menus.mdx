@@ -188,16 +188,16 @@ See <DocsLink reference="disnake.ChannelType">disnake.ChannelType</DocsLink> to 
 
 ### Handling View Timeouts
 
-When a view times out the bot will no longer listen for these events and your users will receive an error `This interaction failed`.
+When a view times out, the bot will no longer listen for these events, and your users will receive an error `This interaction failed`.
 
-To prevent this you have a couple of options.
+To avoid this, you have a couple of options when the view times out:
 
 1.  Disable the components within the view so that they are no longer interactive.
-2.  Remove the view altogether leaving only the original message.
+2.  Remove the view altogether, leaving only the original message without components.
 
-For this example we will disable the component `on_timeout`. However, if you wish to remove the view completely you can pass `view=None` instead of `view=self` as the example below shows.
+For this example we will disable the component `on_timeout`. However, if you wish to remove the view completely you can pass `view=None` (instead of `view=self` like the example below).
 
-We'll continue with the original example from above, however I will only be altering the parts that matter.
+We'll continue with the `subclassing.py` example from above, only altering the relevant parts:
 
 ```python title="viewtimeout.py"
 ...
