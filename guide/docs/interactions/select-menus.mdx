@@ -73,10 +73,10 @@ class AnimalDropdown(disnake.ui.StringSelect):
 
     # this callback is called each time a user has selected an option
     async def callback(self, inter: disnake.MessageInteraction):
-        # Use the interaction object to respond to the interaction
-        # `Self` refers to this StringSelect object, and the `values`
-        # attribute contains a list of the user's selected options
-        # We only want the first one
+        # Use the interaction object to respond to the interaction.
+        # `self` refers to this StringSelect object, and the `values`
+        # attribute contains a list of the user's selected options.
+        # We only want the first (and in this case, only) one.
         await inter.response.send_message(f"Your favorite type of animal is: {self.values[0]}")
 
 
