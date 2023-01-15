@@ -17,7 +17,8 @@ Select Menus are available as the following types:
 
 The options for user, role, and channel select menus are populated by Discord, and currently cannot be limited to a specific subset. See [below](#other-selects) for details.
 
-This guide will walk you through a pretty basic use-case for a `StringSelect` dropdowns using views and low-level components. If you need more examples, you can always check the examples in the [disnake repo](https://github.com/DisnakeDev/disnake/tree/master/examples).
+This guide will walk you through a pretty basic use-case for a `StringSelect` dropdowns using [Views](#example-of-stringselects) and [low-level components](#views-vs-low-level-components).  
+If you need more examples, you can always check the examples in the [disnake repo](https://github.com/DisnakeDev/disnake/tree/master/examples).
 &nbsp;  
 :::note
 A message can have a maximum of 5 rows of components. Select components each take a single row, therefore you cannot have more than 5 Select components per message
@@ -45,9 +46,9 @@ from disnake.ext import commands
 class AnimalDropdown(disnake.ui.StringSelect):
     def __init__(self):
 
-        # Define the options that will be presented inside the dropdown.
+        # Define the options that will be displayed inside the dropdown.
         # You may not have more than 25 options.
-        # There is a value keyword that is being omitted, which is useful if
+        # There is a `value` keyword that is being omitted, which is useful if
         # you wish to display a label to the user, but handle a different value
         # here within the code, like an index number or database id.
         options = [
@@ -71,7 +72,7 @@ class AnimalDropdown(disnake.ui.StringSelect):
             options=options,
         )
 
-    # this callback is called each time a user has selected an option
+    # This callback is called each time a user has selected an option
     async def callback(self, inter: disnake.MessageInteraction):
         # Use the interaction object to respond to the interaction.
         # `self` refers to this StringSelect object, and the `values`
@@ -81,7 +82,7 @@ class AnimalDropdown(disnake.ui.StringSelect):
 
 
 # Now that we have created the Select object with its options and callback, we need to attach it to a
-# view that will be displayed to the user in the command response.
+# View that will be displayed to the user in the command response.
 #
 # Views have a default timeout of 180s, at which the bot will stop listening for those events.
 # You may pass any float here, or `None` if you wish to remove the timeout.
@@ -91,14 +92,14 @@ class AnimalDropdown(disnake.ui.StringSelect):
 class DropDownView(disnake.ui.View):
     def __init__(self):
         # You would pass a new `timeout=` if you wish to alter it, but
-        # we will leave it empty for this example so that it uses the default
+        # we will leave it empty for this example so that it uses the default 180s.
         super().__init__()
 
-        # now let's add the `StringSelect` object we created above to this view
+        # Now let's add the `StringSelect` object we created above to this view
         self.add_item(AnimalDropdown())
 
 
-# Finally, we create a basic bot instance with a command that will utilize the created view and dropdown
+# Finally, we create a basic bot instance with a command that will utilize the created view and dropdown.
 bot = commands.Bot()
 
 
@@ -111,10 +112,10 @@ async def on_ready():
 async def animals(inter: disnake.ApplicationCommandInteraction):
     """Sends a message with our dropdown containing the animals"""
 
-    # create the view with our dropdown object
+    # Create the view with our dropdown object
     view = DropDownView()
 
-    # respond to the interaction with a message and our view
+    # Respond to the interaction with a message and our view
     await inter.response.send_message("What is your favorite type of animal?", view=view)
 
 
@@ -127,7 +128,7 @@ if __name__ == "__main__":
 
 ```python
 # Instead of subclassing `disnake.ui.StringSelect`, this example shows how to use the
-# `@disnake.ui.string_select` decorator directly inside the view to create the dropdown
+# `@disnake.ui.string_select` decorator directly inside the View to create the dropdown
 # component.
 class AnimalView(disnake.ui.View):
     def __init__(self):
@@ -166,7 +167,7 @@ class AnimalView(disnake.ui.View):
 
 The three other select components available are constructed and can be used in the same manner.
 The main difference is that we do not create nor pass any options to these Select objects as Discord will provide these options to the user automatically.
-The selected option(s) that are available in `self.values` will be the selected object rather than a string.
+The selected option(s) that are available in `self.values` will be the selected object(s) rather than the string values.
 
 -   `UserSelect.values` will return a list of <DocsLink reference="disnake.User">disnake.User</DocsLink> or <DocsLink reference="disnake.Member">disnake.Member</DocsLink>
 -   `RoleSelect.values` will return a list of <DocsLink reference="disnake.Role">disnake.Role</DocsLink>
@@ -175,7 +176,7 @@ The selected option(s) that are available in `self.values` will be the selected 
 :::note
 
 <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> has an extra keyword argument that is
-not available to the other SelectMenu types.{' '}
+not available to the other SelectMenu types.
 
 `channel_types` will allow you to specify the types of channels made available as options (omit to show all available channels):
 
@@ -188,20 +189,19 @@ See <DocsLink reference="disnake.ChannelType">disnake.ChannelType</DocsLink> to 
 
 ### Handling View Timeouts
 
-When a view times out, the bot will no longer listen for these events, and your users will receive an error `This interaction failed`.
+When a View times out, the bot will no longer listen for these events, and your users will receive an error `This interaction failed`.
 
 To avoid this, you have a couple of options when the view times out:
 
 1.  Disable the components within the view so that they are no longer interactive.
 2.  Remove the view altogether, leaving only the original message without components.
 
-For this example we will disable the component `on_timeout`. However, if you wish to remove the view completely you can pass `view=None` (instead of `view=self` like the example below).
+For this example we will disable the components using an `on_timeout` method. However, if you wish to remove the View completely you can pass `view=None` (instead of `view=self` like the example below).
 
 We'll continue with the `subclassing.py` example from above, only altering the relevant parts:
 
 ```python title="viewtimeout.py"
 ...
-
 
 class DropDownView(disnake.ui.View):
 
@@ -213,7 +213,7 @@ class DropDownView(disnake.ui.View):
         # now let's add the `StringSelect` object we created above to this view
         self.add_item(AnimalDropdown())
 
-    # to handle this timeout, we'll need to override the default `on_timeout` method within the `View``
+    # To handle this timeout, we'll need to override the default `on_timeout` method within the `View``
     async def on_timeout(self):
         # Now we will edit the original command response so that it displays the disabled view.
         # Since `self.children` returns a list of the components attached to this `View` and we want
@@ -229,22 +229,21 @@ class DropDownView(disnake.ui.View):
 
 ...
 # The only changes we need to make to handle the updated view is to fetch the original response after,
-# so that we can edit it later:
-# it has been sent.  This is required because `interaction.send` methods do not return a message object
+# so that the message can be edited later.
+# This is necessary because `interaction.send` methods do not return a message object
 @bot.slash_command()
 async def animals(inter: disnake.ApplicationCommandInteraction):
     """Sends a message with our dropdown containing the animals"""
 
-    # create the view with our dropdown object
+    # Create the view with our dropdown object.
     view = DropDownView()
 
-    # respond to the interaction with a message and our view
+    # Respond to the interaction with a message and our view.
     await inter.response.send_message("What is your favorite type of animal?", view=view)
 
-    # this will add a new `message` attribute to the `DropDownView` that will be edited
+    # This will add a new `message` attribute to the `DropDownView` that will be edited
     # once the view has timed out
     view.message = await inter.original_response()
-
 
 ...
 ```
@@ -258,8 +257,7 @@ Note that any component being sent in this manner must have a `custom_id` explic
 which means the `custom_id` should be unique for each component to be able to identify the component in your code.
 
 The main advantage of this is that listeners, by nature, are persistent and will remain fully functional over bot reloads. Listeners are stored in the bot
-strictly once, and are shared by all components. Because of this, the memory footprint will generally be smaller
-than that of an equivalent view.
+strictly once, and are shared by all components. Because of this, the memory footprint will generally be smaller than that of an equivalent view.
 
 The example below will be similar to the above examples, however will be executed as a low level component instead.
 
@@ -279,15 +277,15 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
     )
 
 
-# Now we create the listener that will handle the users's selection, similar to the callback we used above
+# Now we create the listener that will handle the users's selection(s), similarly to the callback we used above.
 @bot.listen("on_dropdown")
 async def fav_animal_listener(inter: disnake.MessageInteraction):
-    # first we should check if the interaction is for the `fav_animal` dropdown we created
+    # First we should check if the interaction is for the `fav_animal` dropdown we created
     # and ignore if it isn't.
     if inter.component.custom_id != "fav_animal":
         return
 
-    # now we can respond with the user's favorite animal
+    # Now we can respond with the user's favorite animal
     await inter.response.send_message(f"Your favorite type of animal is: {inter.values[0]}")
 ```
 
