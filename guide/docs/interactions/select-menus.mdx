@@ -220,7 +220,8 @@ class DropDownView(disnake.ui.View):
         # to prevent the components from remaining interactive after the timeout, we can easily loop
         # over its components and disable them.
         for child in self.children:
-            child.disabled = True
+            if isinstance(child, (disnake.ui.Button, disnake.ui.BaseSelect)):
+                child.disabled = True
 
         # Now, edit the message with this updated `View`
         await self.message.edit(view=self)
