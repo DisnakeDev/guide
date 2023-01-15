@@ -133,9 +133,13 @@ class AnimalView(disnake.ui.View):
     def __init__(self):
         super().__init__()
 
-        # rather than creating a large decorator, we can create the options for this component here
-        # this also works if you wish to pass a list of options to this view to create options dynamically
-        self.animal_callback.options = [
+        # If you wish to pass a previously defined sequence of values to this `View` so that
+        # you may have dynamic options, you can do so by defining them within this __init__ method.
+        # `self.animal_callback.options = [...]`
+
+    @disnake.ui.string_select(
+        placeholder="Choose an animal",
+        options=[
             disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal"),
             disnake.SelectOption(label="Cat", description="Cats are your favorite type of animal"),
             disnake.SelectOption(
@@ -144,10 +148,7 @@ class AnimalView(disnake.ui.View):
             disnake.SelectOption(
                 label="Gerbil", description="Gerbils are your favorite type of animal"
             ),
-        ]
-
-    @disnake.ui.string_select(
-        placeholder="Choose an animal",
+        ],
         min_values=1,
         max_values=1,
     )
@@ -158,7 +159,6 @@ class AnimalView(disnake.ui.View):
         # parameter passed to the callback, vs the subclass example where we access it via `self`
         await inter.response.send_message(f"You favorite type of animal is: {select.values[0]}")
 ```
-
 </TabItem>
 </Tabs>
 
