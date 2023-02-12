@@ -6,7 +6,7 @@ hide_table_of_contents: true
 # Reactions
 
 Reactions are Discord's way of adding emojis to other messages. Early on, before Discord introduced [components](../interactions/buttons.mdx), this system was largely used to make interactive messages and apps.
-Having bots react to messages is less common now, and is somewhat considered legacy behaviour.  
+Having bots react to messages is less common now, and is somewhat considered legacy behavior.  
 This guide will teach you the basics of how they work, since they still have their use cases, like reaction role systems and polling.
 
 In Disnake, reactions are represented with <DocsLink reference="disnake.Reaction">Reaction</DocsLink> objects. Whenever you operate on a <DocsLink reference="disnake.Message">Message</DocsLink> you can access a list of reactions attached to that message.
@@ -54,7 +54,7 @@ In this guide we will be providing an example using the <DocsLink reference="dis
 Since reactions utilize Emojis this guide will also include a quick primer on how disnake handles emojis  
 **Emojis have three forms:**
 
--   <DocsLink reference="disnake.Emoji">Emoji</DocsLink> Custom emojis are primarely returned when custom emojis are grabbed
+-   <DocsLink reference="disnake.Emoji">Emoji</DocsLink> Custom emojis are primarily returned when custom emojis are grabbed
     from the guild/bot
 -   <DocsLink reference="disnake.PartialEmoji">PartialEmoji</DocsLink> Stripped down version of Emoji. Which appears in raw
     events or when the bot cannot access the custom emoji
@@ -156,8 +156,8 @@ Notice how second emoji resolved into **:disnake:** because the emoji is on a se
 <br />
 
 :::caution
-We can only use custom emojis from servers the bot has joined, but we can use them interchangably on those servers.  
-Bots can make <DocsLink reference="disnake.ui.Button">buttons</DocsLink> using emojis from servers they're not members of, this may or may not be intended behaviour by Discord and should not be relied on.  
+We can only use custom emojis from servers the bot has joined, but we can use them interchangeably on those servers.  
+Bots can make <DocsLink reference="disnake.ui.Button">buttons</DocsLink> using emojis from servers they're not members of, this may or may not be intended behavior by Discord and should not be relied on.  
 :::
 
 <br />
