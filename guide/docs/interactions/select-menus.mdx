@@ -160,6 +160,7 @@ class AnimalView(disnake.ui.View):
         # parameter passed to the callback, vs the subclass example where we access it via `self`
         await inter.response.send_message(f"You favorite type of animal is: {select.values[0]}")
 ```
+
 </TabItem>
 </Tabs>
 
@@ -203,6 +204,7 @@ We'll continue with the `subclassing.py` example from above, only altering the r
 ```python title="viewtimeout.py"
 ...
 
+
 class DropDownView(disnake.ui.View):
 
     message: disnake.Message  # adding to typehint the future `message` attribute
@@ -244,6 +246,7 @@ async def animals(inter: disnake.ApplicationCommandInteraction):
     # This will add a new `message` attribute to the `DropDownView` that will be edited
     # once the view has timed out
     view.message = await inter.original_response()
+
 
 ...
 ```
