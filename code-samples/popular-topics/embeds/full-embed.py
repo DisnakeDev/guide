@@ -30,7 +30,7 @@ async def fullembed(ctx):
 
     embed.set_thumbnail(url="https://disnake.dev/assets/disnake-logo.png")
 
-    embed.set_image(url="https://disnake.dev/assets/disnake-thin-banner.png")
+    embed.set_image(url="https://disnake.dev/assets/disnake-banner-thin.png")
 
     embed.add_field(name="Regular Title", value="Regular Value", inline=False)
 
