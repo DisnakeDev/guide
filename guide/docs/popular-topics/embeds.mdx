@@ -22,7 +22,7 @@ Here is an example of how an embed may look. We will go over embed construction 
 			embedTitle="Embed Title"
 			url="https://disnake.dev/"
 			thumbnail="/public/disnake-logo.png"
-			image="https://i.imgur.com/KsTvw5Z.png"
+			image="https://disnake.dev/assets/disnake-banner-thin.png"
 			timestamp="01/01/2077"
 			authorName="Embed Author"
 			authorIcon="/public/disnake-logo.png"
@@ -75,7 +75,7 @@ embed.set_footer(
 )
 
 embed.set_thumbnail(url="https://disnake.dev/assets/disnake-logo.png")
-embed.set_image(url="https://disnake.dev/assets/disnake-thin-banner.png")
+embed.set_image(url="https://disnake.dev/assets/disnake-banner-thin.png")
 
 embed.add_field(name="Regular Title", value="Regular Value", inline=False)
 embed.add_field(name="Inline Title", value="Inline Value", inline=True)
@@ -187,7 +187,7 @@ The thumbnail of the embed is shown in it's top right corner. It can be set usin
 the <DocsLink reference="disnake.Embed.set_thumbnail">set_thumbnail</DocsLink> attribute.
 
 ```python title="embed.py"
-embed.set_thumbnail(url="https://disnake.dev/assets/disnake-thin-banner.png")
+embed.set_thumbnail(url="https://disnake.dev/assets/disnake-banner-thin.png")
 ```
 
 <br />
@@ -310,7 +310,7 @@ either a URL or a <DocsLink reference="disnake.File" /> object.
 
 ```python title="embed.py"
 # Using a URL
-embed.set_image(url="https://disnake.dev/assets/disnake-thin-banner.png")
+embed.set_image(url="https://disnake.dev/assets/disnake-banner-thin.png")
 
 # Using a local file
 embed.set_image(file=disnake.File("path/to/file.png"))
@@ -367,7 +367,7 @@ embed_dict = {
         {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
         {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
     ],
-    "image": {"url": "https://disnake.dev/assets/disnake-thin-banner.png"},
+    "image": {"url": "https://disnake.dev/assets/disnake-banner-thin.png"},
     "footer": {"text": "Embed Footer", "icon_url": "https://disnake.dev/assets/disnake-logo.png"},
 }
 
