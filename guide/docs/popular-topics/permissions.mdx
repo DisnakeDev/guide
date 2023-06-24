@@ -203,6 +203,35 @@ async def can_add_reactions(inter: disnake.ApplicationCommandInteraction) -> Non
     await inter.send("Sure you can!" if inter.permissions.add_reactions else "Sadly no :(")
 ```
 
+## Querying permissions
+
+There are various ways to query permission information, and they also depend on the context you're
+in. This section tries to list all possible methods for getting permission info, grouped by context
+they can be used in.
+
+### Context-agnostic
+
+If you have an instance of any class implementing <DocsLink reference="disnake.abc.GuildChannel" />
+or <DocsLink reference="disnake.abc.PrivateChannel" />, then the easiest way to query permissions
+for a member/role is through <DocsLink reference="disnake.abc.GuildChannel.permissions_for" />.
+If you need a bit more lower level control, you can also get raw overwrite objects
+using <DocsLink reference="disnake.abc.GuildChannel.overwrites_for" />
+or <DocsLink reference="disnake.abc.GuildChannel.overwrites" />.
+
+### In prefix commands
+
+There are no direct methods on <DocsLink reference="disnake.ext.commands.Context" /> for querying permission
+information, however, you can still access <DocsLink reference="disnake.ext.commands.Context.channel" /> and
+call above-mentioned methods on it, though be sure to check that it's not <DocsLink reference="disnake.PartialMessageable" />
+as it doesn't have any permissions-related methods on it either.
+
+### In interactions
+
+When working with interactions (i.e., with application commands or components), there are two main methods
+defined on <DocsLink reference="disnake.Interaction" />: <DocsLink reference="disnake.Interaction.permissions" />
+(for getting interaction author's permissions) and <DocsLink reference="disnake.Interaction.app_permissions" />
+(for getting bot's permissions in interaction's channel).
+
 ## How permissions are calculated
 
 Permissions can be a tough thing to understand at first, but understanding how permissions are
