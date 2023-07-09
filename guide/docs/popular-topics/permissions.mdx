@@ -375,12 +375,12 @@ There's also a few additional operations supported that do not involve operators
 # Returns the permissions's hash. Allows permission objects to be used as dictionary keys.
 hash(base)
 
-# Permissions object implements `__iter__()`, and thus can be used in for loops.
-for perm, value in base:
-    truthy = []
+# Permissions and PermissionOverwrite both implement `__iter__()`, and thus can be used in for loops.
+truthy = []
 
+for perm, value in base:
     if value:
         truthy.append(perm)
 
-    assert truthy == ["add_reactions", "manage_guild"]
+assert truthy == ["add_reactions", "manage_guild"]
 ```
