@@ -97,16 +97,16 @@ This likely won't work for all possible screen/window sizes, but it's better tha
 
 A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., those granted
 by roles). Permission overwrites are assigned per-channel and to a specific user/role, and are made up of two <span id="untouched-permissions">`Permissions`</span>
-objects: the one containing granted permissions, and the one contaning revoked permissions, collectively called a "pair".
+objects: the one containing allowed permissions, and the one contaning denied permissions, collectively called a "pair".
 
-If some permission is not granted neither revoked, then it is considered "untouched" and is not overriden. The value of an
+If some permission is not explicitly allowed neither denied, then it is considered "untouched" and is not overriden. The value of an
 untouched permission is `None`.
 
 ```python
 overwrite = disnake.PermissionOverwrite(
-    add_reactions=True,  # This goes into the "Granted" part.
-    view_audit_log=False,  # This goes into the "Revoked" part.
-    manage_guild=None,  # Does nothing as `None` is the default value.
+    add_reactions=True,  # This goes into the "Allowed" part.
+    view_audit_log=False,  # This goes into the "Denied" part.
+    manage_guild=None,  # Effectively a no-op as `None` is the default value.
 )
 
 # disnake allows you to query individual permissions just as easily
@@ -116,9 +116,10 @@ assert overwrite.add_reactions
 assert not overwrite.view_audit_log
 assert overwrite.manage_guild is None
 
-# However, you can still access raw objects if neccesary using `.pair()`,
-# which returns a tuple of two `Permissions` objects, first being the
-# granted permission set and second being the revoked ones.
+# Although not recommended, you can still access raw objects if neccesary
+# using `.pair()`, which returns a tuple of two `Permissions` objects,
+# first having the allowed permissions set to `True` and second having
+# the denied ones set to `True`.
 
 allow, deny = overwrite.pair()
 assert allow == disnake.Permissions(add_reactions=True)
