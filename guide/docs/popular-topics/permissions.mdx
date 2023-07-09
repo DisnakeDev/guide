@@ -372,9 +372,8 @@ assert subset | disnake.Permissions.manage_guild == base
 There's also a few additional operations supported that do not involve operators.
 
 ```python
-# Returns the permissions's hash. This currently returns it's value, but that may change
-# in the future.
-assert hash(base) == base.value == 96
+# Returns the permissions's hash. Allows permission objects to be used as dictionary keys.
+hash(base)
 
 # Permissions object implements `__iter__()`, and thus can be used in for loops.
 for perm, value in base:
