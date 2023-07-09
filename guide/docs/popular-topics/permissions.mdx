@@ -166,29 +166,18 @@ chatmod_role = await guild.create_role(
 )
 ```
 
-Overriding chat moderator's permissions in the `#only-mods` <DocsLink reference="disnake.TextChannel"/>:
+Creating an `#only-mods` <DocsLink reference="disnake.TextChannel"/>:
 
 ```python
-# We don't want to allow chat mods to delete each other's messages.
-overwrite = disnake.PermissionOverwrite(manage_messages=False)
+# Allow mods to see the channel
+overwrite = disnake.PermissionOverwrite(view_channel=True)
 # See `TextChannel.edit()` documentation.
 mapping = {chatmod_role: overwrite}
 
-only_mods_channel = await only_mods_channel.edit(overwrites=mapping)
+only_mods_channel = await guild.create_text_channel("only-mods", overwrites=mapping)
 
-assert not only_mods_channel.permissions_for(chatmod_role).manage_messages
-```
-
-We trust Kate and still want her to manage messages:
-
-```python
-overwrite = disnake.PermissionOverwrite(manage_messages=True)
-# We want to preserve previously set overwrites, so we include them first.
-mapping = {**only_mods_channel.overwrites, kate: overwrite}
-
-only_mods_channel = await only_mods_channel.edit(overwrites=mapping)
-
-assert only_mods_channel.permissions_for(kate).manage_messages
+assert not only_mods_channel.permissions_for(guild.default_role).view_channel
+assert only_mods_channel.permissions_for(chatmod_role).view_channel
 ```
 
 A slash command that checks whether the command author can add reactions in the current channel:
