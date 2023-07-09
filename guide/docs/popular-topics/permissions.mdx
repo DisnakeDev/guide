@@ -291,12 +291,17 @@ This rule automatically revokes all permissions for timed out members _except_ "
 1. If you can't send a message in a channel, then you can't sent _any_ message in it.
 
 This rule automatically revokes "Send TTS Messages", "Send Voice Messages", "Mention Everyone", "Embed Links"
-and "Attach Files" permissions for members that do not have the "Send Messages" permission.
+and "Attach Files" permissions, if the member doesn't have the "Send Messages" permission.
 
 2. If you can't view a channel, they you can't do anything in it.
 
 This rule automatically revokes "All Channel" permissions, as specified by <DocsLink reference="disnake.Permissions.all_channel" />,
 if the member doesn't have the "View Channel" permission.
+
+3. If you can't connect to a vocal channel, then you can't interfere with it's participants.
+
+This rule automatically revokes "Voice", "Text" and "Stage" permission groups from the official Discord UI if
+the member doesn't have the "Connect" permission.
 
 ## Operating on permission values
 
