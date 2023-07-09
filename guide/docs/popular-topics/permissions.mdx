@@ -272,8 +272,12 @@ granted permissions. For example, take a user with two permissions: "View Channe
 "Send Messages". If at some point user loses the "View Channel" permission, it wouldn't matter whether
 they can send messages in that channel: they just can't see the channel in the UI. disnake's permission system
 attempts to handle such cases via "implicit permissions" - permissions that, when granted or, more commonly,
-revoked, automatically grant (revoke) other permissions as well. The currently handled cases are separated
-into two parts: guild-wide rules and channel-specific rules, and are described below.
+revoked, automatically grant (revoke) other permissions as well. A few handled cases are demonstrated below,
+but note that this is by no means an exhaustive list: quoting from the [official Discord documentation], "in
+all cases, these are based on logical conclusions about how a user with certain permissions should or should
+not interact with Discord", and, as such, it's hardly possible to accomodate all possibilities.
+
+[official discord documentation]: https://discord.com/developers/docs/topics/permissions#implicit-permissions
 
 #### Guild-wide implicit permissions
 
