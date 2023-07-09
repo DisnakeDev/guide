@@ -13,7 +13,7 @@ In disnake, permissions are controlled via two objects: <DocsLink reference="dis
 ## Creating permission objects
 
 `Permissions` can be constructed in two ways: using manual instantiation with granted/revoked permissions specified via
-keyword arguments, or shorthand methods that create permission objects with corresponding permissions granted.
+keyword arguments, or shorthand methods that create permission objects with specific groups of permissions.
 
 :::note
 There's actually a third option: specifying the raw value, but it's usage is generally discouraged as it's hard
@@ -54,7 +54,7 @@ permissions = disnake.Permissions(
 Note that, quoting from docs, "Arguments are applied in order, which notably also means that supplying a flag and
 its alias will make whatever comes last overwrite the first one". As an example, in the above case the latter
 `manage_roles=False` argument will overwrite the `manage_permissions` one, and the resulting object will have
-both of them set to `False`.
+both of them set to `False` (since they represent the same permission).
 
 ```python
 assert not permissions.manage_roles
@@ -68,7 +68,7 @@ them can become tedious, and you'll also need to keep them up-to-date with the U
 for you via a range of methods defined on the <DocsLink reference="disnake.Permissions" /> class.
 
 ```python
-# All "Advanced" permissions from the official UI granted.
+# All permissions grouped under "Advanced" in the official UI.
 advanced_permissions = disnake.Permissions.advanced()
 # ALL permissions granted, including advanced ones.
 all_permissions = disnake.Permissions.all()
@@ -98,8 +98,8 @@ is an implementation detail (i suppose?). -->
 <!-- NOTE: The #untouched-permissions anchor is placed a bit above the paragraph to account for website header offset
 This likely won't work for all possible screen/window sizes, but it's better than nothing. -->
 
-A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., those granted/revoked
-by roles). Permission overwrites are assigned per-channel per-user/role and are made up of two <span id="untouched-permissions">`Permissions`</span>
+A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., those granted
+by roles). Permission overwrites are assigned per-channel and to a specific user/role, and are made up of two <span id="untouched-permissions">`Permissions`</span>
 objects: the one containing granted permissions, and the one contaning revoked permissions, collectively called a "pair".
 
 If some permission is not granted neither revoked, then it is considered "untouched" and is not overriden. The value of an
@@ -123,8 +123,9 @@ assert overwrite.manage_guild is None
 # which returns a tuple of two `Permissions` objects, first being the
 # granted permission set and second being the revoked ones.
 
-assert overwrite.pair()[0] == disnake.Permissions(add_reactions=True)
-assert overwrite.pair()[1] == disnake.Permissions(view_audit_log=False)
+allow, deny = overwrite.pair()
+assert allow == disnake.Permissions(add_reactions=True)
+assert deny == disnake.Permissions(view_audit_log=False)
 ```
 
 You can update overwrites in-place by simply assigning values to attributes or by using
@@ -143,8 +144,8 @@ assert not overwrite.view_audit_log
 If you need to create a new overwrite object based on an existing one, you can do the following.
 
 ```python
-pair = overwrite.pair()
-new_overwrite = disnake.PermissionOverwrite.from_pair(pair)
+allow, deny = overwrite.pair()
+new_overwrite = disnake.PermissionOverwrite.from_pair(allow, deny)
 
 new_overwrite.add_reactions = False
 
@@ -184,8 +185,6 @@ assert not only_mods_channel.permissions_for(chatmod_role).manage_messages
 We trust Kate and still want her to manage messages:
 
 ```python
-kate = await client.getch_user(...)
-
 overwrite = disnake.PermissionOverwrite(manage_messages=True)
 # We want to preserve previously set overwrites, so we include them first.
 mapping = {**only_mods_channel.overwrites, kate: overwrite}
@@ -214,6 +213,7 @@ they can be used in.
 If you have an instance of any class implementing <DocsLink reference="disnake.abc.GuildChannel" />,
 then the easiest way to query permissions for a member/role is
 through <DocsLink reference="disnake.abc.GuildChannel.permissions_for" />.
+This also works with <DocsLink reference="disnake.Thread" />s.
 If you need a bit more lower level control, you can also get raw overwrite objects
 using <DocsLink reference="disnake.abc.GuildChannel.overwrites_for" />
 or <DocsLink reference="disnake.abc.GuildChannel.overwrites" />.
@@ -227,10 +227,10 @@ as it doesn't have any permissions-related methods on it either.
 
 ### In interactions
 
-When working with interactions (i.e., with application commands or components), there are two main methods
+When working with interactions (i.e., with application commands or components), there are two main properties
 defined on <DocsLink reference="disnake.Interaction" />: <DocsLink reference="disnake.Interaction.permissions" />
-(for getting interaction author's permissions) and <DocsLink reference="disnake.Interaction.app_permissions" />
-(for getting bot's permissions in interaction's channel).
+(for getting the interaction author's permissions in the current channel) and <DocsLink reference="disnake.Interaction.app_permissions" />
+(for getting the bot's permissions).
 
 ## How permissions are calculated
 
@@ -331,8 +331,8 @@ assert base <= same
 # Check that one (base) permission object has at maximum of the granted permissions
 # of the second one granted, minus one or more.
 assert base < superset
-# Check that one (base) permission object has at least one permission granted/revoked
-# that is revoked/granted in the second one.
+# Check that one (base) permission object has at least one permission allowed
+# that is denied in the second one (and the other way around).
 assert base != different
 ```
 
@@ -342,9 +342,9 @@ If you're familar with bit operators in Python, then you'll feel right at home. 
 the comments to understand what does what.
 
 ```python
-# Creates a new Permissions object with all granted permissions from both base and different.
+# Creates a new Permissions object with all granted permissions from either one of them.
 assert subset | different == disnake.Permissions(add_reactions=True, use_voice_activation=True)
-# Creates a new Permissions object with only permissions granted on both base and different.
+# Creates a new Permissions object with only permissions granted on both.
 assert base & subset == disnake.Permissions(add_reactions=True)
 # Creates a new Permissions object with only permissions granted on one of base or different,
 # but not both.
