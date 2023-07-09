@@ -237,17 +237,24 @@ better grasp this concept.
 
 In case we're calculating permissions for a member, the strategy is as follows:
 
--   If member is the guild owner, all permissions are granted - no questions asked. Otherwise..
--   First we apply the `@everyone` role's permissions.
--   Then, for each role the member has we apply it's permissions too.
--   -   If at this point the member has the "Administrator" permission, all others are granted automatically
-        (the member is a guild-wide administrator, and, as such, is functionally equivalent to the owner except
-        they can't delete the guild).
--   After that, if we're in a channel, the following is additionally done.
--   -   We apply it's overwrites in the same order: `@everyone` overwrites,
+1.  If member is the guild owner, all permissions are granted - no questions asked. Otherwise..
+
+2.  First we apply the `@everyone` role's permissions.
+
+3.  Then, for each role the member has we apply it's permissions too.
+
+4.  If at this point the member has the "Administrator" permission, all others are granted automatically
+    (the member is a guild-wide administrator, and, as such, is functionally equivalent to the owner except
+    they can't delete the guild).
+
+5.  After that, if we're in a channel, the following is additionally done.
+
+6.  1.  We apply it's overwrites in the same order: `@everyone` overwrites,
         role overwrites and finally member overwrites.
--   -   Then [channel-specific implicit permissions](#channel-specific-implicit-permissions) are handled.
--   In the end, we take into account [guild-wide implicit permissions](#guild-wide-implicit-permissions).
+
+    2.  Then [channel-specific implicit permissions](#channel-specific-implicit-permissions) are handled.
+
+7.  In the end, we take into account [guild-wide implicit permissions](#guild-wide-implicit-permissions).
 
 In case of calculating permissions for a role, the strategy is the same as if we were calculating permissions
 for a member with only that role (and `@everyone`), except that member overwrites are
