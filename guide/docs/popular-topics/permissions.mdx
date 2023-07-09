@@ -100,21 +100,16 @@ list the available methods here:
 
 ## Permission Overwrites
 
-<!-- NOTE: The #untouched-permissions anchor is placed a bit above the paragraph to account for website header offset
-This likely won't work for all possible screen/window sizes, but it's better than nothing. -->
-
 A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., those granted
-by roles). Permission overwrites are assigned per-channel and to a specific user/role, and are made up of two <span id="untouched-permissions">`Permissions`</span>
-objects: the one containing allowed permissions, and the one contaning denied permissions, collectively called a "pair".
-
-If some permission is not explicitly allowed neither denied, then it is considered "untouched" and is not overriden. The value of an
-untouched permission is `None`.
+by roles). Permission overwrites are assigned per-channel and to a specific user/role, but, unlike regular `Permissions`
+objects, each permission in them can have three values: `True` (explicitly allowed), `False` (explicitly denied) and
+_`None`_ ("untouched", i.e., not overriden). The latter is also the default value for permissions in permission overwrites.
 
 ```python
 overwrite = disnake.PermissionOverwrite(
-    add_reactions=True,  # This goes into the "Allowed" part.
-    view_audit_log=False,  # This goes into the "Denied" part.
-    manage_guild=None,  # Effectively a no-op as `None` is the default value.
+    add_reactions=True,  # This overrides permission as allowed.
+    view_audit_log=False,  # This overrides permission as denied.
+    manage_guild=None,  # Does not override anything (this is the default behavior).
 )
 
 # disnake allows you to query individual permissions just as easily
@@ -124,7 +119,7 @@ assert overwrite.add_reactions
 assert not overwrite.view_audit_log
 assert overwrite.manage_guild is None
 
-# Although not recommended, you can still access raw objects if neccesary
+# Although not being the recommended usage, you can also access permissions
 # using `.pair()`, which returns a tuple of two `Permissions` objects,
 # first having the allowed permissions set to `True` and second having
 # the denied ones set to `True`.
@@ -282,7 +277,7 @@ not interact with Discord", and, as such, it's hardly possible to accomodate all
 1. Timed out members are spectators.
 
 This rule automatically revokes all permissions for timed out members _except_ "View Channel" and
-"Read Message History", which are left [untouched](#untouched-permissions).
+"Read Message History", which are left [untouched](#permission-overwrites).
 
 #### Channel-specific implicit permissions
 
