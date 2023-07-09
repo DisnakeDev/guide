@@ -20,7 +20,7 @@ There's actually a third option: specifying the raw value, but it's usage is gen
 to understand at a glance what the result will be. Anyway, here's how you do it:
 
 ```python
-permissions = disnake.Permissions(64)  # Grants the "Add Reactions" permission.
+permissions = disnake.Permissions(64)  # Represents the "Add Reactions" permission.
 
 assert permissions.value == 64
 ```
@@ -35,21 +35,29 @@ as intuitive as possible, and, as such, is also what you'll usually encounter in
 ```python
 permissions = disnake.Permissions(
     # Each permission is specified using a keyword argument,
-    # where value of `True` means that it is granted, while
-    # `False` revokes the permission.
-    view_audit_log=True,  # This grants the "View Audit Log" permission.
-    add_reactions=False,  # This revokes the "Add Reactions" permission.
+    # where a value of `True` means that it is allowed, while
+    # `False` means that it is denied.
+    view_audit_log=True,  # This allows the "View Audit Log" permission.
     # Note that not all permission names are the same as in the
     # official UI. For example, in the UI guilds are called "Servers",
     # and, as such, the `manage_guild` kwarg is actually responsible
     # for controlling the "Manage Server" permission.
-    manage_guild=False,  # Revokes the "Manage Server" permission.
-    use_voice_activation=True,  # Grants the "Use Voice Activity" permission.
+    manage_guild=False,  # Denies the "Manage Server" permission.
+    use_voic_activation=True,  # Allows the "Use Voice Activity" permission.
     # There are also a few aliases for certain permissions.
-    manage_permissions=True,  # Grants the "Manage Roles" permission.
-    manage_roles=False,  # Revokes the "Manage Roles" permission.
+    manage_permissions=True,  # Allows the "Manage Roles" permission.
+    manage_roles=False,  # Denies the "Manage Roles" permission.
 )
 ```
+
+:::warning
+It is often misunderstood that setting `True` or `False` on a `Permissions` object will permanently "grant"/"deny"
+the permission, but this is not true.
+
+**`Permissions` do not "grant" or "revoke" permission(s) by themselves** - they only _represent_ them. Detecting whether
+a certain permission will be allowed or denied in the end is not possible unless you go through the full process of
+[calculating](#how-permissions-are-calculated) permissions (or [querying](#querying-permissions) a pre-computed ones).
+:::
 
 Note that, quoting from docs, "Arguments are applied in order, which notably also means that supplying a flag and
 its alias will make whatever comes last overwrite the first one". As an example, in the above case the latter
@@ -63,7 +71,7 @@ assert not permissions.manage_permissions
 
 ### Shorthand methods
 
-Sometimes you may want to grant a group of permissions, like the ones defined in the official UI. Manually creating
+Sometimes you may want to allow a group of permissions, like the ones defined in the official UI. Manually creating
 them can become tedious, and you'll also need to keep them up-to-date with the UI. Luckily, disnake already does that
 for you via a range of methods defined on the <DocsLink reference="disnake.Permissions" /> class.
 
