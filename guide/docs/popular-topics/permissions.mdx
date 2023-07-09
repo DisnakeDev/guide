@@ -12,7 +12,7 @@ In disnake, permissions are controlled via two objects: <DocsLink reference="dis
 
 ## Creating permission objects
 
-`Permissions` can be constructed in two ways: using manual instantiation with granted/revoked permissions specified via
+`Permissions` can be constructed in two ways: using manual instantiation with allowed/denied permissions specified via
 keyword arguments, or shorthand methods that create permission objects with specific groups of permissions.
 
 :::note
@@ -51,7 +51,7 @@ permissions = disnake.Permissions(
 ```
 
 :::warning
-It is often misunderstood that setting `True` or `False` on a `Permissions` object will permanently "grant"/"deny"
+It is often misunderstood that setting `True` or `False` on a `Permissions` object will permanently "grant"/"revoke"
 the permission, but this is not true.
 
 **`Permissions` do not "grant" or "revoke" permission(s) by themselves** - they only _represent_ them. Detecting whether
@@ -78,7 +78,7 @@ for you via a range of methods defined on the <DocsLink reference="disnake.Permi
 ```python
 # All permissions grouped under "Advanced" in the official UI.
 advanced_permissions = disnake.Permissions.advanced()
-# ALL permissions granted, including advanced ones.
+# ALL permissions allowed, including advanced ones.
 all_permissions = disnake.Permissions.all()
 ```
 
@@ -322,17 +322,17 @@ These are operations that usually require no explanation. In any way, comments w
 ```python
 # Check that two permission object have same permissions set to the same value.
 assert base == same
-# Check that one (base) permission object has at least all of the granted permissions
-# of the second one granted too.
+# Check that one (base) permission object has at least all of the allowed permissions
+# of the second one allowed too.
 assert base >= same
-# Check that one (base) permission object has all of the granted permissions
-# of the second one granted too, plus at least one extra.
+# Check that one (base) permission object has all of the allowed permissions
+# of the second one allowed too, plus at least one extra.
 assert base > subset
-# Check that one (base) permission object has at maximum all of the granted permissions
-# of the second one granted.
+# Check that one (base) permission object has at maximum all of the allowed permissions
+# of the second one allowed.
 assert base <= same
-# Check that one (base) permission object has at maximum of the granted permissions
-# of the second one granted, minus one or more.
+# Check that one (base) permission object has at maximum of the allowed permissions
+# of the second one allowed, minus one or more.
 assert base < superset
 # Check that one (base) permission object has at least one permission allowed
 # that is denied in the second one (and the other way around).
@@ -345,11 +345,11 @@ If you're familar with bit operators in Python, then you'll feel right at home. 
 the comments to understand what does what.
 
 ```python
-# Creates a new Permissions object with all granted permissions from either one of them.
+# Creates a new Permissions object with all allowed permissions from either one of them.
 assert subset | different == disnake.Permissions(add_reactions=True, use_voice_activation=True)
-# Creates a new Permissions object with only permissions granted on both.
+# Creates a new Permissions object with only permissions allowed on both.
 assert base & subset == disnake.Permissions(add_reactions=True)
-# Creates a new Permissions object with only permissions granted on one of base or different,
+# Creates a new Permissions object with only permissions allowed on one of base or different,
 # but not both.
 assert base ^ different
 
@@ -358,9 +358,9 @@ assert base ^ different
 
 # Creates a new Permissions object with all permissions from subset inverted.
 assert not (~subset).add_reactions and (~subset).manage_guild
-# Creates a new Permissions object with all permissions except add_reactions granted.
+# Creates a new Permissions object with all permissions except add_reactions allowed.
 assert not (~disnake.Permissions.add_reactions).add_reactions
-# Creates a new Permissions object with all specified permissions granted.
+# Creates a new Permissions object with all specified permissions allowed.
 assert disnake.Permissions.add_reactions | disnake.Permissions.manage_guild == base
 assert subset | disnake.Permissions.manage_guild == base
 ```
