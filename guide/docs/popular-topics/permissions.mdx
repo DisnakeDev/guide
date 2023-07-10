@@ -225,8 +225,7 @@ defined on <DocsLink reference="disnake.Interaction" />: <DocsLink reference="di
 ## How permissions are calculated
 
 Permissions can be a tough thing to understand at first, but understanding how permissions are
-applied can help you <!-- feel the pain of us mere mortals re-implementing discord client's obscure behaviour -->
-better grasp this concept.
+applied can help you better grasp this concept.
 
 In case we're calculating permissions for a member, the strategy is as follows:
 
@@ -234,20 +233,20 @@ In case we're calculating permissions for a member, the strategy is as follows:
 
 2.  First we apply the `@everyone` role's permissions.
 
-3.  Then, for each role the member has we apply it's permissions too.
+3.  Then, for each of the member's roles, apply its permissions too.
 
-4.  If at this point the member has the "Administrator" permission, all others are granted automatically
+4.  If at this point the member has the "Administrator" permission, all other permissions are granted automatically
     (the member is a guild-wide administrator, and, as such, is functionally equivalent to the owner except
     they can't delete the guild).
 
-5.  After that, if we're in a channel, the following is additionally done.
+5.  After that, if we're in a channel, the following is additionally done:
 
-6.  1.  We apply it's overwrites in the same order: `@everyone` overwrites,
+    1.  We apply its overwrites in the same order: `@everyone` overwrites,
         role overwrites and finally member overwrites.
 
     2.  Then [channel-specific implicit permissions](#channel-specific-implicit-permissions) are handled.
 
-7.  In the end, we take into account [guild-wide implicit permissions](#guild-wide-implicit-permissions).
+6.  In the end, we take into account [guild-wide implicit permissions](#guild-wide-implicit-permissions).
 
 In case of calculating permissions for a role, the strategy is the same as if we were calculating permissions
 for a member with only that role (and `@everyone`), except that member overwrites are
@@ -374,11 +373,11 @@ There's also a few additional operations supported that do not involve operators
 hash(base)
 
 # Permissions and PermissionOverwrite both implement `__iter__()`, and thus can be used in for loops.
-truthy = []
+allowed = []
 
-for perm, value in base:
+for name, value in base:
     if value:
-        truthy.append(perm)
+        allowed.append(name)
 
-assert truthy == ["add_reactions", "manage_guild"]
+assert allowed == ["add_reactions", "manage_guild"]
 ```
