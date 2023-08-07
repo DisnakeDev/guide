@@ -31,7 +31,7 @@ async def dictembed(ctx):
             {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
             {"name": "Inline Title", "value": "Inline Value", "inline": "true"},
         ],
-        "image": {"url": "https://disnake.dev/assets/disnake-thin-banner.png"},
+        "image": {"url": "https://disnake.dev/assets/disnake-banner-thin.png"},
         "footer": {
             "text": "Embed Footer",
             "icon_url": "https://disnake.dev/assets/disnake-logo.png",
