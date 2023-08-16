@@ -64,6 +64,10 @@ Components allow users to interact with your bot through interactive UI elements
 Button components, like [SelectMenu](select-menus.mdx) components, can be implemented using a <DocsLink reference="disnake.ui.View">View</DocsLink>
 or via a [low-level implementation](#Views-vs-low-level-components).
 
+:::note
+A message can include up to 25 button components, organized with a maximum of 5 buttons per row across 5 rows.
+:::
+
 ```python title="button_view.py"
 # At top of file.
 import disnake
