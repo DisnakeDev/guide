@@ -19,20 +19,20 @@ There are two main ways of using webhooks in disnake.
             - <DocsLink reference="disnake.TextChannel">TextChannel</DocsLink>
             - <DocsLink reference="disnake.ForumChannel">ForumChannel</DocsLink>
             - <DocsLink reference="disnake.VoiceChannel">VoiceChannel</DocsLink>
-            - <DocsLink reference="disnake.StageChannel">StageChannel</DocsLink>{' '}
+            - <DocsLink reference="disnake.StageChannel">StageChannel</DocsLink>
 
 :::note
 Webhooks fetched or created using these methods are automatically bound to the bot's internal HTTP session.
 :::
 
 2. The second way involves creating partial webhooks using the following methods:
-    - <DocsLink reference="disnake.Webhook.from_url">Webhook.from_url()</DocsLink> - Create a Webhook from a channel's webhook
+    - <DocsLink reference="disnake.Webhook.from_url">Webhook.from_url()</DocsLink> - Create a Webhook from only a webhook
       URL.
-    - <DocsLink reference="disnake.Webhook.partial">Webhook.partial()</DocsLink> - Create a Webhook with an `id`, webhook
-      `token`, and optional `bot_token`
+    - <DocsLink reference="disnake.Webhook.partial">Webhook.partial()</DocsLink> - Create a Webhook with only a webhook ID,
+      and token.
 
 :::note
-Webhooks created using these methods require that you create and manage a separate HTTP session.  
+Webhooks created using these methods require that you create and manage a separate HTTP session that is provided to the method used.  
 An [example of this](#creating-a-webhook-from-a-url) is available further down this page.
 :::
 
