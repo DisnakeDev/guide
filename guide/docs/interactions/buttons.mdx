@@ -230,11 +230,6 @@ async def buttons(inter: disnake.ApplicationCommandInteraction):
 # Create the listener that will handle the button interactions, similarly to the callbacks used above.
 @bot.listen("on_button_click")
 async def help_listener(inter: disnake.MessageInteraction):
-    if inter.component.custom_id not in ["yes", "no"]:
-        # We filter out any other button presses except
-        # the components we wish to process.
-        return
-
     if inter.component.custom_id == "yes":
         await inter.response.send_message("Contact us at https://discord.gg/disnake!")
     elif inter.component.custom_id == "no":
