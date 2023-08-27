@@ -74,20 +74,18 @@ from disnake.ext import commands
 
 
 class ButtonView(disnake.ui.View):
-    # In this example, the buttons are created using `@disnake.ui.button` (Notice the lower `b`)
-    # to create the buttons and assign the decorated functions as the button callback.
+    # Here, we use `@disnake.ui.button` (notice the lower `b`)
+    # to create the buttons and assign the decorated functions as the button callbacks.
+    # In this case, we simply respond to the interaction with a message
+    # then explicitly stop the View from continuing to listen for further interactions.
 
     @disnake.ui.button(label="Yes", style=disnake.ButtonStyle.success)
     async def success(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
-
-        # In this example we simply respond to the interaction with a message
-        # then explicitly stop the View from continuing to listen.
         await inter.response.send_message("Contact us at https://discord.gg/disnake!")
         self.stop()
 
     @disnake.ui.button(label="No", style=disnake.ButtonStyle.danger)
     async def no(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
-
         await inter.response.send_message("Got it. Signing off!")
         self.stop()
 
