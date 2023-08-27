@@ -150,15 +150,14 @@ class TimeoutButtonView(disnake.ui.View):
 
         await inter.response.send_message("Contact us at https://discord.gg/disnake!")
 
-        # Update the View by disabling the buttons, then editing the original message
-        # the View was attached to, not the response message sent above.
-        # You could also do this as part of the interaction.response by using
-        # `inter.response.edit_message` which would handle the required response
-        # and editing of the original message.
+        # Update the View by disabling all buttons, then editing the original message
+        # containing this View, not the response message sent above.
+        # Note: This can also be done with `inter.response.edit_message()` instead
+        # if you did not wish to send a separate response.
         self.disable_children()
         await inter.message.edit(view=self)
-        # We still want to explicitly stop the View after a user has interacted
-        # to ensure it's no longer usable.
+
+        # Now, we explicitly stop the View which prevents it from listening for more interactions.
         self.stop()
 
     @disnake.ui.button(label="No", style=disnake.ButtonStyle.danger)
@@ -166,15 +165,9 @@ class TimeoutButtonView(disnake.ui.View):
 
         await inter.response.send_message("Got it. Signing off!")
 
-        # Update the View by disabling the buttons, then editing the original message
-        # the View was attached to, not the response message sent above.
-        # You could also do this as part of the interaction.response by using
-        # `inter.response.edit_message` which would handle the required response
-        # and editing of the original message.
         self.disable_children()
         await inter.message.edit(view=self)
-        # We still want to explicitly stop the View after a user has interacted
-        # to ensure it's no longer usable.
+
         self.stop()
 
 
