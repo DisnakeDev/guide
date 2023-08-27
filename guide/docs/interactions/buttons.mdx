@@ -190,9 +190,9 @@ async def buttons(inter: disnake.ApplicationCommandInteraction):
     view = TimeoutButtonView(timeout=120)
     await inter.response.send_message("Need help?", view=view)
 
-    # Because this type of interaction response does not return a message, we will need
+    # Because interaction responses do not return a message, we will need
     # to fetch the message and assign it to `View.message` to be used if `on_timeout` is called.
-    View.message = await inter.original_response()
+    view.message = await inter.original_response()
 ```
 
 ## Views vs. low-level components
