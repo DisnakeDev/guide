@@ -75,10 +75,6 @@ from disnake.ext import commands
 
 
 class ButtonView(disnake.ui.View):
-    def __init__(self):
-        # Views by default have a 180s `timeout`
-        super().__init__()
-
     # In this example, the buttons are created using `@disnake.ui.button` (Notice the lower `b`)
     # to create the buttons and assign the decorated functions as the button callback.
 
