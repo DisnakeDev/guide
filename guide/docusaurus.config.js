@@ -71,7 +71,7 @@ module.exports = {
 					position: 'left',
 				},
 				{
-					to: 'https://docs.disnake.dev/en/stable/api.html',
+					to: 'https://docs.disnake.dev/en/stable/api/index.html',
 					label: 'API Reference',
 					position: 'left',
 				},
