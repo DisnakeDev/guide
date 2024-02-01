@@ -13,7 +13,7 @@ In disnake, permissions are controlled via two objects: <DocsLink reference="dis
 ## Creating permission objects
 
 `Permissions` can be constructed in two ways: using manual instantiation with allowed/denied permissions specified via
-keyword arguments, or shorthand methods that create permission objects with specific groups of permissions.
+keyword arguments, or shorthand methods that create permission objects with predefined groups of permissions.
 
 :::note
 There's actually a third option: specifying the raw value, but it's usage is generally discouraged as it's hard
@@ -56,13 +56,14 @@ the permission, but this is not true.
 
 **`Permissions` do not "grant" or "revoke" permission(s) by themselves** - they only _represent_ them. Detecting whether
 a certain permission will be allowed or denied in the end is not possible unless you go through the full process of
-[calculating](#how-permissions-are-calculated) permissions (or [querying](#querying-permissions) a pre-computed ones).
+[calculating](#how-permissions-are-calculated) permissions (or, more commonly, [querying](#querying-permissions) pre-computed
+ones).
 :::
 
 Note that, quoting from docs, "Arguments are applied in order, which notably also means that supplying a flag and
 its alias will make whatever comes last overwrite the first one". As an example, in the above case the latter
-`manage_roles=False` argument will overwrite the `manage_permissions` one, and the resulting object will have
-both of them set to `False` (since they represent the same permission).
+`manage_roles=False` argument will overwrite the former `manage_permissions`, and the resulting object will have
+both of them set to `False` (since they both represent the same permission).
 
 ```python
 assert not permissions.manage_roles
@@ -100,10 +101,11 @@ list the available methods here:
 
 ## Permission Overwrites
 
-A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., those granted
+A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., these granted
 by roles). Permission overwrites are assigned per-channel and to a specific user/role, but, unlike regular `Permissions`
-objects, each permission in them can have three values: `True` (explicitly allowed), `False` (explicitly denied) and
-_`None`_ ("untouched", i.e., not overriden). The latter is also the default value for permissions in permission overwrites.
+objects, each permission in an overwrite can have three values (intead of two for `Permissions`): `True` (explicitly allowed),
+`False` (explicitly denied) and _`None`_ ("untouched", i.e., not overriden). The latter is the default value for permissions
+in permission overwrites.
 
 ```python
 overwrite = disnake.PermissionOverwrite(
@@ -119,10 +121,11 @@ assert overwrite.add_reactions
 assert not overwrite.view_audit_log
 assert overwrite.manage_guild is None
 
-# Although not being the recommended usage, you can also access permissions
-# using `.pair()`, which returns a tuple of two `Permissions` objects,
-# first having the allowed permissions set to `True` and second having
-# the denied ones set to `True`.
+# Although not being the recommended usage (except for creating copies,
+# as you'll see a bit below), you can also access permissions using
+# `.pair()`, which returns a tuple of two `Permissions` objects, first
+# having the allowed permissions set to `True` and second having the
+# denied ones set to `True`.
 
 allow, deny = overwrite.pair()
 assert allow == disnake.Permissions(add_reactions=True)
@@ -212,8 +215,8 @@ or <DocsLink reference="disnake.abc.GuildChannel.overwrites" />.
 
 There are no direct methods on <DocsLink reference="disnake.ext.commands.Context" /> for querying permission
 information, however, you can still access <DocsLink reference="disnake.ext.commands.Context.channel" /> and
-call above-mentioned methods on it, though be sure to check that it's not <DocsLink reference="disnake.PartialMessageable" />
-as it doesn't have any permissions-related methods on it either.
+call above-mentioned methods on it, but be sure to check that it's not a <DocsLink reference="disnake.PartialMessageable" />
+as it doesn't have any permissions-related methods on it.
 
 ### In interactions
 
@@ -254,7 +257,7 @@ not taken into account.
 
 :::note
 Curious about the implementation? At the time of writing, implementation could be found
-[here](https://git.disnake.dev/disnake/blob/0c193b53922002396ffbbe03d8a10b1a41c37e8e/disnake/abc.py#L651-L808).
+[here](https://git.disnake.dev/disnake/blob/a24abf43297215b6fe70e0bc61b2ec1dada84b9f/disnake/abc.py#L651-L808).
 :::
 
 ### Implicit permissions
@@ -295,7 +298,7 @@ if the member doesn't have the "View Channel" permission.
 This rule automatically revokes "Voice", "Text" and "Stage" permission groups from the official Discord UI if
 the member doesn't have the "Connect" permission.
 
-## Operating on permission values
+## Operations on permission values
 
 Since disnake v2.6, it is possible to do various operations on permission objects with minimal effort. While
 not something you'd usually use often, they can come in very handy when it comes to complex permission
@@ -369,10 +372,12 @@ assert subset | disnake.Permissions.manage_guild == base
 There's also a few additional operations supported that do not involve operators.
 
 ```python
-# Returns the permissions's hash. Allows permission objects to be used as dictionary keys.
+# Returns the permissions's hash. Allows permission objects to
+# be used as dictionary keys.
 hash(base)
 
-# Permissions and PermissionOverwrite both implement `__iter__()`, and thus can be used in for loops.
+# `Permissions` and `PermissionOverwrite` both implement `__iter__()`,
+# and therefore can be used in for loops.
 allowed = []
 
 for name, value in base:
