@@ -28,6 +28,7 @@ import {
 } from '@discord-message-components/react';
 import '@discord-message-components/react/styles';
 import isDarkTheme from '../../hooks/isDarkTheme';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -85,7 +86,14 @@ const MDXComponents = {
 	DiscordMessages: (props) => {
 		return (
 			<DiscordOptionsContext.Provider value={discordOptions}>
-				<DiscordMessages {...props} lightTheme={!isDarkTheme()}>
+				<DiscordMessages
+					{...props}
+					lightTheme={!isDarkTheme()}
+					// force remount on hydration to work around SSR theming bug
+					// - https://github.com/facebook/docusaurus/issues/7986
+					// - https://github.com/facebook/docusaurus/blob/61116e2ad6f675d0ba1abef98484712b14834bdb/packages/docusaurus-theme-live-codeblock/src/theme/Playground/index.tsx#L78)
+					key={useIsBrowser()}
+				>
 					{props.children}
 				</DiscordMessages>
 			</DiscordOptionsContext.Provider>
@@ -99,7 +107,12 @@ const MDXComponents = {
 	},
 	DiscordEmbed: (props) => {
 		return (
-			<DiscordEmbed {...props} borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}>
+			<DiscordEmbed
+				{...props}
+				borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+				// see `DiscordMessages` above for explanation
+				key={useIsBrowser()}
+			>
 				{props.children}
 			</DiscordEmbed>
 		);
