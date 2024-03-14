@@ -16,5 +16,5 @@ To get started with contributing to this guide, follow these steps:
     - If you want to install the pre-commit hooks to automatically run before every commit, use `pre-commit install`
     - Otherwise, use `pre-commit run --all-files` to run all checks once.
 
->[!NOTE]
+> [!NOTE]
 > Before contributing please search if these is an issue about what you are making. If not please do so, otherwise you might make something we will not contribute.
