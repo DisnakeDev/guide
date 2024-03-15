@@ -5,4 +5,116 @@ hide_table_of_contents: true
 
 # Webhooks
 
-<WorkInProgress />
+Webhooks provide a way to send messages to guild channels without a bot user or authentication.
+
+## Creating or Fetching webhooks
+
+There are two main ways of using webhooks in disnake.
+
+1. The first method involves fetching existing Webhooks from a Guild or Channel, or creating a new webhook.
+    - `await Guild.webhooks()` - Fetches a list of webhooks available in the guild.
+    - `await Channel.webhooks()` - Fetches a list of webhooks available in the channel.
+    - `await Channel.create_webhook()` - Creates and returns the created <DocsLink reference='disnake.Webhook'>Webhook</DocsLink> for the Channel. (Requires <DocsLink reference="disnake.Permissions.manage_webhooks">manage_webhooks</DocsLink>)
+        - Supported Channels for `.webhooks()` and `.create_webhook()`:
+            - <DocsLink reference="disnake.TextChannel">TextChannel</DocsLink>
+            - <DocsLink reference="disnake.ForumChannel">ForumChannel</DocsLink>
+            - <DocsLink reference="disnake.VoiceChannel">VoiceChannel</DocsLink>
+            - <DocsLink reference="disnake.StageChannel">StageChannel</DocsLink>
+
+:::note
+Webhooks fetched or created using these methods are automatically bound to the bot's internal HTTP session.
+:::
+
+2. The second way involves creating partial webhooks using the following methods:
+    - <DocsLink reference="disnake.Webhook.from_url">Webhook.from_url()</DocsLink> - Create a Webhook from only a webhook
+      URL.
+    - <DocsLink reference="disnake.Webhook.partial">Webhook.partial()</DocsLink> - Create a Webhook with only a webhook ID,
+      and token.
+
+:::note
+Webhooks created using these methods require that you create and manage a separate HTTP session that is provided to the method used.  
+An [example of this](#creating-a-webhook-from-a-url) is available further down this page.
+:::
+
+### Other Webhook methods
+
+-   <DocsLink reference="disnake.Webhook.fetch">Webhook.fetch</DocsLink> - Useful for fetching the full webhook from a partial
+    webhook.
+-   <DocsLink reference="disnake.Webhook.delete">Webhook.delete</DocsLink> - Deletes the webhook. (Requires <DocsLink reference="disnake.Permissions.manage_webhooks">
+    	manage_webhooks
+    </DocsLink>
+    )
+-   <DocsLink reference="disnake.Webhook.edit">Webhook.edit</DocsLink> - Edits the webhook (Requires <DocsLink reference="disnake.Permissions.manage_webhooks">
+    	manage_webhooks
+    </DocsLink>
+    )
+-   <DocsLink reference="disnake.Webhook.fetch_message">Webhook.fetch_message</DocsLink> - Fetches a <DocsLink reference="disnake.WebhookMessage">
+    	WebhookMessage
+    </DocsLink> owned by the webhook using the messages's ID.
+-   <DocsLink reference="disnake.Webhook.send">Webhook.send</DocsLink> - Sends a message using the Webhook.
+
+### Creating a Webhook from a URL
+
+```python title="webhook_from_url.py"
+import disnake
+import asyncio
+import aiohttp
+
+URL = "https://discord.com/api/webhooks/808030843078836254/H82Ba5B958KkeAG4u4A3otcQvl64XPFNqmlP2aMmpJbCHntrEfxgoqE7_OZAzqP9Z2Dr"
+
+
+async def main():
+
+    # Create the HTTP session using aiohttp.ClientSession
+    async with aiohttp.ClientSession() as session:
+        # Construct the Webhook from the URL using the HTTP session.
+        webhook = disnake.Webhook.from_url(URL, session=session)
+        # Send a message using the webhook with a custom username.
+        # Webhook `username` and `avatar` can be changed for each message that is sent.
+        # Doing this in the `.send` method will not alter the Webhook as it appears in the
+        # Guild or Channel integrations.
+        await webhook.send("I sent my first webhook!.", username="Webhook!")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## SyncWebhook
+
+When working with Webhooks in the context of a bot, it's advisable to utilize <DocsLink reference='disnake.Webhook'>disnake.Webhook</DocsLink> to maintain an asynchronous approach.
+Nevertheless, disnake does offer an alternative synchronous variant of Webhooks known as <DocsLink reference="disnake.SyncWebhook">disnake.SyncWebhook</DocsLink>, designed for scenarios
+outside the realm of asynchronous projects.
+
+It's important to note that this version of the `Webhook` should be avoided in asynchronous projects, as its HTTP requests rely on the synchronous and blocking
+[Requests](https://requests.readthedocs.io/en/latest/) library.
+
+Usage of this object remains largely consistent; the primary distinction is the utilization of [Requests](https://requests.readthedocs.io/en/latest/) for managing the HTTP session.
+
+### SyncWebhook example
+
+```python title='sync_webhook.py'
+import requests
+import disnake
+
+
+URL = "https://discord.com/api/webhooks/808030843078836254/H82Ba5B958KkeAG4u4A3otcQvl64XPFNqmlP2aMmpJbCHntrEfxgoqE7_OZAzqP9Z2Dr"
+
+
+def main():
+
+    # This time we create a requests.Session
+    with requests.Session() as session:
+
+        # We are still passing the session to the Webhook, however
+        # it should be noted that if a session is not provided, the
+        # webhook will create it's own `requests.Session` and use that instead.
+        webhook = disnake.SyncWebhook.from_url(URL, session=session)
+
+        # Notice we do not `await` the `webhook.send` method this time.
+        webhook.send("My first synchronous webhook!", username="SyncWebhook!")
+
+
+if __name__ == "__main__":
+    main()
+```
