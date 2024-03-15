@@ -17,4 +17,4 @@ To get started with contributing to this guide, follow these steps:
     - Otherwise, use `pre-commit run --all-files` to run all checks once.
 
 > [!NOTE]
-> Before contributing please search if these is an issue about what you are making. If not please do so, otherwise you might make something we will not contribute.
+> Before contributing new content, please consider checking if there is already an issue about the topic. If not, it would be advisable to create one first, in case you start working on something that may not end up being accepted.
