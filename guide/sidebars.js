@@ -46,6 +46,7 @@ const sidebars = {
 				'popular-topics/permissions',
 				'popular-topics/errors',
 				'popular-topics/intents',
+				'popular-topics/monetization',
 			],
 		},
 		{
