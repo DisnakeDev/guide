@@ -76,6 +76,11 @@ module.exports = {
 					position: 'left',
 				},
 				{
+					to: 'https://discord.gg/disnake',
+					className: 'navbar-item-discord',
+					position: 'right',
+				},
+				{
 					href: 'https://github.com/DisnakeDev/disnake',
 					className: 'navbar-item-github',
 					position: 'right',
