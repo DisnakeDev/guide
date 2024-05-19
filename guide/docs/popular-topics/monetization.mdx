@@ -1,0 +1,69 @@
+---
+description: Add premium features to your bot.
+---
+
+# Monetization
+
+:::note
+
+Monetization is limited to **verified** apps/bots.
+
+:::
+
+Premium Apps offer developers the ability to monetize their application through monthly recurring subscriptions, natively on Discord.
+This allows you to e.g. restrict specific commands or other functionality to premium users/guilds.
+
+Not all applications are eligible - your app must be verified, part of a developer team, and use [slash commands](/interactions/slash-commands) or the privileged `Message Content` intent, among other things.
+
+## Initial setup
+
+To get started, visit the [official documentation](https://discord.com/developers/docs/monetization/overview) to see the full list of requirements, and configure your app for monetization by following the steps outlined there.
+
+## Retrieving entitlements
+
+Entitlements represent access to the premium functionality of your application. These can be granted to users or guilds, depending on how you set up monetization in the previous step, and contain a start/end date.
+
+In [interactions](/interactions) (e.g. slash commands), the entitlements for the invoking user/guild are easily accessible using <DocsLink reference="disnake.Interaction.entitlements" />.
+
+Outside of interactions, you can fetch entitlements using <DocsLink reference="disnake.Client.entitlements">Client.entitlements()</DocsLink>, optionally only fetching entitlements of a specific user or guild. Note that this may include expired entitlements, unless you pass the `exclude_ended` parameter.
+
+To check whether an entitlement is still active, you can use <DocsLink reference="disnake.Entitlement.is_active">Entitlement.is_active()</DocsLink>.
+
+## Premium interactions
+
+This is usually the main way to provide premium functionality.
+Application commands are not preemptively marked as "premium-only" - instead, you may respond to interactions with a new response type: <DocsLink reference="disnake.InteractionResponse.require_premium" />.
+
+This will display an ephemeral message to the invoking user, prompting them to upgrade:
+
+```python
+@bot.slash_command()
+async def command(inter: disnake.ApplicationCommandInteraction):
+    if not inter.entitlements:
+        await inter.response.require_premium()
+        return  # skip remaining code
+    ...
+```
+
+<p align="center">
+	<img
+		src={require('./images/monetization-response.png').default}
+		alt="Premium Interaction Response Type"
+		width="75%"
+	/>
+</p>
+
+## Events
+
+Whenever users subscribe or renew a subscription with your app, you will receive an <DocsLink reference="disnake.on_entitlement_create" /> or <DocsLink reference="disnake.on_entitlement_update" /> event respectively.
+In the case of renewals, the <DocsLink reference="disnake.Entitlement.ends_at">ends_at</DocsLink> attribute of the entitlement you receive from the event will reflect the new expiry date.
+
+:::note
+While an <DocsLink reference="disnake.on_entitlement_delete" /> event also exists, it will not fire when a subscription expires; it only occurs e.g. in case of refunds or due to manual removal by Discord.
+:::
+
+## Testing entitlements
+
+You can create test entitlements using <DocsLink reference="disnake.Client.create_entitlement" /> and delete them using <DocsLink reference="disnake.Entitlement.delete" />, which allows you to test your implementation in various subscription states. These entitlements do not expire and therefore have no start/end date.
+
+If you want to test the full payment flow, you can go through the same upgrade steps as any other user of your application would - all members of the app's associated team automatically receive a 100% discount on the subscription. Note that you cannot delete these entitlements, unlike the test entitlements mentioned before.
