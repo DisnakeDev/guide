@@ -24,11 +24,7 @@ class MyModal(disnake.ui.Modal):
                 style=TextInputStyle.paragraph,
             ),
         ]
-        super().__init__(
-            title="Create Tag",
-            custom_id="create_tag",
-            components=components,
-        )
+        super().__init__(title="Create Tag", components=components)
 
     # The callback received when the user input is completed.
     async def callback(self, inter: disnake.ModalInteraction):

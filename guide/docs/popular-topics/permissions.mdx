@@ -1,8 +1,388 @@
 ---
 description: Understand and utilize the permission system.
-hide_table_of_contents: true
+keywords: [disnake, bot, guide, tutorial, permissions, python]
 ---
 
 # Permissions
 
-<WorkInProgress />
+Permissions are one of the key concepts in Discord. As the name implies, they can be used to grant or revoke
+access to certain actions for certain users based on the roles they have and the channel they're in.
+
+In disnake, permissions are controlled via two objects: <DocsLink reference="disnake.Permissions" /> and <DocsLink reference="disnake.PermissionOverwrite" />, which we'll discuss below.
+
+## Creating permission objects
+
+`Permissions` can be constructed in two ways: using manual instantiation with allowed/denied permissions specified via
+keyword arguments, or shorthand methods that create permission objects with predefined groups of permissions.
+
+:::note
+There's actually a third option: specifying the raw value, but it's usage is generally discouraged as it's hard
+to understand at a glance what the result will be. Anyway, here's how you do it:
+
+```python
+permissions = disnake.Permissions(64)  # Represents the "Add Reactions" permission.
+
+assert permissions.value == 64
+```
+
+:::
+
+### Manual creation
+
+Manual creation is usually preferred over shorthand methods due to the flexibility it provides while also still being
+as intuitive as possible, and, as such, is also what you'll usually encounter in other examples and documentation.
+
+```python
+permissions = disnake.Permissions(
+    # Each permission is specified using a keyword argument,
+    # where a value of `True` means that it is allowed, while
+    # `False` means that it is denied.
+    view_audit_log=True,  # This allows the "View Audit Log" permission.
+    # Note that not all permission names are the same as in the
+    # official UI. For example, in the UI guilds are called "Servers",
+    # and, as such, the `manage_guild` kwarg is actually responsible
+    # for controlling the "Manage Server" permission.
+    manage_guild=False,  # Denies the "Manage Server" permission.
+    use_voic_activation=True,  # Allows the "Use Voice Activity" permission.
+    # There are also a few aliases for certain permissions.
+    manage_permissions=True,  # Allows the "Manage Roles" permission.
+    manage_roles=False,  # Denies the "Manage Roles" permission.
+)
+```
+
+:::warning
+It is often misunderstood that setting `True` or `False` on a `Permissions` object will permanently "grant"/"revoke"
+the permission, but this is not true.
+
+**`Permissions` do not "grant" or "revoke" permission(s) by themselves** - they only _represent_ them. Detecting whether
+a certain permission will be allowed or denied in the end is not possible unless you go through the full process of
+[calculating](#how-permissions-are-calculated) permissions (or, more commonly, [querying](#querying-permissions) pre-computed
+ones).
+:::
+
+Note that, quoting from docs, "Arguments are applied in order, which notably also means that supplying a flag and
+its alias will make whatever comes last overwrite the first one". As an example, in the above case the latter
+`manage_roles=False` argument will overwrite the former `manage_permissions`, and the resulting object will have
+both of them set to `False` (since they both represent the same permission).
+
+```python
+assert not permissions.manage_roles
+assert not permissions.manage_permissions
+```
+
+### Shorthand methods
+
+Sometimes you may want to allow a group of permissions, like the ones defined in the official UI. Manually creating
+them can become tedious, and you'll also need to keep them up-to-date with the UI. Luckily, disnake already does that
+for you via a range of methods defined on the <DocsLink reference="disnake.Permissions" /> class.
+
+```python
+# All permissions grouped under "Advanced" in the official UI.
+advanced_permissions = disnake.Permissions.advanced()
+# ALL permissions allowed, including advanced ones.
+all_permissions = disnake.Permissions.all()
+```
+
+To not duplicate what's already said in <DocsLink reference="disnake.Permissions">docs</DocsLink>, we'll only
+list the available methods here:
+
+-   <DocsLink reference="disnake.Permissions.advanced" />
+-   <DocsLink reference="disnake.Permissions.all" />
+-   <DocsLink reference="disnake.Permissions.all_channel" />
+-   <DocsLink reference="disnake.Permissions.events" />
+-   <DocsLink reference="disnake.Permissions.general" />
+-   <DocsLink reference="disnake.Permissions.membership" />
+-   <DocsLink reference="disnake.Permissions.none" />
+-   <DocsLink reference="disnake.Permissions.private_channel" />
+-   <DocsLink reference="disnake.Permissions.stage" />
+-   <DocsLink reference="disnake.Permissions.stage_moderator" />
+-   <DocsLink reference="disnake.Permissions.text" />
+-   <DocsLink reference="disnake.Permissions.voice" />
+
+## Permission Overwrites
+
+A <DocsLink reference="disnake.PermissionOverwrite" /> is an override for server-wide permissions (i.e., these granted
+by roles). Permission overwrites are assigned per-channel and to a specific user/role, but, unlike regular `Permissions`
+objects, each permission in an overwrite can have three values (intead of two for `Permissions`): `True` (explicitly allowed),
+`False` (explicitly denied) and _`None`_ ("untouched", i.e., not overriden). The latter is the default value for permissions
+in permission overwrites.
+
+```python
+overwrite = disnake.PermissionOverwrite(
+    add_reactions=True,  # This overrides permission as allowed.
+    view_audit_log=False,  # This overrides permission as denied.
+    manage_guild=None,  # Does not override anything (this is the default behavior).
+)
+
+# disnake allows you to query individual permissions just as easily
+# as with regular `Permissions`.
+
+assert overwrite.add_reactions
+assert not overwrite.view_audit_log
+assert overwrite.manage_guild is None
+
+# Although not being the recommended usage (except for creating copies,
+# as you'll see a bit below), you can also access permissions using
+# `.pair()`, which returns a tuple of two `Permissions` objects, first
+# having the allowed permissions set to `True` and second having the
+# denied ones set to `True`.
+
+allow, deny = overwrite.pair()
+assert allow == disnake.Permissions(add_reactions=True)
+assert deny == disnake.Permissions(view_audit_log=False)
+```
+
+You can update overwrites in-place by simply assigning values to attributes or by using
+the <DocsLink reference="disnake.PermissionOverwrite.update" /> method.
+
+```python
+overwrite.view_audit_log = True
+
+assert overwrite.view_audit_log
+
+overwrite.update(view_audit_log=False)
+
+assert not overwrite.view_audit_log
+```
+
+If you need to create a new overwrite object based on an existing one, you can do the following.
+
+```python
+allow, deny = overwrite.pair()
+new_overwrite = disnake.PermissionOverwrite.from_pair(allow, deny)
+
+new_overwrite.add_reactions = False
+
+assert not new_overwrite.add_reactions
+```
+
+## Using permissions
+
+Creating a "chat moderator" role:
+
+```python
+permissions = disnake.Permissions(
+    manage_messages=True,
+    moderate_members=True,
+)
+
+chatmod_role = await guild.create_role(
+    name="Chat Moderator",
+    permissions=permissions,
+    hoist=True,
+)
+```
+
+Creating an `#only-mods` <DocsLink reference="disnake.TextChannel"/>:
+
+```python
+# Allow mods to see the channel
+overwrite = disnake.PermissionOverwrite(view_channel=True)
+# See `TextChannel.edit()` documentation.
+mapping = {chatmod_role: overwrite}
+
+only_mods_channel = await guild.create_text_channel("only-mods", overwrites=mapping)
+
+assert not only_mods_channel.permissions_for(guild.default_role).view_channel
+assert only_mods_channel.permissions_for(chatmod_role).view_channel
+```
+
+A slash command that checks whether the command author can add reactions in the current channel:
+
+```python
+@commands.slash_command(description="Checks whether you can add reactions!")
+async def can_add_reactions(inter: disnake.ApplicationCommandInteraction) -> None:
+    await inter.send("Sure you can!" if inter.permissions.add_reactions else "Sadly no :(")
+```
+
+## Querying permissions
+
+There are various ways to query permission information, and they also depend on the context you're
+in. This section tries to list all possible methods for getting permission info, grouped by context
+they can be used in.
+
+### Context-agnostic
+
+If you have an instance of any class implementing <DocsLink reference="disnake.abc.GuildChannel" />,
+then the easiest way to query permissions for a member/role is
+through <DocsLink reference="disnake.abc.GuildChannel.permissions_for" />.
+This also works with <DocsLink reference="disnake.Thread" />s.
+If you need a bit more lower level control, you can also get raw overwrite objects
+using <DocsLink reference="disnake.abc.GuildChannel.overwrites_for" />
+or <DocsLink reference="disnake.abc.GuildChannel.overwrites" />.
+
+### In prefix commands
+
+There are no direct methods on <DocsLink reference="disnake.ext.commands.Context" /> for querying permission
+information, however, you can still access <DocsLink reference="disnake.ext.commands.Context.channel" /> and
+call above-mentioned methods on it, but be sure to check that it's not a <DocsLink reference="disnake.PartialMessageable" />
+as it doesn't have any permissions-related methods on it.
+
+### In interactions
+
+When working with interactions (i.e., with application commands or components), there are two main properties
+defined on <DocsLink reference="disnake.Interaction" />: <DocsLink reference="disnake.Interaction.permissions" />
+(for getting the interaction author's permissions in the current channel) and <DocsLink reference="disnake.Interaction.app_permissions" />
+(for getting the bot's permissions).
+
+## How permissions are calculated
+
+Permissions can be a tough thing to understand at first, but understanding how permissions are
+applied can help you better grasp this concept.
+
+In case we're calculating permissions for a member, the strategy is as follows:
+
+1.  If member is the guild owner, all permissions are granted - no questions asked. Otherwise..
+
+2.  First we apply the `@everyone` role's permissions.
+
+3.  Then, for each of the member's roles, apply its permissions too.
+
+4.  If at this point the member has the "Administrator" permission, all other permissions are granted automatically
+    (the member is a guild-wide administrator, and, as such, is functionally equivalent to the owner except
+    they can't delete the guild).
+
+5.  After that, if we're in a channel, the following is additionally done:
+
+    1.  We apply its overwrites in the same order: `@everyone` overwrites,
+        role overwrites and finally member overwrites.
+
+    2.  Then [channel-specific implicit permissions](#channel-specific-implicit-permissions) are handled.
+
+6.  In the end, we take into account [guild-wide implicit permissions](#guild-wide-implicit-permissions).
+
+In case of calculating permissions for a role, the strategy is the same as if we were calculating permissions
+for a member with only that role (and `@everyone`), except that member overwrites are
+not taken into account.
+
+:::note
+Curious about the implementation? At the time of writing, implementation could be found
+[here](https://git.disnake.dev/disnake/blob/a24abf43297215b6fe70e0bc61b2ec1dada84b9f/disnake/abc.py#L651-L808).
+:::
+
+### Implicit permissions
+
+In Discord, there are some permissions that, when revoked, basically make it impossible to utilize other
+granted permissions. For example, take a user with two permissions: "View Channel" and
+"Send Messages". If at some point user loses the "View Channel" permission, it wouldn't matter whether
+they can send messages in that channel: they just can't see the channel in the UI. disnake's permission system
+attempts to handle such cases via "implicit permissions" - permissions that, when granted or, more commonly,
+revoked, automatically grant (revoke) other permissions as well. A few handled cases are demonstrated below,
+but note that this is by no means an exhaustive list: quoting from the [official Discord documentation], "in
+all cases, these are based on logical conclusions about how a user with certain permissions should or should
+not interact with Discord", and, as such, it's hardly possible to accomodate all possibilities.
+
+[official discord documentation]: https://discord.com/developers/docs/topics/permissions#implicit-permissions
+
+#### Guild-wide implicit permissions
+
+1. Timed out members are spectators.
+
+This rule automatically revokes all permissions for timed out members _except_ "View Channel" and
+"Read Message History", which are left [untouched](#permission-overwrites).
+
+#### Channel-specific implicit permissions
+
+1. If you can't send a message in a channel, then you can't sent _any_ message in it.
+
+This rule automatically revokes "Send TTS Messages", "Send Voice Messages", "Mention Everyone", "Embed Links"
+and "Attach Files" permissions, if the member doesn't have the "Send Messages" permission.
+
+2. If you can't view a channel, they you can't do anything in it.
+
+This rule automatically revokes "All Channel" permissions, as specified by <DocsLink reference="disnake.Permissions.all_channel" />,
+if the member doesn't have the "View Channel" permission.
+
+3. If you can't connect to a vocal channel, then you can't interfere with it's participants.
+
+This rule automatically revokes "Voice", "Text" and "Stage" permission groups from the official Discord UI if
+the member doesn't have the "Connect" permission.
+
+## Operations on permission values
+
+Since disnake v2.6, it is possible to do various operations on permission objects with minimal effort. While
+not something you'd usually use often, they can come in very handy when it comes to complex permission
+math you'd have to do manually otherwise.
+
+This section is meant as a companion to the <DocsLink reference="disnake.Permissions">official reference</DocsLink>,
+meaning that ideally you should read both.
+
+The following variables will be used throughout in the examples below.
+
+```python
+base = disnake.Permissions(add_reactions=True, manage_guild=True)
+same = disnake.Permissions(add_reactions=True, manage_guild=True)
+superset = disnake.Permissions(add_reactions=True, manage_guild=True, send_messages=True)
+subset = disnake.Permissions(add_reactions=True)
+different = disnake.Permissions(use_voice_activation=True)
+```
+
+### Basic
+
+These are operations that usually require no explanation. In any way, comments will guide you through.
+
+```python
+# Check that two permission object have same permissions set to the same value.
+assert base == same
+# Check that one (base) permission object has at least all of the allowed permissions
+# of the second one allowed too.
+assert base >= same
+# Check that one (base) permission object has all of the allowed permissions
+# of the second one allowed too, plus at least one extra.
+assert base > subset
+# Check that one (base) permission object has at maximum all of the allowed permissions
+# of the second one allowed.
+assert base <= same
+# Check that one (base) permission object has at maximum of the allowed permissions
+# of the second one allowed, minus one or more.
+assert base < superset
+# Check that one (base) permission object has at least one permission allowed
+# that is denied in the second one (and the other way around).
+assert base != different
+```
+
+### Advanced
+
+If you're familar with bit operators in Python, then you'll feel right at home. Otherwise, read
+the comments to understand what does what.
+
+```python
+# Creates a new Permissions object with all allowed permissions from either one of them.
+assert subset | different == disnake.Permissions(add_reactions=True, use_voice_activation=True)
+# Creates a new Permissions object with only permissions allowed on both.
+assert base & subset == disnake.Permissions(add_reactions=True)
+# Creates a new Permissions object with only permissions allowed on one of base or different,
+# but not both.
+assert base ^ different
+
+# Notably, all of operators above support in-place updates using the `OP=` syntax, like so:
+# `base &= subset`.
+
+# Creates a new Permissions object with all permissions from subset inverted.
+assert not (~subset).add_reactions and (~subset).manage_guild
+# Creates a new Permissions object with all permissions except add_reactions allowed.
+assert not (~disnake.Permissions.add_reactions).add_reactions
+# Creates a new Permissions object with all specified permissions allowed.
+assert disnake.Permissions.add_reactions | disnake.Permissions.manage_guild == base
+assert subset | disnake.Permissions.manage_guild == base
+```
+
+### Additional
+
+There's also a few additional operations supported that do not involve operators.
+
+```python
+# Returns the permissions's hash. Allows permission objects to
+# be used as dictionary keys.
+hash(base)
+
+# `Permissions` and `PermissionOverwrite` both implement `__iter__()`,
+# and therefore can be used in for loops.
+allowed = []
+
+for name, value in base:
+    if value:
+        allowed.append(name)
+
+assert allowed == ["add_reactions", "manage_guild"]
+```

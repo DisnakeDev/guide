@@ -1,0 +1,298 @@
+---
+description: They refer to views, buttons and select menus that can be added to the messages your bot sends.
+---
+
+# Select Menus
+
+Select Menus allow users to interact with your bot through an interactive dropdown component. This component provides selectable options for your users to choose from.
+You can require users to select a minimum/maximum number of options using <DocsLink reference="disnake.ui.BaseSelect.min_values">min_values</DocsLink> and <DocsLink reference="disnake.ui.BaseSelect.max_values">max_values</DocsLink>.
+
+Select Menus are available as the following types:
+
+-   <DocsLink reference="disnake.ui.StringSelect">disnake.ui.StringSelect</DocsLink> Allows you to input custom string options
+    for users to select from, up to 25
+-   <DocsLink reference="disnake.ui.UserSelect">disnake.ui.UserSelect</DocsLink> User or Member objects as options
+-   <DocsLink reference="disnake.ui.RoleSelect">disnake.ui.RoleSelect</DocsLink> Role objects as options
+-   <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> Channel objects as options
+
+The options for user, role, and channel select menus are populated by Discord, and currently cannot be limited to a specific subset. See [below](#other-selects) for details.
+
+This guide will walk you through a pretty basic use-case for a `StringSelect` dropdowns using [Views](#example-of-stringselects) and [low-level components](#views-vs-low-level-components).  
+If you need more examples, you can always check the examples in the [disnake repo](https://github.com/DisnakeDev/disnake/tree/master/examples).
+&nbsp;  
+:::note
+A message can have a maximum of 5 rows of components. Select components each take a single row, therefore you cannot have more than 5 Select components per message
+:::
+
+<br />
+<p align="center">
+	<img src={require('./images/string-select.png').default} alt="StringSelect example" width="60%" />
+</p>
+<br />
+
+### Example of `StringSelect`s
+
+<Tabs>
+<TabItem value="subclass" label="subclassing.py">
+
+```python
+import os
+
+import disnake
+from disnake.ext import commands
+
+
+# Defines the StringSelect that contains animals that your users can choose from
+class AnimalDropdown(disnake.ui.StringSelect):
+    def __init__(self):
+
+        # Define the options that will be displayed inside the dropdown.
+        # You may not have more than 25 options.
+        # There is a `value` keyword that is being omitted, which is useful if
+        # you wish to display a label to the user, but handle a different value
+        # here within the code, like an index number or database id.
+        options = [
+            disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal"),
+            disnake.SelectOption(label="Cat", description="Cats are your favorite type of animal"),
+            disnake.SelectOption(
+                label="Snake", description="Snakes are your favorite type of animal"
+            ),
+            disnake.SelectOption(
+                label="Gerbil", description="Gerbils are your favorite type of animal"
+            ),
+        ]
+
+        # We will include a placeholder that will be shown until an option has been selected.
+        # The min and max values indicate the minimum and maximum number of options to be selected -
+        # in this example we will only allow one option to be selected.
+        super().__init__(
+            placeholder="Choose an animal",
+            min_values=1,
+            max_values=1,
+            options=options,
+        )
+
+    # This callback is called each time a user has selected an option
+    async def callback(self, inter: disnake.MessageInteraction):
+        # Use the interaction object to respond to the interaction.
+        # `self` refers to this StringSelect object, and the `values`
+        # attribute contains a list of the user's selected options.
+        # We only want the first (and in this case, only) one.
+        await inter.response.send_message(f"Your favorite type of animal is: {self.values[0]}")
+
+
+# Now that we have created the Select object with its options and callback, we need to attach it to a
+# View that will be displayed to the user in the command response.
+#
+# Views have a default timeout of 180s, at which the bot will stop listening for those events.
+# You may pass any float here, or `None` if you wish to remove the timeout.
+# Note: If `None` is passed, this view will persist only until the bot is restarted.  If you wish to have persistent views,
+# consider using low-level components or check out the persistent view example:
+# https://github.com/DisnakeDev/disnake/blob/master/examples/views/persistent.py
+class DropDownView(disnake.ui.View):
+    def __init__(self):
+        # You would pass a new `timeout=` if you wish to alter it, but
+        # we will leave it empty for this example so that it uses the default 180s.
+        super().__init__()
+
+        # Now let's add the `StringSelect` object we created above to this view
+        self.add_item(AnimalDropdown())
+
+
+# Finally, we create a basic bot instance with a command that will utilize the created view and dropdown.
+bot = commands.Bot()
+
+
+@bot.listen()
+async def on_ready():
+    print(f"Logged in as {bot.user} (ID: {bot.user.id})\n------")
+
+
+@bot.slash_command()
+async def animals(inter: disnake.ApplicationCommandInteraction):
+    """Sends a message with our dropdown containing the animals"""
+
+    # Create the view with our dropdown object
+    view = DropDownView()
+
+    # Respond to the interaction with a message and our view
+    await inter.response.send_message("What is your favorite type of animal?", view=view)
+
+
+if __name__ == "__main__":
+    bot.run(os.getenv("BOT_TOKEN"))
+```
+
+</TabItem>
+<TabItem value="decorator" label="decorator.py">
+
+```python
+# Instead of subclassing `disnake.ui.StringSelect`, this example shows how to use the
+# `@disnake.ui.string_select` decorator directly inside the View to create the dropdown
+# component.
+class AnimalView(disnake.ui.View):
+    def __init__(self):
+        super().__init__()
+
+        # If you wish to pass a previously defined sequence of values to this `View` so that
+        # you may have dynamic options, you can do so by defining them within this __init__ method.
+        # `self.animal_callback.options = [...]`
+
+    @disnake.ui.string_select(
+        placeholder="Choose an animal",
+        options=[
+            disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal"),
+            disnake.SelectOption(label="Cat", description="Cats are your favorite type of animal"),
+            disnake.SelectOption(
+                label="Snake", description="Snakes are your favorite type of animal"
+            ),
+            disnake.SelectOption(
+                label="Gerbil", description="Gerbils are your favorite type of animal"
+            ),
+        ],
+        min_values=1,
+        max_values=1,
+    )
+    async def animal_callback(
+        self, select: disnake.ui.StringSelect, inter: disnake.MessageInteraction
+    ):
+        # The main difference in this callback is that we access the `StringSelect` through the
+        # parameter passed to the callback, vs the subclass example where we access it via `self`
+        await inter.response.send_message(f"You favorite type of animal is: {select.values[0]}")
+```
+
+</TabItem>
+</Tabs>
+
+### Other Selects
+
+The three other select components available are constructed and can be used in the same manner.
+The main difference is that we do not create nor pass any options to these Select objects as Discord will provide these options to the user automatically.
+The selected option(s) that are available in `self.values` will be the selected object(s) rather than the string values.
+
+-   `UserSelect.values` will return a list of <DocsLink reference="disnake.User">disnake.User</DocsLink> or <DocsLink reference="disnake.Member">disnake.Member</DocsLink>
+-   `RoleSelect.values` will return a list of <DocsLink reference="disnake.Role">disnake.Role</DocsLink>
+-   `ChannelSelect.values` returns a list of <DocsLink reference="disnake.abc.GuildChannel">disnake.abc.GuildChannel</DocsLink>, <DocsLink reference="disnake.Thread">disnake.Thread</DocsLink>, or <DocsLink reference="disnake.PartialMessageable">disnake.PartialMessageable</DocsLink>
+
+:::note
+
+<DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> has an extra keyword argument that is
+not available to the other SelectMenu types.
+
+`channel_types` will allow you to specify the types of channels made available as options (omit to show all available channels):
+
+-   `channel_types=[ChannelType.text]` to display only guild text channels as options
+-   `channel_types=[ChannelType.voice, ChannelType.stage_voice]` to display only guild voice and stage channels as options
+-   etc.
+
+See <DocsLink reference="disnake.ChannelType">disnake.ChannelType</DocsLink> to see more channel types.
+:::
+
+### Handling View Timeouts
+
+When a View times out, the bot will no longer listen for these events, and your users will receive an error `This interaction failed`.
+
+To avoid this, you have a couple of options when the view times out:
+
+1.  Disable the components within the view so that they are no longer interactive.
+2.  Remove the view altogether, leaving only the original message without components.
+
+For this example we will disable the components using an `on_timeout` method. However, if you wish to remove the View completely you can pass `view=None` (instead of `view=self` like the example below).
+
+We'll continue with the `subclassing.py` example from above, only altering the relevant parts:
+
+```python title="viewtimeout.py"
+...
+
+
+class DropDownView(disnake.ui.View):
+
+    message: disnake.Message  # adding to typehint the future `message` attribute
+
+    def __init__(self):
+        # this time we will set the timeout to 30.0s
+        super().__init__(timeout=30.0)
+        # now let's add the `StringSelect` object we created above to this view
+        self.add_item(AnimalDropdown())
+
+    # To handle this timeout, we'll need to override the default `on_timeout` method within the `View``
+    async def on_timeout(self):
+        # Now we will edit the original command response so that it displays the disabled view.
+        # Since `self.children` returns a list of the components attached to this `View` and we want
+        # to prevent the components from remaining interactive after the timeout, we can easily loop
+        # over its components and disable them.
+        for child in self.children:
+            if isinstance(child, (disnake.ui.Button, disnake.ui.BaseSelect)):
+                child.disabled = True
+
+        # Now, edit the message with this updated `View`
+        await self.message.edit(view=self)
+
+
+...
+# The only changes we need to make to handle the updated view is to fetch the original response after,
+# so that the message can be edited later.
+# This is necessary because `interaction.send` methods do not return a message object
+@bot.slash_command()
+async def animals(inter: disnake.ApplicationCommandInteraction):
+    """Sends a message with our dropdown containing the animals"""
+
+    # Create the view with our dropdown object.
+    view = DropDownView()
+
+    # Respond to the interaction with a message and our view.
+    await inter.response.send_message("What is your favorite type of animal?", view=view)
+
+    # This will add a new `message` attribute to the `DropDownView` that will be edited
+    # once the view has timed out
+    view.message = await inter.original_response()
+
+
+...
+```
+
+### Views vs. low-level components
+
+As an alternative to using `View`s, it is possible to use Select Menus as low-level components.
+These components do not need to be sent as part of a View and can be sent as is.
+
+Note that any component being sent in this manner must have a `custom_id` explicitly set. Component interactions are sent to all listeners,
+which means the `custom_id` should be unique for each component to be able to identify the component in your code.
+
+The main advantage of this is that listeners, by nature, are persistent and will remain fully functional over bot reloads. Listeners are stored in the bot
+strictly once, and are shared by all components. Because of this, the memory footprint will generally be smaller than that of an equivalent view.
+
+The example below will be similar to the above examples, however will be executed as a low level component instead.
+
+```python title="low_level_dropdown.py"
+@bot.slash_command()
+async def animals(inter: disnake.ApplicationCommandInteraction):
+    """Sends a message with our dropdown containing the animals"""
+
+    await inter.response.send_message(
+        "What is your favorite type of animal?",
+        components=[
+            disnake.ui.StringSelect(
+                custom_id="fav_animal",
+                options=["Dog", "Cat", "Snake", "Gerbil"],
+            )
+        ],
+    )
+
+
+# Now we create the listener that will handle the users's selection(s), similarly to the callback we used above.
+@bot.listen("on_dropdown")
+async def fav_animal_listener(inter: disnake.MessageInteraction):
+    # First we should check if the interaction is for the `fav_animal` dropdown we created
+    # and ignore if it isn't.
+    if inter.component.custom_id != "fav_animal":
+        return
+
+    # Now we can respond with the user's favorite animal
+    await inter.response.send_message(f"Your favorite type of animal is: {inter.values[0]}")
+```
+
+:::note
+These component listeners can be used inside cogs as well. Simply replace `@bot.listen()` with `@commands.Cog.listener()` and
+be sure to pass `self` as the first argument of the listener function
+:::

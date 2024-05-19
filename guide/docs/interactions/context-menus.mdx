@@ -1,0 +1,72 @@
+---
+description: They are available under Apps in user/message context menus, responding with the resolved user or message on which the action was taken.
+---
+
+# Context Menus
+
+These application commands are situated under the "Apps" section when you right-click a user or a message. They act like interactions, except they take a <DocsLink reference="disnake.User" /> or <DocsLink reference="disnake.Message" /> object along with <DocsLink reference="disnake.ApplicationCommandInteraction" />.
+
+<!-- prettier-ignore -->
+<br />
+<p align = "center">
+	<img src={require("./images/context-menus-intro.png").default} alt="Context Menu Introduction" width="70%"/>
+</p>
+<br />
+
+:::note
+
+For more specific annotations, you can use <DocsLink reference="disnake.UserCommandInteraction" /> or <DocsLink reference="disnake.MessageCommandInteraction" /> instead of <DocsLink reference="disnake.ApplicationCommandInteraction" /> for the respective commands.
+
+:::
+
+## User commands
+
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="user" command={true}>
+				User Info
+			</DiscordInteraction>
+		</div>
+		Username: AbhigyanTrips#2474
+		<br />
+		Bot: False
+	</DiscordMessage>
+</DiscordMessages>
+<br />
+
+The function below should have only one required argument, which is an instance of <DocsLink reference="disnake.ApplicationCommandInteraction" />.
+
+```python
+@bot.user_command(name="User Info")
+async def avatar(inter: disnake.ApplicationCommandInteraction, user: disnake.User):
+    await inter.response.send_message(f"Username: {user}\nBot: {user.bot}")
+```
+
+## Message commands
+
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<div slot="interactions">
+			<DiscordInteraction profile="user" command={true}>
+				Reverse
+			</DiscordInteraction>
+		</div>
+		.desrever si egassem sihT
+	</DiscordMessage>
+</DiscordMessages>
+<br />
+
+The function below should have only one required argument, which is an instance of <DocsLink reference="disnake.ApplicationCommandInteraction" />.
+
+```python
+@bot.message_command(name="Reverse")
+async def reverse(inter: disnake.ApplicationCommandInteraction, message: disnake.Message):
+    # Reversing the message and sending it back.
+    await inter.response.send_message(message.content[::-1])
+```
+
+## Context menu notes
+
+-   Context menu commands cannot have subcommands or any other options.
+-   Responses to context menu commands and their permissions function the same as slash commands.
