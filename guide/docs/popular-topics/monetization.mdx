@@ -1,0 +1,96 @@
+---
+description: Add premium features to your bot.
+---
+
+# Monetization
+
+:::note
+
+Monetization is limited to **verified** apps/bots.
+
+:::
+
+Premium Apps offer developers the ability to monetize their application through either **monthly recurring subscriptions** or **one-time purchases**, natively on Discord.
+This allows you to e.g. limit specific commands or other functionality to premium users/guilds.
+
+Not all applications are eligible - your app must be verified, part of a developer team, and use [slash commands](/interactions/slash-commands) or the privileged `Message Content` intent, among other things.
+
+## Initial setup
+
+To get started, visit the [official documentation](https://discord.com/developers/docs/monetization/overview) to see the full list of requirements, and configure your app for monetization by following the steps outlined there.
+
+## Entitlements
+
+Entitlements represent access to the premium functionality of your application. These can be granted to users or guilds, depending on the type of SKU you set up in the previous step.
+
+In [interactions](/interactions) (e.g. slash commands), the entitlements for the invoking user/guild are easily accessible using <DocsLink reference="disnake.Interaction.entitlements" />.
+
+Outside of interactions, you can fetch entitlements using <DocsLink reference="disnake.Client.entitlements">Client.entitlements()</DocsLink>, optionally only fetching entitlements of a specific user or guild. Note that this may include expired entitlements, unless you pass the `exclude_ended` parameter.
+
+To check whether an entitlement is still active, you can use <DocsLink reference="disnake.Entitlement.is_active">Entitlement.is_active()</DocsLink>.
+
+### Premium interactions
+
+This is usually the main way to provide premium functionality.
+Commands are not preemptively marked as "premium-only" - instead, you may respond with a premium button, prompting users to upgrade/purchase a specific SKU:
+
+```python
+sku_id = 1234432112344321
+
+
+@bot.slash_command()
+async def command(inter: disnake.ApplicationCommandInteraction):
+    if not any(e.sku_id == sku_id for e in inter.entitlements):
+        await inter.response.send(
+            content="Upgrade now to get access to this feature!",
+            components=[disnake.ui.Button(sku_id=sku_id)],
+        )
+        return  # skip remaining code
+    ...
+```
+
+<p align="center">
+	<img
+		src={require('./images/monetization-response.png').default}
+		alt="Premium Interaction Response Type"
+		width="75%"
+	/>
+</p>
+
+### Events
+
+Whenever users make a purchase in your app, you will receive an <DocsLink reference="disnake.on_entitlement_create" /> event. For subscriptions, entitlements are granted indefinitely until the user decides to cancel their subscription, in which case you will receive a <DocsLink reference="disnake.on_entitlement_update" /> event when the subscription ends.  
+Note that entitlement events are not emitted immediately when a subscription is canceled, only at the end of the subscription period. In this case, the entitlement's <DocsLink reference="disnake.Entitlement.ends_at">ends_at</DocsLink> attribute reflects the date indicating when the subscription (and entitlement) ended.
+
+:::note
+While an <DocsLink reference="disnake.on_entitlement_delete" /> event also exists, it will not fire when a subscription expires; it only occurs e.g. in case of refunds or due to manual removal by Discord.
+:::
+
+## Subscriptions
+
+Subscriptions are used for products with recurring monthly payments. These should not be used to determine access to premium features, they are only meant for lifecycle management purposes.
+
+Similarly to entitlements, you will receive an <DocsLink reference="disnake.on_subscription_create" /> event whenever a subscription is created. An <DocsLink reference="disnake.on_subscription_update" /> event is emitted when a user cancels their subscription; canceled subscriptions remain valid until the end of the subscription period. Further details about subscription lifecycles can be found in the [official documentation](https://discord.com/developers/docs/monetization/implementing-app-subscriptions#supporting-subscriptions).
+
+To obtain the subscriptions of a user to a particular SKU, you can use <DocsLink reference="disnake.SKU.subscriptions" />.
+
+### Testing subscriptions
+
+For subscription SKUs, you can create test entitlements using <DocsLink reference="disnake.Client.create_entitlement" /> and delete them using <DocsLink reference="disnake.Entitlement.delete" />, which allows you to test your implementation in various subscription states. These entitlements do not expire and therefore have no start/end date.
+
+If you want to test the full payment flow, you can go through the same upgrade steps as any other user of your application would - all members of the app's associated team automatically receive a 100% discount on the subscription. Note that you cannot delete these entitlements, unlike the test entitlements mentioned before.
+
+## One-time purchases
+
+One-time purchases can be durable (i.e. permanent) or consumable.  
+Just like subscriptions, access to these items is represented by entitlements, which you can receive in entitlement events or interactions.
+
+Users may only have one unconsumed entitlement for an SKU at a time. To consume an entitlement, use <DocsLink reference="disnake.Entitlement.consume" /> and process/store the state of the item in your application where applicable.
+
+For further lifecycle details and other considerations, visit the [official documentation](https://discord.com/developers/docs/monetization/implementing-one-time-purchases#how-onetime-purchases-work) for one-time purchases.
+
+### Testing one-time purchases
+
+Unlike subscriptions, one-time purchases may only be tested through the Application Test Mode, not via test entitlements.  
+To test one-time purchases without being charged, [enable Application Test Mode](https://discord.com/developers/docs/monetization/implementing-one-time-purchases#using-application-test-mode) for your app and visit the app's store page.
+Entitlements tied to one-time purchases made this way will have a `type` of <DocsLink reference="disnake.EntitlementType.test_mode_purchase">test_mode_purchase</DocsLink>.
