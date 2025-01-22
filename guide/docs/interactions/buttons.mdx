@@ -1,5 +1,5 @@
 ---
-description: They refer to views, buttons and select menus that can be added to the messages your bot sends.
+description: This section covers the usage of button components and how to implement them using Views and via low-level components.
 ---
 
 # Buttons
@@ -25,41 +25,9 @@ Components allow users to interact with your bot through interactive UI elements
 </DiscordMessages>
 <br />
 
-The code for this command is given below.
-
-```python title="buttons.py"
-# At the top of the file.
-import disnake
-from disnake.ext import commands
-
-# The slash command that responds with a message.
-@bot.slash_command()
-async def buttons(inter: disnake.ApplicationCommandInteraction):
-    await inter.response.send_message(
-        "Need help?",
-        components=[
-            disnake.ui.Button(label="Yes", style=disnake.ButtonStyle.success, custom_id="yes"),
-            disnake.ui.Button(label="No", style=disnake.ButtonStyle.danger, custom_id="no"),
-        ],
-    )
-
-
-@bot.listen("on_button_click")
-async def help_listener(inter: disnake.MessageInteraction):
-    if inter.component.custom_id not in ["yes", "no"]:
-        # We filter out any other button presses except
-        # the components we wish to process.
-        return
-
-    if inter.component.custom_id == "yes":
-        await inter.response.send_message("Contact us at https://discord.gg/disnake!")
-    elif inter.component.custom_id == "no":
-        await inter.response.send_message("Got it. Signing off!")
-```
-
 ## Building and sending buttons
 
-## Button styles
+### Button styles
 
 | Name      | Syntax                                                            | Color   |
 | --------- | ----------------------------------------------------------------- | ------- |
@@ -88,13 +56,181 @@ async def help_listener(inter: disnake.MessageInteraction):
 <br />
 
 :::note
-
 `Link` buttons _cannot_ have a `custom_id`, and _do not_ send an interaction event when clicked.
-
 :::
 
-### Disabled buttons
+### Example of Buttons
 
-## Receiving button callback
+Button components, like [SelectMenu](select-menus.mdx) components, can be implemented using a <DocsLink reference="disnake.ui.View">View</DocsLink>
+or via a [low-level implementation](#Views-vs-low-level-components).
+
+:::note
+A message can include up to 25 button components, organized with a maximum of 5 buttons per row across 5 rows.
+:::
+
+```python title="button_view.py"
+import disnake
+from disnake.ext import commands
+
+
+class ButtonView(disnake.ui.View):
+    # Here, we use `@disnake.ui.button` (notice the lower `b`)
+    # to create the buttons and assign the decorated functions as the button callbacks.
+    # In this case, we simply respond to the interaction with a message
+    # then explicitly stop the View from continuing to listen for further interactions.
+
+    @disnake.ui.button(label="Yes", style=disnake.ButtonStyle.success)
+    async def success(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
+        await inter.response.send_message("Contact us at https://discord.gg/disnake!")
+        self.stop()
+
+    @disnake.ui.button(label="No", style=disnake.ButtonStyle.danger)
+    async def no(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
+        await inter.response.send_message("Got it. Signing off!")
+        self.stop()
+
+
+# The slash command that will respond with a message and the View.
+@bot.slash_command()
+async def buttons_View(inter: disnake.ApplicationCommandInteraction):
+    await inter.response.send_message("Need help?", view=ButtonView())
+```
+
+## Handling View timeout and stopping Views
+
+One of the key advantages of using a <DocsLink reference="disnake.ui.View">View</DocsLink> is the streamlined management
+of your components' state and the convenient setting up and handling of timeouts.
+
+By default, when a View has timed out, the buttons remain attached to the message and appear to be interactable, however, if a user attempts to
+interact with one of thse buttons, an error is displayed. This is also applies `View`s that have been explicitly stopped. To avoid this poor
+user experience, we can customize what happens when a `View` has timed out by altering the <DocsLink reference="disnake.ui.View.on_timeout">on_timeout</DocsLink>
+method and then updating our button callbacks to manage the state of components when the `View` is to be stopped.
+
+Below is an example of handling this type of implementation.
+
+```python title="timeout.py"
+import disnake
+from disnake.ext import commands
+
+
+class TimeoutButtonView(disnake.ui.View):
+
+    # This type hints that the future `self.message` attribute that will be accessed is
+    # a disnake.InteractionMessage type.
+    message: disnake.InteractionMessage
+
+    def __init__(self, timeout: float = 180.0):
+        # Again, we want to set a timeout for this View, but this time we will assign it
+        # when constructing the View later.
+        super().__init__(timeout=timeout)
+
+    def disable_children(self):
+        # Simply loop over `self.children` to access each component within the View
+        # and set `.disabled=True` for each of the children.
+        for child in self.children:
+            if isinstance(child, (disnake.ui.Button, disnake.ui.BaseSelect)):
+                child.disabled = True
+
+    async def on_timeout(self):
+        # When the View has timed out we want to disable all components associated with this View.
+        # A disabled component will still appear on the message, but will be greyed and non-interactable.
+        self.disable_children()
+
+        # Now that the View's children have been disabled, we edit the message by sending the updated View.
+        # Since the View has timed out, it does not need to be explicitly stopped.
+        await self.message.edit(view=self)
+
+        # You may also remove all components by calling `self.clear_items()` which returns the View with
+        # no components.
+        # Sending this updated View in the `message.edit` will remove the components from the message.
+        # await self.message.edit(view=self.clear_items())
+
+    @disnake.ui.button(label="Yes", style=disnake.ButtonStyle.success)
+    async def yes(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
+
+        await inter.response.send_message("Contact us at https://discord.gg/disnake!")
+
+        # Update the View by disabling all buttons, then editing the original message
+        # containing this View, not the response message sent above.
+        # Note: This can also be done with `inter.response.edit_message()` instead
+        # if you did not wish to send a separate response.
+        self.disable_children()
+        await inter.message.edit(view=self)
+
+        # Now, we explicitly stop the View which prevents it from listening for more interactions.
+        self.stop()
+
+    @disnake.ui.button(label="No", style=disnake.ButtonStyle.danger)
+    async def no(self, button: disnake.ui.Button, inter: disnake.MessageInteraction):
+
+        await inter.response.send_message("Got it. Signing off!")
+
+        self.disable_children()
+        await inter.message.edit(view=self)
+
+        self.stop()
+
+
+...
+...
+# The slash command that will respond with a message and the View.
+@bot.slash_command()
+async def buttons(inter: disnake.ApplicationCommandInteraction):
+
+    # Here we need to construct the TimeoutButtonView so that it can be sent with
+    # the slash command response message. Since we do not have the message object yet,
+    # we assign it after the response has been sent.
+    view = TimeoutButtonView(timeout=120)
+    await inter.response.send_message("Need help?", view=view)
+
+    # Because interaction responses do not return a message, we will need
+    # to fetch the message and assign it to `View.message` to be used if `on_timeout` is called.
+    view.message = await inter.original_response()
+```
 
 ## Views vs. low-level components
+
+With disnake, you have the flexibility to implement low-level components instead of relying on a <DocsLink reference="disnake.ui.View">View</DocsLink>.
+
+It's important to highlight that when sending components using this approach, it's essential to assign a unique `custom_id` to each component.
+This is necessary because component interactions are broadcasted to all listeners, and you need to distinguish which listener is intended for
+each component. You can handle multiple component interactions with a single listnener.
+
+The primary benefit of adopting this technique is that these low-level components and listeners are inherently persistent, retaining their
+functionality even when the bot restarts. Listeners are stored in the bot only once and are shared across all components. As a result, this
+approach generally has a smaller memory footprint compared to an equivalent View.
+
+The example below demonstrates a similar user experience to the above example, however, it will be implmented using low-level components
+and will not timeout nor be stopped. As a result, the button components will not be disabled after use.
+
+```python title="buttons.py"
+# At the top of the file.
+import disnake
+from disnake.ext import commands
+
+# The slash command that responds with a message.
+@bot.slash_command()
+async def buttons(inter: disnake.ApplicationCommandInteraction):
+    await inter.response.send_message(
+        "Need help?",
+        components=[
+            disnake.ui.Button(label="Yes", style=disnake.ButtonStyle.success, custom_id="yes"),
+            disnake.ui.Button(label="No", style=disnake.ButtonStyle.danger, custom_id="no"),
+        ],
+    )
+
+
+# Create the listener that will handle the button interactions, similarly to the callbacks used above.
+@bot.listen("on_button_click")
+async def help_listener(inter: disnake.MessageInteraction):
+    if inter.component.custom_id == "yes":
+        await inter.response.send_message("Contact us at https://discord.gg/disnake!")
+    elif inter.component.custom_id == "no":
+        await inter.response.send_message("Got it. Signing off!")
+```
+
+## More Examples
+
+Use the links below to View more button examples using Views and low-level implementations in the repo:  
+[View examples](https://github.com/DisnakeDev/disnake/tree/master/examples/views/button)  
+[Low-level](https://github.com/DisnakeDev/disnake/blob/master/examples/interactions/low_level_components.py)
