@@ -92,11 +92,15 @@ Otherwise only one bulk overwrite request is done.
 
 :::
 
-If you want to disable the automatic registration, set the `sync_commands` parameter of `commands.Bot` to `False`.
-If you want to see how exactly the list of registered commands changes, set the `sync_commands_debug` parameter to `True`.
+If you want to disable the automatic registration, use <DocsLink ext="commands" reference="disnake.ext.commands.CommandSyncFlags.none">CommandSyncFlags.none()</DocsLink>.
+If you want to see how exactly the list of registered commands changes, set
+the <DocsLink ext="commands" reference="disnake.ext.commands.CommandSyncFlags.sync_commands_debug">CommandSyncFlags.sync_commands_debug</DocsLink> flag to `True`.
 
 ```python
-bot = commands.Bot("!", sync_commands_debug=True)
+command_sync_flags = commands.CommandSyncFlags.default()
+command_sync_flags.sync_commands_debug = True
+
+bot = commands.Bot(..., command_sync_flags=command_sync_flags)
 ```
 
 It will print (or use the logger, if enabled) which commands were added, edited, deleted or left untouched.
