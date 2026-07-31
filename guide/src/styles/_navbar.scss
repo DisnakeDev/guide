@@ -10,6 +10,8 @@
 	font-family: 'uni-sans-caps';
 	font-size: 1.35rem;
 	padding-left: 0.25rem;
+	// offset weird glyph box, I think it might just be the font
+	margin-bottom: -0.35rem;
 }
 
 // GitHub Social Icon
