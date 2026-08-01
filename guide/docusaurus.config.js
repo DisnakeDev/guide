@@ -1,6 +1,9 @@
 // @ts-check
+import prismLight from './src/utils/prismLight.js';
+import prismDark from './src/utils/prismDark.js';
 
-module.exports = {
+/** @type {import('@docusaurus/types').Config} */
+export default {
 	title: 'Disnake Guide',
 	url: 'https://guide.disnake.dev/',
 	favicon: 'public/favicon.ico',
@@ -22,13 +25,13 @@ module.exports = {
 			({
 				docs: {
 					routeBasePath: '/',
-					sidebarPath: require.resolve('./sidebars.js'),
+					sidebarPath: './sidebars.js',
 					editUrl: 'https://github.com/DisnakeDev/guide/edit/main/guide',
 					showLastUpdateAuthor: true,
 					showLastUpdateTime: true,
 				},
 				theme: {
-					customCss: [require.resolve('./src/styles/index.scss')],
+					customCss: ['./src/styles/index.scss'],
 				},
 			}),
 		],
@@ -88,8 +91,8 @@ module.exports = {
 			},
 		},
 		prism: {
-			theme: require('./src/utils/prismLight'),
-			darkTheme: require('./src/utils/prismDark'),
+			theme: prismLight,
+			darkTheme: prismDark,
 		},
 		algolia: {
 			appId: 'WPCP8YA273',

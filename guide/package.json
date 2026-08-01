@@ -16,7 +16,8 @@
     "url": "https://github.com/DisnakeDev/guide/issues"
   },
   "dependencies": {
-    "@discord-message-components/react": "^0.2.1"
+    "@skyra/discord-components-core": "^4.0.2",
+    "@skyra/discord-components-react": "^4.0.2"
   },
   "engines": {
     "node": ">=24.0.0"
@@ -34,17 +35,16 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/core": "^2.4.3",
-    "@docusaurus/preset-classic": "^2.4.3",
-    "@mdx-js/react": "^1.6.22",
-    "clsx": "^1.1.1",
-    "docusaurus-plugin-sass": "^0.2.2",
-    "eslint": "^8.6.0",
-    "eslint-plugin-mdx": "^1.16.0",
-    "prism-react-renderer": "^1.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-native": "^0.66.4",
-    "sass": "^1.49.9"
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "@mdx-js/react": "^3.1.1",
+    "clsx": "^2.1.1",
+    "docusaurus-plugin-sass": "^0.2.6",
+    "eslint": "^10.8.0",
+    "eslint-plugin-mdx": "^3.8.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sass": "^1.102.0"
   }
 }

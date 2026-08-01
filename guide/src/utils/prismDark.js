@@ -1,7 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const darkTheme = require('prism-react-renderer/themes/vsDark');
+import * as prism from 'prism-react-renderer';
 
-module.exports = {
+const darkTheme = prism.themes.vsDark;
+
+export default {
 	plain: {
 		color: '#D4D4D4',
 		backgroundColor: '#1E1E1E',
