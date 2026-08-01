@@ -54,7 +54,6 @@ Creating a Bot account is a pretty straightforward process.
         <img src={require("./images/new-bot.png").default} alt="New Bot" width="75%"/>
     </p>
     <br />
-
     - You should also make sure that `Require OAuth2 Code Grant` is unchecked unless you are developing a service that
       needs it. If you're unsure, then **leave it unchecked**.
 
@@ -66,7 +65,6 @@ Creating a Bot account is a pretty straightforward process.
         <img src={require("./images/copy-token.png").default} alt="Copy Token" width="75%"/>
     </p>
     <br />
-
     - Click "Yes, do it!" when asked.
     - This is **not** the Client Secret at the General Information page.
 
@@ -97,12 +95,12 @@ bot to work!
 Let's imagine that you have a bot on over 1,000 servers, and it took you many, many months of coding and patience to get
 it on that amount. Your token gets leaked somewhere, and now someone else has it. That person can:
 
--   Spam every server your bot is on;
--   DM spam as many users as possible;
--   Delete as many channels as possible;
--   Kick or ban as many server members as possible;
--   Make your bot leave all of the servers it has joined;
--   Access and damage the underlying infrastructure (your server).
+- Spam every server your bot is on;
+- DM spam as many users as possible;
+- Delete as many channels as possible;
+- Kick or ban as many server members as possible;
+- Make your bot leave all of the servers it has joined;
+- Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible! In the
 [initial files](../getting-started/initial-files.mdx) page of the guide, we cover how to safely store your token in a
@@ -180,9 +178,8 @@ invite URL for it.
         <img src={require("./images/oauth-scopes.png").default} alt="OAuth2 Scope" width="100%"/>
     </p>
     <br />
-
-    -   If you would like to integrate slash commands and other interactions into your bot, make sure to check the
-        `applications.commands` scope as well.
+    - If you would like to integrate slash commands and other interactions into your bot, make sure to check the
+      `applications.commands` scope as well.
 
     <!-- prettier-ignore -->
     <br />
@@ -193,10 +190,10 @@ invite URL for it.
 
 6.  Tick the permissions required for your bot to function under `Bot Permissions`.
 
-    -   Please be aware of the consequences of requiring your bot to have the `Administrator` permission.
+    - Please be aware of the consequences of requiring your bot to have the `Administrator` permission.
 
-    -   Bot owners must have 2FA enabled for certain actions and permissions when added in servers that have Server-Wide
-        2FA enabled. Check the [2FA support page][discord-2fa-page] for more information.
+    - Bot owners must have 2FA enabled for certain actions and permissions when added in servers that have Server-Wide
+      2FA enabled. Check the [2FA support page][discord-2fa-page] for more information.
 
     <!-- prettier-ignore -->
     <br />

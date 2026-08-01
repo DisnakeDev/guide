@@ -2,7 +2,6 @@ import disnake
 from disnake.ext import commands
 from disnake import TextInputStyle
 
-
 bot = commands.Bot(command_prefix="!")
 
 

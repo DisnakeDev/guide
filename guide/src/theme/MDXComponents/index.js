@@ -11,22 +11,23 @@ import Admonition from '@theme/Admonition';
 import Mermaid from '@theme/Mermaid';
 
 import {
+	DiscordActionRow,
+	DiscordAttachments,
 	DiscordButton,
-	DiscordButtons,
-	DiscordDefaultOptions,
+	DiscordCode,
+	DiscordCommand,
 	DiscordEmbed,
+	DiscordEmbedDescription,
 	DiscordEmbedField,
 	DiscordEmbedFields,
-	DiscordInteraction,
-	DiscordMarkdown,
+	DiscordEmbedFooter,
 	DiscordMention,
 	DiscordMessage,
 	DiscordMessages,
-	DiscordOptionsContext,
 	DiscordReaction,
 	DiscordReactions,
-} from '@discord-message-components/react';
-import '@discord-message-components/react/styles';
+	DiscordReply,
+} from '@skyra/discord-components-react';
 import isDarkTheme from '../../hooks/isDarkTheme';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 
@@ -36,21 +37,6 @@ import TabItem from '@theme/TabItem';
 import DocsLink from '../../components/DocsLink';
 import ResultingCode from '../../components/ResultingCode';
 import WorkInProgress from '../../components/WorkInProgress';
-
-const discordOptions = {
-	...DiscordDefaultOptions,
-	profiles: {
-		user: {
-			author: 'AbhigyanTrips',
-			avatar: '/public/message-author.png',
-		},
-		bot: {
-			author: 'Disnake Bot',
-			avatar: '/public/disnake-logo.png',
-			bot: true,
-		},
-	},
-};
 
 const MDXComponents = {
 	head: MDXHead,
@@ -85,22 +71,30 @@ const MDXComponents = {
 	},
 	DiscordMessages: (props) => {
 		return (
-			<DiscordOptionsContext.Provider value={discordOptions}>
-				<DiscordMessages
-					{...props}
-					lightTheme={!isDarkTheme()}
-					// force remount on hydration to work around SSR theming bug
-					// - https://github.com/facebook/docusaurus/issues/7986
-					// - https://github.com/facebook/docusaurus/blob/61116e2ad6f675d0ba1abef98484712b14834bdb/packages/docusaurus-theme-live-codeblock/src/theme/Playground/index.tsx#L78)
-					key={useIsBrowser()}
-				>
-					{props.children}
-				</DiscordMessages>
-			</DiscordOptionsContext.Provider>
+			<DiscordMessages
+				{...props}
+				// the `lightTheme` prop needs to be applied to several components, since seemingly not all
+				// all seem to subscribe to theme changes from the parent component for some reason
+				lightTheme={!isDarkTheme()}
+				// force remount on hydration to work around SSR theming bug
+				// - https://github.com/facebook/docusaurus/issues/7986
+				key={useIsBrowser()}
+			>
+				{props.children}
+			</DiscordMessages>
 		);
 	},
 	DiscordMessage: (props) => {
-		return <DiscordMessage {...props}>{props.children}</DiscordMessage>;
+		return (
+			<DiscordMessage
+				{...props}
+				// see above
+				lightTheme={!isDarkTheme()}
+				key={useIsBrowser()}
+			>
+				{props.children}
+			</DiscordMessage>
+		);
 	},
 	DiscordMention: (props) => {
 		return <DiscordMention {...props}>{props.children}</DiscordMention>;
@@ -109,8 +103,8 @@ const MDXComponents = {
 		return (
 			<DiscordEmbed
 				{...props}
-				borderColor={isDarkTheme() ? '#f0c43f' : '#376fa1'}
-				// see `DiscordMessages` above for explanation
+				color={isDarkTheme() ? '#f0c43f' : '#376fa1'}
+				// see above
 				key={useIsBrowser()}
 			>
 				{props.children}
@@ -123,23 +117,53 @@ const MDXComponents = {
 	DiscordEmbedField: (props) => {
 		return <DiscordEmbedField {...props}>{props.children}</DiscordEmbedField>;
 	},
-	DiscordInteraction: (props) => {
-		return <DiscordInteraction {...props}>{props.children}</DiscordInteraction>;
+	DiscordEmbedDescription: (props) => {
+		return <DiscordEmbedDescription {...props}>{props.children}</DiscordEmbedDescription>;
 	},
-	DiscordMarkdown: (props) => {
-		return <DiscordMarkdown {...props}>{props.children}</DiscordMarkdown>;
+	DiscordEmbedFooter: (props) => {
+		return <DiscordEmbedFooter {...props}>{props.children}</DiscordEmbedFooter>;
 	},
-	DiscordButtons: (props) => {
-		return <DiscordButtons {...props}>{props.children}</DiscordButtons>;
+	DiscordCommand: (props) => {
+		return (
+			<DiscordCommand
+				{...props}
+				// see above
+				lightTheme={!isDarkTheme()}
+				key={useIsBrowser()}
+			>
+				{props.children}
+			</DiscordCommand>
+		);
 	},
 	DiscordButton: (props) => {
 		return <DiscordButton {...props}>{props.children}</DiscordButton>;
+	},
+	DiscordAttachments: (props) => {
+		return <DiscordAttachments {...props}>{props.children}</DiscordAttachments>;
+	},
+	DiscordActionRow: (props) => {
+		return <DiscordActionRow {...props}>{props.children}</DiscordActionRow>;
 	},
 	DiscordReactions: (props) => {
 		return <DiscordReactions {...props}>{props.children}</DiscordReactions>;
 	},
 	DiscordReaction: (props) => {
 		return <DiscordReaction {...props}>{props.children}</DiscordReaction>;
+	},
+	DiscordReply: (props) => {
+		return (
+			<DiscordReply
+				{...props}
+				// see above
+				lightTheme={!isDarkTheme()}
+				key={useIsBrowser()}
+			>
+				{props.children}
+			</DiscordReply>
+		);
+	},
+	DiscordCode: (props) => {
+		return <DiscordCode {...props}>{props.children}</DiscordCode>;
 	},
 };
 export default MDXComponents;

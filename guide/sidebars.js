@@ -1,7 +1,7 @@
 // @ts-check
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
-const sidebars = {
+export default {
 	guideSidebar: [
 		{
 			type: 'doc',
@@ -57,5 +57,3 @@ const sidebars = {
 		},
 	],
 };
-
-module.exports = sidebars;

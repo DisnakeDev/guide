@@ -30,12 +30,8 @@ async def ping(inter: disnake.ApplicationCommandInteraction):
 <br />
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command="true">
-				ping
-			</DiscordInteraction>
-		</div>
-		Latency: <DiscordMarkdown>`42ms`</DiscordMarkdown>!
+		<DiscordCommand slot="reply" profile="user" command="/ping"></DiscordCommand>
+		Latency: <DiscordCode>42ms</DiscordCode>!
 	</DiscordMessage>
 </DiscordMessages>
 <br />
@@ -150,16 +146,15 @@ If you want to send secondary messages, consider using a <DocsLink reference="di
 
 :::warning
 
-An interaction can only be responded to **once**. After a response is made, **no more responses can be made.** See the [followup](#followup) object for sending messages after responding.
+An interaction can only be responded to **once**. After a response is made, **no more responses can be made.** See the [followup](#followups) object for sending messages after responding.
 :::
 
 1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message.
-1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example in
-   component or component+modal interactions. Cannot be used with application commands.
+1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example
+   in component or component+modal interactions. Cannot be used with application commands.
 1. <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> - Defers the interaction.
-1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a <DocsLink reference="disnake.ui.Modal">
-   	Modal
-   </DocsLink> as a response.
+1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a
+   <DocsLink reference="disnake.ui.Modal">Modal</DocsLink> as a response.
 
 :::note
 
@@ -187,9 +182,9 @@ async def defer(inter: ApplicationCommandInteraction):
 
 Followups are a way to send a message after responding. There are two important restrictions for when a followup can be used:
 
--   The interaction must have been responded to (see [responding](#responses)).
--   The interaction must not be expired (i.e. hasn't exceeded the 15 minute limit).
-    Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
+- The interaction must have been responded to (see [responding](#responding)).
+- The interaction must not be expired (i.e. hasn't exceeded the 15 minute limit).
+  Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
 
 At their core, followups are simply <DocsLink reference="disnake.Webhook">Webhook</DocsLink> instances. The only special thing about them is that the `wait` parameter is treated as if it is always set to `True`.
 
@@ -203,21 +198,18 @@ async def timer(inter: disnake.ApplicationCommandInteraction, seconds: int):
     await inter.followup.send(f"{inter.author.mention}, your timer expired!")
 ```
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command="true">
-				timer
-			</DiscordInteraction>
-		</div>
+		<DiscordCommand slot="reply" profile="user" command="/timer"></DiscordCommand>
 		Setting a timer for 30 seconds.
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="bot">Setting a timer for 30 seconds.</DiscordInteraction>
-		</div>
-		<DiscordMention profile="user"></DiscordMention>, your timer expired!
+		<DiscordReply slot="reply" profile="bot" command>
+			Setting a timer for 30 seconds.
+		</DiscordReply>
+		<DiscordMention>AbhigyanTrips</DiscordMention>, your timer expired!
 	</DiscordMessage>
 </DiscordMessages>
-<br />
+}

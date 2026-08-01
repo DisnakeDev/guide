@@ -15,7 +15,8 @@ desired topic via the table of contents.
 
 Here is an example of how an embed may look. We will go over embed construction in the next part of this article.
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
@@ -23,30 +24,31 @@ Here is an example of how an embed may look. We will go over embed construction 
 			url="https://disnake.dev/"
 			thumbnail="/public/disnake-logo.png"
 			image="https://disnake.dev/assets/disnake-banner-thin.png"
-			timestamp="01/01/2077"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
-			footerIcon="/public/disnake-logo.png"
 			slot="embeds"
 		>
-			Embed Description
+			<DiscordEmbedDescription slot="description">Embed Description</DiscordEmbedDescription>
 			<DiscordEmbedFields slot="fields">
 				<DiscordEmbedField fieldTitle="Regular Title">Regular Value</DiscordEmbedField>
-				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+				<DiscordEmbedField fieldTitle="Inline Title" inline inline-index="1">
 					Inline Value
 				</DiscordEmbedField>
-				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+				<DiscordEmbedField fieldTitle="Inline Title" inline inline-index="2">
 					Inline Value
 				</DiscordEmbedField>
-				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+				<DiscordEmbedField fieldTitle="Inline Title" inline inline-index="3">
 					Inline Value
 				</DiscordEmbedField>
 			</DiscordEmbedFields>
-			<span slot="footer">Embed Footer</span>
+			<DiscordEmbedFooter slot="footer" footer-image="/public/disnake-logo.png" timestamp="01/01/2077">
+				Embed Footer
+			</DiscordEmbedFooter>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 The code for this embed is given below.
@@ -110,11 +112,10 @@ embed = disnake.Embed(
 )
 ```
 
-<br />
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed embedTitle="Embed Title" slot="embeds">
-			Embed Description
+			<DiscordEmbedDescription slot="description">Embed Description</DiscordEmbedDescription>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
@@ -133,17 +134,16 @@ embed.set_author(
 )
 ```
 
-<br />
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
 			embedTitle="Embed Title"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
 			slot="embeds"
 		>
-			Embed Description
+			<DiscordEmbedDescription slot="description">Embed Description</DiscordEmbedDescription>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
@@ -164,22 +164,25 @@ embed.set_footer(
 )
 ```
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
 			embedTitle="Embed Title"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
-			footerIcon="/public/disnake-logo.png"
 			slot="embeds"
 		>
-			Embed Description
-			<span slot="footer">Embed Footer</span>
+			<DiscordEmbedDescription slot="description">Embed Description</DiscordEmbedDescription>
+			<DiscordEmbedFooter slot="footer" footer-image="/public/disnake-logo.png">
+				Embed Footer
+			</DiscordEmbedFooter>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 ### Setting the thumbnail
@@ -191,36 +194,37 @@ the <DocsLink reference="disnake.Embed.set_thumbnail">set_thumbnail</DocsLink> a
 embed.set_thumbnail(url="https://disnake.dev/assets/disnake-banner-thin.png")
 ```
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
 			embedTitle="Embed Thumbnail"
 			thumbnail="/public/disnake-logo.png"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
-			footerIcon="/public/disnake-logo.png"
-			timestamp="01/01/2077"
 			slot="embeds"
 		>
-			It is shown in the top-right corner of the embed. You can set this as a URL, but{' '}
-			<DiscordMarkdown>`disnake`</DiscordMarkdown> also allows you to use a locally stored file instead, using the{' '}
-			<DiscordMarkdown>`file`</DiscordMarkdown> parameter.
-			<br />
-			<br />
-			<DiscordMarkdown>`embed.set_thumbnail(file=disnake.File("asset/path.png"))`</DiscordMarkdown>
-			<span slot="footer">Embed Footer</span>
+			<DiscordEmbedDescription slot="description">
+				It is shown in the top-right corner of the embed. You can set this as a URL, but{' '}
+				<DiscordCode>disnake</DiscordCode> also allows you to use a locally stored file instead, using the{' '}
+				<DiscordCode>file</DiscordCode> parameter.
+			</DiscordEmbedDescription>
+			<DiscordEmbedFooter slot="footer" footer-image="/public/disnake-logo.png">
+				Embed Footer
+			</DiscordEmbedFooter>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 ### Using timestamps
 
 Timestamps are shown in the footer of the embed, indicating the time at which the embed was sent/initiated. This can be
 done using the <DocsLink reference="disnake.Embed.timestamp">timestamp</DocsLink> parameter of `disnake.Embed()`. Note
-that you will need to import the [`datetime`][datetime-pypi] package into your script.
+that you will need to import the `datetime` package into your script.
 
 ```python title="embed.py" {9}
 # At the top of your script
@@ -235,24 +239,28 @@ embed = disnake.Embed(
 )
 ```
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
 			embedTitle="Timestamps"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
-			footerIcon="/public/disnake-logo.png"
-			timestamp="01/01/2077"
 			slot="embeds"
 		>
-			Note that <DiscordMarkdown>`datetime.datetime.utcnow()`</DiscordMarkdown> can also be used here. You can
-			also specify the timezone via the <DiscordMarkdown>`tzinfo`</DiscordMarkdown> parameter.
-			<span slot="footer">Embed Footer</span>
+			<DiscordEmbedDescription slot="description">
+				Note that <DiscordCode>datetime.datetime.utcnow()</DiscordCode> can also be used here. You can also
+				specify the timezone via the <DiscordCode>tzinfo</DiscordCode> parameter.
+			</DiscordEmbedDescription>
+			<DiscordEmbedFooter slot="footer" footer-image="/public/disnake-logo.png" timestamp="01/01/2077">
+				Embed Footer
+			</DiscordEmbedFooter>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 ### Inserting fields
@@ -270,35 +278,37 @@ embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 embed.add_field(name="Inline Title", value="Inline Value", inline=True)
 ```
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
 			embedTitle="Embed Title"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
-			footerIcon="/public/disnake-logo.png"
-			timestamp="01/01/2077"
 			slot="embeds"
 		>
-			Embed Description
+			<DiscordEmbedDescription slot="description">Embed Description</DiscordEmbedDescription>
 			<DiscordEmbedFields slot="fields">
 				<DiscordEmbedField fieldTitle="Regular Title">Regular Value</DiscordEmbedField>
-				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+				<DiscordEmbedField fieldTitle="Inline Title" inline inline-index="1">
 					Inline Value
 				</DiscordEmbedField>
-				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+				<DiscordEmbedField fieldTitle="Inline Title" inline inline-index="2">
 					Inline Value
 				</DiscordEmbedField>
-				<DiscordEmbedField inline="true" fieldTitle="Inline Title">
+				<DiscordEmbedField fieldTitle="Inline Title" inline inline-index="3">
 					Inline Value
 				</DiscordEmbedField>
 			</DiscordEmbedFields>
-			<span slot="footer">Embed Footer</span>
+			<DiscordEmbedFooter slot="footer" footer-image="/public/disnake-logo.png" timestamp="01/01/2077">
+				Embed Footer
+			</DiscordEmbedFooter>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 These attributes also fully support the use of markdown, as well as highlight links. You can also insert fields at a
@@ -317,26 +327,30 @@ embed.set_image(url="https://disnake.dev/assets/disnake-banner-thin.png")
 embed.set_image(file=disnake.File("path/to/file.png"))
 ```
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<DiscordEmbed
 			embedTitle="Images"
-			image="https://i.imgur.com/KsTvw5Z.png"
+			image="/public/disnake-thin-banner.png"
 			authorName="Embed Author"
-			authorIcon="/public/disnake-logo.png"
+			authorImage="/public/disnake-logo.png"
 			authorUrl="https://disnake.dev/"
-			footerIcon="/public/disnake-logo.png"
-			timestamp="01/01/2077"
 			slot="embeds"
 		>
-			To use a local asset for images or thumbnail with the <DiscordMarkdown>`set_image`</DiscordMarkdown>{' '}
-			attribute, use the <DiscordMarkdown>`file`</DiscordMarkdown> kwarg which accepts a{' '}
-			<DiscordMarkdown>`disnake.File()`</DiscordMarkdown> object.
-			<span slot="footer">Embed Footer</span>
+			<DiscordEmbedDescription slot="description">
+				To use a local asset for images or thumbnail with the <DiscordCode>set_image</DiscordCode> attribute,
+				use the <DiscordCode>file</DiscordCode> kwarg which accepts a <DiscordCode>disnake.File()</DiscordCode>{' '}
+				object.
+			</DiscordEmbedDescription>
+			<DiscordEmbedFooter slot="footer" footer-image="/public/disnake-logo.png" timestamp="01/01/2077">
+				Embed Footer
+			</DiscordEmbedFooter>
 		</DiscordEmbed>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 ## Sending an embed
@@ -382,12 +396,12 @@ You can learn more about the `dict` format of embeds in the
 
 ## Embed notes
 
--   To display fields side-by-side, you need at least two consecutive fields set to inline.
--   The timestamp will automatically adjust the timezone depending on the user's device.
--   Mentions of any kind in embeds will only render correctly within embed descriptions and field values.
--   Mentions in embeds will not trigger a notification.
--   Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext')`), but only in description
-    and field values.
+- To display fields side-by-side, you need at least two consecutive fields set to inline.
+- The timestamp will automatically adjust the timezone depending on the user's device.
+- Mentions of any kind in embeds will only render correctly within embed descriptions and field values.
+- Mentions in embeds will not trigger a notification.
+- Embeds allow masked links (e.g. `[Guide](https://guide.disnake.dev/ 'optional hovertext')`), but only in description
+  and field values.
 
 <sup>
 	Source: <a href="https://discordjs.guide/popular-topics/embeds.html#notes">Discord.js Guide</a>
@@ -398,14 +412,14 @@ You can learn more about the `dict` format of embeds in the
 There are a few limits to be aware of while planning your embeds due to the API's limitations. Here is a quick reference
 you can come back to:
 
--   Embed titles are limited to **256 characters**.
--   Embed descriptions are limited to **4096 characters**.
--   There can be up to **25 fields**.
--   A field's name is limited to **256 characters** and its value to **1024 characters**.
--   The footer text is limited to **2048 characters**.
--   The author name is limited to **256 characters**.
--   The sum of all characters from all embed structures in a message must not exceed **6000 characters**.
--   **10 embeds** can be sent per message.
+- Embed titles are limited to **256 characters**.
+- Embed descriptions are limited to **4096 characters**.
+- There can be up to **25 fields**.
+- A field's name is limited to **256 characters** and its value to **1024 characters**.
+- The footer text is limited to **2048 characters**.
+- The author name is limited to **256 characters**.
+- The sum of all characters from all embed structures in a message must not exceed **6000 characters**.
+- **10 embeds** can be sent per message.
 
 <sup>
 	Source: <a href="https://discord.com/developers/docs/resources/channel#embed-limits">Discord API Documentation</a>

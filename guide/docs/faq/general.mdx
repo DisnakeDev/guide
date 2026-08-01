@@ -32,8 +32,8 @@ It is highly discouraged to use <DocsLink ext="commands" reference="disnake.ext.
 The status type (playing, listening, streaming, watching) can be set using the <DocsLink reference="disnake.ActivityType" /> enum.
 For memory optimisation purposes, some activities are offered in slimmed-down versions:
 
--   <DocsLink reference="disnake.Game" />
--   <DocsLink reference="disnake.Streaming" />
+- <DocsLink reference="disnake.Game" />
+- <DocsLink reference="disnake.Streaming" />
 
 Putting both of these pieces of info together, you get the following:
 
@@ -137,9 +137,9 @@ You use the <DocsLink reference="disnake.Message.add_reaction" /> method.
 
 If you want to use unicode emoji, you must pass a valid unicode code point in a string. In your code, you can write this in a few different ways:
 
--   `'👍'`
--   `'\U0001F44D'`
--   `'\N{THUMBS UP SIGN}'`
+- `'👍'`
+- `'\U0001F44D'`
+- `'\N{THUMBS UP SIGN}'`
 
 Quick example:
 
@@ -213,23 +213,23 @@ Check the [`background_task.py` example](https://github.com/DisnakeDev/disnake/b
 There are multiple ways of doing this. If you have a specific model's ID then you can use
 one of the following functions:
 
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_channel" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_guild" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_user" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_emoji" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_member" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_channel" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_role" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_channel" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_guild" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_user" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_emoji" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_member" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_channel" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.get_role" />
 
 The following use an HTTP request:
 
--   <DocsLink reference="disnake.abc.Messageable.fetch_message" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_user" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_guilds" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_guild" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_emojis" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_emoji" />
--   <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_member" />
+- <DocsLink reference="disnake.abc.Messageable.fetch_message" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_user" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_guilds" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_guild" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_emojis" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_emoji" />
+- <DocsLink ext="commands" reference="disnake.ext.commands.Bot.fetch_member" />
 
 If the functions above do not help you, then use of <DocsLink reference="disnake.utils.find" /> or <DocsLink reference="disnake.utils.get" /> would serve some use in finding
 specific models.

@@ -9,11 +9,11 @@ You can require users to select a minimum/maximum number of options using <DocsL
 
 Select Menus are available as the following types:
 
--   <DocsLink reference="disnake.ui.StringSelect">disnake.ui.StringSelect</DocsLink> Allows you to input custom string options
-    for users to select from, up to 25
--   <DocsLink reference="disnake.ui.UserSelect">disnake.ui.UserSelect</DocsLink> User or Member objects as options
--   <DocsLink reference="disnake.ui.RoleSelect">disnake.ui.RoleSelect</DocsLink> Role objects as options
--   <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> Channel objects as options
+- <DocsLink reference="disnake.ui.StringSelect">disnake.ui.StringSelect</DocsLink> Allows you to input custom string
+  options for users to select from, up to 25
+- <DocsLink reference="disnake.ui.UserSelect">disnake.ui.UserSelect</DocsLink> User or Member objects as options
+- <DocsLink reference="disnake.ui.RoleSelect">disnake.ui.RoleSelect</DocsLink> Role objects as options
+- <DocsLink reference="disnake.ui.ChannelSelect">disnake.ui.ChannelSelect</DocsLink> Channel objects as options
 
 The options for user, role, and channel select menus are populated by Discord, and currently cannot be limited to a specific subset. See [below](#other-selects) for details.
 
@@ -170,9 +170,9 @@ The three other select components available are constructed and can be used in t
 The main difference is that we do not create nor pass any options to these Select objects as Discord will provide these options to the user automatically.
 The selected option(s) that are available in `self.values` will be the selected object(s) rather than the string values.
 
--   `UserSelect.values` will return a list of <DocsLink reference="disnake.User">disnake.User</DocsLink> or <DocsLink reference="disnake.Member">disnake.Member</DocsLink>
--   `RoleSelect.values` will return a list of <DocsLink reference="disnake.Role">disnake.Role</DocsLink>
--   `ChannelSelect.values` returns a list of <DocsLink reference="disnake.abc.GuildChannel">disnake.abc.GuildChannel</DocsLink>, <DocsLink reference="disnake.Thread">disnake.Thread</DocsLink>, or <DocsLink reference="disnake.PartialMessageable">disnake.PartialMessageable</DocsLink>
+- `UserSelect.values` will return a list of <DocsLink reference="disnake.User">disnake.User</DocsLink> or <DocsLink reference="disnake.Member">disnake.Member</DocsLink>
+- `RoleSelect.values` will return a list of <DocsLink reference="disnake.Role">disnake.Role</DocsLink>
+- `ChannelSelect.values` returns a list of <DocsLink reference="disnake.abc.GuildChannel">disnake.abc.GuildChannel</DocsLink>, <DocsLink reference="disnake.Thread">disnake.Thread</DocsLink>, or <DocsLink reference="disnake.PartialMessageable">disnake.PartialMessageable</DocsLink>
 
 :::note
 
@@ -181,9 +181,9 @@ not available to the other SelectMenu types.
 
 `channel_types` will allow you to specify the types of channels made available as options (omit to show all available channels):
 
--   `channel_types=[ChannelType.text]` to display only guild text channels as options
--   `channel_types=[ChannelType.voice, ChannelType.stage_voice]` to display only guild voice and stage channels as options
--   etc.
+- `channel_types=[ChannelType.text]` to display only guild text channels as options
+- `channel_types=[ChannelType.voice, ChannelType.stage_voice]` to display only guild voice and stage channels as options
+- etc.
 
 See <DocsLink reference="disnake.ChannelType">disnake.ChannelType</DocsLink> to see more channel types.
 :::
