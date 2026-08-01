@@ -167,11 +167,7 @@ bot.run("YOUR_BOT_TOKEN")
 <br />
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command="true">
-				ping
-			</DiscordInteraction>
-		</div>
+		<DiscordCommand slot="reply" profile="user" command="/ping"></DiscordCommand>
 		Pong!
 	</DiscordMessage>
 </DiscordMessages>
@@ -207,11 +203,7 @@ bot.run("YOUR_BOT_TOKEN")
 <br />
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command="true">
-				server
-			</DiscordInteraction>
-		</div>
+		<DiscordCommand slot="reply" profile="user" command="/server"></DiscordCommand>
 		Server name: Disnake Guide <br />
 		Total members: 2
 	</DiscordMessage>
@@ -257,11 +249,7 @@ bot.run("YOUR_BOT_TOKEN")
 <br />
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command="true">
-				server
-			</DiscordInteraction>
-		</div>
+		<DiscordCommand slot="reply" profile="user" command="/server"></DiscordCommand>
 		Your tag: AbhigyanTrips#1234 <br />
 		Your ID: 123456789012345678
 	</DiscordMessage>

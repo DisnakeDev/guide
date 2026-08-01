@@ -6,23 +6,21 @@ description: They refer to views, buttons and select menus that can be added to 
 
 Components allow users to interact with your bot through interactive UI elements. In this section, we will discuss how bots can receive and process information from these elements through the library.
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command={true}>
-				buttons
-			</DiscordInteraction>
-		</div>
+		<DiscordCommand slot="reply" profile="user" command="/buttons"></DiscordCommand>
 		Need help?
-		<div slot="actions">
-			<DiscordButtons>
+		<DiscordAttachments slot="components">
+			<DiscordActionRow>
 				<DiscordButton type="success">Yes</DiscordButton>
-				<DiscordButton type="danger">No</DiscordButton>
-			</DiscordButtons>
-		</div>
+				<DiscordButton type="destructive">No</DiscordButton>
+			</DiscordActionRow>
+		</DiscordAttachments>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 The code for this command is given below.
@@ -69,22 +67,22 @@ async def help_listener(inter: disnake.MessageInteraction):
 | Danger    | `ButtonStyle.danger` / `ButtonStyle.red`                          | Red     |
 | Link      | `ButtonStyle.link` / `ButtonStyle.url`                            | Grey    |
 
-<br />
+{
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="actions">
-			<DiscordButtons>
+		<DiscordAttachments slot="components">
+			<DiscordActionRow>
 				<DiscordButton type="primary">Primary</DiscordButton>
 				<DiscordButton type="secondary">Secondary</DiscordButton>
 				<DiscordButton type="success">Success</DiscordButton>
-				<DiscordButton type="danger">Danger</DiscordButton>
-				<DiscordButton type="link" url="https://guide.disnake.dev/">
-					Link
-				</DiscordButton>
-			</DiscordButtons>
-		</div>
+				<DiscordButton type="destructive">Danger</DiscordButton>
+				<DiscordButton url="https://guide.disnake.dev/">Link</DiscordButton>
+			</DiscordActionRow>
+		</DiscordAttachments>
 	</DiscordMessage>
 </DiscordMessages>
+}
 <br />
 
 :::note

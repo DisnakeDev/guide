@@ -23,13 +23,8 @@ For more specific annotations, you can use <DocsLink reference="disnake.UserComm
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command={true}>
-				User Info
-			</DiscordInteraction>
-		</div>
-		Username: AbhigyanTrips#2474
-		<br />
+		<DiscordCommand slot="reply" profile="user" command="User Info"></DiscordCommand>
+		Username: AbhigyanTrips#2474 <br />
 		Bot: False
 	</DiscordMessage>
 </DiscordMessages>
@@ -47,11 +42,7 @@ async def avatar(inter: disnake.ApplicationCommandInteraction, user: disnake.Use
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<div slot="interactions">
-			<DiscordInteraction profile="user" command={true}>
-				Reverse
-			</DiscordInteraction>
-		</div>
+		<DiscordCommand slot="reply" profile="user" command="Reverse"></DiscordCommand>
 		.desrever si egassem sihT
 	</DiscordMessage>
 </DiscordMessages>

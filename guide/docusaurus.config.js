@@ -13,10 +13,36 @@ export default {
 	baseUrl: '/',
 	trailingSlash: false,
 
-	onBrokenLinks: 'warn',
-	onBrokenMarkdownLinks: 'warn',
-
 	plugins: ['docusaurus-plugin-sass'],
+
+	onBrokenLinks: 'warn',
+	markdown: {
+		hooks: {
+			onBrokenMarkdownLinks: 'warn',
+		},
+	},
+
+	headTags: [
+		{
+			tagName: 'script',
+			attributes: {},
+			innerHTML: `
+			globalThis.$discordMessage = {
+				profiles: {
+					user: {
+						author: 'AbhigyanTrips',
+						avatar: '/public/message-author.png',
+					},
+					bot: {
+						author: 'Disnake Bot',
+						avatar: '/public/disnake-logo.png',
+						bot: true,
+					},
+				},
+			};
+			`,
+		},
+	],
 
 	presets: [
 		[
