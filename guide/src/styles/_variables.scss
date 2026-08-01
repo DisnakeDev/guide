@@ -8,7 +8,7 @@ html[data-theme="light"] {
 	--ifm-color-primary-darkest: hsl(211, 43%, 28%);
 	--ifm-code-font-size: 95%;
 
-	--custom-code-highlight-color: rgba(0, 0, 0, 0.1);
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 html[data-theme="dark"] {
@@ -21,5 +21,5 @@ html[data-theme="dark"] {
 	--ifm-color-primary-darkest: hsl(47, 100%, 38%);
 	--ifm-code-font-size: 95%;
 
-	--custom-code-highlight-color: rgba(255, 255, 255, 0.1);
+	--docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
 }
