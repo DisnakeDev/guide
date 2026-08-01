@@ -97,15 +97,15 @@ The implementation of this command using the lower-level interface can be found 
 
 A modal can be created and sent using two different methods, just like other message components:
 
--   Subclassing <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> to define the components, and sending it through the `modal` parameter of <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> (as done in the example above).
--   Defining the attributes and components of the modal inside <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> itself. This is considered a "lower-level" implementation of modals - we will use the same term to refer to it in this section.
+- Subclassing <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> to define the components, and sending it through the `modal` parameter of <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> (as done in the example above).
+- Defining the attributes and components of the modal inside <DocsLink reference="disnake.InteractionResponse.send_modal">interaction.send_modal</DocsLink> itself. This is considered a "lower-level" implementation of modals - we will use the same term to refer to it in this section.
 
 A <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object has the following attributes:
 
--   `title` - The title of the modal.
--   `custom_id` - An ID specified to the modal. This can be accessed via <DocsLink reference="disnake.ModalInteraction" />.
--   `timeout` - The time (in seconds) after which the modal is removed from cache. Defaults to **600 seconds**.
--   `components` - The list of components to be displayed in the modal. Limited to **5 action rows**.
+- `title` - The title of the modal.
+- `custom_id` - An ID specified to the modal. This can be accessed via <DocsLink reference="disnake.ModalInteraction" />.
+- `timeout` - The time (in seconds) after which the modal is removed from cache. Defaults to **600 seconds**.
+- `components` - The list of components to be displayed in the modal. Limited to **5 action rows**.
 
 :::caution
 
@@ -156,13 +156,13 @@ In the lower-level interface, you can implement this like so:
 
 `TextInput` is a component in itself, like buttons and select menus. It is responsible for receiving user input in the form of text, and cannot be used outside of modals. It has the following customizable attributes.
 
--   `label` - The label of the text input.
--   `custom_id` - An ID specified to the text input.
--   `style` - Utilizes one of <DocsLink reference="disnake.TextInputStyle" /> for the component. Defaults to <DocsLink reference="disnake.TextInputStyle.short">short</DocsLink>.
--   `placeholder` - The placeholder text that is shown if nothing is entered.
--   `value` - The pre-filled value of the text input (up to `max_length`).
--   `required` - Whether the text input is required. Defaults to `True`.
--   `min_length` and `max_length` - Set the minimum and maximum length of the inputs respectively.
+- `label` - The label of the text input.
+- `custom_id` - An ID specified to the text input.
+- `style` - Utilizes one of <DocsLink reference="disnake.TextInputStyle" /> for the component. Defaults to <DocsLink reference="disnake.TextInputStyle.short">short</DocsLink>.
+- `placeholder` - The placeholder text that is shown if nothing is entered.
+- `value` - The pre-filled value of the text input (up to `max_length`).
+- `required` - Whether the text input is required. Defaults to `True`.
+- `min_length` and `max_length` - Set the minimum and maximum length of the inputs respectively.
 
 These attributes can be used per `TextInput` component, as follows.
 
@@ -178,8 +178,8 @@ disnake.ui.TextInput(
 
 The <DocsLink reference="disnake.TextInputStyle" /> attribute currently has two styles, which have multiple aliases:
 
--   `short` - Represents a single-line text input component. Also called `single_line`.
--   `long` - Represents a multi-line text input component. Also called `multi_line` or `paragraph`.
+- `short` - Represents a single-line text input component. Also called `single_line`.
+- `long` - Represents a multi-line text input component. Also called `multi_line` or `paragraph`.
 
 ## Modal callback methods
 
@@ -255,22 +255,22 @@ No interaction object is passed to the <DocsLink reference="disnake.ui.Modal.on_
 
 ## Modal notes
 
--   The only component that can currently be used with modals is <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink>. Buttons and select menus cannot be used inside modals.
--   You can add components to a <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object using the <DocsLink reference="disnake.ui.Modal.append_component">append_component()</DocsLink> method. To directly add text inputs, use <DocsLink reference="disnake.ui.Modal.add_text_input">add_text_input()</DocsLink> instead.
--   The <DocsLink reference="disnake.TextInputStyle" /> defaults to `short`, if not specified for the component.
--   All <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink> components are required by default.
+- The only component that can currently be used with modals is <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink>. Buttons and select menus cannot be used inside modals.
+- You can add components to a <DocsLink reference="disnake.ui.Modal">disnake.ui.Modal</DocsLink> object using the <DocsLink reference="disnake.ui.Modal.append_component">append_component()</DocsLink> method. To directly add text inputs, use <DocsLink reference="disnake.ui.Modal.add_text_input">add_text_input()</DocsLink> instead.
+- The <DocsLink reference="disnake.TextInputStyle" /> defaults to `short`, if not specified for the component.
+- All <DocsLink reference="disnake.ui.TextInput">TextInput</DocsLink> components are required by default.
 
 ## Modal limits
 
 There are a few limits to be aware of while using modals due to the API's limitations. Here is a quick reference you can come back to:
 
--   A modal can have a total of **5 action rows**.
--   A modal's `title` has a maximum length of **45 characters**.
--   The text input `label` has a maximum length of **45 characters**.
--   The text input `placeholder` is limited to **100 characters**.
--   The `custom_id` is limited to **100 characters**, for both modals and text inputs.
--   The pre-defined `value` has a maximum length of **4000 characters** (overriden by the developer-defined limit).
--   The minimum and maximum values of a text input can be set from **0-4000 characters** and **1-4000 characters** respectively.
+- A modal can have a total of **5 action rows**.
+- A modal's `title` has a maximum length of **45 characters**.
+- The text input `label` has a maximum length of **45 characters**.
+- The text input `placeholder` is limited to **100 characters**.
+- The `custom_id` is limited to **100 characters**, for both modals and text inputs.
+- The pre-defined `value` has a maximum length of **4000 characters** (overriden by the developer-defined limit).
+- The minimum and maximum values of a text input can be set from **0-4000 characters** and **1-4000 characters** respectively.
 
 ## Resulting code
 

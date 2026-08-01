@@ -150,12 +150,11 @@ An interaction can only be responded to **once**. After a response is made, **no
 :::
 
 1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message.
-1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example in
-   component or component+modal interactions. Cannot be used with application commands.
+1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example
+   in component or component+modal interactions. Cannot be used with application commands.
 1. <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> - Defers the interaction.
-1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a <DocsLink reference="disnake.ui.Modal">
-   	Modal
-   </DocsLink> as a response.
+1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a
+   <DocsLink reference="disnake.ui.Modal">Modal</DocsLink> as a response.
 
 :::note
 
@@ -183,9 +182,9 @@ async def defer(inter: ApplicationCommandInteraction):
 
 Followups are a way to send a message after responding. There are two important restrictions for when a followup can be used:
 
--   The interaction must have been responded to (see [responding](#responding)).
--   The interaction must not be expired (i.e. hasn't exceeded the 15 minute limit).
-    Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
+- The interaction must have been responded to (see [responding](#responding)).
+- The interaction must not be expired (i.e. hasn't exceeded the 15 minute limit).
+  Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
 
 At their core, followups are simply <DocsLink reference="disnake.Webhook">Webhook</DocsLink> instances. The only special thing about them is that the `wait` parameter is treated as if it is always set to `True`.
 

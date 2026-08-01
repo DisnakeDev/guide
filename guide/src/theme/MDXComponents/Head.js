@@ -11,7 +11,7 @@ function unwrapMDXElement(element) {
 }
 export default function MDXHead(props) {
 	const unwrappedChildren = React.Children.map(props.children, (child) =>
-		React.isValidElement(child) ? unwrapMDXElement(child) : child
+		React.isValidElement(child) ? unwrapMDXElement(child) : child,
 	);
 	return <Head {...props}>{unwrappedChildren}</Head>;
 }

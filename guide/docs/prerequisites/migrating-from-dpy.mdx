@@ -20,19 +20,19 @@ shifting to `disnake` from a version of `discord.py` lower than 2.0, you will ha
 in your code. You can refer [this page](https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58) for the full
 list of breaking changes in `discord.py 2.0`, though we will list some primary API reference changes here:
 
--   Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
--   Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to
-    `avatar.url`. `User.avatar` returns `None` in case the default avatar is used.
--   `on_presence_update` replaces `on_member_update` for updates to `Member.status` and `Member.activities`.
--   Webhooks are changed significantly: `WebhookAdapter` is removed, and synchronous requests using `requests` is now
-    inside `SyncWebhook`.
--   `edit` methods no longer updates cache and instead returns modified instance.
--   `Client.logout` is removed; use `Client.close` instead.
--   `Message.type` for replies are now `MessageType.reply`.
--   `Reaction.custom_emoji` property is changed to `Reaction.is_custom_emoji` method.
--   `missing_perms` attributes and arguments are renamed to `missing_permissions`.
--   Many arguments are now specified as positional-only or keyword-only; e.g. `oauth_url` now takes keyword-only
-    arguments, and methods starting with `get_` or `fetch_` take positional-only arguments.
+- Methods and attributes that returned `TextChannel`, etc can now return `Thread`.
+- Attributes that returned `Asset` are renamed, e.g. attributes ending with `_url` (i.e. `avatar_url`) are changed to
+  `avatar.url`. `User.avatar` returns `None` in case the default avatar is used.
+- `on_presence_update` replaces `on_member_update` for updates to `Member.status` and `Member.activities`.
+- Webhooks are changed significantly: `WebhookAdapter` is removed, and synchronous requests using `requests` is now
+  inside `SyncWebhook`.
+- `edit` methods no longer updates cache and instead returns modified instance.
+- `Client.logout` is removed; use `Client.close` instead.
+- `Message.type` for replies are now `MessageType.reply`.
+- `Reaction.custom_emoji` property is changed to `Reaction.is_custom_emoji` method.
+- `missing_perms` attributes and arguments are renamed to `missing_permissions`.
+- Many arguments are now specified as positional-only or keyword-only; e.g. `oauth_url` now takes keyword-only
+  arguments, and methods starting with `get_` or `fetch_` take positional-only arguments.
 
 ## Changing requirements
 

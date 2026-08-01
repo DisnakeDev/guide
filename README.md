@@ -14,12 +14,12 @@ as their library of choice.
 
 The concept we will be going over, include:
 
--   How to get started on working with bots;
--   How to create and organize commands, using cogs/extensions;
--   Working with databases (such as [`sqlite`][sqlite-docs] and [`mongodb (motor)`][motor-docs]);
--   Using the [`AutoShardedClient`](https://disnake.readthedocs.io/en/stable/api.html#disnake.AutoShardedClient) class
-    to shard your bot;
--   A plethora of examples with popular topics along with in-depth explanation, and much more!
+- How to get started on working with bots;
+- How to create and organize commands, using cogs/extensions;
+- Working with databases (such as [`sqlite`][sqlite-docs] and [`mongodb (motor)`][motor-docs]);
+- Using the [`AutoShardedClient`](https://disnake.readthedocs.io/en/stable/api.html#disnake.AutoShardedClient) class
+  to shard your bot;
+- A plethora of examples with popular topics along with in-depth explanation, and much more!
 
 [sqlite-docs]: https://docs.python.org/3/library/sqlite3.html
 [motor-docs]: https://motor.readthedocs.io/en/stable/
