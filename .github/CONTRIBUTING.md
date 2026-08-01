@@ -8,7 +8,7 @@ To get started with contributing to this guide, follow these steps:
 
 1. `cd guide` as this is our docusaurus directory.
 2. Install dependencies: `npm install`.
-    - Note: Node version 16.14 or higher is required for Docusaurus 2.
+    - Note: Node v24 or higher is required.
 3. Build using `Docusaurus`.
     - To build the documentation once, use `npm run build` and open `build/index.html` in your browser
     - Alternatively, if you want to see your changes to the content in real-time, use `npm run start` to start an autoreloading server on localhost.
