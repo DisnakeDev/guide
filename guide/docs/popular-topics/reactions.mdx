@@ -1,8 +1,314 @@
 ---
-description: Create polls, paginate your commands, and more.
+description: This section covers the topic of interacting with message reactions. Both adding them with code, and reacting to on_reaction events
 hide_table_of_contents: true
 ---
 
 # Reactions
 
-<WorkInProgress />
+Reactions are Discord's way of adding emojis to other messages. Early on, before Discord introduced [components](../interactions/buttons.mdx), this system was largely used to make interactive messages and apps.
+Having bots react to messages is less common now, and is somewhat considered legacy behavior.  
+This guide will teach you the basics of how they work, since they still have their use cases, like reaction role systems and polling.
+
+In Disnake, reactions are represented with <DocsLink reference="disnake.Reaction">Reaction</DocsLink> objects. Whenever you operate on a <DocsLink reference="disnake.Message">Message</DocsLink> you can access a list of reactions attached to that message.
+In this guide we will be providing an example using the <DocsLink reference="disnake.on_raw_reaction_add">on_raw_reaction_add / remove</DocsLink> events and a <DocsLink ext="commands" reference="disnake.ext.commands.Bot.message_command">message_command</DocsLink>'s <DocsLink reference="disnake.MessageCommandInteraction">interaction</DocsLink> to demonstrate.
+
+-   <DocsLink reference="disnake.Reactions.users">disnake.Reactions.users</DocsLink> won't be covered here since the docs
+    demonstrate its use elegantly.
+
+:::info
+**Reaction limitations**
+
+-   To maintain a consistent reaction cache, <DocsLink reference="disnake.Intents.reactions">Intents.reactions</DocsLink> is recommended to manipulate others' reactions, and is required if you intend to utilize events.
+-   A message can have a maximum of 20 unique reactions on it at one time.
+-   Reactions are inherently linked to emojis, and your bot will not have access to resend all emojis used by Discord users. ( The bot can always react to others reactions )
+-   Dealing with reactions results in a fair amount of extra API calls, meaning it can have rate-limit implications on deployment scale.
+-   Using Reactions for user interfaces was never intended behavior, and is ultimately inferior to the newer component interface.
+
+:::
+
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		In case you are unaware, reactions are the emojis below this message.
+		<br />
+		Emojis that are highlighted means you've reacted to it, and the number indicates how many have reacted to it.
+		<div slot="actions">
+			<DiscordReactions>
+				<DiscordReaction
+					name="disnake_pride"
+					image="https://cdn.discordapp.com/emojis/983256241142910996.webp?size=96&quality=lossless"
+					count={3}
+					active={true}
+				/>
+				<DiscordReaction
+					name="disnake"
+					image="https://cdn.discordapp.com/emojis/922937443039186975.webp?size=96&quality=lossless"
+					count={1}
+				/>
+			</DiscordReactions>
+		</div>
+	</DiscordMessage>
+</DiscordMessages>
+
+### Emojis
+
+Since reactions utilize Emojis this guide will also include a quick primer on how disnake handles emojis  
+**Emojis have three forms:**
+
+-   <DocsLink reference="disnake.Emoji">Emoji</DocsLink> Custom emojis are primarily returned when custom emojis are grabbed
+    from the guild/bot
+-   <DocsLink reference="disnake.PartialEmoji">PartialEmoji</DocsLink> Stripped down version of Emoji. Which appears in raw
+    events or when the bot cannot access the custom emoji
+-   [`string`](https://docs.python.org/3/library/string.html) Strings: are normally returned when unicode emojis are used. These are the standard emojis most are familiar with (✅🎮💛💫)
+    but these will also come as a PartialEmoji in raw events
+
+There is also a small write up about this [here](../faq/general.mdx#how-can-i-add-a-reaction-to-a-message).
+
+:::note
+The examples are only meant to demonstrate how disnake interacts with reactions, and should probably not be copied verbatim.  
+These examples are not intended for [cogs](../getting-started/using-cogs.mdx), but can easily be adapted to run inside them.  
+Some examples are also available in the [GitHub repository](https://github.com/DisnakeDev/disnake/tree/master/examples).
+:::
+
+### Example using on_reaction events
+
+There are a few reaction related [events](https://docs.disnake.dev/en/stable/api.html#event-reference) we can listen/subscribe to:
+
+-   <DocsLink reference="disnake.on_raw_reaction_add">on_raw_reaction_add</DocsLink>, called when a user adds a reaction
+-   <DocsLink reference="disnake.on_raw_reaction_remove">on_raw_reaction_remove</DocsLink>, called when a user's
+    reaction is removed
+-   <DocsLink reference="disnake.on_raw_reaction_clear">on_raw_reaction_clear</DocsLink>, called when a message has all
+    reactions removed
+-   <DocsLink reference="disnake.on_raw_reaction_clear_emoji">on_raw_reaction_clear_emoji</DocsLink>, called when all
+    reactions with a specific emoji are removed from a message
+
+There are non-raw equivalents, but they rely on the cache. If the message is not found in the internal cache, then the event is not called.  
+For this reason raw events are preferred, and you are only giving up on an included User/Member object that you can easily fetch if you need it.
+
+One important thing about raw_reaction events is that all the payloads are only populated with <DocsLink reference="disnake.PartialEmoji">PartialEmojis</DocsLink>  
+This is generally not an issue since it contains everything we need, but its something you should be aware of.  
+Raw reaction add/remove events come as <DocsLink reference="disnake.RawReactionActionEvent">RawReactionActionEvent</DocsLink> which is called `payload` in the examples.  
+The raw clearing events each have their own event payloads.
+
+```python title="on_raw_reaction_add.py"
+@bot.listen()
+async def on_raw_reaction_add(self, payload: disnake.RawReactionActionEvent):
+    # For this example we will have the bot post a message describing the event, and adding the emoji to that message as an exercise
+
+    # We don't want the bot to react to its own actions, nor DM's in this case
+    if payload.user_id == bot.user.id:
+        return
+    if not payload.guild_id:
+        return  # guild_id is None if its a DM
+
+    # Raw events contain the channel ID, so we need to grab the channel from the cache
+    event_channel = bot.get_channel(payload.channel_id)
+
+    # With the channel in hand we can use it to post a new message like normal, Messageable.send() returns the message, and we need to store it
+    event_response_message = await event_channel.send(
+        content=f"Reaction {payload.emoji} added by: {payload.member.display_name}!"
+    )
+
+    # Now, we could add our own reaction to the message we just sent.
+    # One thing we need to consider is that the bot cannot access custom emojis from servers they're not members of (see caution below),
+    # because of this we need to check if we have access to the custom_emoji.
+    # disnake.Emoji has a `is_usable()` function we could reference, but partials do not, so we need to check manually.
+    if payload.emoji.is_custom_emoji() and not bot.get_emoji(payload.emoji.id):
+        return  # The emoji is custom, but from a guild the bot cannot access.
+    await event_response_message.add_reaction(payload.emoji)
+```
+
+Below is how the the listener above would react both for a unicode emoji and a custom emoji the bot can't access.  
+Notice how second emoji resolved into **:disnake:** because the emoji is on a server not accessible to the bot:
+
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		Join the Disnake Discord server, it's an amazing community
+		<div slot="actions">
+			<DiscordReactions>
+				<DiscordReaction
+					name="popcorn"
+					image="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/microsoft/310/popcorn_1f37f.png"
+					count={1}
+				/>
+				<DiscordReaction
+					name="disnake"
+					image="https://cdn.discordapp.com/emojis/922937443039186975.webp?size=96&quality=lossless"
+					count={1}
+				/>
+			</DiscordReactions>
+		</div>
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		Reaction 🍿 added by: AbhigyanTrips!
+		<div slot="actions">
+			<DiscordReactions>
+				<DiscordReaction
+					name="popcorn"
+					image="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/microsoft/310/popcorn_1f37f.png"
+					count={1}
+				/>
+			</DiscordReactions>
+		</div>
+	</DiscordMessage>
+	<DiscordMessage profile="bot">Reaction :disnake: added by: AbhigyanTrips!</DiscordMessage>
+</DiscordMessages>
+
+<br />
+
+:::caution
+We can only use custom emojis from servers the bot has joined, but we can use them interchangeably on those servers.  
+Bots can make <DocsLink reference="disnake.ui.Button">buttons</DocsLink> using emojis from servers they're not members of, this may or may not be intended behavior by Discord and should not be relied on.  
+:::
+
+<br />
+
+**Here are a few examples on how reactions can be implemented:**
+
+<Tabs>
+<TabItem value="deny_reactions.py" label="Deny a role using reactions">
+
+```python
+# Members with a restricted role are only allowed to react with 💙
+
+allowed_emojis = ["💙"]
+restricted_role_ids = [951263965235773480, 1060778008039919616]
+
+
+@bot.listen()
+async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
+    if payload.user_id == bot.user.id:
+        return
+    if not payload.guild_id:
+        return  # guild_id is None if its a DM
+
+    # From the docs we know that str(PartialEmoji) returns either the codepoint or <:emoji:id>
+    if (
+        any(payload.member.get_role(role) for role in restricted_role_ids)
+        and str(payload.emoji) not in allowed_emojis
+    ):
+        # Getting the channel, and fetching message as these will be useful
+        event_channel = bot.get_channel(payload.channel_id)
+        event_message = await event_channel.fetch_message(payload.message_id)
+
+        await event_message.remove_reaction(emoji=payload.emoji, member=payload.member)
+```
+
+</TabItem>
+
+<TabItem value="main2.py" label="Simple reaction button">
+
+```python
+# Since you can remove a user's reaction (given appropriate permissions), we can emulate a button.
+# This can be useful if you want the functionality of buttons, but want a more compact look.
+
+button_emojis = ["✅"]  # What emojis to react to
+reaction_messages = [1060797825417478154]  # What messages to monitor
+
+
+@bot.listen()
+async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
+    if payload.user_id == bot.user.id:
+        return
+    if payload.message_id not in reaction_messages or str(payload.emoji) not in button_emojis:
+        return
+
+    # Getting the channel, and fetching message as these will be useful
+    event_channel = bot.get_channel(payload.channel_id)
+    event_message = await event_channel.fetch_message(payload.message_id)
+
+    # Remove the reaction
+    await event_message.remove_reaction(emoji=payload.emoji, member=payload.member)
+    awesome_function()  # Do some stuff
+
+    # Short message to let the user know it went ok. This is not an interaction so a message response is not strictly needed
+    await event_channel.send("Done!", delete_after=10.0)
+```
+
+</TabItem>
+<TabItem value="reaction_role.py" label="Simple reaction roles">
+
+```python
+# A very simple reaction role system
+
+reaction_messages = [1060797825417478154]  # What messages to monitor
+reaction_roles = {
+    "🎮": 1060778008039919616,
+    "🚀": 1007024363616350308,
+    "<:catpat:967269162386858055>": 1056775021281943583,
+}  # The emojis, and their corresponding role ids
+
+
+@bot.listen()
+async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
+    # We usually don't want the bot to react to its own actions, nor DM's in this case
+    if payload.user_id == bot.user.id:
+        return
+    if not payload.guild_id:
+        return  # guild_id is None if its a DM
+
+    role_id = reaction_roles.get(str(payload.emoji))
+    if payload.message_id not in reaction_messages or not role_id:
+        return
+
+    role = bot.get_guild(payload.guild_id).get_role(role_id)
+    # Check if we actually got a role, then check if the member already has it, if not add it
+    if role and role not in payload.member.roles:
+        await payload.member.add_roles(role)
+
+
+@bot.listen()
+async def on_raw_reaction_remove(payload: disnake.RawReactionActionEvent):
+    if payload.user_id == bot.user.id:
+        return
+    if not payload.guild_id:
+        return  # guild_id is None if its a DM
+
+    role_id = reaction_roles.get(str(payload.emoji))
+    if payload.message_id not in reaction_messages or not role_id:
+        return
+
+    role = bot.get_guild(payload.guild_id).get_role(role_id)
+    # Check if we actually got a role, then check if the member actually has it, then remove it
+    if role and role in payload.member.roles:
+        await payload.member.remove_roles(role)
+```
+
+</TabItem>
+
+</Tabs>
+
+### Example using an ApplicationCommandInteraction
+
+Using a `message_command` here because the message object is always included in the message commands interaction instance.  
+This example is purely to demonstrate using the Reaction object since events deal with a similar but different class
+
+```python title="message_command.py"
+@commands.message_command()
+async def list_reactions(self, inter: disnake.MessageCommandInteraction):
+
+    response_string = ""  # Start with an empty string
+    reaction_list = inter.target.reactions  # First we get the list of disnake.Reaction objects
+    for index, reaction in enumerate(
+        reaction_list
+    ):  # We then loop through the reactions and use enumerate for indexing
+        response_string += f"{index+1}. {reaction.emoji} - {reaction.count}\n"  # Using f-strings we format the list how we like
+
+    # If the message has no reactions, response_string will be "" which evaluates to False
+    await inter.response.send_message(response_string or "No Reactions found")
+
+    # As with the previous examples, we can add reactions too
+
+    # inter.response.send_message() does not return the message generated so we have to fetch it, thankfully we have this alias we can use
+    message = await inter.original_response()
+
+    for reaction in reaction_list:
+
+        # Since the reactions are present on the message, the bot can react to it, even though it does not have access to the custom emoji
+        await inter.target.add_reaction(reaction)
+
+        # However we still cannot add new reactions we don't have access to.
+        # PartialEmojis are generated if the bot does not have access to it, so we can filter on that to skip them
+        if isinstance(reaction.emoji, disnake.PartialEmoji):
+            continue
+        await message.add_reaction(reaction)
+```
