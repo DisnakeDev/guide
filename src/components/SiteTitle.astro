@@ -1,0 +1,21 @@
+<div class="brand-navigation">
+    <a class="site-title sl-flex" href="https://disnake.dev/">
+        <img src="/public/disnake-logo.png" alt="Disnake Logo" width="36" height="36" />
+        <span translate="no">Disnake</span>
+    </a>
+    <nav aria-label="Disnake sites">
+        <a href="https://docs.disnake.dev/">Docs</a>
+        <a href="/" aria-current="page">Guide</a>
+        <a href="https://docs.disnake.dev/en/stable/api/index.html">API Reference</a>
+    </nav>
+</div>
+<style>
+    .brand-navigation, .site-title, nav { display: flex; align-items: center; gap: 1rem; }
+    .site-title { color: var(--sl-color-text-accent); text-decoration: none; gap: 0.5rem; white-space: nowrap; }
+    .site-title span { font-family: 'uni-sans-caps', sans-serif; font-size: 1.35rem; margin-bottom: -0.35rem; }
+    img { width: 2.25rem; height: 2.25rem; object-fit: contain; }
+    nav { gap: 0.85rem; font-size: 0.875rem; white-space: nowrap; }
+    nav a { color: var(--sl-color-text); text-decoration: none; }
+    nav a:hover, nav a[aria-current] { color: var(--sl-color-text-accent); }
+    @media (max-width: 72rem) { nav { display: none; } }
+</style>

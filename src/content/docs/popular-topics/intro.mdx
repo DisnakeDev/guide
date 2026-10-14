@@ -1,0 +1,54 @@
+---
+title: 'Popular Topics'
+slug: popular-topics
+tableOfContents: false
+description:
+    This section covers several Discord client and gateway features extensively, including their methods and various
+    use-cases.
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import TopicCard from '../../../components/TopicCard.astro';
+
+import image1 from './images/threads-intro.png';
+import image2 from './images/embeds-intro.png';
+import image3 from './images/reactions-intro.png';
+import image4 from './images/webhooks-intro.png';
+import image5 from './images/permissions-intro.png';
+import image6 from './images/intents-intro.png';
+import image7 from './images/monetization-intro.png';
+
+import ResultingCode from '../../../components/ResultingCode.astro';
+
+<a id="popular-topics"></a>
+
+This section covers several Discord client and gateway features extensively, including their methods and various
+use-cases.
+
+<CardGrid>
+	<TopicCard title="Threads" href="/popular-topics/threads" image={image1.src}>
+		Think of them as sub-channels inside a channel.
+	</TopicCard>
+	<TopicCard title="Embeds" href="/popular-topics/embeds" image={image2.src}>
+		Present your content in an organized format.
+	</TopicCard>
+	<TopicCard title="Reactions" href="/popular-topics/reactions" image={image3.src}>
+		Create polls, paginate your commands, and more.
+	</TopicCard>
+	<TopicCard title="Webhooks" href="/popular-topics/webhooks" image={image4.src}>
+		Send messages in a text channel without a bot user.
+	</TopicCard>
+	<TopicCard title="Permissions" href="/popular-topics/permissions" image={image5.src}>
+		Understand and utilize the permission system.
+	</TopicCard>
+	<TopicCard title="Gateway Intents" href="/popular-topics/intents" image={image6.src}>
+		Learn how intents limit your bot's functions.
+	</TopicCard>
+	<TopicCard title="Monetization" href="/popular-topics/monetization" image={image7.src}>
+		Add premium features to your bot.
+	</TopicCard>
+</CardGrid>
+
+## Resulting Code
+
+<ResultingCode />

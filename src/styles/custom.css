@@ -1,0 +1,40 @@
+@font-face {
+	font-family: 'uni-sans-caps';
+	src: url('/fonts/uni-sans.heavy-caps.otf') format('opentype');
+	font-display: swap;
+}
+
+:root {
+	--sl-color-accent-low: hsl(47, 60%, 17%);
+	--sl-color-accent: hsl(47, 83%, 55%);
+	--sl-color-accent-high: hsl(47, 82%, 76%);
+	--sl-color-text-accent: hsl(47, 83%, 55%);
+	--sl-sidebar-width: 19.375rem;
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: hsl(211, 44%, 94%);
+	--sl-color-accent: hsl(211, 44%, 40%);
+	--sl-color-accent-high: hsl(211, 43%, 28%);
+	--sl-color-text-accent: hsl(211, 44%, 40%);
+}
+
+:root[data-theme='dark'] ::selection {
+	background: rgb(255 255 255 / 20%);
+}
+:root[data-theme='light'] ::selection {
+	background: rgb(0 0 0 / 10%);
+}
+
+/* Keep previews isolated from the guide's prose spacing and rounded like the originals. */
+.sl-markdown-content discord-messages {
+	display: block;
+	border-radius: 0.4rem;
+	overflow: hidden;
+}
+.sl-markdown-content discord-messages * {
+	margin-top: 0;
+}
+.sl-markdown-content discord-messages img {
+	display: inline;
+}

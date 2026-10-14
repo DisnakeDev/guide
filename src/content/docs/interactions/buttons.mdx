@@ -1,0 +1,74 @@
+---
+title: 'Buttons'
+description: They refer to views, buttons and select menus that can be added to the messages your bot sends.
+---
+
+import { Preview1, Preview2 } from '../../../components/examples/buttons.jsx';
+
+<a id="buttons"></a>
+
+Components allow users to interact with your bot through interactive UI elements. In this section, we will discuss how bots can receive and process information from these elements through the library.
+
+<br />
+<Preview1 client:only="react" />
+<br />
+
+The code for this command is given below.
+
+```python title="buttons.py"
+# At the top of the file.
+import disnake
+from disnake.ext import commands
+
+# The slash command that responds with a message.
+@bot.slash_command()
+async def buttons(inter: disnake.ApplicationCommandInteraction):
+    await inter.response.send_message(
+        "Need help?",
+        components=[
+            disnake.ui.Button(label="Yes", style=disnake.ButtonStyle.success, custom_id="yes"),
+            disnake.ui.Button(label="No", style=disnake.ButtonStyle.danger, custom_id="no"),
+        ],
+    )
+
+
+@bot.listen("on_button_click")
+async def help_listener(inter: disnake.MessageInteraction):
+    if inter.component.custom_id not in ["yes", "no"]:
+        # We filter out any other button presses except
+        # the components we wish to process.
+        return
+
+    if inter.component.custom_id == "yes":
+        await inter.response.send_message("Contact us at https://discord.gg/disnake!")
+    elif inter.component.custom_id == "no":
+        await inter.response.send_message("Got it. Signing off!")
+```
+
+## Building and sending buttons
+
+## Button styles
+
+| Name      | Syntax                                                            | Color   |
+| --------- | ----------------------------------------------------------------- | ------- |
+| Primary   | `ButtonStyle.primary` / `ButtonStyle.blurple`                     | Blurple |
+| Secondary | `ButtonStyle.secondary` / `ButtonStyle.grey` / `ButtonStyle.gray` | Grey    |
+| Success   | `ButtonStyle.success` / `ButtonStyle.green `                      | Green   |
+| Danger    | `ButtonStyle.danger` / `ButtonStyle.red`                          | Red     |
+| Link      | `ButtonStyle.link` / `ButtonStyle.url`                            | Grey    |
+
+<br />
+<Preview2 client:only="react" />
+<br />
+
+:::note
+
+`Link` buttons _cannot_ have a `custom_id`, and _do not_ send an interaction event when clicked.
+
+:::
+
+### Disabled buttons
+
+## Receiving button callback
+
+## Views vs. low-level components

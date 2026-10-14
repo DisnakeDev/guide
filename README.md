@@ -29,6 +29,8 @@ functions work together as well as how the syntax looks in production.
 
 ## Development
 
+The website uses Astro/Starlight with local search and Skyra Discord message components. Run `pnpm install` and `pnpm dev` from the repository root to start development.
+
 For more info on development/contributions, see [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 <br />

@@ -1,0 +1,139 @@
+---
+title: 'Threads'
+description: An extensive article on methods and events to be used with Discord Threads.
+head:
+    - tag: meta
+      attrs:
+          name: keywords
+          content: 'disnake, bot, guide, tutorial, thread, python'
+---
+
+import DocsLink from '../../../components/DocsLink.astro';
+
+<a id="threads"></a>
+
+Threads are <DocsLink reference="disnake.abc.Messageable">Messageable</DocsLink> objects, and can be thought of as
+sub-channels inside existing channels. They allow organization of multiple topics in a channel by temporarily giving
+them a separate space.
+
+## Thread-related methods
+
+### Creating and deleting threads
+
+A thread can be created by using the <DocsLink reference="disnake.TextChannel.create_thread">create_thread()</DocsLink>
+method on a <DocsLink reference="disnake.Message">Message</DocsLink> or <DocsLink reference="disnake.TextChannel">TextChannel</DocsLink> object.
+
+```python title="threads.py"
+# Using the 'Message' object
+message = channel.fetch_message(1234567890)
+await message.create_thread(
+    name="This message will act as the thread's starting message.",
+    auto_archive_duration=60,
+)
+
+# Using the 'TextChannel' object
+channel = bot.get_channel(...)
+await channel.create_thread(
+    name="This thread requires a starting message to be specified.",
+    auto_archive_duration=60,
+    message=message,
+)
+```
+
+In order to delete a thread, you can use the <DocsLink reference="disnake.Thread.delete">delete()</DocsLink> method on
+the <DocsLink reference="disnake.Thread">Thread</DocsLink> object.
+
+```python title="threads.py"
+thread = channel.get_thread(...)  # You can also use bot.get_channel(...)
+
+await thread.delete()
+```
+
+### Joining and leaving threads
+
+Both joining and leaving a thread require you to have a <DocsLink reference="disnake.Thread">Thread</DocsLink> object,
+on which you can use the <DocsLink reference="disnake.Thread.join">join()</DocsLink> and <DocsLink reference="disnake.Thread.leave">leave()</DocsLink> methods for the respective action.
+
+```python title="threads.py"
+thread = channel.get_thread(...)  # You can also use bot.get_channel(...)
+
+# Joining a thread.
+await thread.join()
+
+# Leaving a thread.
+await thread.leave()
+```
+
+It is recommended to use a `try-except` loop here, in case that the thread is not joinable by the bot user; this can be
+due to missing permissions.
+
+### Archiving, unarchiving and locking threads
+
+Archiving a thread essentially makes it "read-only" for non-moderators - where they can view older messages, but not
+send messages themselves. Locked threads can only be unarchived by users who have the `manage_threads` permission.
+
+Threads have an **auto-archive duration** - a period of time after which the thread is archived automatically without
+being configured by a moderator. This duration can also be set by a bot user while creating or editing a thread.
+
+```python title="threads.py"
+thread = channel.get_thread(...)
+
+await thread.edit(auto_archive_duration=60)
+```
+
+Configuring a thread to be archived, unarchived or locked can be done using the <DocsLink reference="disnake.Thread.edit">edit()</DocsLink> method, via the `archived` and `locked` parameters. Both of
+these attributes accept a boolean value.
+
+```python title="threads.py"
+thread = channel.get_thread(...)
+
+# Archiving a thread
+await thread.edit(archived=True)  # Set to 'False', to unarchive the thread
+
+# Locking a thread
+await thread.edit(locked=True)
+```
+
+### Public and private threads
+
+Public threads are accessible to all members that can view the thread's parent channel. Such threads can be created
+using the <DocsLink reference="disnake.TextChannel.create_thread">create_thread()</DocsLink> method, as covered in
+[a previous section](#creating-and-deleting-threads).
+
+Private threads are those which are only accessible to moderators and the members invited by the thread creator. A
+private thread can be created by specifying the `type` in the <DocsLink reference="disnake.TextChannel">create_thread()</DocsLink> method as <DocsLink reference="disnake.ChannelType.private_thread">private_thread</DocsLink>.
+
+```python title="threads.py" {6}
+channel = bot.get_channel(...)
+
+await channel.create_thread(
+    name="Thread Title",
+    auto_archive_duration=60,
+    type=disnake.ChannelType.private_thread,
+)
+```
+
+:::note
+
+A private thread can only be created on a <DocsLink reference="disnake.TextChannel">TextChannel</DocsLink> object. The
+type that can be specified under <DocsLink reference="disnake.TextChannel.create_thread">create_thread()</DocsLink> can
+be `public_thread`, `private_thread` or `news_thread`.
+
+:::
+
+## Thread-related events
+
+Threads introduce some new gateway events, which are listed below. You can find more information on these
+[in the documentation](https://docs.disnake.dev/en/stable/api.html#disnake.on_thread_join).
+
+-   <DocsLink reference="disnake.on_thread_join">on_thread_join</DocsLink>
+
+-   <DocsLink reference="disnake.on_thread_remove">on_thread_remove</DocsLink>
+
+-   <DocsLink reference="disnake.on_thread_member_join">on_thread_member_join</DocsLink>
+
+-   <DocsLink reference="disnake.on_thread_member_remove">on_thread_member_remove</DocsLink>
+
+-   <DocsLink reference="disnake.on_thread_delete">on_thread_delete</DocsLink>
+
+-   <DocsLink reference="disnake.on_thread_update">on_thread_update</DocsLink>

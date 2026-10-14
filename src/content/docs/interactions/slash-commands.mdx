@@ -1,0 +1,209 @@
+---
+title: 'Slash Commands'
+description: They can be accessed via the textbox, and return the values the user submitted with the command.
+---
+
+import DocsLink from '../../../components/DocsLink.astro';
+import { Preview1, Preview2 } from '../../../components/examples/slash-commands.jsx';
+
+<a id="slash-commands"></a>
+
+A **slash command** is one of the types of client-integrated interactions a bot can create. Unlike prefix commands, these do not require the message content intent.
+
+This section will go in-depth on the creation, types and handling of slash commands with `disnake`.
+
+:::note
+
+A bot needs to be authorized with the `applications.commands` scope in order to create slash commands in a guild. We recommend adding this scope to your bot invite links.
+
+:::
+
+## Defining slash commands
+
+To create a slash command, use the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.slash_command">@Bot.slash_command</DocsLink> decorator.
+
+```python
+@bot.slash_command(
+    name="ping",
+    description="Returns websocket latency.",
+)
+async def ping(inter: disnake.ApplicationCommandInteraction):
+    ...
+```
+
+<br />
+<Preview1 client:only="react" />
+<br />
+
+If you're using cogs, the <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">@commands.slash_command</DocsLink> decorator should be used instead.
+
+```python
+class Meta(commands.Cog):
+    """Meta commands."""
+
+    @commands.slash_command(
+        name="ping",
+        description="Returns websocket latency.",
+    )
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        ...
+```
+
+### Parameters
+
+While some commands can exist without arguments, most commands will need to take user input to be useful. Adding an option is as simple as defining a parameter on the callback.
+
+Here's an example of a command with one integer option (without a description):
+
+```python
+@bot.slash_command(description="Multiplies the number by 7")
+async def multiply(inter, number: int):
+    await inter.response.send_message(number * 7)
+```
+
+To make a parameter optional, provide a default value for the option:
+
+```python
+@bot.slash_command(description="Multiplies the number by a multiplier")
+async def multiply(inter, number: int, multiplier: int = 7):
+    await inter.response.send_message(number * multiplier)
+```
+
+{/* TODO: document subcommands. */}
+
+## Registering commands
+
+Unlike prefix commands, slash commands must be registered with Discord first, otherwise they won't show up if you press "/".
+By default, the library registers and updates your slash commands automatically.
+It does so on bot start or when cogs are loaded, unloaded, or reloaded.
+
+:::note
+
+The library avoids unnecessary API requests during this process.
+If the registered commands match the commands in your code, no API requests are made.
+Otherwise only one bulk overwrite request is done.
+
+:::
+
+If you want to disable the automatic registration, use <DocsLink ext="commands" reference="disnake.ext.commands.CommandSyncFlags.none">CommandSyncFlags.none()</DocsLink>.
+If you want to see how exactly the list of registered commands changes, set
+the <DocsLink ext="commands" reference="disnake.ext.commands.CommandSyncFlags.sync_commands_debug">CommandSyncFlags.sync_commands_debug</DocsLink> flag to `True`.
+
+```python
+command_sync_flags = commands.CommandSyncFlags.default()
+command_sync_flags.sync_commands_debug = True
+
+bot = commands.Bot(..., command_sync_flags=command_sync_flags)
+```
+
+It will print (or use the logger, if enabled) which commands were added, edited, deleted or left untouched.
+
+### Global commands
+
+Global slash commands are visible everywhere, including your bot DMs.
+If you don't specify the `test_guilds` parameter of `commands.Bot`, all your slash commands are global by default.
+
+Global commands are visible and usable on most devices right away.
+
+### Guild commands
+
+If you specify the `test_guilds` parameter of `commands.Bot`, all slash commands in your code are no longer global.
+The following code will register all slash commands only in 2 guilds:
+
+```python
+bot = commands.Bot("!", test_guilds=[123456789, 987654321])  # guild IDs
+```
+
+If you want to keep some of your slash commands global and make some of them local, specify the `guild_ids` parameter of `@bot.slash_command()`:
+
+```python
+bot = commands.Bot("!")
+
+
+@bot.slash_command()
+async def global_command(inter):
+    """This command is visible everywhere"""
+    ...
+
+
+@bot.slash_command(guild_ids=[123456789])
+async def local_command(inter):
+    """This command is visible in one guild"""
+    ...
+```
+
+<a id="responding"></a>
+
+## Responding to commands
+
+<a id="response"></a>
+
+<a id="responses"></a>
+
+### Sending responses
+
+The <DocsLink reference="disnake.Interaction.response">response</DocsLink> attribute returns a <DocsLink reference="disnake.InteractionResponse">InteractionResponse</DocsLink>
+instance that has four ways of responding to an ApplicationCommandInteraction.
+A response can <b>only be done once</b>.
+If you want to send secondary messages, consider using a <DocsLink reference="disnake.Interaction.followup">followup</DocsLink> webhook instead.
+
+:::caution
+
+An interaction can only be responded to **once**. After a response is made, **no more responses can be made.** See the [followup](#followup) object for sending messages after responding.
+:::
+
+1. <DocsLink reference="disnake.InteractionResponse.send_message">send_message</DocsLink> - Sends response message.
+1. <DocsLink reference="disnake.InteractionResponse.edit_message">edit_message</DocsLink> - Edits message, for example in
+   component or component+modal interactions. Cannot be used with application commands.
+1. <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> - Defers the interaction.
+1. <DocsLink reference="disnake.InteractionResponse.send_modal">send_modal</DocsLink> - Sends a <DocsLink reference="disnake.ui.Modal">
+   	Modal
+   </DocsLink> as a response.
+
+:::note
+
+If you're going to run long processes (more than 3 seconds) before responding, you should first <DocsLink reference="disnake.InteractionResponse.defer">defer</DocsLink> the interaction,
+as interactions expire after 3 seconds and later responses will fail.
+Deferring an interaction response shows a loading indicator to the user, and gives you more time to prepare a complete response.
+Once your response is ready, you can edit the original response using the <DocsLink reference="disnake.Interaction.edit_original_response">Interaction.edit_original_response</DocsLink> method.
+
+:::
+
+```python title="example.py"
+@bot.slash_command()
+async def ping(inter: ApplicationCommandInteraction):
+    await inter.response.send_message("Pong!")
+
+
+@bot.slash_command()
+async def defer(inter: ApplicationCommandInteraction):
+    await inter.response.defer()
+    await asyncio.sleep(10)
+    await inter.edit_original_response(content="The wait is over, my comrades!")
+```
+
+<a id="followup"></a>
+
+### Followups
+
+Followups are a way to send a message after responding. There are two important restrictions for when a followup can be used:
+
+-   The interaction must have been responded to (see [responding](#responses)).
+-   The interaction must not be expired (i.e. hasn't exceeded the 15 minute limit).
+    Checking if an interaction has expired can be done with <DocsLink reference="disnake.ApplicationCommandInteraction.is_expired">ApplicationCommandInteraction.is_expired</DocsLink>.
+
+At their core, followups are simply <DocsLink reference="disnake.Webhook">Webhook</DocsLink> instances. The only special thing about them is that the `wait` parameter is treated as if it is always set to `True`.
+
+Take this as an example of how followups could be used:
+
+```python
+@bot.slash_command()
+async def timer(inter: disnake.ApplicationCommandInteraction, seconds: int):
+    await inter.response.send_message(f"Setting a timer for {seconds} seconds.")
+    await asyncio.sleep(seconds)
+    await inter.followup.send(f"{inter.author.mention}, your timer expired!")
+```
+
+<br />
+<Preview2 client:only="react" />
+<br />

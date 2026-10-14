@@ -1,0 +1,20 @@
+---
+interface Props { title: string; href: string; image: string; }
+const { title, href, image } = Astro.props;
+---
+<article class="topic-card">
+    <a {href}><img src={image} alt={`${title} introduction`} loading="lazy" /></a>
+    <div class="body">
+        <h3><a {href}>{title}</a></h3>
+        <p><slot /></p>
+    </div>
+</article>
+<style>
+    .topic-card { border: 1px solid var(--sl-color-gray-5); background: var(--sl-color-bg-nav); overflow: hidden; border-radius: 0.4rem; }
+    img { width: 100%; height: auto; display: block; }
+    .body { padding: 1.25rem; }
+    h3 { margin: 0; font-size: var(--sl-text-h4); }
+    h3 a { color: var(--sl-color-text-accent); text-decoration: none; }
+    h3 a:hover { text-decoration: underline; }
+    p { margin-block: 0.75rem 0; }
+</style>

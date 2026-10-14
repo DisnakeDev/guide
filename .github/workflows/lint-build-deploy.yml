@@ -4,7 +4,13 @@ on:
   push:
     paths:
       - .github/**
-      - guide/**
+      - src/**
+      - public/**
+      - astro.config.mjs
+      - package.json
+      - pnpm-lock.yaml
+      - tsconfig.json
+      - .pre-commit-config.yaml
   pull_request:
     branches:
       - main
@@ -25,27 +31,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - name: Cache npm
-        uses: actions/cache@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
-      - name: Build website
-        working-directory: guide
+      - name: Check and build website
         run: |
-          npm ci
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm check
+          pnpm build
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./guide/build
+          publish_dir: ./dist
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           force_orphan: true

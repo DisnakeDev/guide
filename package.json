@@ -1,0 +1,41 @@
+{
+    "name": "disnake-guide",
+    "type": "module",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "check": "astro check",
+        "serve": "astro preview"
+    },
+    "dependencies": {
+        "@astrojs/react": "^7.0.1",
+        "@astrojs/starlight": "^0.42.6",
+        "@skyra/discord-components-core": "^4.0.2",
+        "@skyra/discord-components-react": "^4.0.2",
+        "@types/react": "^19.3.0",
+        "@types/react-dom": "^19.3.0",
+        "astro": "^7.2.10",
+        "react": "^19.3.0",
+        "react-dom": "^19.3.0",
+        "sharp": "^0.35.3"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.9.10",
+        "typescript": "^6.0.3"
+    },
+    "private": true,
+    "repository": "https://github.com/DisnakeDev/guide.git",
+    "author": "abhigyantrips <abhigyantrips@gmail.com>",
+    "homepage": "https://guide.disnake.dev",
+    "bugs": {
+        "url": "https://github.com/DisnakeDev/guide/issues"
+    },
+    "packageManager": "pnpm@10.29.3",
+    "engines": {
+        "node": ">=22.12.0"
+    }
+}

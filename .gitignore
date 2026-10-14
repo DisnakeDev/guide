@@ -54,8 +54,8 @@ jspm_packages/
 .serverless/
 
 # Generated files
-.docusaurus
-.cache-loader
+.astro
+.pnpm-store
 
 # Misc
 .DS_Store
@@ -68,4 +68,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-guide/build
+dist/
