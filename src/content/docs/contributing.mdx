@@ -1,0 +1,57 @@
+---
+title: 'Contributing'
+template: splash
+---
+
+import DocsLink from '../../components/DocsLink.astro';
+import ResultingCode from '../../components/ResultingCode.astro';
+import WorkInProgress from '../../components/WorkInProgress.astro';
+
+<a id="contributing"></a>
+
+First off, thanks for taking the time to contribute. This guide uses [Astro and Starlight](https://starlight.astro.build/) for building the guide itself, and [`pre-commit`](https://pre-commit.com/) for various formatting/cleanup tasks, like formatting Python codeblocks. Use pnpm for the website scripts and install pre-commit for formatting checks.
+
+## Prerequisites
+
+-   Node.js 22.12 or newer (CI uses Node.js 24)
+-   pnpm 10.29.3
+-   pre-commit
+
+## Local development
+
+Clone the repo to your desired folder, and `cd` into it.
+
+```
+git clone https://github.com/DisnakeDev/guide.git
+cd guide
+```
+
+Further, install the dependencies using `pnpm install`.
+
+### Starting the server
+
+Start the development server from the repository root:
+
+```
+pnpm dev
+```
+
+This will serve the site on `http://localhost:4321/`. To specify the port of the devserver, you can use the `--port` option.
+
+```
+pnpm dev --port 8000
+```
+
+## Linting
+
+Linting your edits/additions is critical to ensure the consistency of the material with the rest of the guide.
+
+## Using components
+
+### `<DocsLink />`
+
+### `<ResultingCode />`
+
+### `<WorkInProgress />`
+
+## Commit convention

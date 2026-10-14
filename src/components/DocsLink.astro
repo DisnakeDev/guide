@@ -1,0 +1,11 @@
+---
+interface Props {
+    ext?: string;
+    reference?: string;
+}
+const { ext, reference = '' } = Astro.props;
+const basePath = 'https://docs.disnake.dev/en/stable';
+const href = basePath + (ext ? `/ext/${ext}` : '') + (ext === 'tasks' ? '/index.html' : '/api.html') + (reference ? `#${reference}` : '');
+const label = reference.replace(ext ? `disnake.ext.${ext}.` : 'disnake.', '');
+---
+<a {href} target="_blank" rel="noopener noreferrer"><code><slot>{label}</slot></code></a>

@@ -1,0 +1,14 @@
+---
+import DefaultSidebar from '@astrojs/starlight/components/Sidebar.astro';
+---
+<DefaultSidebar />
+<nav class="mobile-site-links" aria-label="Disnake sites">
+    <a href="https://docs.disnake.dev/">Docs</a>
+    <a href="/">Guide</a>
+    <a href="https://docs.disnake.dev/en/stable/api/index.html">API Reference</a>
+</nav>
+<style>
+    nav { display: flex; flex-wrap: wrap; gap: 1rem; padding-block: 1rem; border-top: 1px solid var(--sl-color-gray-5); }
+    a { color: var(--sl-color-text-accent); }
+    @media (min-width: 72rem) { nav { display: none; } }
+</style>

@@ -1,0 +1,40 @@
+---
+title: 'Interactions'
+slug: interactions
+tableOfContents: false
+description: This section covers application commands and message components.
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import TopicCard from '../../../components/TopicCard.astro';
+
+import image1 from './images/slash-commands-intro.png';
+import image2 from './images/context-menus-intro.png';
+import image3 from './images/message-components-intro.png';
+
+<a id="interactions"></a>
+
+**Interactions** here refers to client-integrated elements that a bot can create - giving users a way to interact directly with your application. Currently, interactions can be classified under three categories:
+
+<CardGrid>
+	<TopicCard title="Slash Commands" href="/interactions/slash-commands" image={image1.src}>
+		They can be accessed via the textbox, and return the values the user submitted with the command.
+	</TopicCard>
+	<TopicCard title="Context Menus" href="/interactions/context-menus" image={image2.src}>
+		They are available under <b>Apps</b> in user/message context menus, responding with the resolved user or message
+		on which the action was taken.
+	</TopicCard>
+	<TopicCard title="Buttons" href="/interactions/buttons" image={image3.src}>
+		They refer to views, buttons and select menus that can be added to the messages your bot sends.{' '}
+	</TopicCard>
+</CardGrid>
+
+<br />
+
+:::note[Interactions and Bot Users]
+
+Interactions are essentially webhooks under the hood (and responding to interactions doesn't require a bot token). Thus, you can have an interaction-only application that can be accessed by users **without having a bot user** in the guild.
+
+Since `disnake` is primarily focused on using the gateway events, you will still require a bot user. You can check out other libraries like [`hikari`](https://www.hikari-py.dev/) for utilizing this feature.
+
+:::

@@ -1,0 +1,179 @@
+---
+title: 'Creating cogs/extensions'
+description: An in-depth section on creating cogs for your Discord bot.
+head:
+    - tag: meta
+      attrs:
+          name: keywords
+          content: 'disnake, bot, guide, tutorial, cogs, extensions, python'
+---
+
+import DocsLink from '../../../components/DocsLink.astro';
+
+<a id="creating-cogsextensions"></a>
+
+[**Cogs**](https://docs.disnake.dev/en/stable/ext/commands/cogs.html) are analogous to modules that extend the core of
+the bot - thus adding to its functions and abilities. They also allow you to break down and organize your bot's
+collection of commands/listeners (which is useful when your bot's command list becomes quite extensive).
+
+:::note
+
+Cogs are typically used alongside with **Extensions**. You can read more about them
+[in the documentation](https://docs.disnake.dev/en/stable/ext/commands/extensions.html).
+
+:::
+
+## Creating files
+
+What we code here will extend on the code from [**Initial Files**](./initial-files), and thus we assume that there
+already exists a `main.py` file in your directory which initiates a `commands.Bot()` instance.
+
+```python title="main.py"
+import disnake
+from disnake.ext import commands
+
+bot = commands.Bot()
+
+
+@bot.event
+async def on_ready():
+    print("The bot is ready!")
+
+
+bot.run("YOUR_BOT_TOKEN")
+```
+
+Next, we will create a new Python file either in the same directory as `main.py` or in a subfolder (which is
+recommended). For the sake of being organized, we will create the cog file in a separate `cogs` folder, and name the
+file `ping.py` just for the "ping" command. If you're strictly following the guide, your file directory should look
+something like this:
+
+```
+.
+├── cogs/
+│   └── ping.py
+├── main.py
+└── secrets.env
+```
+
+## Initial code
+
+### Inheriting a class
+
+The first step is to create a class in `ping.py` that inherits from the `commands.Cog`, along with a constructor that
+takes in the `bot` object as its only argument and saves it. This is where we will be putting in our commands.
+
+```python title="ping.py"
+from disnake.ext import commands
+
+
+class PingCommand(commands.Cog):
+    """This will be for a ping command."""
+
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
+```
+
+:::tip
+
+We typehint `bot: commands.Bot` here to give the IDE an idea of what the argument type is. It is not necessary, but can
+be useful in development when adding certain arguments to your commands.
+
+:::
+
+### Registering commands
+
+Now, to define a slash command inside the class, we will use the `commands.slash_command()` decorator. It functions the same as
+`bot.slash_command()`, but works in cogs as well.
+
+```python title="ping.py" {10-13}
+import disnake
+from disnake.ext import commands
+
+
+class PingCommand(commands.Cog):
+    """This will be for a ping command."""
+
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
+
+    @commands.slash_command()
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        """Get the bot's current websocket latency."""
+        await inter.response.send_message(f"Pong! {round(self.bot.latency * 1000)}ms")
+```
+
+Note that we're using `self` as the first argument, since the command function is inside a class.
+
+### Adding `setup` function
+
+The last thing that needs to be added to this file is a `setup` function, so that disnake can load the cog when it is
+added to `main.py`.
+
+```python title="ping.py" {16,17}
+import disnake
+from disnake.ext import commands
+
+
+class PingCommand(commands.Cog):
+    """This will be for a ping command."""
+
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
+
+    @commands.slash_command()
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        """Get the bot's current websocket latency."""
+        await inter.response.send_message(f"Pong! {round(self.bot.latency * 1000)}ms")
+
+
+def setup(bot: commands.Bot):
+    bot.add_cog(PingCommand(bot))
+```
+
+This cog file can now be added to the bot via the `bot.load_extension()` method in `main.py`.
+
+```python title="main.py"
+import disnake
+from disnake.ext import commands
+
+bot = commands.Bot()
+
+
+@bot.event
+async def on_ready():
+    print("The bot is ready!")
+
+
+bot.load_extension("cogs.ping")  # Note: We did not append the .py extension.
+
+bot.run("YOUR_BOT_TOKEN")
+```
+
+Note that we've input `"cogs.ping"` here, since the `ping.py` file is inside the `cogs` folder. Therefore, the basic
+syntax for loading an extension is `bot.load_extension("<folder_name>.<file_name>")`.
+
+And that concludes the use of cogs with `disnake`! You can now create multiple cogs to group and organize your
+commands/events, and load/unload them via your main file. More information on special cog methods and meta options can
+be found [in the documentation](https://docs.disnake.dev/en/stable/ext/commands/cogs.html).
+
+## Syntax changes
+
+Cogs represent a fairly drastic change in the way you write commands and bots, so here's a list you can come back to for
+the primary syntax used in cogs:
+
+-   Each cog is a Python class that subclasses <DocsLink ext="commands" reference="disnake.ext.commands.Cog">commands.Cog</DocsLink>.
+-   Decorators for commands in cogs:
+    -   Command - <DocsLink ext="commands" reference="disnake.ext.commands.command">commands.command()</DocsLink>
+    -   Slash command - <DocsLink ext="commands" reference="disnake.ext.commands.slash_command">commands.slash_command()</DocsLink>
+    -   User command - <DocsLink ext="commands" reference="disnake.ext.commands.user_command">commands.user_command()</DocsLink>
+    -   Message command - <DocsLink ext="commands" reference="disnake.ext.commands.message_command">commands.message_command()</DocsLink>
+-   Every listener is marked with the <DocsLink ext="commands" reference="disnake.ext.commands.Cog.listener">commands.Cog.listener()</DocsLink> decorator.
+-   Cogs are then registered with the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.add_cog">Bot.add_cog</DocsLink> call, and are subsequently removed with the <DocsLink ext="commands" reference="disnake.ext.commands.Bot.remove_cog">Bot.remove_cog</DocsLink> call.
+
+<sup>
+	Source: <a href="https://docs.disnake.dev/en/stable/ext/commands/cogs.html">Disnake Documentation</a>
+</sup>
+
+Cogs represent a fairly drastic change in the way you write commands and bots. Thus, it is recommended that you get
+familiar with this syntax - since the code we use in this section is largely tailored for cogs.

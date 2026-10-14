@@ -1,5 +1,5 @@
 // https://code.visualstudio.com/docs/editor/userdefinedsnippets
-// https://docusaurus.io/docs/markdown-features/admonitions
+// https://starlight.astro.build/guides/authoring-content/#asides
 
 {
     "note": {
@@ -7,7 +7,7 @@
         "prefix": ":note",
         "description": "Insert a note admonition",
         "body": [
-            ":::note ${1:Admonition title}",
+            ":::note[${1:Admonition title}]",
             "",
             "${2:Admonition text}",
             "",
@@ -21,7 +21,7 @@
         "prefix": ":tip",
         "description": "Insert a tip admonition",
         "body": [
-            ":::tip ${1:Admonition title}",
+            ":::tip[${1:Admonition title}]",
             "",
             "${2:Admonition text}",
             "",
@@ -35,7 +35,7 @@
         "prefix": ":info",
         "description": "Insert an info admonition",
         "body": [
-            ":::info ${1:Admonition title}",
+            ":::note[${1:Admonition title}]",
             "",
             "${2:Admonition text}",
             "",
@@ -49,7 +49,7 @@
         "prefix": [":caution", ":warning", ":warn"],
         "description": "Insert a caution admonition",
         "body": [
-            ":::caution ${1:Admonition title}",
+            ":::caution[${1:Admonition title}]",
             "",
             "${2:Admonition text}",
             "",
@@ -63,7 +63,7 @@
         "prefix": ":danger",
         "description": "Insert a danger admonition",
         "body": [
-            ":::danger ${1:Admonition title}",
+            ":::danger[${1:Admonition title}]",
             "",
             "${2:Admonition text}",
             "",
